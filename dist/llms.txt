@@ -4,7 +4,7 @@
 
 ## Canonical URL
 
-- https://saewookkangboy.github.io/commandaiagent/
+- https://book.allrounder.im/
 
 ## Primary facts
 
@@ -14,8 +14,8 @@
 - Language: Korean
 - Length: 320 pages
 - Structure: 7 parts and a 21-day practice plan
-- Core framework: R-G-C-T-O-R — Role, Goal, Context, Tool, Output, Review
-- Main concept: Command Marketing — humans set goals and review criteria while AI Agents support repeatable execution
+- Core framework: R-G-C-T-O-R, meaning Role, Goal, Context, Tool, Output, Review
+- Main concept: Command Marketing. Humans set goals and review criteria while AI Agents support repeatable execution
 
 ## Main topics
 

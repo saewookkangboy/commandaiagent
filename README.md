@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://saewookkangboy.github.io/commandaiagent/"><strong>웹사이트 보기</strong></a>
+  <a href="https://book.allrounder.im/"><strong>웹사이트 보기</strong></a>
 </p>
 
 ---
@@ -23,7 +23,7 @@
 
 이 저장소는 박충효 저 『AI Agent를 지휘하는 마케터』의 핵심 메시지를 웹에서 경험할 수 있도록 만든 반응형 프로모션 사이트입니다.
 
-단순히 AI 도구를 소개하는 대신, 마케터가 목표와 기준을 세우고 AI Agent에게 업무를 맡긴 뒤 최종 결과를 검수하는 **Command Marketing 운영 방식**을 시각적으로 전달합니다. 책 표지의 청록색 인상과 TROE·AX WORKS의 절제된 브랜드 시스템을 하나의 웹 경험으로 연결했습니다.
+단순히 AI 도구를 소개하는 대신, 마케터가 목표와 기준을 세우고 AI Agent에게 업무를 맡긴 뒤 최종 결과를 검수하는 **Command Marketing 운영 방식**을 시각적으로 전달합니다. 책 표지의 청록색 인상과 TROE의 절제된 브랜드 시스템을 비대칭 출판물 레이아웃으로 연결했습니다.
 
 ## 실제 화면
 
@@ -64,6 +64,7 @@ commandaiagent/
 │       └── deploy-pages.yml
 ├── .openai/
 │   └── hosting.json
+├── vercel.json
 ├── docs/
 │   └── readme/
 │       └── site-preview.png
@@ -74,30 +75,46 @@ commandaiagent/
     ├── llms.txt
     └── assets/
         ├── book-3d.png
+        ├── book-3d.webp
         ├── book-cover.jpg
         └── book-flat.jpg
 ```
 
 ## 디자인 시스템
 
+리디자인은 [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)의 Redesign - Preserve 원칙을 적용했습니다. 정보 구조와 SEO 자산은 유지하고 타이포그래피, 여백, 컬러 토큰, 모션, 핵심 섹션 구성을 순서대로 개선했습니다.
+
+- Design Variance: `7`
+- Motion Intensity: `5`
+- Visual Density: `4`
+
 | 역할 | 색상 | 용도 |
 |---|---|---|
-| Ink | `#0C1116` | 본문, 다크 섹션, 정보 구조 |
-| Cobalt | `#1C51B9` | AX 브랜드 신뢰감과 강조 |
-| Gold | `#C8912B` | 포인트와 핵심 메시지 |
-| Mist | `#F4F6F8` | 밝은 배경과 여백 |
-| Book Teal | 책 표지 기반 청록색 | 도서 정체성과 인터랙션 |
+| Ink | `#101817` | 본문과 정보 위계 |
+| Paper | `#EEF3F1` | 전체 페이지 배경 |
+| Surface | `#F8FAF9` | 콘텐츠 표면 |
+| Book Teal | `#007E71` | 단일 강조색과 인터랙션 |
+| Dark Surface | `#0D1514` | 시스템 다크 모드 배경 |
 
-타이포그래피는 별도 웹폰트 의존 없이 시스템 글꼴을 사용하며, 모바일 환경에서는 1열 구조로 자연스럽게 전환됩니다.
+타이포그래피는 별도 웹폰트 의존 없이 시스템 글꼴을 사용합니다. 카드 반경은 18px, 버튼은 pill 형태로 역할을 구분하며 모든 비대칭 레이아웃은 모바일에서 명시적으로 1열로 전환됩니다.
 
 ## 기술 구성
 
 - HTML, CSS, Vanilla JavaScript 단일 페이지
 - 외부 프레임워크와 런타임 의존성 없음
 - 반응형 레이아웃과 `prefers-reduced-motion` 대응
+- 시스템 설정에 따라 전환되는 라이트·다크 컬러 토큰
+- 키보드 화살표로 이동할 수 있는 AI 성숙도 탭과 모바일 메뉴
 - 키보드 접근이 가능한 링크·버튼·아코디언
 - WebSite, WebPage, Organization, Person, Book, FAQPage를 연결한 JSON-LD `@graph`
 - 이메일 기반 출간·단체 구매·강연 문의 CTA
+
+## 배포
+
+- 운영 도메인: [https://book.allrounder.im](https://book.allrounder.im)
+- 호스팅: Vercel `chunghyos-projects`
+- 보조 배포: GitHub Pages
+- Vercel 출력 디렉터리: `dist`
 
 ## SEO · GEO 적용
 
@@ -121,10 +138,11 @@ commandaiagent/
 | 모바일 렌더 | 390 × 844 전체 화면 확인 |
 | 가로 오버플로우 | 없음 |
 | 브라우저 콘솔 오류 | 0건 |
-| 로컬 이미지 누락 | 0건 / 3종 정상 로드 |
+| 로컬 이미지 누락 | 0건 / 원본 3종과 히어로 WebP 정상 로드 |
 | 인터랙션 | 성숙도 탭, PART 07 아코디언 작동 확인 |
 | 구조화 데이터 | JSON-LD 파싱 확인 |
 | 검색 파일 | `robots.txt`, `sitemap.xml`, `llms.txt` 구문·URL 확인 |
+| Lighthouse | Performance 99 · Accessibility 100 · Best Practices 100 · SEO 100 |
 
 ## 콘텐츠 출처와 범위
 
