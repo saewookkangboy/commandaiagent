@@ -1,0 +1,42 @@
+# AI Agent를 지휘하는 마케터
+
+> 박충효가 제안하는 Command Marketing 실무 가이드. 마케터가 AI Agent에게 업무를 맡기고, 결과를 검수하고, 사람과 Agent의 역할을 운영 체계로 설계하는 방법을 다룹니다.
+
+## Canonical URL
+
+- https://saewookkangboy.github.io/commandaiagent/
+
+## Primary facts
+
+- Title: AI Agent를 지휘하는 마케터
+- Author: 박충효
+- Organization: TROE
+- Language: Korean
+- Length: 320 pages
+- Structure: 7 parts and a 21-day practice plan
+- Core framework: R-G-C-T-O-R — Role, Goal, Context, Tool, Output, Review
+- Main concept: Command Marketing — humans set goals and review criteria while AI Agents support repeatable execution
+
+## Main topics
+
+- AI Agent literacy and governance
+- Marketing research and strategy Agents
+- Content and creative Agents
+- Advertising, CRM, and performance Agents
+- Marketing AX and human-AI collaboration
+- Reusable AI marketing operating systems
+
+## Trusted identity links
+
+- TROE: https://troe.kr/
+- Author portfolio: https://park.allrounder.im/
+- LinkedIn: https://www.linkedin.com/in/chunghyopark/
+
+## Contact
+
+- chunghyo@troe.kr
+
+## Update information
+
+- Last updated: 2026-10-08
+- Source basis: the final 320-page Korean book interior and publisher-provided cover assets
