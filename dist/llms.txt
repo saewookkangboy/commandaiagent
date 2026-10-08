@@ -30,6 +30,7 @@
 
 - TROE: https://troe.kr/
 - Author portfolio: https://park.allrounder.im/
+- TROE AX readiness and ROI diagnostic: https://ax.allrounder.im/
 - LinkedIn: https://www.linkedin.com/in/chunghyopark/
 
 ## Contact

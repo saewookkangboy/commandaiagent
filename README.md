@@ -14,7 +14,7 @@
   ·
   <a href="#로컬에서-실행하기">로컬 실행</a>
   ·
-  <a href="mailto:chunghyo@troe.kr?subject=AI%20Agent%EB%A5%BC%20%EC%A7%80%ED%9C%98%ED%95%98%EB%8A%94%20%EB%A7%88%EC%BC%80%ED%84%B0%20%EB%AC%B8%EC%9D%98">출간·강연 문의</a>
+  <a href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅 문의</a>
 </p>
 
 <p align="center">
@@ -44,7 +44,7 @@
 | 도서 구성 | AI Agent 리터러시부터 리서치, 콘텐츠, 광고, CRM, 운영 매뉴얼까지 7개 파트 |
 | 21일 훈련 | 업무 분해, 지시·검수 기준, 반복 운영을 연결하는 실천 플랜 |
 | 사람과 Agent의 역할 | 사람은 목표·기준·승인·책임을, Agent는 리서치·초안·반복 실행을 담당 |
-| 저자와 TROE | 박충효의 마케팅·AI/AX 전문성과 출간·강연 문의 동선 |
+| 저자와 TROE | 박충효의 마케팅·AI/AX 전문성과 강연·컨설팅 문의 동선 |
 
 ## 로컬에서 실행하기
 
@@ -141,12 +141,13 @@ python3 -m http.server 4173 --directory dist
 
 사이트 내용은 최종 내지 PDF 320쪽에서 확인한 프롤로그, 7개 파트 목차, AI 활용 성숙도 5단계, R-G-C-T-O-R과 21일 훈련 플랜을 바탕으로 구성했습니다. 원본 PDF는 이 저장소에 포함하지 않습니다.
 
-판매처 URL은 확정 정보가 없어 임의로 연결하지 않았습니다. 현재 CTA는 출간·단체 구매·강연·교육 문의로 연결됩니다.
+판매처 URL은 확정 정보가 없어 임의로 연결하지 않았습니다. 현재 CTA는 강연·컨설팅 문의 이메일로 통합되어 있습니다.
 
 ## TROE · 박충효
 
 - [TROE](https://troe.kr/)
 - [박충효 포트폴리오](https://park.allrounder.im/)
+- [TROE AX 준비도와 ROI 진단](https://ax.allrounder.im/)
 - [LinkedIn](https://www.linkedin.com/in/chunghyopark/)
 - 문의: [chunghyo@troe.kr](mailto:chunghyo@troe.kr)
 
