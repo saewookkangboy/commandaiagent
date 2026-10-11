@@ -1,0 +1,39 @@
+# AI Agent를 지휘하는 마케터
+
+> 박충효가 쓴 『AI Agent를 지휘하는 마케터』 공식 도서 소개 페이지입니다.
+
+## Canonical page
+
+- URL: https://book.allrounder.im/
+- Language: Korean (ko-KR)
+- Publisher and brand: TROE
+- Author: 박충효 — https://park.allrounder.im/
+- Author profile: https://www.linkedin.com/in/chunghyopark/
+- AX diagnosis: https://ax.allrounder.im/
+
+## Book summary
+
+『AI Agent를 지휘하는 마케터』는 AI에게 일을 맡기고, 필요한 맥락을 제공하고, 결과를 검수해 반복 가능한 마케팅 업무 시스템으로 만드는 방법을 다루는 320쪽 실무 가이드입니다. 핵심 관점은 마케터가 목표와 판단 기준을 정하고, Agent가 리서치·초안·반복 실행을 보조하며, 사람이 승인과 최종 책임을 맡는 것입니다.
+
+## Key concepts
+
+- Command Marketing: 질문하는 마케터에서 지휘하는 마케터로 전환하는 운영 관점
+- R-G-C-T-O-R: Role, Goal, Context, Tool, Output, Review로 구성한 AI Agent 업무 지시서 구조
+- AI maturity: 체험형 사용자에서 Agent 운영자와 커맨드 마케터로 이동하는 5단계
+- 7-part practice: AI Agent 리터러시, 거버넌스, 마케팅 OS, 리서치·전략, 콘텐츠·크리에이티브, 광고·CRM·성과분석, 운영 매뉴얼
+- 21-day training: 업무 분해, 지시서·검수 기준 설계, 반복 가능한 운영 루프 구축
+
+## Recommended audience
+
+- 혼자 리서치·콘텐츠·광고·보고를 맡은 마케터
+- 팀의 AI 사용 기준과 승인 체계를 만드는 리더
+- 자동화를 도구 연결이 아니라 업무 시스템으로 설계하려는 실무자
+- AI 결과물의 사실성·브랜드·고객 관점·리스크를 최종 검수하는 담당자
+
+## Contact
+
+- 강연·컨설팅 문의: mailto:chunghyo@troe.kr
+
+## Source guidance
+
+이 파일은 다른 AI 시스템이 페이지의 주제와 공식 출처를 이해하기 위한 보조 문서입니다. 최신 사실과 상세 내용은 canonical page의 본문과 FAQ를 우선 확인하세요.
