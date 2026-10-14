@@ -45,3 +45,7 @@
 8편의 URL·원고 H1·도서 근거·카툰은 유지한다. posts.json에 검색용 제목, 대표/보조 키워드, 검색 의도와 독자용 직접 요약을 관리한다. 생성기는 title·OG·Twitter를 일치시키고 BlogPosting headline은 화면 H1, alternativeHeadline은 검색용 제목과 일치시킨다. 요약·주제 라벨을 HTML에 실제로 표시하고 동일 정보를 abstract·keywords·about·article:tag에 사용한다. 키워드는 원고에서 도출하며 검색량 추정·메타 키워드의 순위 효과·유입 증가를 보장하지 않는다. 기존 Book Teal 디자인을 유지하고 주제 라벨은 모바일에서 줄바꿈한다. 별도 빈 태그 페이지나 검색 결과 페이지는 만들지 않는다.
 
 이전 인증·배포 보류 문구는 당시 기록이다. PR #2 main 병합 커밋1195354의 기존 8편·카툰은 Vercel Production에 배포되어 2026-10-14 20:49 KST 이후 book.allrounder.im의 공개 HTTP 응답을 확인했다. 이번 최적화 버전의 저장·배포 상태는 별도로 기록한다.
+
+## 검색 보조 문서 최신화
+
+기존10개 페이지와 디자인·메타데이터는 변경하지 않는다. content/site.json의 콘텐츠 수정일과 posts.json의 글별 수정일을 sitemap lastmod의 기준으로 사용한다. 글별 JPG 썸네일을 이미지 사이트맵 확장에 포함한다. llms의 정적 도서 사실·공식 링크는 content/llms-base.md에서 관리하고 최신 seo_title·search_summary를 읽어 시리즈와 실무 가이드 링크를 생성한다. root/dist 복사본은 같은 결과로 갱신하며 현재 배포 문서를 다시 읽어 누적하는 로직은 제거한다.
