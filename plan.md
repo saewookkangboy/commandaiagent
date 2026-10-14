@@ -49,3 +49,7 @@
 ## 검색 보조 문서 최신화
 
 기존10개 페이지와 디자인·메타데이터는 변경하지 않는다. content/site.json의 콘텐츠 수정일과 posts.json의 글별 수정일을 sitemap lastmod의 기준으로 사용한다. 글별 JPG 썸네일을 이미지 사이트맵 확장에 포함한다. llms의 정적 도서 사실·공식 링크는 content/llms-base.md에서 관리하고 최신 seo_title·search_summary를 읽어 시리즈와 실무 가이드 링크를 생성한다. root/dist 복사본은 같은 결과로 갱신하며 현재 배포 문서를 다시 읽어 누적하는 로직은 제거한다.
+
+## GA4·Meta 공통 계측
+
+content/analytics-events.json을 공통 이벤트와 매개변수 계약의 원본으로 삼고 생성기가 analytics-config.js를 만든다. analytics.js가 SDK 초기화·허용 매개변수·페이지 문맥·이벤트ID·한 번 발화 조건·기본 상호작용을 담당한다. enhancements.js는 진단·읽기 경로 등 실제 UI 완료 시 공통 API만 호출한다. 기존 랜딩 하단의 분석 코드는 제거하되 성숙도 탭·모션·모바일 메뉴 UI는 유지한다. 정적 HTML body에 페이지 유형·콘텐츠 그룹·시리즈 순서를 표시하고 공통 스크립트를 홈·목록·8편에 적용한다. 기존 GA4/Pixels ID·디자인·링크·검색 메타데이터·크롤러 정책은 보존한다. 계정 내 보고서 설정이나 광고 최적화 전환 설정은 변경하지 않는다.

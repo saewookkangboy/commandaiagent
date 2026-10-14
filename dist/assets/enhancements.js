@@ -1,19 +1,14 @@
 'use strict';
 (() => {
-  const measure = (name, parameters = {}) => {
-    if (!window.commandTrackingEnabled) return;
-    const safe = { ...parameters, page_path: window.location.pathname };
-    if (typeof window.gtag === 'function') window.gtag('event', name, safe);
-    if (typeof window.fbq === 'function') window.fbq('trackCustom', name, safe);
-  };
+  const measure = (name, parameters = {}) => window.commandAnalytics?.emit(name, parameters);
   let diagnosisStarted = false;
-  const startDiagnosis = () => {
+  const startDiagnosis = (position = 'diagnosis') => {
     if (diagnosisStarted) return;
     diagnosisStarted = true;
-    measure('start_situation_diagnosis', { position: 'landing' });
+    measure('start_situation_diagnosis', { position });
   };
   document.querySelectorAll('[data-diagnosis-start]').forEach(link => {
-    link.addEventListener('click', startDiagnosis);
+    link.addEventListener('click', () => startDiagnosis(link.dataset.position || 'hero'));
   });
   const form = document.getElementById('situation-form');
   const status = document.getElementById('situation-status');
@@ -68,30 +63,7 @@
     if (day1.open) measure('open_day1_preview');
     // Individual checkboxes are deliberately neither persisted nor measured.
   });
-  document.querySelectorAll('[data-cta="purchase"]').forEach(link => {
-    link.addEventListener('click', () => measure('click_book_purchase', {
-      position: link.dataset.position || 'unknown'
-    }));
-  });
-  document.querySelectorAll('[data-consulting-path], [data-cta="inquiry"]').forEach(link => {
-    link.addEventListener('click', () => measure('click_consulting_path', {
-      position: link.dataset.position || 'landing',
-      stage: link.hasAttribute('data-consulting-path') ? 'scope' : 'email'
-    }));
-  });
-  document.querySelectorAll('[data-blog-link]').forEach(link => {
-    link.addEventListener('click', () => measure('open_blog_article', { article_slug: link.dataset.blogLink }));
-  });
   document.querySelectorAll('.mobile-menu a').forEach(link => {
     link.addEventListener('click', () => link.closest('details').removeAttribute('open'));
   });
-  const end = document.getElementById('article-end');
-  if (end && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      measure('blog_article_complete', { article_slug: document.body.dataset.article || '' });
-      observer.disconnect();
-    }, { threshold: 0.2 });
-    observer.observe(end);
-  }
 })();

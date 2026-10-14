@@ -26,8 +26,12 @@ if not STYLE.exists():
     STYLE.write_text(SOUP.style.string.strip() + '\n')
 HEADER = re.sub(r'href="#', 'href="/#', str(SOUP.select_one('header.site-head')))
 FAVICON = str(SOUP.select_one('link[rel="icon"]'))
-TRACKING = str(SOUP.find('script'))
-PIXEL = next(str(tag) for tag in SOUP.find_all('script') if "fbq('init'" in (tag.string or ''))
+ANALYTICS_CONFIG = json.loads((ROOT / 'content/analytics-events.json').read_text())
+for name, event in ANALYTICS_CONFIG['events'].items():
+    assert re.fullmatch(r'[a-z][a-z0-9_]{0,38}', name), name
+    assert set(event['parameters']) <= set(ANALYTICS_CONFIG['parameters']), name
+(DIST / 'assets/analytics-config.js').write_text('/* Generated from content/analytics-events.json. */\nwindow.commandAnalyticsConfig = Object.freeze(' + json.dumps(ANALYTICS_CONFIG, ensure_ascii=False).replace('<', '\\u003c') + ');\n')
+ANALYTICS = '<script src="/assets/analytics-config.js" defer></script><script src="/assets/analytics.js" defer></script>'
 BOOK_IMAGE = ORIGIN + '/assets/book-flat.jpg'
 SITE = json.loads((ROOT / 'content/site.json').read_text())
 POST_MODIFIED = {post['slug']: post.get('modified', post['date']) for post in POSTS}
@@ -85,7 +89,7 @@ def head(title, description, path=None, graph=None, post=None, noindex=False):
 <meta name="twitter:description" content="{escape(description, quote=True)}"><meta name="twitter:image" content="{image}"><meta name="twitter:image:alt" content="{escape(image_alt, quote=True)}">
 {dates}{topic_meta}{FAVICON}<link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="describedby" href="/llms.txt">
-{TRACKING}{PIXEL}{schema}</head>'''
+{ANALYTICS}{schema}</head>'''
 
 
 def breadcrumbs(post=None):
@@ -164,7 +168,7 @@ for post in POSTS:
     date_text = f'게시: <time datetime="{post["date"]}">{post["date"]}</time> · 검토·수정: <time datetime="{post.get("modified", post["date"])}">{post.get("modified", post["date"])}</time>'
     topic_labels = ''.join(f'<li>{escape(keyword)}</li>' for keyword in post_keywords(post))
     html = head(post['seo_title'], post['description'], path, graph, post=post) + f'''
-<body class="blog-page" data-article="{post['slug']}"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}
+<body class="blog-page" data-page-type="blog_article" data-content-group="{'book_series' if is_series else 'practical_guide'}" data-series-order="{post.get('series_order', '')}" data-article="{post['slug']}"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}
 <main class="blog-main wrap" id="main">{breadcrumbs(post)}
 <header class="blog-heading"><p class="eyebrow">{escape(post['category'])}</p><h1>{escape(post['title'])}</h1>
 <p class="article-meta"><span>편집: Command Marketing</span><span>{date_text}</span><span>약 {reading}분 읽기</span></p>
@@ -190,7 +194,7 @@ graph = {'@context': 'https://schema.org', '@graph': [
     {'@type': 'CollectionPage', '@id': ORIGIN + '/blog#webpage', 'url': ORIGIN + '/blog', 'name': 'AI 마케팅 책 소개와 SEO·GEO·AIEO 실무 블로그', 'inLanguage': 'ko-KR', 'mainEntity': {'@type': 'ItemList', 'itemListElement': items}},
     {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'url': ORIGIN + '/blog', 'name': 'Command Marketing 블로그', 'inLanguage': 'ko-KR', 'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'}}, breadcrumb_graph()]}
 index = head('AI 마케팅 책 소개와 SEO·GEO·AIEO 실무 블로그', 'AI Agent를 지휘하는 마케터 책 소개 시리즈 3편과 SEO·GEO·AIEO 실무 가이드 5편. Agent와 거버넌스, 업무 지시서, 21일 훈련부터 기술 SEO와 AI 검색 성과 측정까지 읽어 보세요.', '/blog', graph) + f'''
-<body class="blog-page"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}<main class="blog-main wrap" id="main">{breadcrumbs()}
+<body class="blog-page" data-page-type="blog_index" data-content-group="blog_index"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}<main class="blog-main wrap" id="main">{breadcrumbs()}
 <header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>책에서 운영으로,<br>검색에서 답변으로.</h1><p class="section-copy">책 소개 시리즈 3편으로 AI 마케팅의 운영 구조를 읽고, 실무 가이드 5편으로 검색·콘텐츠·검수·측정의 기준을 세우세요.</p><nav class="blog-category-nav" aria-label="블로그 콘텐츠 분류"><a href="#book-series">책 소개 시리즈 3편</a><a href="#practical-guides">SEO·GEO·AIEO 가이드 5편</a></nav><p class="blog-disclosure">도서 소개는 제공된 최종 내지 PDF의 요약이며, 실무 가이드는 공개 출처 기반 응용 콘텐츠입니다. AI 초안을 활용한 Command Marketing 편집 글로 저자의 직접 집필이 아닙니다.</p></header>
 <section class="blog-group" id="book-series" aria-labelledby="series-title"><p class="eyebrow">Book notes / 01 — 03</p><h2 class="extra-title" id="series-title">『AI Agent를 지휘하는 마케터』<br>세 편으로 읽는 핵심 구조</h2><p class="section-copy">일을 맡기는 판단, 업무 지시서, 실행과 검수의 루프를 순서대로 소개합니다. 각 글에 도서 페이지 근거를 표시했습니다.</p><div class="blog-cards series-cards">{series_cards}</div></section>
 <section class="blog-group" id="practical-guides" aria-labelledby="guides-title"><p class="eyebrow">Practical guides / SEO · GEO · AIEO</p><h2 class="extra-title" id="guides-title">검색과 AI 답변을 위한 실무 가이드</h2><div class="blog-cards">{guide_cards}</div></section>
