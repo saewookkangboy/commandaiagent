@@ -91,3 +91,8 @@
 .blog-card-cover:focus-visible,.series-nav a:focus-visible,.blog-category-nav a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 @media(max-width:1000px){.series-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.series-cards{grid-template-columns:1fr}.series-nav{padding:22px 20px}.series-nav ol,.series-pager{flex-direction:column;gap:10px}.article-cover{margin-bottom:30px}.blog-group{padding-block:28px}}
+
+/* Reader-facing summaries and honest topic labels, not hidden keyword lists. */
+.article-summary{max-width:76ch;margin:26px 0 18px;font-size:clamp(1.05rem,1.7vw,1.2rem);line-height:1.9;color:var(--ink);overflow-wrap:anywhere}
+.article-topics{display:flex;flex-wrap:wrap;gap:8px 10px;list-style:none;margin:0;padding:0;max-width:900px}
+.article-topics li{max-width:100%;border:1px solid var(--line);border-radius:6px;padding:6px 10px;background:var(--surface);color:var(--muted);font-size:.82rem;line-height:1.6;overflow-wrap:anywhere}

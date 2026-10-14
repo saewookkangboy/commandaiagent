@@ -53,13 +53,13 @@
 도서명: AI Agent를 지휘하는 마케터 · 저자: 박충효. 책 소개 시리즈 3편은 제공 PDF를 요약한 편집 글이며 각 글에 도서 페이지 근거가 있습니다. 원본 PDF는 공개하지 않습니다. 실무 가이드 5편은 공개 출처 기반 응용 콘텐츠로 도서 발췌나 저자의 직접 발언이 아닙니다. AI 초안 활용. AIEO는 사이트 편집상 AI Engine Optimization으로 정의합니다.
 
 - [블로그 목록](https://book.allrounder.im/blog)
-- [책 소개 1 | AI를 쓰는 마케터에서 지휘하는 마케터로: Agent와 거버넌스](https://book.allrounder.im/blog/book-command-marketer-01): AI Agent를 지휘하는 마케터의 Prologue와 Part 1·2를 소개합니다. Chat AI와 Agent AI의 차이, 개인정보·브랜드 거버넌스, 사람의 검수·승인 책임을 실제 도서 페이지 근거로 설명합니다.
-- [책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서](https://book.allrounder.im/blog/book-command-marketer-02): AI 마케팅 업무 지시서를 R-G-C-T-O-R로 설계하는 방법을 책 Part 3·5에 근거해 소개합니다. 역할·목표·맥락·도구·산출물·검수와 콘텐츠·SEO·랜딩 QA를 편집 응용 예시로 연결합니다.
-- [책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프](https://book.allrounder.im/blog/book-command-marketer-03): 책 Part 6·7의 광고·CRM·리포팅·실험과 21일 커맨드 마케팅 훈련을 소개합니다. 실제 3주 플랜의 목적, 사람의 승인, 기록과 월간 점검을 PDF 페이지 근거로 확인하세요.
-- [SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?](https://book.allrounder.im/blog/seo-geo-aieo-guide): SEO·GEO·AIEO의 차이를 명확히 짚고, AI 검색에서도 중요한 검색 기본기와 사람 중심 콘텐츠 전략을 설명합니다. 마케터와 팀 리더를 위한 실무 예시와 발행 체크리스트를 확인하세요.
-- [AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드](https://book.allrounder.im/blog/geo-content-structure): AI 검색을 고려한 콘텐츠는 질문에 직접 답하고 근거·날짜·적용 범위를 밝혀야 합니다. 한국어 마케팅 콘텐츠 전후 예시, GEO 연구의 한계, 출처 검수 체크리스트를 정리했습니다.
-- [AI 검색 기술 SEO 체크리스트: 초기 HTML부터 크롤러·스키마까지](https://book.allrounder.im/blog/technical-seo-ai-search): 초기 HTML, canonical, sitemap, robots.txt, Article·BreadcrumbList와 AI 크롤러를 점검하는 기술 SEO 가이드입니다. 검색용 크롤러와 학습용 크롤러의 목적, llms.txt의 한계를 구분합니다.
-- [SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법](https://book.allrounder.im/blog/rgctor-content-workflow): SEO·GEO 콘텐츠 Agent의 역할·목표·맥락·도구·산출물·검수를 설계하세요. 실무 브리프 예시, 주장과 출처를 대조하는 방법, 개인정보 보호와 사람의 최종 승인 체크리스트를 제공합니다.
-- [SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법](https://book.allrounder.im/blog/ai-search-measurement): 검색 노출, 클릭·세션, AI 답변의 인용, 실제 문의·구매를 분리해 측정하는 방법을 설명합니다. Search Console 지표의 한계와 수동 인용 표본, 2주 단일변수 실험의 해석 기준을 확인하세요.
+- [책 소개 1 | AI를 쓰는 마케터에서 지휘하는 마케터로: Agent와 거버넌스](https://book.allrounder.im/blog/book-command-marketer-01): AI 에이전트 마케팅 책 『AI Agent를 지휘하는 마케터』의 Prologue와 Part 1·2를 요약합니다. Chat AI와 Agent AI의 차이, 데이터 보호, 사람의 검수·승인·책임 기준을 도서 페이지 근거와 함께 확인하세요.
+- [책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서의 여섯 요소를 『AI Agent를 지휘하는 마케터』 Part 3·5에 근거해 소개합니다. 프롬프트를 업무 흐름으로 확장하고 콘텐츠·SEO·랜딩페이지의 검수와 사람 승인 기준을 세우는 편집 응용 예시를 확인하세요.
+- [책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련을 다룬 『AI Agent를 지휘하는 마케터』 Part 6·7의 핵심을 요약합니다. 광고·CRM·분석의 운영 루프, 주차별 실습, 실험 기록과 사람의 승인 기준을 확인해 업무에 적용할 출발점을 찾을 수 있습니다.
+- [SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?](https://book.allrounder.im/blog/seo-geo-aieo-guide): SEO·GEO·AIEO 차이를 정의와 적용 범위로 비교하고, Google의 AI 검색 안내에 비춰 SEO 기본기와 생성형 검색 대응을 정리합니다. 발행 전 체크리스트와 도서 프레임의 편집 응용 예를 확인하세요.
+- [AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드](https://book.allrounder.im/blog/geo-content-structure): GEO 콘텐츠 작성법을 찾는 마케터와 팀 리더를 위해 질문에 먼저 답하는 본문, 범위·기준일·원출처 표기, 구조화 데이터와 FAQ의 한계를 정리했습니다. 한국어 예시와 게시 전 점검표로 실무 적용 방법을 확인하세요.
+- [AI 검색 기술 SEO 체크리스트: 초기 HTML부터 크롤러·스키마까지](https://book.allrounder.im/blog/technical-seo-ai-search): AI 검색 기술 SEO 체크리스트로 초기 HTML과 canonical·sitemap·robots.txt를 점검하세요. 구조화 데이터와 검색용·학습용 AI 크롤러 설정을 구분하는 마케터·개발팀용 배포 전 기준을 제공합니다.
+- [SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법](https://book.allrounder.im/blog/rgctor-content-workflow): AI 콘텐츠 자동화 워크플로를 R-G-C-T-O-R로 설계해 역할·근거·출력·검수 범위를 정하는 방법을 소개합니다. 출처 대조, 개인정보 보호, 사람의 최종 승인까지 실무 체크리스트로 확인하세요.
+- [SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법](https://book.allrounder.im/blog/ai-search-measurement): GEO 성과 측정에서 검색 노출, 사이트 클릭·세션, AI 답변 인용, CRM 전환을 구분합니다. Search Console의 한계와 고정 질문 표본, 2주 단일변수 실험을 활용해 마케팅 성과를 해석하는 기준을 확인하세요.
 
 작성·검토 기준일: 2026-10-14. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.

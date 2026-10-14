@@ -15,6 +15,9 @@ assert len({post['slug'] for post in posts}) == 8
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
 assert len({post['description'] for post in posts}) == 8
 assert len({post['image'] for post in posts}) == 8
+assert len({post['seo_title'] for post in posts}) == 8
+assert len({post['primary_keyword'] for post in posts}) == 8
+assert len({post['search_summary'] for post in posts}) == 8
 
 
 def local_file(path):
@@ -61,6 +64,23 @@ for post in posts:
     assert soup.h1.get_text() == post['title']
     assert soup.select_one('link[rel="canonical"]')['href'] == ORIGIN + '/blog/' + slug
     assert soup.select_one('meta[name="description"]')['content'] == post['description']
+    assert soup.title.get_text() == post['seo_title'] + ' | Command Marketing'
+    assert len(soup.title.get_text()) <= 60, (slug, 'editorial title budget, not a ranking rule')
+    assert 70 <= len(post['description']) <= 160, slug
+    assert soup.select_one('meta[property="og:title"]')['content'] == post['seo_title']
+    assert soup.select_one('meta[name="twitter:title"]')['content'] == post['seo_title']
+    for selector in ('meta[property="og:description"]', 'meta[name="twitter:description"]'):
+        assert soup.select_one(selector)['content'] == post['description']
+    keywords = [post['primary_keyword'], *post['secondary_keywords']]
+    assert 5 <= len(keywords) <= 7 and len(set(keywords)) == len(keywords)
+    assert all(keyword and keyword == keyword.strip() and ',' not in keyword for keyword in keywords)
+    assert soup.select_one('meta[name="keywords"]')['content'] == ', '.join(keywords)
+    assert [tag['content'] for tag in soup.select('meta[property="article:tag"]')] == keywords
+    assert soup.select_one('meta[property="article:section"]')['content'] == post['category']
+    assert soup.select_one('.article-summary').get_text() == post['search_summary']
+    assert [tag.get_text() for tag in soup.select('.article-topics li')] == keywords
+    assert post['primary_keyword'] in post['description']
+    assert post['primary_keyword'] in post['search_summary']
     og = soup.select_one('meta[property="og:image"]')['content']
     assert og == ORIGIN + post['image_jpg']
     assert soup.select_one('meta[name="twitter:image"]')['content'] == og
@@ -73,6 +93,12 @@ for post in posts:
     article = next(row for row in graph['@graph'] if row['@type'] == 'BlogPosting')
     assert article['image']['url'] == og
     assert article['author']['name'] == 'Command Marketing'
+    assert article['headline'] == post['title']
+    assert article['alternativeHeadline'] == post['seo_title']
+    assert article['abstract'] == post['search_summary']
+    assert article['description'] == post['description']
+    assert article['keywords'] == keywords
+    assert [topic['name'] for topic in article['about']] == keywords
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1
