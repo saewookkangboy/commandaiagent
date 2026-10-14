@@ -1,6 +1,7 @@
 """Check static blog integrity without changing site state or contacting analytics."""
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
+from datetime import date
 import json
 import re
 import xml.etree.ElementTree as ET
@@ -116,8 +117,40 @@ urls = [node.text for node in ET.parse(DIST / 'sitemap.xml').iter('{http://www.s
 assert len(urls) == 10 and len(set(urls)) == 10
 assert set(urls) == {ORIGIN + '/', ORIGIN + '/blog'} | {ORIGIN + '/blog/' + p['slug'] for p in posts}
 assert (ROOT / 'sitemap.xml').read_bytes() == (DIST / 'sitemap.xml').read_bytes()
+ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'image': 'http://www.google.com/schemas/sitemap-image/1.1'}
+site = json.loads((ROOT / 'content/site.json').read_text())
+expected_modified = {ORIGIN + '/': site['home_modified'], ORIGIN + '/blog': max(p.get('modified', p['date']) for p in posts)}
+expected_images = {ORIGIN + '/': ORIGIN + '/assets/book-flat.jpg'}
+for post in posts:
+    url = ORIGIN + '/blog/' + post['slug']
+    expected_modified[url] = post.get('modified', post['date'])
+    expected_images[url] = ORIGIN + post['image_jpg']
+for node in ET.parse(DIST / 'sitemap.xml').getroot().findall('sm:url', ns):
+    url = node.findtext('sm:loc', namespaces=ns)
+    modified = node.findtext('sm:lastmod', namespaces=ns)
+    assert modified == expected_modified[url] and date.fromisoformat(modified).isoformat() == modified
+    image_urls = [tag.text for tag in node.findall('image:image/image:loc', ns)]
+    assert image_urls == ([expected_images[url]] if url in expected_images else [])
+    assert local_file(urlsplit(url).path).is_file()
+    for image_url in image_urls:
+        assert local_file(urlsplit(image_url).path).is_file()
 llms = (DIST / 'llms.txt').read_text()
+assert (ROOT / 'llms.txt').read_bytes() == (DIST / 'llms.txt').read_bytes()
+assert llms.startswith((ROOT / 'content/llms-base.md').read_text().rstrip())
+expected_reviewed = max(site['llms_reviewed'], site['home_modified'], *expected_modified.values())
+assert re.findall(r'^문서 검토 기준일: ([0-9-]+)\.', llms, re.M) == [expected_reviewed], 'Stale llms review date; rebuild search documents'
 assert all(p['slug'] in llms for p in posts)
+assert llms.count('## 도서 소개 시리즈 3편') == 1
+assert llms.count('## SEO·GEO·AIEO 실무 가이드 5편') == 1
+for post in posts:
+    assert f'[{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' in llms
+for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):
+    url = urlsplit(href)
+    if url.netloc == urlsplit(ORIGIN).netloc:
+        target = local_file(url.path)
+        assert target.is_file(), href
+        if url.fragment:
+            assert BeautifulSoup(target.read_text(), 'html.parser').find(id=unquote(url.fragment)), href
 assert '도서 발췌나 저자의 직접 발언이 아닙니다' in llms
 assert '책 소개 시리즈 3편은 제공 PDF를 요약' in llms
 assert not list(DIST.rglob('*.pdf'))

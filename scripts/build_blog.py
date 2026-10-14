@@ -4,6 +4,7 @@ Run: python3 -m pip install -r scripts/requirements.txt && python3 scripts/build
 """
 from pathlib import Path
 from html import escape
+from datetime import date
 import json
 import re
 import math
@@ -28,7 +29,14 @@ FAVICON = str(SOUP.select_one('link[rel="icon"]'))
 TRACKING = str(SOUP.find('script'))
 PIXEL = next(str(tag) for tag in SOUP.find_all('script') if "fbq('init'" in (tag.string or ''))
 BOOK_IMAGE = ORIGIN + '/assets/book-flat.jpg'
-DATE = '2026-10-14'
+SITE = json.loads((ROOT / 'content/site.json').read_text())
+POST_MODIFIED = {post['slug']: post.get('modified', post['date']) for post in POSTS}
+for post in POSTS:
+    assert date.fromisoformat(POST_MODIFIED[post['slug']]) >= date.fromisoformat(post['date']), post['slug']
+BLOG_MODIFIED = max(POST_MODIFIED.values())
+REVIEWED = max(SITE['llms_reviewed'], SITE['home_modified'], BLOG_MODIFIED)
+for value in (SITE['home_modified'], REVIEWED):
+    date.fromisoformat(value)
 BOOK = {'@type': 'Book', 'name': 'AI Agent를 지휘하는 마케터', 'author': {'@type': 'Person', 'name': '박충효'}, 'url': ORIGIN + '/'}
 GUIDE_DISCLOSURE = 'Command Marketing 편집 콘텐츠 · AI 초안 활용, 공개 출처 기반 편집. 도서 발췌나 저자의 직접 발언이 아닌 실무 응용 콘텐츠입니다. 예시는 실제 캠페인 성과가 아니며 검색 노출과 AI 인용을 보장하지 않습니다.'
 SERIES_DISCLOSURE = 'Command Marketing 도서 소개 · AI 초안 활용. 제공된 최종 내지 PDF를 근거로 요약·소개한 편집 콘텐츠이며 저자가 직접 집필한 블로그 글은 아닙니다. 별도 표시한 예시는 편집 응용입니다. 원본 PDF는 공개하지 않습니다.'
@@ -197,18 +205,31 @@ routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path':
 (DIST / 'manus-routes.json').write_text(json.dumps({'routes': routes}, ensure_ascii=False, indent=2) + '\n')
 ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
 ns = 'http://www.sitemaps.org/schemas/sitemap/0.9'
+image_ns = 'http://www.google.com/schemas/sitemap-image/1.1'
+ET.register_namespace('image', image_ns)
+route_modified = {'/': SITE['home_modified'], '/blog': BLOG_MODIFIED}
+route_images = {'/': BOOK_IMAGE}
+for post in POSTS:
+    route_modified['/blog/' + post['slug']] = POST_MODIFIED[post['slug']]
+    route_images['/blog/' + post['slug']] = ORIGIN + post['image_jpg']
 root = ET.Element(f'{{{ns}}}urlset')
 for route in routes:
     node = ET.SubElement(root, f'{{{ns}}}url')
     ET.SubElement(node, f'{{{ns}}}loc').text = ORIGIN + route['path']
-    ET.SubElement(node, f'{{{ns}}}lastmod').text = DATE
+    ET.SubElement(node, f'{{{ns}}}lastmod').text = route_modified[route['path']]
+    if route['path'] in route_images:
+        image = ET.SubElement(node, f'{{{image_ns}}}image')
+        ET.SubElement(image, f'{{{image_ns}}}loc').text = route_images[route['path']]
+ET.indent(root, space='  ')
 sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encoding='unicode') + '\n'
 for path in (ROOT / 'sitemap.xml', DIST / 'sitemap.xml'):
     path.write_text(sitemap)
-llms = re.sub(r'\n## Blog guides\n.*', '', (DIST / 'llms.txt').read_text(), flags=re.S)
-llms += '\n## Blog guides\n\n書名: AI Agent를 지휘하는 마케터 · 저자: 박충효. 책 소개 시리즈 3편은 제공 PDF를 요약한 편집 글이며 각 글에 도서 페이지 근거가 있습니다. 원본 PDF는 공개하지 않습니다. 실무 가이드 5편은 공개 출처 기반 응용 콘텐츠로 도서 발췌나 저자의 직접 발언이 아닙니다. AI 초안 활용. AIEO는 사이트 편집상 AI Engine Optimization으로 정의합니다.\n\n- [블로그 목록](' + ORIGIN + '/blog)\n'
-llms += '\n'.join(f'- [{p["title"]}]({ORIGIN}/blog/{p["slug"]}): {p["description"]}' for p in ordered) + f'\n\n작성·검토 기준일: {DATE}. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.\n'
-llms = llms.replace('書名:', '도서명:')
+llms = (ROOT / 'content/llms-base.md').read_text().rstrip() + '\n'
+for title, group in (('도서 소개 시리즈 3편', SERIES), ('SEO·GEO·AIEO 실무 가이드 5편', GUIDES)):
+    llms += '\n## ' + title + '\n\n'
+    llms += '\n'.join(f'- [{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' for post in group) + '\n'
+llms += f'\n## 검색 보조 문서\n\n- [XML 사이트맵]({ORIGIN}/sitemap.xml): 홈·블로그 목록·글 8편의 canonical URL 10개와 대표 이미지\n- [크롤러 접근 정책]({ORIGIN}/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분\n'
+llms += f'\n문서 검토 기준일: {REVIEWED}. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.\n'
 for path in (ROOT / 'llms.txt', DIST / 'llms.txt'):
     path.write_text(llms)
 (DIST / '404.html').write_text(head('페이지를 찾을 수 없습니다', '요청한 페이지가 없거나 이동되었습니다. 도서 소개 또는 블로그 목록에서 다시 탐색하세요.', noindex=True) + f'<body class="blog-page">{HEADER}<main class="wrap not-found" id="main"><p class="eyebrow">404 / NOT FOUND</p><h1>이 페이지는 찾을 수 없습니다.</h1><p class="section-copy">도서 소개나 블로그 목록에서 필요한 내용을 다시 찾아보세요.</p><div class="actions"><a class="button primary" href="/">도서 홈</a><a class="button secondary" href="/blog">블로그 목록</a></div></main>{FOOTER}')
