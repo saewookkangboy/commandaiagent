@@ -6,7 +6,7 @@
     },
     {
       "path": "/blog",
-      "title": "SEO·GEO·AIEO 실무 블로그"
+      "title": "도서 소개와 SEO·GEO·AIEO 블로그"
     },
     {
       "path": "/blog/seo-geo-aieo-guide",
@@ -27,6 +27,18 @@
     {
       "path": "/blog/ai-search-measurement",
       "title": "SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법"
+    },
+    {
+      "path": "/blog/book-command-marketer-01",
+      "title": "책 소개 1 | AI를 쓰는 마케터에서 지휘하는 마케터로: Agent와 거버넌스"
+    },
+    {
+      "path": "/blog/book-command-marketer-02",
+      "title": "책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서"
+    },
+    {
+      "path": "/blog/book-command-marketer-03",
+      "title": "책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프"
     }
   ]
 }

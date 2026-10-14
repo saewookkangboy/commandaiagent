@@ -27,11 +27,13 @@ Tool은 허용된 검색·사내 문서·분석 도구와 사용 한계를 지�
 
 ## 주장과 근거를 맞추고 개인정보를 지키기
 
-초안의 모든 중요한 사실 주장을 “주장 → 근거 → 확인 상태”로 연결합니다. 예를 들어 “OAI-SearchBot은 ChatGPT 검색 결과에 웹사이트를 노출하는 데 쓰인다”는 문장은 OpenAI의 공식 크롤러 안내에서 확인하고 링크를 붙입니다. “GPTBot은 검색 노출을 담당한다”라고 혼동하면 안 됩니다. OpenAI 문서는 OAI-SearchBot과 GPTBot을 서로 다른 용도로 설명하며 robots.txt 제어도 각각 구분합니다.[4] 출처가 실제로 설명한 범위만 옮기고, 연구·실험 결과를 보편적인 사실이나 성과 보장으로 바꾸지 않습니다.
+초안의 모든 중요한 사실 주장을 “주장 → 근거 → 확인 상태”로 연결합니다. 예를 들어 ChatGPT 검색 답변에서의 자동 크롤링과 사이트 노출 관리는 OAI-SearchBot의 robots.txt 규칙으로 확인합니다. OpenAI는 OAI-SearchBot을 ChatGPT 검색 기능에서 웹사이트를 표시하는 데 쓰고, GPTBot은 생성형 AI 기반 모델 학습에 쓸 수 있는 콘텐츠를 크롤링한다고 구분합니다.[4] OAI-SearchBot 허용 여부만으로 노출이나 성과를 단정하지 않습니다. 출처가 실제로 설명한 범위만 옮기고, 연구·실험 결과를 보편적인 사실이나 성과 보장으로 바꾸지 않습니다.
 
 편집자는 문장별 근거 장부에 원문 제목, 게시·수정일, 확인일, URL, 뒷받침하는 정확한 주장, 인용 또는 요약 여부를 남길 수 있습니다. 출처의 표현과 결론을 직접 인용하려면 인용 필요성과 저작권·사용 조건을 확인합니다. 애매한 주장은 삭제하거나 “이 문서가 확인해 주는 범위는 여기까지”라고 한정합니다. 구조화 데이터 역시 눈에 보이는 본문과 작성자 정보를 정확하게 나타내야 합니다. Google의 Article 마크업은 검색엔진이 기사 제목·이미지·날짜 정보를 이해하는 데 도움을 줄 수 있지만 검색 결과의 특정 표시를 보장하지 않습니다.[5]
 
 개인정보와 기밀은 초안 속도를 위해 넘길 수 있는 재료가 아닙니다. 고객 이름, 이메일, 상담 전문, 계정 식별자, 계약서, 미공개 캠페인 데이터는 승인된 환경과 내부 규정이 따로 허용하지 않는 한 외부 AI 도구에 입력하지 않습니다. 필요하면 식별자를 지우는 데 그치지 말고 재식별 가능성도 점검하고, 최소한의 익명화된 사례로 바꿉니다. AI가 만든 고객 후기나 전문가 인용을 실제 기록처럼 만들지도 않습니다.
+
+Google 검색을 대상으로 발행 후 변화를 확인할 때는 Search Console의 생성형 AI 성과 보고서를 볼 수 있습니다. 이 보고서는 AI Overviews와 AI Mode에서 사이트 링크가 표시된 유기적 노출을 페이지·국가·기기별로 보여 줍니다. 핵심 지표는 노출이므로, 이 수치만으로 AI 답변의 인용 품질이나 클릭·전환·매출을 단정하지 않습니다.[7]
 
 ## 사람이 승인하는 실행 체크리스트
 
@@ -55,7 +57,9 @@ AI가 초안을 작성했다는 사실은 발행자의 책임을 없애지 않�
 
 ### 구조화 데이터나 llms.txt를 추가하면 AI 검색에 더 잘 나오나요?
 
-Google은 생성형 검색 노출을 위해 특별한 구조화 데이터나 llms.txt가 필요하지 않다고 안내합니다. Article 구조화 데이터는 페이지 정보를 이해하는 데 도움을 주는 보완 수단이며, 검색 결과 표시를 보장하지 않습니다.[2] [5]
+Google 검색의 생성형 기능 노출을 위해 특별한 구조화 데이터나 llms.txt가 필요한 것은 아닙니다. Google Search는 llms.txt를 사용하지 않는다고 안내합니다. Article 구조화 데이터는 페이지 정보를 이해하는 데 도움을 주는 보완 수단이며, 검색 결과 표시를 보장하지 않습니다.[2] [5]
+
+Google FAQ 리치 결과는 2026년 5월 7일부터 표시되지 않으므로, FAQPage 마크업을 그 표시를 목적으로 적용해서는 안 됩니다.[8] 다른 서비스에서 llms.txt를 어떻게 처리하는지는 해당 서비스의 공식 문서를 따로 확인해야 하며, 파일 추가만으로 AI 답변의 인용·유입·전환 또는 매출을 보장하지 않습니다.
 
 ### AI가 자료를 찾았으면 사람의 사실 검수는 생략해도 되나요?
 
@@ -69,5 +73,7 @@ Google은 생성형 검색 노출을 위해 특별한 구조화 데이터나 llm
 [4]: https://developers.openai.com/api/docs/bots "Overview of OpenAI Crawlers"
 [5]: https://developers.google.com/search/docs/appearance/structured-data/article "Article structured data"
 [6]: https://developers.google.com/search/docs/fundamentals/creating-helpful-content "Creating helpful, reliable, people-first content"
+[7]: https://support.google.com/webmasters/answer/16984139?hl=en "Generative AI performance report (Search)"
+[8]: https://developers.google.com/search/updates "Google Search documentation updates"
 
 편집: Command Marketing · AI 초안 활용, 공개 출처 기반 편집. 도서 발췌가 아닌 실무 응용 콘텐츠.
