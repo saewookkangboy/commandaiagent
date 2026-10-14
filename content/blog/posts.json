@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "seo-geo-aieo-guide",
+    "title": "SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?",
+    "description": "SEO·GEO·AIEO의 차이를 명확히 짚고, AI 검색에서도 중요한 검색 기본기와 사람 중심 콘텐츠 전략을 설명합니다. 마케터와 팀 리더를 위한 실무 예시와 발행 체크리스트를 확인하세요.",
+    "category": "SEO · GEO · AIEO",
+    "date": "2026-10-14",
+    "related": ["geo-content-structure", "technical-seo-ai-search"]
+  },
+  {
+    "slug": "geo-content-structure",
+    "title": "AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드",
+    "description": "AI 검색을 고려한 콘텐츠는 질문에 직접 답하고 근거·날짜·적용 범위를 밝혀야 합니다. 한국어 마케팅 콘텐츠 전후 예시, GEO 연구의 한계, 출처 검수 체크리스트를 정리했습니다.",
+    "category": "GEO · 콘텐츠 설계",
+    "date": "2026-10-14",
+    "related": ["seo-geo-aieo-guide", "rgctor-content-workflow"]
+  },
+  {
+    "slug": "technical-seo-ai-search",
+    "title": "AI 검색 기술 SEO 체크리스트: 초기 HTML부터 크롤러·스키마까지",
+    "description": "초기 HTML, canonical, sitemap, robots.txt, Article·BreadcrumbList와 AI 크롤러를 점검하는 기술 SEO 가이드입니다. 검색용 크롤러와 학습용 크롤러의 목적, llms.txt의 한계를 구분합니다.",
+    "category": "SEO · 기술 구현",
+    "date": "2026-10-14",
+    "related": ["geo-content-structure", "ai-search-measurement"]
+  },
+  {
+    "slug": "rgctor-content-workflow",
+    "title": "SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법",
+    "description": "SEO·GEO 콘텐츠 Agent의 역할·목표·맥락·도구·산출물·검수를 설계하세요. 실무 브리프 예시, 주장과 출처를 대조하는 방법, 개인정보 보호와 사람의 최종 승인 체크리스트를 제공합니다.",
+    "category": "AIEO · Agent 운영",
+    "date": "2026-10-14",
+    "related": ["seo-geo-aieo-guide", "ai-search-measurement"]
+  },
+  {
+    "slug": "ai-search-measurement",
+    "title": "SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법",
+    "description": "검색 노출, 클릭·세션, AI 답변의 인용, 실제 문의·구매를 분리해 측정하는 방법을 설명합니다. Search Console 지표의 한계와 수동 인용 표본, 2주 단일변수 실험의 해석 기준을 확인하세요.",
+    "category": "SEO · GEO · 성과 측정",
+    "date": "2026-10-14",
+    "related": ["technical-seo-ai-search", "rgctor-content-workflow"]
+  }
+]

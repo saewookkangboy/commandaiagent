@@ -33,7 +33,9 @@
 
 이 저장소는 박충효 저 『AI Agent를 지휘하는 마케터』의 핵심 메시지를 웹에서 경험할 수 있도록 만든 반응형 프로모션 사이트입니다. 책 표지의 청록색 인상과 TROE의 절제된 브랜드 시스템을 비대칭 출판물 레이아웃으로 연결했습니다.
 
-최신 운영본은 한국어 어절이 중간에서 끊기지 않도록 조판을 교정하고, 마지막 문의 섹션의 책 표지를 원본 비율로 다시 설계했습니다.
+운영본의 한국어 조판과 도서 표지 비율을 유지했습니다. 이번 수정본에는 60초 상황 진단, 업무 방식 전후 비교, R-G-C-T-O-R 캠페인 응용 예시, 90초 읽기 경로, DAY 1 훈련 미리보기, 파트별 결과물, 개인·팀 적용 경로와 SEO·GEO·AIEO 블로그 5편이 추가되었습니다.
+
+> 이 수정본은 `feat/landing-engagement-seo-blog` 브랜치의 검토용 변경입니다. 운영 도메인에는 아직 반영되지 않았으며, main 병합은 기존 배포 연동을 촉발할 수 있습니다.
 
 ## 사이트가 설명하는 것
 
@@ -53,14 +55,14 @@
 ```bash
 git clone https://github.com/saewookkangboy/commandaiagent.git
 cd commandaiagent
-python3 -m http.server 4173 --directory dist
+python3 scripts/serve_preview.py --port 4173
 ```
 
 브라우저에서 [http://localhost:4173](http://localhost:4173)을 열면 됩니다. 정적 파일을 직접 확인하려면 `dist/index.html`을 열어도 됩니다.
 
 ## 구현 원칙
 
-- HTML, CSS, Vanilla JavaScript로 구성한 정적 단일 페이지
+- HTML, CSS, Vanilla JavaScript로 구성한 정적 랜딩페이지와 블로그 6개 페이지
 - 외부 프레임워크와 웹폰트 의존성 없음
 - 1440px 데스크톱부터 390px 모바일까지 명시적인 반응형 레이아웃
 - `word-break: keep-all`과 `text-wrap: pretty`를 활용한 한국어 중심 조판
@@ -91,7 +93,7 @@ python3 -m http.server 4173 --directory dist
 - 검색 제목, 설명, 저자, 발행자, canonical과 robots 메타 태그
 - Open Graph와 X 카드 메타데이터 및 실제 도서 이미지
 - WebSite, Organization, Person, Book, WebPage, FAQPage를 연결한 JSON-LD `@graph`
-- 본문과 구조화 데이터가 일치하는 직접 답변 FAQ 6개
+- 본문과 구조화 데이터가 일치하는 도서·팀 적용 FAQ 8개 및 각 블로그의 직접 답변·FAQ
 - canonical URL과 수정일을 포함한 `sitemap.xml`
 - 검색 크롤러와 모델 학습 크롤러를 분리한 `robots.txt`
 - AI 시스템이 핵심 사실과 신뢰 링크를 확인할 수 있는 `llms.txt`
@@ -102,8 +104,12 @@ python3 -m http.server 4173 --directory dist
 
 | 경로 | 역할 |
 |---|---|
-| `dist/index.html` | 사이트 본문, 스타일, 인터랙션과 구조화 데이터 |
-| `dist/assets/` | 도서 표지·실물 이미지와 최적화 WebP |
+| `dist/index.html` | 랜딩 본문, 스타일, 기존 인터랙션과 구조화 데이터 |
+| `dist/assets/` | 기존 도서 이미지, 공유 스타일, 새 섹션 스타일·인터랙션 |
+| `dist/blog/` | 블로그 목록과 독립 글 5편의 초기 HTML |
+| `content/blog/` | 편집 원고 Markdown과 메타데이터 JSON |
+| `scripts/build_blog.py` | 원고를 정적 HTML·sitemap·llms로 재생성 |
+| `scripts/serve_preview.py` | clean URL·실제 404·미리보기 noindex 응답 |
 | `dist/robots.txt` | 검색·AI 크롤러 접근 정책 |
 | `dist/sitemap.xml` | 운영 URL과 수정일 |
 | `dist/llms.txt` | AI 검색용 핵심 사실 요약 |
@@ -121,14 +127,14 @@ python3 -m http.server 4173 --directory dist
 
 </details>
 
-## 배포와 검증
+## 기존 배포 구성과 과거 검증 기록
 
 - 운영 도메인: [book.allrounder.im](https://book.allrounder.im/)
 - Vercel 프로젝트: `chunghyos-projects/commandaiagent`
 - 프로덕션 출력: `dist`
 - 보조 배포: GitHub Pages
 
-| 검증 항목 | 결과 |
+| 기존 버전의 검증 항목 | 과거 결과 — 이번 수정본의 점수가 아님 |
 |---|---|
 | Lighthouse | Performance 100 · Accessibility 100 · Best Practices 100 · SEO 100 |
 | 반응형 렌더 | 데스크톱 1440 × 1000 · 모바일 609 × 848 / 390 × 844 |
@@ -141,7 +147,36 @@ python3 -m http.server 4173 --directory dist
 
 사이트 내용은 최종 내지 PDF 320쪽에서 확인한 프롤로그, 7개 파트 목차, AI 활용 성숙도 5단계, R-G-C-T-O-R과 21일 훈련 플랜을 바탕으로 구성했습니다. 원본 PDF는 이 저장소에 포함하지 않습니다.
 
-판매처 URL은 확정 정보가 없어 임의로 연결하지 않았습니다. 현재 CTA는 강연·컨설팅 문의 이메일로 통합되어 있습니다.
+책 구매 CTA는 기존에 확정된 교보문고 판매 페이지를 유지합니다. 팀 적용 CTA는 교육·강연·컨설팅 적용 범위를 안내한 뒤 기존 문의 이메일로 연결합니다. 문의 메일은 자동 전송하지 않습니다.
+
+## 새 블로그와 콘텐츠 유지보수
+
+`/blog`에서 다음 다섯 가이드를 읽을 수 있습니다.
+
+1. SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?
+2. AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드
+3. AI 검색 기술 SEO 체크리스트: 초기 HTML부터 크롤러·스키마까지
+4. SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법
+5. SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법
+
+글은 공개 출처 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
+
+원고 수정 후에는 아래 명령으로 HTML과 검색 보조 문서를 갱신합니다. Vercel은 기존처럼 `dist`를 그대로 배포하므로 프로덕션에 Python이나 새 빌드 단계는 필요하지 않습니다.
+
+```sh
+python3 -m pip install -r scripts/requirements.txt
+python3 scripts/build_blog.py
+```
+
+각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 5편의 정규 URL 7개만 포함됩니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
+
+## 측정과 공개 경계
+
+GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.im` 호스트에서만 분석 스크립트를 초기화하여 임시 미리보기와 로컬 검증 트래픽을 제외합니다. DAY 1 체크 내용은 저장하거나 분석으로 전송하지 않습니다. 진단은 선택한 경로만 이용 통계로 남길 수 있습니다.
+
+권장 이벤트는 `start_situation_diagnosis`, `select_solo_team_loop`, `open_rgctor_example`, `open_day1_preview`, `click_book_purchase`, `click_consulting_path`입니다. 기존 CTA 이벤트도 보존합니다. 구매 클릭은 구매 완료가 아니며, 이메일 열기는 문의 접수 완료가 아닙니다. `engaged_30s`는 탭이 보이는 시간을 합산하는 지표이지 실제 독서 완료의 증명이 아닙니다.
+
+별도 브랜치의 코드 저장과 운영 배포는 구분합니다. 운영 배포는 아직 수행하지 않았으며, 과거 Lighthouse 수치를 새 버전의 검사 결과로 사용하지 않습니다.
 
 ## TROE · 박충효
 

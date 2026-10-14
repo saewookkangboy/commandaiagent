@@ -1,0 +1,32 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "AI Agent를 지휘하는 마케터"
+    },
+    {
+      "path": "/blog",
+      "title": "SEO·GEO·AIEO 실무 블로그"
+    },
+    {
+      "path": "/blog/seo-geo-aieo-guide",
+      "title": "SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?"
+    },
+    {
+      "path": "/blog/geo-content-structure",
+      "title": "AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드"
+    },
+    {
+      "path": "/blog/technical-seo-ai-search",
+      "title": "AI 검색 기술 SEO 체크리스트: 초기 HTML부터 크롤러·스키마까지"
+    },
+    {
+      "path": "/blog/rgctor-content-workflow",
+      "title": "SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법"
+    },
+    {
+      "path": "/blog/ai-search-measurement",
+      "title": "SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법"
+    }
+  ]
+}
