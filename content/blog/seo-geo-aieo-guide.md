@@ -1,22 +1,26 @@
 # SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?
 
-SEO는 검색엔진이 웹페이지를 찾고 이해해 검색 결과에 연결하도록 돕는 일이고, GEO는 생성형 검색의 답변에서 콘텐츠가 근거·출처로 발견되고 활용될 가능성을 고려하는 접근입니다. AIEO는 이 글에서 편집상 ‘AI Engine Optimization’이라는 뜻으로 사용하며, AI 엔진을 고려한 콘텐츠와 운영을 통칭하는 작업 프레임입니다. 세 용어는 업계에서 하나의 공통 정의로 합의된 표준이 아니며, 특히 AIEO는 공식 지침이나 보장된 전술을 뜻하지 않습니다. 마케터와 팀 리더에게 중요한 것은 새 약어를 쫓는 일이 아니라, 고객의 질문에 제대로 답하는 콘텐츠를 만들고 검색·AI가 그것을 이해할 수 있게 하는 일입니다.
+SEO는 검색엔진이 웹페이지를 찾고 이해해 검색 결과에 연결하도록 돕는 일이고, GEO는 생성형 검색의 답변에서 콘텐츠가 근거·출처로 발견되고 활용될 가능성을 고려하는 접근입니다. 이 글에서 AIEO는 **AI Engine Optimization**을 뜻하는 사이트 내 편집 용어이며, AI 엔진을 고려한 콘텐츠와 운영을 통칭하는 작업 프레임입니다. Google은 AEO를 Answer Engine Optimization, GEO를 Generative Engine Optimization의 약자로 설명하지만, Google Search 관점에서는 생성형 AI 검색 최적화도 SEO의 일부로 봅니다.[6] GEO와 AIEO의 범위에는 공통의 업계 표준 정의가 없으며, 특히 AIEO는 공식 지침이나 보장된 전술을 뜻하지 않습니다. 마케터와 팀 리더에게 중요한 것은 새 약어를 쫓는 일이 아니라, 고객의 질문에 제대로 답하는 콘텐츠를 만들고 검색·AI가 그것을 이해할 수 있게 하는 일입니다.
 
 ## SEO·GEO·AIEO는 무엇이 다를까
 
 SEO의 중심은 검색엔진에서의 발견과 이해입니다. 크롤러가 페이지에 접근할 수 있는지, 중요한 정보가 텍스트로 제공되는지, 내부 링크와 페이지 제목이 주제를 잘 드러내는지 등을 살핍니다. 목표는 단순히 순위를 올리는 기술이 아니라, 필요한 정보를 찾는 사람과 적합한 페이지를 연결하는 것입니다.
 
-GEO(Generative Engine Optimization)는 생성형 엔진의 답변이 여러 웹 자료를 찾아 종합하는 환경에서, 내 콘텐츠가 질문에 답하는 유용한 자료이자 확인 가능한 출처가 되도록 다루는 접근입니다. GEO라는 이름은 학술 연구에서도 제안됐지만, 특정 편집법이 모든 서비스에서 통한다는 공식 규격은 아닙니다. 2023년 공개된 원 연구도 여러 생성형 엔진과 쿼리로 가시성 최적화 방법을 탐색한 연구 프레임워크입니다. 그 실험 결과를 모든 사이트나 현재 서비스의 성과 예측치로 옮겨 읽어서는 안 됩니다.[5]
+GEO(Generative Engine Optimization)는 생성형 엔진의 답변이 여러 웹 자료를 찾아 종합하는 환경에서, 내 콘텐츠가 질문에 답하는 유용한 자료이자 확인 가능한 출처가 되도록 다루는 접근입니다. GEO라는 이름은 2023년 공개돼 2024년 KDD에 채택된 연구에서도 제안됐지만, 특정 편집법이 모든 서비스에서 통한다는 공식 규격은 아닙니다. 해당 연구는 자체 벤치마크와 블랙박스 최적화로 생성형 엔진 응답 안의 가시성을 측정해 최대 40% 향상을 보고했고, 전략 효과가 도메인에 따라 달랐다고 밝혔습니다. 이 최대치는 그 실험 조건의 가시성 지표일 뿐, 현재의 모든 서비스·사이트에서 인용·유입·매출을 예측하거나 보장하는 수치가 아닙니다.[5]
 
 이 글에서 AIEO는 **AI Engine Optimization**의 약자로, SEO와 GEO를 포함해 AI 기반 검색·답변 환경에서 콘텐츠를 명료하고 검증 가능하게 기획·구성·관리하는 편집상 용어로 정의합니다. GEO가 생성형 답변 안에서의 출처 노출이라는 과제에 초점을 둔다면, AIEO는 팀의 콘텐츠 운영까지 묶는 넓은 실무 프레임으로 씁니다. 둘 다 업계 표준 정의라고 주장하지 않습니다. 검색 결과나 AI 답변에서 노출·인용을 보장하는 명칭도 아닙니다.
 
 ## AI 검색에도 SEO 기본기가 중요한 이유
 
-Google Search Central은 AI Overviews와 AI Mode를 위해 별도의 특별한 최적화나 추가 기술 요건이 필요한 것은 아니며, 기존 SEO 기본 원칙이 여전히 중요하다고 설명합니다. 페이지가 검색에 색인되고 스니펫과 함께 표시될 자격이 있어야 AI 기능의 지원 링크가 될 수 있지만, 요건을 충족해도 크롤링·색인·노출이 보장되지는 않습니다. 따라서 robots.txt와 사이트 인프라의 접근 허용, 내부 링크, 텍스트로 제공되는 핵심 정보, 사용자에게 도움이 되는 페이지 경험부터 점검해야 합니다.[1]
+Google Search Central은 AI Overviews와 AI Mode에 별도의 특수 최적화나 생성형 AI 전용 마크업이 필요하지 않으며, 기존 SEO 기본 원칙이 여전히 중요하다고 설명합니다. 페이지가 검색에 색인되고 스니펫과 함께 표시될 자격을 갖추며, Search Console의 생성형 AI 기능 포함 설정에서 제외되지 않아야 지원 링크 후보가 될 수 있습니다. 그래도 크롤링·색인·노출은 보장되지 않습니다. 따라서 robots.txt와 사이트 인프라의 접근 허용, 내부 링크, 텍스트로 제공되는 핵심 정보, 사용자에게 도움이 되는 페이지 경험부터 점검해야 합니다.[1] [6] [10]
 
 Google이 권하는 방향도 검색어를 억지로 반복하거나 분량을 늘리는 것이 아닙니다. 사람을 위해 만든 독창적이고 신뢰할 수 있는 정보인지, 다른 자료를 요약하는 데서 그치지 않고 추가 가치를 주는지, 읽은 사람이 다시 검색하지 않아도 목적을 달성할 만큼 충분한 답을 얻는지를 확인하라고 안내합니다. AI를 사용했다면 누가 만들었는지, 제작 과정에서 AI가 어떤 역할을 했는지, 왜 활용했는지를 독자가 궁금해할 상황에서 투명하게 설명하는 것도 신뢰에 도움이 됩니다.[2]
 
-구조화 데이터는 페이지의 제목·작성자·날짜 등 내용을 검색엔진이 더 잘 이해하도록 돕는 표시 정보입니다. 블로그 글에 Article 또는 BlogPosting 구조화 데이터를 정확히 적용할 수 있지만, Google은 이를 검색 결과 노출이나 특정 리치 결과의 보장으로 설명하지 않습니다. 표시한 정보는 독자가 실제로 보는 페이지 내용과 일치해야 합니다. 구조화 데이터가 좋은 답변이나 실무 경험을 대신하지는 않습니다.[3]
+구조화 데이터는 페이지의 제목·작성자·날짜 등 내용을 검색엔진이 더 잘 이해하도록 돕는 표시 정보입니다. 블로그 글에 Article 또는 BlogPosting 구조화 데이터를 정확히 적용할 수 있지만, Google은 이를 검색 결과 노출이나 특정 리치 결과의 보장으로 설명하지 않습니다. 표시한 정보는 독자가 실제로 보는 페이지 내용과 일치해야 합니다. 구조화 데이터가 좋은 답변이나 실무 경험을 대신하지는 않습니다.[1] [3]
+
+또한 Google Search에서는 `llms.txt` 같은 AI 전용 파일이 생성형 기능의 포함 여부·가시성·순위를 높이거나 낮추지 않습니다. 다른 서비스가 해당 파일을 어떻게 쓰는지는 각 서비스의 문서를 따로 확인해야 합니다.[6]
+
+아래의 FAQ는 독자가 핵심을 빠르게 확인하도록 구성한 본문입니다. Google Search의 FAQ 리치 결과는 2026년 5월 7일부터 더 이상 표시되지 않으므로, 그 표시를 노린 FAQPage 마크업을 이 글의 권장사항으로 볼 수 없습니다.[9]
 
 ## 팀에서 적용하는 예: 마케팅 자동화 온보딩
 
@@ -33,10 +37,11 @@ Google이 권하는 방향도 검색어를 억지로 반복하거나 분량을 �
 - 핵심 주장을 출처에 연결하고, 사실·날짜·적용 범위를 사람이 확인했는가?
 - 페이지가 크롤링 가능한지, 중요한 내용이 텍스트로 읽히는지, 제목과 내부 링크가 명확한지 확인했는가?
 - Article/BlogPosting 구조화 데이터를 쓴다면 화면의 실제 작성자·제목·게시 정보와 일치하는가?
-- AI 크롤러 접근을 관리한다면 목적별 정책을 확인했는가? OpenAI 문서에서 OAI-SearchBot은 ChatGPT 검색 결과 노출과, GPTBot은 모델 학습에 사용될 수 있는 크롤링과 관련해 별도로 설명됩니다. 사이트 운영자는 검색 노출과 학습 이용 정책을 같은 설정이라고 가정하지 말고 각 정책과 robots.txt를 확인해야 합니다.[4]
-- 사람 담당자가 최종 검수·승인했으며, 공개 후 유입뿐 아니라 실제 문의 품질과 독자 반응도 살필 계획이 있는가?
+- Google Search의 생성형 AI 기능에 콘텐츠를 포함하거나 제외할 정책이 있다면, Search Console의 `Search generative AI` 설정을 확인했는가? 기본값은 포함이며, 제외하면 AI 기능에서 링크·콘텐츠로 표시되거나 응답의 그라운딩에 쓰이지 않습니다. 이 설정은 모델 학습을 제어하지 않습니다.[10]
+- AI 크롤러 접근은 목적별로 구분했는가? Googlebot 규칙은 Google Search와 모든 Search 기능에 적용됩니다. Google-Extended는 Gemini 모델의 학습·그라운딩 활용을 제어하며 Search 포함·순위에는 영향을 주지 않습니다. OpenAI도 OAI-SearchBot은 ChatGPT Search용, GPTBot은 기초 모델 학습에 사용될 수 있는 크롤링용으로 구분하고 두 robots.txt 설정은 독립적이라고 설명합니다.[4] [8]
+- 사람 담당자가 최종 검수·승인했으며, 공개 후에는 생성형 AI 성과 보고서로 AI Overviews와 AI Mode의 유기적 노출 추이를 확인하되, 노출이 충분하지 않으면 보고서가 보이지 않을 수 있음을 알고 있는가? 유입뿐 아니라 실제 문의 품질과 독자 반응도 살필 계획이 있는가?[7]
 
-체크리스트를 통과했다고 검색 순위나 AI 인용이 보장되는 것은 아닙니다. 목적은 노출을 약속하는 비법을 찾는 대신, 정보가 정확하고 찾기 쉬우며 독자에게 쓸모 있는 상태인지 꾸준히 개선하는 데 있습니다.
+체크리스트를 통과했다고 검색 순위, AI 답변에서의 링크·인용, 유입 또는 매출이 보장되는 것은 아닙니다. 목적은 노출을 약속하는 비법을 찾는 대신, 정보가 정확하고 찾기 쉬우며 독자에게 쓸모 있는 상태인지 꾸준히 개선하는 데 있습니다.
 
 ## 자주 묻는 질문
 
@@ -56,5 +61,10 @@ Google이 권하는 방향도 검색어를 억지로 반복하거나 분량을 �
 [3]: https://developers.google.com/search/docs/appearance/structured-data/article "Google Search Central: Article structured data"
 [4]: https://developers.openai.com/api/docs/bots "OpenAI: Overview of OpenAI Crawlers"
 [5]: https://arxiv.org/abs/2311.09735 "Aggarwal et al., GEO: Generative Engine Optimization"
+[6]: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide "Google Search Central: Optimizing your website for generative AI features on Google Search"
+[7]: https://support.google.com/webmasters/answer/16984139?hl=en "Google Search Console Help: Generative AI performance report (Search)"
+[8]: https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers "Google Crawling: List of Google's common crawlers"
+[9]: https://developers.google.com/search/updates "Google Search Central: Documentation updates"
+[10]: https://support.google.com/webmasters/answer/16908024?hl=en "Google Search Console Help: Search generative AI control"
 
 편집: Command Marketing · AI 초안 활용, 공개 출처 기반 편집. 도서 발췌가 아닌 실무 응용 콘텐츠.
