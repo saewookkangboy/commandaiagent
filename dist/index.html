@@ -2,13 +2,18 @@
 <html lang="ko">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QK0BMHHNR5"></script>
   <script>
+    window.commandTrackingEnabled = window.location.hostname === 'book.allrounder.im';
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-QK0BMHHNR5');
+    function gtag(){ if (window.commandTrackingEnabled) dataLayer.push(arguments); }
+    if (window.commandTrackingEnabled) {
+      const tag = document.createElement('script');
+      tag.async = true;
+      tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-QK0BMHHNR5';
+      document.head.appendChild(tag);
+      gtag('js', new Date());
+      gtag('config', 'G-QK0BMHHNR5');
+    }
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -46,7 +51,7 @@
   <meta property="og:image:height" content="930">
   <meta property="og:image:alt" content="책상 위에 놓인 『AI Agent를 지휘하는 마케터』 도서">
   <meta property="book:author" content="https://park.allrounder.im/">
-  <meta property="article:modified_time" content="2026-10-11T00:00:00+09:00">
+  <meta property="article:modified_time" content="2026-10-14T00:00:00+09:00">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Agent를 지휘하는 마케터 | 박충효">
   <meta name="twitter:description" content="AI Agent 운영, R-G-C-T-O-R, 마케팅 AX를 한 권으로 연결한 Command Marketing 실무 가이드.">
@@ -55,135 +60,216 @@
   <link rel="preload" as="image" href="assets/book-3d.webp" type="image/webp" fetchpriority="high">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1917'/%3E%3Cpath d='M17 45 31 15h4l12 30h-7l-3-8H27l-4 8h-6Zm13-15h5l-2-7-3 7Z' fill='%2356c7b3'/%3E%3C/svg%3E">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://book.allrounder.im/#website",
-        "url": "https://book.allrounder.im/",
-        "name": "AI Agent를 지휘하는 마케터",
-        "alternateName": "Command Marketing",
-        "description": "박충효가 제안하는 AI Agent 운영과 마케팅 AX 실무 가이드",
-        "inLanguage": "ko-KR",
-        "publisher": {"@id": "https://book.allrounder.im/#organization"}
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://book.allrounder.im/#organization",
-        "name": "TROE",
-        "url": "https://troe.kr/",
-        "description": "마케팅 성장 자문, AI와 AX 교육, 시스템 운영을 연결하는 TROE",
-        "image": "https://book.allrounder.im/assets/book-cover.jpg",
-        "sameAs": [
-          "https://troe.kr/",
-          "https://www.linkedin.com/in/chunghyopark/",
-          "https://ax.allrounder.im/"
-        ]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://book.allrounder.im/#author",
-        "name": "박충효",
-        "url": "https://park.allrounder.im/",
-        "description": "디지털 마케팅 현장의 경험을 AI Agent와 일하는 운영 언어로 바꾸어 온 마케팅 성장 자문가",
-        "jobTitle": "TROE 대표 파트너, 마케팅 성장 자문가",
-        "worksFor": {"@id": "https://book.allrounder.im/#organization"},
-        "sameAs": [
-          "https://park.allrounder.im/",
-          "https://www.linkedin.com/in/chunghyopark/",
-          "https://troe.kr/"
-        ]
-      },
-      {
-        "@type": "Book",
-        "@id": "https://book.allrounder.im/#book",
-        "name": "AI Agent를 지휘하는 마케터",
-        "alternativeHeadline": "Command Marketing",
-        "url": "https://book.allrounder.im/",
-        "description": "AI에게 일을 맡기고, 필요한 맥락을 제공하며, 결과를 검수해 반복 가능한 마케팅 업무 시스템으로 만드는 320쪽 실무 가이드",
-        "image": [
-          "https://book.allrounder.im/assets/book-cover.jpg",
-          "https://book.allrounder.im/assets/book-3d.png"
-        ],
-        "inLanguage": "ko-KR",
-        "numberOfPages": 320,
-        "genre": ["마케팅", "AI Agent", "마케팅 AX", "Command Marketing"],
-        "keywords": ["AI Agent 운영", "R-G-C-T-O-R", "마케팅 AX", "AI 마케팅 팀"],
-        "author": {"@id": "https://book.allrounder.im/#author"},
-        "publisher": {"@id": "https://book.allrounder.im/#organization"},
-        "isPartOf": {"@id": "https://book.allrounder.im/#website"},
-        "about": [
-          {"@type": "Thing", "name": "AI Agent 운영"},
-          {"@type": "Thing", "name": "R-G-C-T-O-R"},
-          {"@type": "Thing", "name": "마케팅 AX"},
-          {"@type": "Thing", "name": "Command Marketing"}
-        ]
-      },
-      {
-        "@type": "ImageObject",
-        "@id": "https://book.allrounder.im/#book-cover-image",
-        "url": "https://book.allrounder.im/assets/book-cover.jpg",
-        "contentUrl": "https://book.allrounder.im/assets/book-cover.jpg",
-        "caption": "AI Agent를 지휘하는 마케터 책 표지",
-        "representativeOfPage": true,
-        "inLanguage": "ko-KR"
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://book.allrounder.im/#webpage",
-        "url": "https://book.allrounder.im/",
-        "name": "AI Agent를 지휘하는 마케터 | 박충효 · TROE",
-        "description": "AI Agent 운영, R-G-C-T-O-R, 마케팅 AX, 21일 훈련법을 소개하는 도서 프로모션 페이지",
-        "isPartOf": {"@id": "https://book.allrounder.im/#website"},
-        "mainEntity": {"@id": "https://book.allrounder.im/#book"},
-        "about": {"@id": "https://book.allrounder.im/#book"},
-        "primaryImageOfPage": {"@id": "https://book.allrounder.im/#book-cover-image"},
-        "keywords": ["AI Agent", "커맨드 마케팅", "마케팅 AX", "마케팅 자동화", "박충효", "TROE"],
-        "dateModified": "2026-10-11",
-        "inLanguage": "ko-KR"
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://book.allrounder.im/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "『AI Agent를 지휘하는 마케터』는 어떤 책인가요?",
-            "acceptedAnswer": {"@type": "Answer", "text": "AI를 단순한 도구가 아니라 역할별 Agent로 운영하는 방법을 다루는 320쪽 실무 가이드입니다. 목표 설정, 업무 지시, 결과 검수, 승인과 학습의 흐름을 Command Marketing 관점으로 설명합니다."}
-          },
-          {
-            "@type": "Question",
-            "name": "커맨드 마케터란 무엇인가요?",
-            "acceptedAnswer": {"@type": "Answer", "text": "커맨드 마케터는 AI에게 판단을 넘기는 사람이 아니라, 사람과 Agent의 역할을 나누고 여러 업무 흐름을 설계, 검수, 개선하는 마케터입니다."}
-          },
-          {
-            "@type": "Question",
-            "name": "R-G-C-T-O-R은 무엇인가요?",
-            "acceptedAnswer": {"@type": "Answer", "text": "Role, Goal, Context, Tool, Output, Review의 여섯 요소로 AI Agent 업무 지시서를 표준화하는 구조입니다."}
-          },
-          {
-            "@type": "Question",
-            "name": "이 책은 누구에게 필요한가요?",
-            "acceptedAnswer": {"@type": "Answer", "text": "혼자 여러 역할을 맡은 마케터, 팀의 AI 사용 기준을 만드는 리더, 자동화를 업무 시스템으로 설계하려는 실무자, AI 결과물의 최종 책임을 지는 담당자에게 적합합니다."}
-          },
-          {
-            "@type": "Question",
-            "name": "책은 어떻게 구성되어 있나요?",
-            "acceptedAnswer": {"@type": "Answer", "text": "AI Agent 리터러시와 거버넌스부터 리서치와 전략, 콘텐츠와 크리에이티브, 광고와 CRM, 성과 관리, 반복 가능한 운영 매뉴얼까지 7개 파트로 구성되어 있으며 21일 훈련 플랜을 포함합니다."}
-          },
-          {
-            "@type": "Question",
-            "name": "AI Agent와 사람은 어떻게 역할을 나누나요?",
-            "acceptedAnswer": {"@type": "Answer", "text": "사람은 목표, 판단 기준, 승인과 최종 책임을 맡고 AI Agent는 리서치, 초안, 반복 실행을 지원합니다. 책은 이 역할 분담을 팀의 운영 방식으로 만드는 방법을 설명합니다."}
-          }
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://book.allrounder.im/#website",
+      "url": "https://book.allrounder.im/",
+      "name": "AI Agent를 지휘하는 마케터",
+      "alternateName": "Command Marketing",
+      "description": "박충효가 제안하는 AI Agent 운영과 마케팅 AX 실무 가이드",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@id": "https://book.allrounder.im/#organization"
       }
-    ]
-  }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://book.allrounder.im/#organization",
+      "name": "TROE",
+      "url": "https://troe.kr/",
+      "description": "마케팅 성장 자문, AI와 AX 교육, 시스템 운영을 연결하는 TROE",
+      "image": "https://book.allrounder.im/assets/book-cover.jpg",
+      "sameAs": [
+        "https://troe.kr/",
+        "https://www.linkedin.com/in/chunghyopark/",
+        "https://ax.allrounder.im/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://book.allrounder.im/#author",
+      "name": "박충효",
+      "url": "https://park.allrounder.im/",
+      "description": "디지털 마케팅 현장의 경험을 AI Agent와 일하는 운영 언어로 바꾸어 온 마케팅 성장 자문가",
+      "jobTitle": "TROE 대표 파트너, 마케팅 성장 자문가",
+      "worksFor": {
+        "@id": "https://book.allrounder.im/#organization"
+      },
+      "sameAs": [
+        "https://park.allrounder.im/",
+        "https://www.linkedin.com/in/chunghyopark/",
+        "https://troe.kr/"
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://book.allrounder.im/#book",
+      "name": "AI Agent를 지휘하는 마케터",
+      "alternativeHeadline": "Command Marketing",
+      "url": "https://book.allrounder.im/",
+      "description": "AI에게 일을 맡기고, 필요한 맥락을 제공하며, 결과를 검수해 반복 가능한 마케팅 업무 시스템으로 만드는 320쪽 실무 가이드",
+      "image": [
+        "https://book.allrounder.im/assets/book-cover.jpg",
+        "https://book.allrounder.im/assets/book-3d.png"
+      ],
+      "inLanguage": "ko-KR",
+      "numberOfPages": 320,
+      "genre": [
+        "마케팅",
+        "AI Agent",
+        "마케팅 AX",
+        "Command Marketing"
+      ],
+      "keywords": [
+        "AI Agent 운영",
+        "R-G-C-T-O-R",
+        "마케팅 AX",
+        "AI 마케팅 팀"
+      ],
+      "author": {
+        "@id": "https://book.allrounder.im/#author"
+      },
+      "publisher": {
+        "@id": "https://book.allrounder.im/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://book.allrounder.im/#website"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "AI Agent 운영"
+        },
+        {
+          "@type": "Thing",
+          "name": "R-G-C-T-O-R"
+        },
+        {
+          "@type": "Thing",
+          "name": "마케팅 AX"
+        },
+        {
+          "@type": "Thing",
+          "name": "Command Marketing"
+        }
+      ]
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://book.allrounder.im/#book-cover-image",
+      "url": "https://book.allrounder.im/assets/book-cover.jpg",
+      "contentUrl": "https://book.allrounder.im/assets/book-cover.jpg",
+      "caption": "AI Agent를 지휘하는 마케터 책 표지",
+      "representativeOfPage": true,
+      "inLanguage": "ko-KR"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://book.allrounder.im/#webpage",
+      "url": "https://book.allrounder.im/",
+      "name": "AI Agent를 지휘하는 마케터 | 박충효 · TROE",
+      "description": "AI Agent 운영, R-G-C-T-O-R, 마케팅 AX, 21일 훈련법을 소개하는 도서 프로모션 페이지",
+      "isPartOf": {
+        "@id": "https://book.allrounder.im/#website"
+      },
+      "mainEntity": {
+        "@id": "https://book.allrounder.im/#book"
+      },
+      "about": {
+        "@id": "https://book.allrounder.im/#book"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://book.allrounder.im/#book-cover-image"
+      },
+      "keywords": [
+        "AI Agent",
+        "커맨드 마케팅",
+        "마케팅 AX",
+        "마케팅 자동화",
+        "박충효",
+        "TROE"
+      ],
+      "dateModified": "2026-10-14",
+      "inLanguage": "ko-KR"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://book.allrounder.im/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "『AI Agent를 지휘하는 마케터』는 어떤 책인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI를 단순한 도구가 아니라 역할별 Agent로 운영하는 방법을 다루는 320쪽 실무 가이드입니다. 목표 설정, 업무 지시, 결과 검수, 승인과 학습의 흐름을 Command Marketing 관점으로 설명합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "커맨드 마케터란 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "커맨드 마케터는 AI에게 판단을 넘기는 사람이 아니라, 사람과 Agent의 역할을 나누고 여러 업무 흐름을 설계, 검수, 개선하는 마케터입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "R-G-C-T-O-R은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Role, Goal, Context, Tool, Output, Review의 여섯 요소로 AI Agent 업무 지시서를 표준화하는 구조입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "이 책은 누구에게 필요한가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "혼자 여러 역할을 맡은 마케터, 팀의 AI 사용 기준을 만드는 리더, 자동화를 업무 시스템으로 설계하려는 실무자, AI 결과물의 최종 책임을 지는 담당자에게 적합합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "책은 어떻게 구성되어 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI Agent 리터러시와 거버넌스부터 리서치와 전략, 콘텐츠와 크리에이티브, 광고와 CRM, 성과 관리, 반복 가능한 운영 매뉴얼까지 7개 파트로 구성되어 있으며 21일 훈련 플랜을 포함합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI Agent와 사람은 어떻게 역할을 나누나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "사람은 목표, 판단 기준, 승인과 최종 책임을 맡고 AI Agent는 리서치, 초안, 반복 실행을 지원합니다. 책은 이 역할 분담을 팀의 운영 방식으로 만드는 방법을 설명합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "팀에 적용할 때 무엇부터 정해야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "반복 업무 하나를 골라 입력 데이터, Agent의 초안 범위, 검수 기준, 승인 담당자를 먼저 정합니다. R-G-C-T-O-R 지시서를 공유한 뒤 결과와 수정 이유를 기록하는 작은 흐름부터 시작하세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "교육·컨설팅 문의에는 무엇을 적으면 좋나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "소속과 담당 역할, 개선하려는 업무, 참여 대상, 희망 일정을 알려 주세요. 고객 개인정보나 비공개 원본 데이터를 보내지 않아도 첫 적용 범위를 논의할 수 있습니다. 구체적인 구성과 비용은 협의 후 결정합니다."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
   <style>
-    :root { color-scheme: light dark; --bg:#eef3f1; --surface:#f8faf9; --surface-strong:#e1ebe7; --ink:#101817; --muted:#566763; --faint:#74837f; --line:#cbd8d4; --accent:#007e71; --accent-strong:#00675d; --accent-soft:#d4ebe6; --on-accent:#f7fffc; --shadow:0 24px 80px rgba(28,65,57,.13); --radius:18px; --max:1280px; --head:72px; --sans:"Pretendard Variable",Pretendard,"SUIT Variable",SUIT,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif; --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
+    :root { color-scheme: light dark; --bg:#eef3f1; --surface:#f8faf9; --surface-strong:#e1ebe7; --ink:#101817; --muted:#566763; --faint:#5c6a66; --line:#cbd8d4; --accent:#007e71; --accent-strong:#00675d; --accent-soft:#d4ebe6; --on-accent:#f7fffc; --shadow:0 24px 80px rgba(28,65,57,.13); --radius:18px; --max:1280px; --head:72px; --sans:"Pretendard Variable",Pretendard,"SUIT Variable",SUIT,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif; --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
     @media (prefers-color-scheme:dark) { :root { --bg:#0d1514; --surface:#121f1d; --surface-strong:#192a27; --ink:#eef6f3; --muted:#a7b7b2; --faint:#879994; --line:#2b403b; --accent:#56c7b3; --accent-strong:#76dbc8; --accent-soft:#163d36; --on-accent:#082c27; --shadow:0 28px 90px rgba(0,0,0,.34); } }
     *,*::before,*::after{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 20px)} body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased} body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.48;background:radial-gradient(circle at 84% 8%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 28%),radial-gradient(circle at 12% 42%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 30%)} img{display:block;max-width:100%} a{color:inherit;text-decoration:none} button,summary{font:inherit} button{color:inherit} ::selection{background:var(--accent);color:#f7fffc}
     .skip-link{position:fixed;top:12px;left:12px;z-index:100;transform:translateY(-180%);border-radius:999px;background:var(--ink);color:var(--bg);padding:10px 16px;font-weight:700}.skip-link:focus{transform:translateY(0)}:focus-visible{outline:3px solid var(--accent);outline-offset:4px}.wrap{width:min(calc(100% - 56px),var(--max));margin-inline:auto}.section{padding:clamp(92px,12vw,170px) 0}.mono{font-family:var(--mono);letter-spacing:-.02em}.eyebrow{margin:0 0 22px;color:var(--accent-strong);font-family:var(--mono);font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.section-title{margin:0;max-width:16ch;font-size:clamp(2.5rem,5.7vw,5.4rem);font-weight:750;letter-spacing:-.065em;line-height:.98;text-wrap:balance}.section-copy{margin:28px 0 0;max-width:62ch;color:var(--muted);font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.85}.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}.reveal.in{opacity:1;transform:none}
@@ -214,8 +300,11 @@
     @media(max-width:1060px){.quickstart-grid{grid-template-columns:1fr 1fr}.quick-card-feature{transform:none}.quick-card:last-child{grid-column:1/-1;min-height:240px}.preview-shell{grid-template-columns:1fr}.preview-shell>.button{grid-column:auto}.purchase-shell{grid-template-columns:1fr}.purchase-actions{justify-content:flex-start}}
     @media(max-width:760px){body{padding-bottom:76px}.hero-proof{gap:12px;margin-top:24px}.hero-proof span{padding-right:12px}.hero-proof b{font-size:1rem}.hero-contact{width:100%;margin:4px 0 0}.quickstart{padding-top:62px}.quickstart-grid{grid-template-columns:1fr;margin-top:32px}.quick-card,.quick-card-feature,.quick-card:last-child{min-height:270px;grid-column:auto}.quick-card h3{margin-top:28px}.preview-shell{padding-block:68px;gap:40px}.preview-steps{grid-template-columns:1fr;border-top:0}.preview-steps article{min-height:0;padding:22px 0;border-top:1px solid var(--line);border-right:0}.preview-steps article:last-child{border-bottom:1px solid var(--line)}.preview-steps h3{margin:12px 0 8px}.preview-shell>.button{width:100%;margin-top:6px}.purchase-shell{padding:30px 24px;gap:28px}.purchase-actions{display:grid;gap:14px}.purchase-actions .button{width:100%}.mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:35;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.mobile-cta .button{min-height:46px;padding-inline:12px}.nav-purchase{display:none!important}}
   </style>
+  <link rel="stylesheet" href="/assets/enhancements.css">
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
   <!-- Meta Pixel Code -->
   <script>
+  if (window.commandTrackingEnabled) {
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -226,42 +315,57 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '2327515324662416');
   fbq('track', 'PageView');
+  }
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=2327515324662416&ev=PageView&noscript=1"
-  /></noscript>
   <!-- End Meta Pixel Code -->
   <meta name="google-site-verification" content="VqNgNXu7ibD_hYh37y74axjP1_E9RGeHC4LM2znCy_U" />
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 이동</a>
-  <header class="site-head"><div class="head-inner"><a class="brand" href="#top" aria-label="TROE 도서 홈"><b>TROE</b><span>PARK CHUNGHYO / COMMAND MARKETING</span></a><nav class="nav" aria-label="주요 메뉴"><a href="#quickstart">빠른 이해</a><a href="#system">업무 시스템</a><a href="#contents">목차</a><a href="#faq">FAQ</a><a href="#author">저자</a><a class="button secondary nav-purchase" data-cta="purchase" data-position="nav" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="button primary" data-cta="inquiry" data-position="nav" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅 문의</a><details class="mobile-menu"><summary>메뉴</summary><nav aria-label="모바일 메뉴"><a href="#quickstart">빠른 이해</a><a href="#system">업무 시스템</a><a href="#contents">목차</a><a href="#faq">FAQ</a><a href="#author">저자</a><a data-cta="purchase" data-position="mobile-menu" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a data-cta="inquiry" data-position="mobile-menu" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅 문의</a></nav></details></nav></div></header>
+  <header class="site-head"><div class="head-inner"><a class="brand" href="#top" aria-label="TROE 도서 홈"><b>TROE</b><span>PARK CHUNGHYO / COMMAND MARKETING</span></a><nav class="nav" aria-label="주요 메뉴"><a href="#quickstart">빠른 이해</a><a href="#system">업무 시스템</a><a href="#contents">목차</a><a href="/blog">블로그</a><a href="#faq">FAQ</a><a href="#author">저자</a><a class="button secondary nav-purchase" data-cta="purchase" data-position="nav" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="button primary" data-consulting-path="" data-cta="consulting" data-position="nav" href="#consulting">강연·컨설팅 안내</a><details class="mobile-menu"><summary>메뉴</summary><nav aria-label="모바일 메뉴"><a href="#quickstart">빠른 이해</a><a href="#system">업무 시스템</a><a href="#contents">목차</a><a href="/blog">블로그</a><a href="#faq">FAQ</a><a href="#author">저자</a><a data-cta="purchase" data-position="mobile-menu" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a data-consulting-path="" data-cta="consulting" data-position="mobile-menu" href="#consulting">강연·컨설팅 안내</a></nav></details></nav></div></header>
   <main id="main">
-    <section class="hero" id="top"><div class="hero-copy"><p class="eyebrow">Command Marketing / New Book</p><h1>AI Agent를<span>지휘하는 마케터</span></h1><p class="lead">AI에게 일을 맡기고, 마케터는 목표·검수·최종 판단을 책임지는 커맨드 마케팅 실무 가이드.</p><div class="actions"><a class="button primary" data-cta="preview" data-position="hero" href="#quickstart">책 핵심 1분 보기</a><a class="button secondary" data-cta="purchase" data-position="hero" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="text-link hero-contact" data-cta="inquiry" data-position="hero" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅 문의 →</a></div><div class="hero-proof" aria-label="도서 신뢰 정보"><span><b>320</b>쪽</span><span><b>7</b>개 파트</span><span><b>21</b>년 경험</span></div></div><div class="book-stage" aria-label="책 입체 표지 이미지"><img class="book" src="assets/book-3d.webp" alt="AI Agent를 지휘하는 마케터 입체 표지" width="960" height="960" fetchpriority="high" decoding="async"><div class="book-note"><strong>박충효 지음</strong>마케터가 AI Agent와 일하는 운영 원리와 실행 프레임</div></div></section>
+    <section class="hero" id="top"><div class="hero-copy"><p class="eyebrow">Command Marketing / New Book</p><h1>AI Agent를 <span>지휘하는 마케터</span></h1><p class="lead">AI에게 일을 맡기고, 마케터는 목표·검수·최종 판단을 책임지는 커맨드 마케팅 실무 가이드.</p><div class="actions"><a class="button primary" data-cta="preview" data-position="hero" href="#diagnosis" data-diagnosis-start>책 핵심 1분 보기</a><a class="button secondary" data-cta="purchase" data-position="hero" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="text-link hero-contact" data-consulting-path="" data-cta="consulting" data-position="hero" href="#consulting">교육·컨설팅 적용 보기 →</a></div><div class="hero-proof" aria-label="도서 신뢰 정보"><span><b>320</b>쪽</span><span><b>7</b>개 파트</span><span><b>21</b>년 경험</span></div></div><div class="book-stage" aria-label="책 입체 표지 이미지"><img class="book" src="assets/book-3d.webp" alt="AI Agent를 지휘하는 마케터 입체 표지" width="960" height="960" fetchpriority="high" decoding="async"><div class="book-note"><strong>박충효 지음</strong>마케터가 AI Agent와 일하는 운영 원리와 실행 프레임</div></div></section>
     <section class="facts" aria-label="도서 기본 정보"><div class="wrap facts-inner"><div class="fact"><span>Book</span><strong>Command Marketing</strong></div><div class="fact"><span>Author</span><strong>박충효</strong></div><div class="fact"><span>Structure</span><strong>7 Parts</strong></div><div class="fact"><span>Volume</span><strong>320 Pages</strong></div></div></section>
-    <section class="quickstart section" id="quickstart" data-track-section="quickstart"><div class="wrap"><div class="quickstart-head reveal"><p class="eyebrow">Start here</p><h2 class="section-title">당신의 마케팅 업무는 어디에서 막혀 있나요?</h2><p class="section-copy">책의 핵심을 세 가지 장면으로 먼저 확인하세요. 상황을 고르면 관련 내용과 실행 단계로 바로 이동합니다.</p></div><div class="quickstart-grid reveal"><article class="quick-card"><span class="quick-index">01 / SOLO</span><h3>혼자 여러 역할을 맡고 있다면</h3><p>반복 업무를 Agent에게 나누고, 마케터는 판단과 우선순위에 집중합니다.</p><a class="text-link" data-cta="preview" data-position="quickstart-solo" href="#readers">내 상황 보기 →</a></article><article class="quick-card quick-card-feature"><span class="quick-index">02 / TEAM</span><h3>팀의 AI 사용 기준이 필요하다면</h3><p>Role·Goal·Context·Tool·Output·Review로 지시서와 검수 기준을 통일합니다.</p><a class="text-link" data-cta="preview" data-position="quickstart-team" href="#system">R-G-C-T-O-R 보기 →</a></article><article class="quick-card"><span class="quick-index">03 / LOOP</span><h3>자동화를 반복 가능한 시스템으로 만들고 싶다면</h3><p>3주 동안 일을 나누고, 기준을 만들고, 실패를 기록해 운영 루프를 완성합니다.</p><a class="text-link" data-cta="preview" data-position="quickstart-loop" href="#practice">3주 훈련 보기 →</a></article></div></div></section>
+    <section class="diagnosis section" id="diagnosis" data-track-section="diagnosis"><div class="wrap diagnosis-shell"><p class="eyebrow">60-second diagnosis</p><h2>지금 필요한 건 AI 도구가 아니라, 운영 기준일 수 있습니다.</h2><form id="situation-form" action="#quickstart"><fieldset><legend>아래에서 가장 가까운 장면 하나를 골라 보세요.</legend><label class="situation-option"><input type="radio" name="situation" value="solo" required><span>반복 업무가 늘지만, 무엇을 Agent에게 맡길지 정하기 어렵다.</span></label><label class="situation-option"><input type="radio" name="situation" value="team"><span>팀마다 AI를 쓰는 방식과 검수 기준이 다르다.</span></label><label class="situation-option"><input type="radio" name="situation" value="loop"><span>자동화를 시작했지만, 수정과 승인 과정에서 다시 사람이 막힌다.</span></label></fieldset><div class="diagnosis-status" id="situation-status" role="status" aria-live="polite">선택하면 내 상황에 맞는 시작점을 안내합니다.</div><div class="actions"><button class="button primary" type="submit">내 상황에 맞는 시작점 보기 →</button><a class="text-link" href="#quickstart">세 가지 경로 먼저 둘러보기</a></div></form><p class="diagnosis-note">도구 추천이나 점수 평가가 아닌 탐색 안내입니다. 개인정보를 입력할 필요가 없으며, 선택값은 앱 저장소에 저장하지 않습니다. 선택한 경로는 사이트 이용 통계에 포함될 수 있습니다.</p></div></section>
+    <section class="quickstart section" id="quickstart" data-track-section="quickstart"><div class="wrap"><div class="quickstart-head reveal"><p class="eyebrow">Start here</p><h2 class="section-title">당신의 마케팅 업무는 어디에서 막혀 있나요?</h2><p class="section-copy">책의 핵심을 세 가지 장면으로 먼저 확인하세요. 상황을 고르면 관련 내용과 실행 단계로 바로 이동합니다.</p></div><div class="quickstart-grid reveal"><article class="quick-card" id="situation-solo" tabindex="-1"><span class="quick-index">01 / SOLO</span><h3>혼자 여러 역할을 맡고 있다면</h3><p>반복 업무를 Agent에게 나누고, 마케터는 판단과 우선순위에 집중합니다.</p><a class="text-link" data-cta="preview" data-position="quickstart-solo" href="#readers">내 상황 보기 →</a></article><article class="quick-card quick-card-feature" id="situation-team" tabindex="-1"><span class="quick-index">02 / TEAM</span><h3>팀의 AI 사용 기준이 필요하다면</h3><p>Role·Goal·Context·Tool·Output·Review로 지시서와 검수 기준을 통일합니다.</p><a class="text-link" data-cta="preview" data-position="quickstart-team" href="#system">R-G-C-T-O-R 보기 →</a></article><article class="quick-card" id="situation-loop" tabindex="-1"><span class="quick-index">03 / LOOP</span><h3>자동화를 반복 가능한 시스템으로 만들고 싶다면</h3><p>3주 동안 일을 나누고, 기준을 만들고, 실패를 기록해 운영 루프를 완성합니다.</p><a class="text-link" data-cta="preview" data-position="quickstart-loop" href="#practice">3주 훈련 보기 →</a></article></div></div></section>
+    <section class="comparison section" id="before-after" data-track-section="before-after"><div class="wrap"><p class="eyebrow">From request to operation</p><h2 class="extra-title">이 책에서 바뀌는 건, AI에게 일을 맡기는 방식입니다.</h2><div class="compare-grid"><article class="compare-card"><h3>요청 → 업무 지시</h3><dl><dt>기존 방식</dt><dd class="before">“광고 카피 써줘”라고 요청한다.</dd><dt>커맨드 마케팅 방식</dt><dd class="after">목표·타깃·금지 표현·검수 기준을 함께 설계한다.</dd></dl><small>책에서 확인할 내용: R-G-C-T-O-R 업무 지시서</small></article><article class="compare-card"><h3>발행 → 검수와 승인</h3><dl><dt>기존 방식</dt><dd class="before">결과가 좋아 보이면 바로 발행한다.</dd><dt>커맨드 마케팅 방식</dt><dd class="after">사실·브랜드·고객·채널·리스크를 점검한다.</dd></dl><small>책에서 확인할 내용: Human-in-the-loop 검수 기준</small></article><article class="compare-card"><h3>결과 → 반복 가능한 기록</h3><dl><dt>기존 방식</dt><dd class="before">잘된 결과만 남긴다.</dd><dt>커맨드 마케팅 방식</dt><dd class="after">가설·조건·결과·배운 점을 함께 기록한다.</dd></dl><small>책에서 확인할 내용: 반복 가능한 운영 매뉴얼</small></article></div><a class="text-link" href="#preview">각 방식이 어떻게 연결되는지 보기 ↓</a></div></section>
     <section class="preview section" id="preview" data-track-section="preview"><div class="wrap preview-shell reveal"><div class="preview-intro"><p class="eyebrow">One-minute preview</p><h2 class="section-title">좋은 Agent는 능력이 아니라, 경계가 분명합니다.</h2><p class="section-copy">이 책은 프롬프트 모음이 아니라 일을 맡기고 검수하는 운영 구조를 설계합니다.</p></div><div class="preview-steps" aria-label="책 핵심 미리보기"><article><span>01</span><h3>맡긴다</h3><p>목표와 맥락을 정해 Agent에게 역할을 맡깁니다.</p></article><article><span>02</span><h3>검수한다</h3><p>사실성·브랜드·고객·채널·리스크 기준으로 결과를 판단합니다.</p></article><article><span>03</span><h3>반복한다</h3><p>실패와 승인 기록을 남겨 팀의 운영 매뉴얼로 만듭니다.</p></article></div><a class="button secondary" data-cta="preview" data-position="preview" href="#system">R-G-C-T-O-R 전체 보기</a></div></section>
     <section class="premise section" id="shift"><div class="wrap premise-grid"><div class="premise-mark" aria-hidden="true">↳</div><div class="reveal"><blockquote>질문하는 마케터에서, <em>지휘하는 마케터로.</em></blockquote><p class="premise-copy">AI를 잘 쓴다는 것은 더 세련된 프롬프트를 외우는 일이 아닙니다.</p><p class="premise-copy"><strong>무엇을 맡길지 결정하고, 필요한 맥락을 제공하며, 결과를 검수해 반복 가능한 업무 흐름으로 만드는 일</strong>입니다. 이 책은 도구가 바뀌어도 남는 마케팅 운영 체계를 다룹니다.</p></div></div></section>
     <section class="section"><div class="wrap maturity-shell reveal"><div class="maturity-head"><p class="eyebrow">AI Maturity</p><h2 class="section-title">AI를 쓰는 5단계, 목표는 4단계입니다.</h2><p class="section-copy">역할별 Agent를 반복 업무에 배치하고, 사람은 목표와 검수 기준을 책임지는 단계로 이동합니다.</p></div><div class="maturity"><div class="maturity-tabs" role="tablist" aria-label="AI 활용 성숙도"><button class="maturity-btn" id="level-tab-1" role="tab" aria-selected="false" aria-controls="maturity-panel" data-level="0"><span>01</span><b>체험형 사용자</b><span>TRY</span></button><button class="maturity-btn" id="level-tab-2" role="tab" aria-selected="false" aria-controls="maturity-panel" data-level="1"><span>02</span><b>프롬프트 사용자</b><span>PROMPT</span></button><button class="maturity-btn" id="level-tab-3" role="tab" aria-selected="false" aria-controls="maturity-panel" data-level="2"><span>03</span><b>업무 보조 사용자</b><span>ASSIST</span></button><button class="maturity-btn" id="level-tab-4" role="tab" aria-selected="true" aria-controls="maturity-panel" data-level="3"><span>04</span><b>Agent 운영자</b><span>OPERATE</span></button><button class="maturity-btn" id="level-tab-5" role="tab" aria-selected="false" aria-controls="maturity-panel" data-level="4"><span>05</span><b>커맨드 마케터</b><span>ORCHESTRATE</span></button></div><div class="maturity-panel" id="maturity-panel" role="tabpanel" aria-labelledby="level-tab-4" aria-live="polite"><div><span class="level">LEVEL 04 / OPERATE</span><h3>Agent 운영자</h3><p>리서치, 콘텐츠, 리포트 등 역할별 Agent를 반복 업무에 배치합니다. 목표와 기준은 사람이 정하고, Agent가 실행을 보조합니다.</p></div><div class="next"><span>NEXT MOVE</span><strong>성과와 실패 사례를 기록해 업무 시스템을 계속 개선합니다.</strong></div></div></div></div></section>
     <section class="section" id="system"><div class="wrap"><div class="command-head reveal"><h2 class="section-title">프롬프트가 아니라 업무 지시서를 설계합니다.</h2><p class="section-copy">R-G-C-T-O-R은 Agent에게 일을 맡길 때 필요한 여섯 요소를 하나의 표준 구조로 묶습니다.</p></div><div class="command-sheet reveal"><div class="command-word" aria-label="R G C T O R">R-G-C-T-O-R</div><div><div class="command-list" aria-label="R-G-C-T-O-R 구성 요소"><article class="command-item"><span class="letter">R</span><h3>Role</h3><p>Agent가 맡을 역할과 책임 범위</p></article><article class="command-item"><span class="letter">G</span><h3>Goal</h3><p>업무의 목적과 성공 기준</p></article><article class="command-item"><span class="letter">C</span><h3>Context</h3><p>타깃, 전략, 데이터, 제약 조건</p></article><article class="command-item"><span class="letter">T</span><h3>Tool</h3><p>사용할 문서, 데이터, 채널, 도구</p></article><article class="command-item"><span class="letter">O</span><h3>Output</h3><p>결과물의 형식, 분량, 필수 항목</p></article><article class="command-item"><span class="letter">R</span><h3>Review</h3><p>사실성, 브랜드, 리스크, 승인 기준</p></article></div><p class="command-caption">좋은 Agent는 능력이 많은 Agent가 아니라 역할과 경계가 분명한 Agent입니다. 여섯 요소에 승인 게이트를 더해 AI를 실제 업무 흐름 안에 안전하게 배치합니다.</p></div></div></div></section>
+    <section class="example-section section" id="rgctor-example" data-track-section="rgctor-example"><div class="wrap"><div class="example-head"><div><p class="eyebrow">R-G-C-T-O-R in one scene</p><h2 class="extra-title">신간 인스타그램 캠페인, 여섯 줄로 지휘하기.</h2><p class="section-copy">각 카드를 열어 실제 업무 지시의 범위를 확인하세요. 책의 프레임을 적용한 웹사이트 편집 예시이며, 원문 발췌나 실제 캠페인 성과가 아닙니다.</p></div></div><div class="example-grid"><details class="example-card" data-rgctor="Role"><summary><span>01 / R</span>Role</summary><p>퍼포먼스 마케터. 캠페인 초안과 검수할 근거를 준비하되, 광고 발행과 예산 집행은 사람이 승인합니다.</p></details><details class="example-card" data-rgctor="Goal"><summary><span>02 / G</span>Goal</summary><p>랜딩 페이지 조회와 핵심 구조 탐색을 늘립니다. 클릭 수만 보지 않고, 진단 시작·프레임 열람·구매 CTA 클릭을 구분해 확인합니다.</p></details><details class="example-card" data-rgctor="Context"><summary><span>03 / C</span>Context</summary><p>AI를 실무에 도입하려는 마케터·팀 리드가 대상입니다. 개인에게는 책과 훈련, 조직에는 교육·강연·컨설팅 경로를 안내합니다.</p></details><details class="example-card" data-rgctor="Tool"><summary><span>04 / T</span>Tool</summary><p>제공된 책 소개와 원고, 랜딩 페이지, 승인된 광고 소재, 캠페인 지표를 사용합니다. 확인할 수 없는 데이터는 만들지 않습니다.</p></details><details class="example-card" data-rgctor="Output"><summary><span>05 / O</span>Output</summary><p>4장 캐러셀·광고 문안·랜딩 개선 가설을 만듭니다. 각 결과물에 목표, 근거, CTA, 검수가 필요한 항목을 함께 적습니다.</p></details><details class="example-card" data-rgctor="Review"><summary><span>06 / R</span>Review</summary><p>과장 표현, 광고 메시지와 랜딩의 일치, CTA 명확성, 브랜드 톤을 점검합니다. 사실 검증과 최종 발행 승인은 사람이 맡습니다.</p></details></div><a class="text-link" href="#contents">이 구조가 320쪽 안에서 어떻게 확장되는지 보기 →</a></div></section>
+    <section class="reading-path section" id="reading-path" data-track-section="reading-path"><div class="wrap"><p class="eyebrow">Your 90-second reading path</p><h2 class="extra-title">처음부터 끝까지 읽지 않아도 괜찮습니다.</h2><p class="section-copy">지금 필요한 파트의 소개와 결과물을 먼저 확인하세요. 각 경로를 둘러보는 데 약 90초입니다.</p><div class="path-list"><article class="path-card"><h3>혼자 여러 역할을 맡고 있다면</h3><p>지시서 → 콘텐츠 운영 → 21일 훈련</p><div class="path-links"><a class="text-link" href="#part-3" data-reading-path="solo" data-parts="3,5,7">Part 3·5·7 보기 →</a></div></article><article class="path-card"><h3>팀의 AI 사용 기준이 필요하다면</h3><p>거버넌스 → 업무 지시 → 운영 점검</p><div class="path-links"><a class="text-link" href="#part-2" data-reading-path="team" data-parts="2,3,7">Part 2·3·7 보기 →</a></div></article><article class="path-card"><h3>광고·CRM·리포트를 개선하려면</h3><p>리서치 → 제작·QA → 성과 개선 루프</p><div class="path-links"><a class="text-link" href="#part-4" data-reading-path="loop" data-parts="4,5,6">Part 4·5·6 보기 →</a></div></article></div></div></section>
     <section class="contents section" id="contents"><div class="wrap"><div class="contents-head reveal"><p class="eyebrow">Inside the Book</p><h2 class="section-title">7개 파트로 완성하는 나만의 AI 마케팅 팀.</h2><p class="section-copy">작동 원리와 안전 기준으로 시작해 리서치, 콘텐츠, 광고, CRM, 리포팅 Agent를 설계하고 운영 매뉴얼로 완성합니다.</p></div><div class="toc reveal">
-      <details open><summary><span class="part-no">PART 01</span><h3>AI Agent 리터러시</h3><span class="plus">+</span></summary><div class="toc-body"><p>Chat AI와 Agent AI의 차이부터 확률적 생성, Context Window, Memory, 멀티모달, 모델 선택까지. 일을 맡기기 전에 필요한 실무 감각을 세웁니다.</p><div class="chapters"><span>Chat AI와 Agent AI</span><span>Context와 Memory</span><span>멀티모달</span><span>모델과 도구 선택</span></div></div></details>
-      <details><summary><span class="part-no">PART 02</span><h3>마케터를 위한 AI 거버넌스</h3><span class="plus">+</span></summary><div class="toc-body"><p>고객 데이터, 브랜드 보이스, 저작권과 광고 심의, Human-in-the-loop를 연결해 팀 단위 안전 기준을 만듭니다.</p><div class="chapters"><span>데이터 분류</span><span>브랜드 보이스</span><span>법과 심의 리스크</span><span>팀 가이드라인</span></div></div></details>
-      <details><summary><span class="part-no">PART 03</span><h3>커맨드 마케팅 OS</h3><span class="plus">+</span></summary><div class="toc-body"><p>R-G-C-T-O-R 기본 공식, 업무 지시서, Workflow, 노코드 자동화를 연결해 인간이 지휘하고 Agent가 실행하는 구조를 설계합니다.</p><div class="chapters"><span>R-G-C-T-O-R</span><span>업무 지시서</span><span>Agent Workflow</span><span>노코드 자동화</span></div></div></details>
-      <details><summary><span class="part-no">PART 04</span><h3>리서치와 전략 Agent</h3><span class="plus">+</span></summary><div class="toc-body"><p>시장, 고객, 경쟁사를 읽고 페르소나와 구매 여정, 캠페인 전략으로 전환하는 다섯 Agent를 다룹니다.</p><div class="chapters"><span>트렌드 스캐너</span><span>VOC 인사이트</span><span>경쟁사 분석</span><span>캠페인 전략</span></div></div></details>
-      <details><summary><span class="part-no">PART 05</span><h3>콘텐츠와 크리에이티브 Agent</h3><span class="plus">+</span></summary><div class="toc-body"><p>기획, 카피, SEO, 랜딩페이지, 숏폼과 이미지와 영상, 콘텐츠 QA까지. 브랜드 톤을 지키며 빠르게 제작하는 방법을 연결합니다.</p><div class="chapters"><span>콘텐츠 기획</span><span>카피라이팅</span><span>SEO와 랜딩페이지</span><span>콘텐츠 QA</span></div></div></details>
-      <details><summary><span class="part-no">PART 06</span><h3>광고, CRM, 성과분석 Agent</h3><span class="plus">+</span></summary><div class="toc-body"><p>퍼포먼스 광고, 소재 분석, CRM과 이메일, 리포팅, 실험 관리, 마케팅 회의를 하나의 개선 루프로 묶습니다.</p><div class="chapters"><span>퍼포먼스 광고</span><span>CRM과 이메일</span><span>데이터 리포팅</span><span>실험과 회의</span></div></div></details>
-      <details><summary><span class="part-no">PART 07</span><h3>계속 꺼내 쓰는 AI 마케팅 운영 매뉴얼</h3><span class="plus">+</span></summary><div class="toc-body"><p>나만의 AI 마케팅 팀, 21일 훈련 플랜, 상황별 프롬프트 카드, 운영 점검표, QR 업데이트 라이브러리로 실행을 지속합니다.</p><div class="chapters"><span>AI 마케팅 팀</span><span>21일 훈련</span><span>프롬프트 카드</span><span>QR 라이브러리</span></div></div></details>
+      <details id="part-1" open><summary><span class="part-no">PART 01</span><h3>AI Agent 리터러시</h3><span class="plus">+</span></summary><div class="toc-body"><p>Chat AI와 Agent AI의 차이부터 확률적 생성, Context Window, Memory, 멀티모달, 모델 선택까지. 일을 맡기기 전에 필요한 실무 감각을 세웁니다.</p><div class="chapters"><span>Chat AI와 Agent AI</span><span>Context와 Memory</span><span>멀티모달</span><span>모델과 도구 선택</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>Chat AI와 Agent AI의 차이, 맡길 범위와 모델 선택을 정리하는 관점</div></div></details>
+      <details id="part-2"><summary><span class="part-no">PART 02</span><h3>마케터를 위한 AI 거버넌스</h3><span class="plus">+</span></summary><div class="toc-body"><p>고객 데이터, 브랜드 보이스, 저작권과 광고 심의, Human-in-the-loop를 연결해 팀 단위 안전 기준을 만듭니다.</p><div class="chapters"><span>데이터 분류</span><span>브랜드 보이스</span><span>법과 심의 리스크</span><span>팀 가이드라인</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>AI 사용 가이드와 검수 체크리스트</div></div></details>
+      <details id="part-3"><summary><span class="part-no">PART 03</span><h3>커맨드 마케팅 OS</h3><span class="plus">+</span></summary><div class="toc-body"><p>R-G-C-T-O-R 기본 공식, 업무 지시서, Workflow, 노코드 자동화를 연결해 인간이 지휘하고 Agent가 실행하는 구조를 설계합니다.</p><div class="chapters"><span>R-G-C-T-O-R</span><span>업무 지시서</span><span>Agent Workflow</span><span>노코드 자동화</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>R-G-C-T-O-R 업무 지시서 템플릿</div></div></details>
+      <details id="part-4"><summary><span class="part-no">PART 04</span><h3>리서치와 전략 Agent</h3><span class="plus">+</span></summary><div class="toc-body"><p>시장, 고객, 경쟁사를 읽고 페르소나와 구매 여정, 캠페인 전략으로 전환하는 다섯 Agent를 다룹니다.</p><div class="chapters"><span>트렌드 스캐너</span><span>VOC 인사이트</span><span>경쟁사 분석</span><span>캠페인 전략</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>리서치·고객·경쟁사 분석 Agent 설계 관점</div></div></details>
+      <details id="part-5"><summary><span class="part-no">PART 05</span><h3>콘텐츠와 크리에이티브 Agent</h3><span class="plus">+</span></summary><div class="toc-body"><p>기획, 카피, SEO, 랜딩페이지, 숏폼과 이미지와 영상, 콘텐츠 QA까지. 브랜드 톤을 지키며 빠르게 제작하는 방법을 연결합니다.</p><div class="chapters"><span>콘텐츠 기획</span><span>카피라이팅</span><span>SEO와 랜딩페이지</span><span>콘텐츠 QA</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>콘텐츠 기획·카피·랜딩·QA 운영 흐름</div></div></details>
+      <details id="part-6"><summary><span class="part-no">PART 06</span><h3>광고, CRM, 성과분석 Agent</h3><span class="plus">+</span></summary><div class="toc-body"><p>퍼포먼스 광고, 소재 분석, CRM과 이메일, 리포팅, 실험 관리, 마케팅 회의를 하나의 개선 루프로 묶습니다.</p><div class="chapters"><span>퍼포먼스 광고</span><span>CRM과 이메일</span><span>데이터 리포팅</span><span>실험과 회의</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>후킹·메시지·비주얼·CTA·랜딩의 일치 여부를 점검하는 관점과 실험 기록</div></div></details>
+      <details id="part-7"><summary><span class="part-no">PART 07</span><h3>계속 꺼내 쓰는 AI 마케팅 운영 매뉴얼</h3><span class="plus">+</span></summary><div class="toc-body"><p>나만의 AI 마케팅 팀, 21일 훈련 플랜, 상황별 프롬프트 카드, 운영 점검표, QR 업데이트 라이브러리로 실행을 지속합니다.</p><div class="chapters"><span>AI 마케팅 팀</span><span>21일 훈련</span><span>프롬프트 카드</span><span>QR 라이브러리</span></div><div class="part-result"><b>적용하며 만들어 볼 결과물</b><br>21일 훈련 플랜과 운영 점검표</div></div></details>
     </div></div></section>
     <section class="spread" aria-label="실물 책 이미지"><img src="assets/book-flat.jpg" alt="책상 위에 놓인 AI Agent를 지휘하는 마케터 실물 책" width="1240" height="930" loading="lazy"><div class="spread-copy reveal"><blockquote>“AI Agent는 마케터를 대체하지 않습니다. 마케터의 판단 이전의 일을 다른 구조로 바꿉니다.”</blockquote><cite>AI AGENT를 지휘하는 마케터 / PARK CHUNGHYO</cite></div></section>
-    <section class="purchase-band section" id="purchase" data-track-section="purchase"><div class="wrap purchase-shell reveal"><div><p class="eyebrow">Read the system</p><h2 class="section-title">읽고, 바로 팀의 일에 적용하세요.</h2><p class="section-copy">320쪽의 실무 프레임과 3주 훈련 플랜으로 마케팅 업무를 Agent와 함께 운영하는 기준을 만듭니다.</p></div><div class="purchase-actions"><a class="button primary" data-cta="purchase" data-position="purchase-band" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">교보문고에서 책 구매</a><a class="text-link" data-cta="inquiry" data-position="purchase-band" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">팀 교육·강연·컨설팅 문의 →</a></div></div></section>
+    <section class="purchase-band section" id="purchase" data-track-section="purchase"><div class="wrap purchase-shell reveal"><div><p class="eyebrow">Read the system</p><h2 class="section-title">읽고, 바로 팀의 일에 적용하세요.</h2><p class="section-copy">320쪽의 실무 프레임과 3주 훈련 플랜으로 마케팅 업무를 Agent와 함께 운영하는 기준을 만듭니다.</p></div><div class="purchase-actions"><a class="button primary" data-cta="purchase" data-position="purchase-band" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">교보문고에서 책 구매</a><a class="text-link" data-consulting-path="" data-cta="consulting" data-position="purchase-band" href="#consulting">팀 교육·컨설팅 적용 범위 →</a></div></div></section>
     <section class="section" id="readers" data-track-section="readers"><div class="wrap readers-layout"><div class="reader-intro reveal"><h2 class="section-title">도구는 많지만 운영 기준이 부족한 마케터에게.</h2><p class="section-copy">AI를 한 번 잘 쓰는 방법보다 팀이 계속 잘 운영하는 기준이 필요한 사람을 위한 책입니다.</p></div><div class="reader-list reveal"><article class="reader"><span class="role">SOLO MARKETER</span><div><h3>혼자 여러 역할을 맡은 마케터</h3><p>리서치부터 콘텐츠, 광고, 보고까지 반복 업무를 역할별 Agent로 나누고 싶은 분.</p></div></article><article class="reader"><span class="role">TEAM LEAD</span><h3>팀의 AI 사용 기준을 만들어야 하는 리더</h3><p>데이터, 검수, 승인, 기록의 원칙을 팀 운영 언어로 정리하려는 분.</p></article><article class="reader"><span class="role">SYSTEM BUILDER</span><h3>자동화를 시스템으로 볼 사람</h3><p>노코드 도구를 붙이기 전에 목표, 입력, 결과, 검수, 승인 흐름을 설계하려는 분.</p></article><article class="reader"><span class="role">FINAL OWNER</span><h3>AI 결과물의 최종 책임을 질 실무자</h3><p>사실성, 브랜드, 고객 관점, 채널, 리스크를 점검해 발행 가능한 결과로 바꾸려는 분.</p></article></div></div></section>
-    <section class="practice section"><div class="wrap practice-shell reveal"><h2>읽고 끝나지 않는 3주 훈련.</h2><div class="weeks"><article class="week"><span>WEEK 01</span><div><b>우리 일을 나눈다</b><p>반복 업무를 Agent가 초안을 만들 일과 사람이 판단할 일로 구분합니다.</p></div></article><article class="week"><span>WEEK 02</span><div><b>지시서와 검수 기준을 만든다</b><p>R-G-C-T-O-R로 지시를 표준화하고 사실, 브랜드, 고객, 채널, 리스크 기준을 배치합니다.</p></div></article><article class="week"><span>WEEK 03</span><div><b>반복 가능한 루프로 운영한다</b><p>결과와 실패를 기록하고 승인, 수정, 재사용 흐름으로 팀의 매뉴얼을 개선합니다.</p></div></article></div></div></section>
-    <section class="faq section" id="faq"><div class="wrap"><div class="faq-head reveal"><h2 class="section-title">이 책을 찾는 사람이 가장 먼저 묻는 질문.</h2><p class="section-copy">2026년 10월 8일 기준 최종 내지 320쪽과 저자 공개 프로필을 바탕으로 답합니다.</p></div><div class="faq-grid reveal"><details class="faq-card" open><summary>『AI Agent를 지휘하는 마케터』는 어떤 책인가요?<span>+</span></summary><p>AI를 단순한 도구가 아니라 역할별 Agent로 운영하는 방법을 다루는 320쪽 실무 가이드입니다. 목표 설정, 업무 지시, 결과 검수, 승인과 학습의 흐름을 Command Marketing 관점으로 설명합니다.</p></details><details class="faq-card"><summary>커맨드 마케터란 무엇인가요?<span>+</span></summary><p>커맨드 마케터는 AI에게 판단을 넘기는 사람이 아니라, 사람과 Agent의 역할을 나누고 여러 업무 흐름을 설계, 검수, 개선하는 마케터입니다.</p></details><details class="faq-card"><summary>R-G-C-T-O-R은 무엇인가요?<span>+</span></summary><p>Role, Goal, Context, Tool, Output, Review의 여섯 요소로 AI Agent 업무 지시서를 표준화하는 구조입니다.</p></details><details class="faq-card"><summary>이 책은 누구에게 필요한가요?<span>+</span></summary><p>혼자 여러 역할을 맡은 마케터, 팀의 AI 사용 기준을 만드는 리더, 자동화를 업무 시스템으로 설계하려는 실무자, AI 결과물의 최종 책임을 지는 담당자에게 적합합니다.</p></details><details class="faq-card"><summary>책은 어떻게 구성되어 있나요?<span>+</span></summary><p>AI Agent 리터러시와 거버넌스부터 리서치와 전략, 콘텐츠와 크리에이티브, 광고와 CRM, 성과 관리, 반복 가능한 운영 매뉴얼까지 7개 파트로 구성되어 있으며 21일 훈련 플랜을 포함합니다.</p></details><details class="faq-card"><summary>AI Agent와 사람은 어떻게 역할을 나누나요?<span>+</span></summary><p>사람은 목표, 판단 기준, 승인과 최종 책임을 맡고 AI Agent는 리서치, 초안, 반복 실행을 지원합니다. 책은 이 역할 분담을 팀의 운영 방식으로 만드는 방법을 설명합니다.</p></details></div><div class="faq-source"><span><strong>정보 기준일</strong> <time datetime="2026-10-08">2026-10-08</time></span><span><strong>근거</strong> 최종 내지 320쪽 / 저자 박충효 공개 프로필 / TROE</span></div></div></section>
+    <section class="practice section" id="practice" data-track-section="practice"><div class="wrap practice-shell reveal"><h2>읽고 끝나지 않는 3주 훈련.</h2><div class="weeks" id="training-weeks"><article class="week"><span>WEEK 01</span><div><b>우리 일을 나눈다</b><p>반복 업무를 Agent가 초안을 만들 일과 사람이 판단할 일로 구분합니다.</p></div></article><article class="week"><span>WEEK 02</span><div><b>지시서와 검수 기준을 만든다</b><p>R-G-C-T-O-R로 지시를 표준화하고 사실, 브랜드, 고객, 채널, 리스크 기준을 배치합니다.</p></div></article><article class="week"><span>WEEK 03</span><div><b>반복 가능한 루프로 운영한다</b><p>결과와 실패를 기록하고 승인, 수정, 재사용 흐름으로 팀의 매뉴얼을 개선합니다.</p></div></article></div><details class="day1" id="day1-preview"><summary>DAY 1 미리보기 — 오늘 반복한 일을 세 줄로 정리해 보세요.</summary><div class="day1-content"><h3>이 세 질문이 3주 훈련의 출발점입니다.</h3><p>답은 종이나 개인 메모에 적어 보세요. 아래 체크는 이 화면에서만 사용하고, 입력·저장·전송하지 않습니다. 책의 훈련 방향을 바탕으로 만든 편집 미리보기입니다.</p><label><input type="checkbox">내가 반복한 업무는 무엇인가?</label><label><input type="checkbox">Agent가 초안을 만들어도 되는 부분은 무엇인가?</label><label><input type="checkbox">사람의 최종 판단이 필요한 지점은 어디인가?</label><a class="text-link" href="#training-weeks">21일 훈련 전체 구조 보기 →</a></div></details></div></section>
+    <section class="faq section" id="faq"><div class="wrap"><div class="faq-head reveal"><h2 class="section-title">이 책을 찾는 사람이 가장 먼저 묻는 질문.</h2><p class="section-copy">2026년 10월 8일 기준 최종 내지 320쪽과 저자 공개 프로필을 바탕으로 답합니다.</p></div><h3 class="faq-category">책을 읽기 전에 확인할 질문</h3><div class="faq-grid reveal"><details class="faq-card" open><summary>『AI Agent를 지휘하는 마케터』는 어떤 책인가요?<span>+</span></summary><p>AI를 단순한 도구가 아니라 역할별 Agent로 운영하는 방법을 다루는 320쪽 실무 가이드입니다. 목표 설정, 업무 지시, 결과 검수, 승인과 학습의 흐름을 Command Marketing 관점으로 설명합니다.</p></details><details class="faq-card"><summary>커맨드 마케터란 무엇인가요?<span>+</span></summary><p>커맨드 마케터는 AI에게 판단을 넘기는 사람이 아니라, 사람과 Agent의 역할을 나누고 여러 업무 흐름을 설계, 검수, 개선하는 마케터입니다.</p></details><details class="faq-card"><summary>R-G-C-T-O-R은 무엇인가요?<span>+</span></summary><p>Role, Goal, Context, Tool, Output, Review의 여섯 요소로 AI Agent 업무 지시서를 표준화하는 구조입니다.</p></details><details class="faq-card"><summary>이 책은 누구에게 필요한가요?<span>+</span></summary><p>혼자 여러 역할을 맡은 마케터, 팀의 AI 사용 기준을 만드는 리더, 자동화를 업무 시스템으로 설계하려는 실무자, AI 결과물의 최종 책임을 지는 담당자에게 적합합니다.</p></details><details class="faq-card"><summary>책은 어떻게 구성되어 있나요?<span>+</span></summary><p>AI Agent 리터러시와 거버넌스부터 리서치와 전략, 콘텐츠와 크리에이티브, 광고와 CRM, 성과 관리, 반복 가능한 운영 매뉴얼까지 7개 파트로 구성되어 있으며 21일 훈련 플랜을 포함합니다.</p></details><details class="faq-card"><summary>AI Agent와 사람은 어떻게 역할을 나누나요?<span>+</span></summary><p>사람은 목표, 판단 기준, 승인과 최종 책임을 맡고 AI Agent는 리서치, 초안, 반복 실행을 지원합니다. 책은 이 역할 분담을 팀의 운영 방식으로 만드는 방법을 설명합니다.</p></details></div><h3 class="faq-category">팀 적용 전에 확인할 질문</h3><div class="faq-grid"><details class="faq-card"><summary>팀에 적용할 때 무엇부터 정해야 하나요?<span>+</span></summary><p>반복 업무 하나를 골라 입력 데이터, Agent의 초안 범위, 검수 기준, 승인 담당자를 먼저 정합니다. R-G-C-T-O-R 지시서를 공유한 뒤 결과와 수정 이유를 기록하는 작은 흐름부터 시작하세요.</p></details><details class="faq-card"><summary>교육·컨설팅 문의에는 무엇을 적으면 좋나요?<span>+</span></summary><p>소속과 담당 역할, 개선하려는 업무, 참여 대상, 희망 일정을 알려 주세요. 고객 개인정보나 비공개 원본 데이터를 보내지 않아도 첫 적용 범위를 논의할 수 있습니다. 구체적인 구성과 비용은 협의 후 결정합니다.</p></details></div><div class="faq-source"><span><strong>정보 기준일</strong> <time datetime="2026-10-08">2026-10-08</time></span><span><strong>근거</strong> 최종 내지 320쪽 / 저자 박충효 공개 프로필 / TROE</span></div></div></section>
     <section class="author section" id="author"><div class="wrap author-grid"><div class="author-card reveal"><span>AUTHOR / TROE REPRESENTATIVE PARTNER</span><h2>박충효</h2><p>마케팅 성장 자문가<br>AI와 AX 교육 및 컨설팅 전문가</p></div><div class="author-copy reveal"><p class="statement">디지털 마케팅 현장의 경험을 AI Agent와 일하는 운영 언어로 바꾸어 왔습니다.</p><p class="bio">TROE 대표 파트너로 디지털 마케팅 전략, 데이터 기반 성장, 브랜드 커뮤니케이션, AI와 AX 교육, 업무 자동화를 연결해 왔습니다.</p><p class="bio">에이전시, 인하우스, 글로벌 커머스, 리서치, 컨설팅 현장의 경험을 바탕으로 마케터가 AI에게 주도권을 넘기지 않고도 더 큰 실행력을 만드는 방법을 이 책에 담았습니다.</p><div class="credentials"><div class="credential"><b>21년 이상</b><span>디지털 마케팅, 리서치, 자문, 교육 경험</span></div><div class="credential"><b>TROE</b><span>마케팅 성장 자문, AI와 AX 교육, 시스템 운영</span></div><div class="credential"><b>Learn by Doing</b><span>현장에서 답을 찾고 기록과 반복으로 개선</span></div></div><div class="link-row"><a class="text-link" href="https://troe.kr" target="_blank" rel="noreferrer">TROE</a><a class="text-link" href="https://park.allrounder.im/" target="_blank" rel="noreferrer">박충효 포트폴리오</a><a class="text-link" href="https://ax.allrounder.im/" target="_blank" rel="noreferrer">TROE AX 진단</a><a class="text-link" href="https://www.linkedin.com/in/chunghyopark/" target="_blank" rel="noreferrer">LinkedIn</a></div></div></div></section>
-    <section class="closing"><div class="wrap closing-inner reveal"><div class="closing-copy"><h2>AI에게 일을 맡기되, <em>판단은 넘기지 마세요.</em></h2><p>마케터가 목표와 기준을 정하고, Agent가 반복 작업을 수행하며, 사람이 최종 결정을 내리는 구조를 설계할 시간입니다.</p><div class="actions"><a class="button primary" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅 문의</a></div></div><figure class="closing-book"><img class="book-mini" src="assets/book-cover.jpg" alt="AI Agent를 지휘하는 마케터 표지 전체" width="2244" height="3071" loading="lazy"><figcaption>BOOK / PARK CHUNGHYO</figcaption></figure></div></section>
+    <!-- BLOG_SECTION_START --><section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Field notes / SEO · GEO · AIEO</p><h2 class="section-title">검색과 AI 답변을 위한 콘텐츠 운영 가이드.</h2><p class="section-copy">정의부터 실무 설계와 측정까지, 다섯 편으로 연결합니다. 도서 발췌가 아닌 공개 출처 기반의 편집 콘텐츠입니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards"><article class="blog-card"><p class="eyebrow">SEO · GEO · AIEO / 2026-10-14</p>
+<h3><a href="/blog/seo-geo-aieo-guide" data-blog-link="seo-geo-aieo-guide">SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?</a></h3>
+<p>SEO·GEO·AIEO의 차이를 명확히 짚고, AI 검색에서도 중요한 검색 기본기와 사람 중심 콘텐츠 전략을 설명합니다. 마케터와 팀 리더를 위한 실무 예시와 발행 체크리스트를 확인하세요.</p><a class="text-link" href="/blog/seo-geo-aieo-guide" data-blog-link="seo-geo-aieo-guide">가이드 읽기 →</a></article><article class="blog-card"><p class="eyebrow">GEO · 콘텐츠 설계 / 2026-10-14</p>
+<h3><a href="/blog/geo-content-structure" data-blog-link="geo-content-structure">AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드</a></h3>
+<p>AI 검색을 고려한 콘텐츠는 질문에 직접 답하고 근거·날짜·적용 범위를 밝혀야 합니다. 한국어 마케팅 콘텐츠 전후 예시, GEO 연구의 한계, 출처 검수 체크리스트를 정리했습니다.</p><a class="text-link" href="/blog/geo-content-structure" data-blog-link="geo-content-structure">가이드 읽기 →</a></article><article class="blog-card"><p class="eyebrow">SEO · 기술 구현 / 2026-10-14</p>
+<h3><a href="/blog/technical-seo-ai-search" data-blog-link="technical-seo-ai-search">AI 검색 기술 SEO 체크리스트: 초기 HTML부터 크롤러·스키마까지</a></h3>
+<p>초기 HTML, canonical, sitemap, robots.txt, Article·BreadcrumbList와 AI 크롤러를 점검하는 기술 SEO 가이드입니다. 검색용 크롤러와 학습용 크롤러의 목적, llms.txt의 한계를 구분합니다.</p><a class="text-link" href="/blog/technical-seo-ai-search" data-blog-link="technical-seo-ai-search">가이드 읽기 →</a></article><article class="blog-card"><p class="eyebrow">AIEO · Agent 운영 / 2026-10-14</p>
+<h3><a href="/blog/rgctor-content-workflow" data-blog-link="rgctor-content-workflow">SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법</a></h3>
+<p>SEO·GEO 콘텐츠 Agent의 역할·목표·맥락·도구·산출물·검수를 설계하세요. 실무 브리프 예시, 주장과 출처를 대조하는 방법, 개인정보 보호와 사람의 최종 승인 체크리스트를 제공합니다.</p><a class="text-link" href="/blog/rgctor-content-workflow" data-blog-link="rgctor-content-workflow">가이드 읽기 →</a></article><article class="blog-card"><p class="eyebrow">SEO · GEO · 성과 측정 / 2026-10-14</p>
+<h3><a href="/blog/ai-search-measurement" data-blog-link="ai-search-measurement">SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법</a></h3>
+<p>검색 노출, 클릭·세션, AI 답변의 인용, 실제 문의·구매를 분리해 측정하는 방법을 설명합니다. Search Console 지표의 한계와 수동 인용 표본, 2주 단일변수 실험의 해석 기준을 확인하세요.</p><a class="text-link" href="/blog/ai-search-measurement" data-blog-link="ai-search-measurement">가이드 읽기 →</a></article></div></div></section><!-- BLOG_SECTION_END -->
+    <section class="section" id="next-path" data-track-section="next-path"><div class="wrap"><p class="eyebrow">Choose your next move</p><h2 class="extra-title">내 업무를 바꿀지, 팀의 기준을 만들지 선택하세요.</h2><div class="dual-path"><article><h3>개인·실무자라면</h3><p>내 업무를 나누고 지시서와 검수 기준을 직접 만들어 보고 싶다면, 책 구성과 훈련부터 확인하세요.</p><a class="text-link" href="#contents" data-personal-path>책 구성 먼저 보기 →</a><div class="link-row"><a class="text-link" href="#practice">3주 훈련 먼저 보기 →</a></div></article><article><h3>팀·조직이라면</h3><p>구성원의 AI 사용 방식과 검수·승인 절차를 맞추고 싶다면, 팀에 적용할 범위를 먼저 확인하세요.</p><a class="text-link" href="#consulting" data-consulting-path data-position="dual-path">교육·강연·컨설팅 적용 범위 보기 →</a></article></div></div></section>
+    <section class="consulting section" id="consulting" data-track-section="consulting"><div class="wrap consulting-layout"><div class="consulting-copy"><p class="eyebrow">For your team / TROE</p><h2 class="extra-title">도구 도입보다 먼저, 팀의 운영 장면을 정합니다.</h2><p class="section-copy">다음은 문의 시 함께 논의할 수 있는 적용 범위입니다. 실제 구성·일정·비용은 조직의 상황을 확인한 뒤 협의합니다.</p><div class="actions"><a class="button primary" data-cta="inquiry" data-position="consulting-scope" href="mailto:chunghyo@troe.kr?subject=%ED%8C%80%20AI%20%EC%9A%B4%EC%98%81%20%EA%B5%90%EC%9C%A1%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98">팀 적용 범위 문의하기 →</a></div></div><ul class="scope-list"><li><h3>01 / 팀 AI 기준 수립</h3><p>사용 가능한 데이터, 브랜드 보이스, 사실 검증과 최종 승인 책임을 팀의 공통 언어로 정리합니다.</p></li><li><h3>02 / 워크플로우 설계</h3><p>리서치·초안·검수·수정·승인을 나누고 R-G-C-T-O-R 업무 지시서로 연결합니다.</p></li><li><h3>03 / 광고·CRM 운영 루프</h3><p>광고와 랜딩의 메시지 일치, 고객 맥락, 성과 해석과 실험 기록의 개선 지점을 찾습니다.</p></li><li><h3>04 / AI·AX 교육</h3><p>도구 사용법에 머물지 않고 실제 업무 분해와 검수 기준을 만들어 보는 교육 방향을 논의합니다.</p></li></ul></div></section>
+    <section class="closing"><div class="wrap closing-inner reveal"><div class="closing-copy"><h2>AI에게 일을 맡기되, <em>판단은 넘기지 마세요.</em></h2><p>마케터가 목표와 기준을 정하고, Agent가 반복 작업을 수행하며, 사람이 최종 결정을 내리는 구조를 설계할 시간입니다.</p><div class="actions"><a class="button primary" data-cta="inquiry" data-position="closing" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅 문의</a></div></div><figure class="closing-book"><img class="book-mini" src="assets/book-cover.jpg" alt="AI Agent를 지휘하는 마케터 표지 전체" width="2244" height="3071" loading="lazy"><figcaption>BOOK / PARK CHUNGHYO</figcaption></figure></div></section>
   </main>
-  <div class="mobile-cta" aria-label="빠른 실행"><a class="button secondary" data-cta="purchase" data-position="mobile-sticky" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="button primary" data-cta="inquiry" data-position="mobile-sticky" href="mailto:chunghyo@troe.kr?subject=%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98&amp;body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%0A%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%0A%0A%EC%86%8C%EC%86%8D%2F%EC%9D%B4%EB%A6%84%3A%0A%EB%AC%B8%EC%9D%98%20%EB%82%B4%EC%9A%A9%3A%0A%ED%9D%AC%EB%A7%9D%20%EC%9D%BC%EC%A0%95%3A">강연·컨설팅</a></div>
+  <div class="mobile-cta" aria-label="빠른 실행"><a class="button secondary" data-cta="purchase" data-position="mobile-sticky" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="button primary" data-consulting-path="" data-cta="consulting" data-position="mobile-sticky" href="#consulting">팀 적용 범위</a></div>
   <footer class="site-footer"><div>TROE / PARK CHUNGHYO / COMMAND MARKETING</div><div>© 2026 TROE. ALL RIGHTS RESERVED.</div></footer>
   <script>
     const levels=[{tag:'LEVEL 01 / TRY',title:'체험형 사용자',body:'가끔 AI에게 카피나 아이디어를 요청합니다. AI는 일회성 도구에 가까운 상태입니다.',next:'업무별로 반복하는 질문을 하나씩 수집합니다.'},{tag:'LEVEL 02 / PROMPT',title:'프롬프트 사용자',body:'좋은 프롬프트를 찾아 복사하고, 더 나은 답을 위해 질문을 다듬습니다.',next:'브랜드와 캠페인의 맥락을 지시서 안에 포함합니다.'},{tag:'LEVEL 03 / ASSIST',title:'업무 보조 사용자',body:'리서치, 콘텐츠, 리포트 등 구체적인 업무의 초안을 AI로 만듭니다.',next:'산출물이 통과해야 할 검수 기준과 승인 프로세스를 정의합니다.'},{tag:'LEVEL 04 / OPERATE',title:'Agent 운영자',body:'리서치, 콘텐츠, 리포트 등 역할별 Agent를 반복 업무에 배치합니다. 목표와 기준은 사람이 정하고, Agent가 실행을 보조합니다.',next:'성과와 실패 사례를 기록해 업무 시스템을 계속 개선합니다.'},{tag:'LEVEL 05 / ORCHESTRATE',title:'커맨드 마케터',body:'AI Agent와 사람의 역할을 나누고, 여러 Agent의 업무 흐름을 팀 운영 방식 안에 통합합니다.',next:'조직 차원의 거버넌스와 학습 루프로 운영 체계를 고도화합니다.'}];
@@ -270,12 +374,13 @@
     buttons.forEach((button,index)=>{button.addEventListener('click',()=>selectLevel(index));button.addEventListener('keydown',event=>{if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key))return;event.preventDefault();let nextIndex=index;if(event.key==='ArrowDown')nextIndex=(index+1)%buttons.length;if(event.key==='ArrowUp')nextIndex=(index-1+buttons.length)%buttons.length;if(event.key==='Home')nextIndex=0;if(event.key==='End')nextIndex=buttons.length-1;selectLevel(nextIndex);buttons[nextIndex].focus()})});selectLevel(3);
     const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reducedMotion||!('IntersectionObserver'in window)){document.querySelectorAll('.reveal').forEach(element=>element.classList.add('in'))}else{const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add('in');observer.unobserve(entry.target)})},{threshold:.14});document.querySelectorAll('.reveal').forEach(element=>observer.observe(element))}
     document.querySelectorAll('.mobile-menu a').forEach(link=>{link.addEventListener('click',()=>link.closest('details').removeAttribute('open'))});
-    const track=(name,params={})=>{if(typeof window.gtag==='function')window.gtag('event',name,{...params,page_location:window.location.href});if(typeof window.fbq==='function')window.fbq('trackCustom',name,params)};
+    const track=(name,params={})=>{if(!window.commandTrackingEnabled)return;if(typeof window.gtag==='function')window.gtag('event',name,{...params,page_location:window.location.href});if(typeof window.fbq==='function')window.fbq('trackCustom',name,params)};
     const sourceParams=new URLSearchParams(window.location.search);const campaign=sourceParams.get('utm_campaign')||'(direct)';const content=sourceParams.get('utm_content')||'(none)';
-    document.querySelectorAll('[data-cta]').forEach(link=>link.addEventListener('click',()=>{const cta=link.dataset.cta;track(cta==='purchase'?'book_store_click':cta==='inquiry'?'inquiry_start':'preview_open',{cta_type:cta,position:link.dataset.position||'unknown',utm_campaign:campaign,utm_content:content});if(cta==='purchase'&&typeof window.fbq==='function')window.fbq('track','ViewContent',{content_name:'AI Agent를 지휘하는 마케터',content_type:'book'})}));document.querySelectorAll('a[href^="mailto:"]:not([data-cta])').forEach(link=>link.addEventListener('click',()=>track('inquiry_start',{cta_type:'inquiry',position:'closing',utm_campaign:campaign,utm_content:content})));
+    document.querySelectorAll('[data-cta]').forEach(link=>link.addEventListener('click',()=>{const cta=link.dataset.cta;track(cta==='purchase'?'book_store_click':cta==='inquiry'?'inquiry_start':'preview_open',{cta_type:cta,position:link.dataset.position||'unknown',utm_campaign:campaign,utm_content:content});if(window.commandTrackingEnabled&&cta==='purchase'&&typeof window.fbq==='function')window.fbq('track','ViewContent',{content_name:'AI Agent를 지휘하는 마케터',content_type:'book'})}));document.querySelectorAll('a[href^="mailto:"]:not([data-cta])').forEach(link=>link.addEventListener('click',()=>track('inquiry_start',{cta_type:'inquiry',position:'closing',utm_campaign:campaign,utm_content:content})));
     document.querySelectorAll('.maturity-btn').forEach(button=>button.addEventListener('click',()=>track('maturity_select',{level:button.dataset.level})));document.querySelectorAll('.toc details').forEach((item,index)=>item.addEventListener('toggle',()=>{if(item.open)track('part_expand',{part_number:index+1})}));document.querySelectorAll('.faq-card').forEach((item,index)=>item.addEventListener('toggle',()=>{if(item.open)track('faq_expand',{question_id:index+1})}));
-    const practiceSection=document.querySelector('.practice');if(practiceSection){practiceSection.id='practice';practiceSection.dataset.trackSection='practice'};['system','contents','faq','author'].forEach(id=>{const section=document.getElementById(id);if(section)section.dataset.trackSection=id});const trackedSections=new Set();const sectionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;const name=entry.target.dataset.trackSection;if(name&&!trackedSections.has(name)){trackedSections.add(name);track('section_view',{section_name:name})}}),{threshold:.5});document.querySelectorAll('[data-track-section]').forEach(section=>sectionObserver.observe(section));
-    [25,50,75,90].forEach(mark=>{let sent=false;const check=()=>{if(sent)return;const progress=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100;if(progress>=mark){sent=true;track('scroll_depth',{percent:mark})}};window.addEventListener('scroll',check,{passive:true});});setTimeout(()=>track('engaged_30s',{landing_page:'book'}),30000);
+    const practiceSection=document.querySelector('.practice');if(practiceSection){practiceSection.id='practice';practiceSection.dataset.trackSection='practice'};['system','contents','faq','author'].forEach(id=>{const section=document.getElementById(id);if(section)section.dataset.trackSection=id});const trackedSections=new Set();const sectionObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;const name=entry.target.closest('[data-track-section]')?.dataset.trackSection;if(name&&!trackedSections.has(name)){trackedSections.add(name);track('section_view',{section_name:name})}}),{threshold:.5}):null;document.querySelectorAll('[data-track-section]').forEach(section=>sectionObserver?.observe(section.querySelector('h2')||section));
+    [25,50,75,90].forEach(mark=>{let sent=false;const check=()=>{if(sent)return;const progress=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100;if(progress>=mark){sent=true;track('scroll_depth',{percent:mark})}};window.addEventListener('scroll',check,{passive:true});});let visibleTime=0,lastTick=performance.now();document.addEventListener('visibilitychange',()=>{lastTick=performance.now()});const engagementTimer=setInterval(()=>{const now=performance.now();if(!document.hidden)visibleTime+=now-lastTick;lastTick=now;if(visibleTime>=30000){track('engaged_30s',{landing_page:'book'});clearInterval(engagementTimer)}},1000);
   </script>
+  <script src="/assets/enhancements.js" defer></script>
 </body>
 </html>
