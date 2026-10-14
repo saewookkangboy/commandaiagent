@@ -137,6 +137,8 @@ for node in ET.parse(DIST / 'sitemap.xml').getroot().findall('sm:url', ns):
 llms = (DIST / 'llms.txt').read_text()
 assert (ROOT / 'llms.txt').read_bytes() == (DIST / 'llms.txt').read_bytes()
 assert llms.startswith((ROOT / 'content/llms-base.md').read_text().rstrip())
+expected_reviewed = max(site['llms_reviewed'], site['home_modified'], *expected_modified.values())
+assert re.findall(r'^문서 검토 기준일: ([0-9-]+)\.', llms, re.M) == [expected_reviewed], 'Stale llms review date; rebuild search documents'
 assert all(p['slug'] in llms for p in posts)
 assert llms.count('## 도서 소개 시리즈 3편') == 1
 assert llms.count('## SEO·GEO·AIEO 실무 가이드 5편') == 1
