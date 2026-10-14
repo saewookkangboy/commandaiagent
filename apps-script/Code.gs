@@ -26,6 +26,15 @@ function configureWriter(config) {
   return { ok: true };
 }
 
+function verifyWriterSetup() {
+  if (Session.getActiveUser().getEmail() !== OWNER_EMAIL) throw new Error('Owner authorization required');
+  const props = PropertiesService.getScriptProperties();
+  const sheet = SpreadsheetApp.openById(props.getProperty('SHEET_ID')).getSheetByName('문의접수');
+  if (!sheet || sheet.getLastColumn() !== 13 || sheet.getRange(1,2).getValue() !== '접수ID') throw new Error('Sheet configuration mismatch');
+  console.log('Private spreadsheet access and 13-column header verified.');
+  return { ready: true };
+}
+
 function constantEqual_(left, right) {
   if (typeof right !== 'string' || left.length !== right.length) return false;
   let difference = 0;
@@ -34,11 +43,11 @@ function constantEqual_(left, right) {
 }
 
 function hmac_(value, secret) {
-  return Utilities.computeHmacSha256Signature(value, secret).map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
+  return Utilities.computeHmacSha256Signature(value, secret, Utilities.Charset.UTF_8).map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
 }
 
 function digest_(value) {
-  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, value).map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
+  return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, value, Utilities.Charset.UTF_8).map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
 }
 
 function safeCell_(value) {

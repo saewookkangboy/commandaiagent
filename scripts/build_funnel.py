@@ -24,7 +24,8 @@ def build_funnel(dist, head, header, footer, origin, site):
         style = '<link rel="stylesheet" href="/assets/funnel.css"><script src="/assets/funnel.js" defer></script>'
         graph = {'@context':'https://schema.org','@type':'WebPage','name':title,'description':description,'url':origin+path,'inLanguage':'ko-KR'}
         html = head(title, description, path, graph=graph, noindex=noindex).replace('</head>', style + '</head>')
-        html += f'<body class="blog-page" data-page-type="{page_type}" data-content-group="{'consulting' if page_type == 'consulting' else 'resources'}" data-content-id="{content_id}" data-ui-variant="ux-v1" data-policy-approved="{str(approved).lower()}"><a class="skip-link" href="#main">本文으로 이동</a>{header}<main class="wrap blog-main funnel-main" id="main">{body}</main>{footer}'
+        content_group = 'consulting' if page_type == 'consulting' else 'resources'
+        html += f'<body class="blog-page" data-page-type="{page_type}" data-content-group="{content_group}" data-content-id="{content_id}" data-ui-variant="ux-v1" data-policy-approved="{str(approved).lower()}"><a class="skip-link" href="#main">本文으로 이동</a>{header}<main class="wrap blog-main funnel-main" id="main">{body}</main>{footer}'
         html = html.replace('>本文으로 이동<', '>본문으로 이동<')
         folder = dist / path.strip('/')
         folder.mkdir(parents=True, exist_ok=True)

@@ -169,7 +169,8 @@ def article_cta(post, location):
         resource_path = '/resources/rgctor-worksheet' if post['slug'] == 'rgctor-content-workflow' else '/resources/content-search-checklist'
         resource_label = 'R-G-C-T-O-R 업무 지시서 워크시트 보기' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표 보기'
         context_link = ''
-        secondary = f'<a class="button secondary" href="{resource_path}" data-resource-id="{resource_path.rsplit('/',1)[-1]}" data-cta-id="{location}-resource" data-position="{position}">{resource_label}</a>'
+        resource_id = resource_path.rsplit('/', 1)[-1]
+        secondary = f'<a class="button secondary" href="{resource_path}" data-resource-id="{resource_id}" data-cta-id="{location}-resource" data-position="{position}">{resource_label}</a>'
     label = '실행 기준 이어 보기' if location == 'inline' else '다음 단계'
     return f'''<section class="article-cta article-cta-{location}"{' id="article-end"' if location == 'end' else ''} aria-label="{label}">
 <p class="eyebrow">{label}</p><h3>{heading}</h3><p>{copy}</p>{context_link}<div class="article-cta-actions">{primary}{secondary}</div></section>'''
