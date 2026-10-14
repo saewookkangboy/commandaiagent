@@ -1,0 +1,265 @@
+/* Blog article UX v1: loaded only on the eight generated article pages. */
+.blog-page[data-page-type="blog_article"] .article-head {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(180px,22vw,290px);
+  gap:22px clamp(28px,5vw,72px);
+  max-width:1120px;
+  padding-bottom:30px;
+  align-items:start;
+}
+.article-head-copy {min-width:0}
+.article-head .article-head-visual {
+  grid-column:2;
+  grid-row:1 / span 2;
+  width:100%;
+  margin:8px 0 0;
+  align-self:start;
+}
+.article-head-visual picture {
+  display:block;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#faf7ec;
+}
+.article-head-visual img {
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:16 / 9;
+  object-fit:contain;
+}
+.article-head-visual figcaption {
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.76rem;
+  line-height:1.55;
+}
+.article-head .article-summary {margin:22px 0 14px}
+.article-head .article-topics {margin:0}
+.article-topic-details {
+  max-width:900px;
+  margin-top:10px;
+  color:var(--muted);
+  font-size:.84rem;
+  line-height:1.65;
+}
+.article-topic-details summary {
+  width:max-content;
+  max-width:100%;
+  cursor:pointer;
+  color:var(--accent-strong);
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.article-topic-details .article-topics {margin-top:10px}
+.article-disclosure-short {
+  max-width:78ch;
+  margin:20px 0 0;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.7;
+}
+.article-disclosure-details {
+  max-width:78ch;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.7;
+}
+.article-disclosure-details summary {
+  cursor:pointer;
+  width:max-content;
+  max-width:100%;
+  color:var(--accent-strong);
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.article-disclosure-details p {margin:8px 0 0}
+
+/* The desktop table of contents stays visible and sticky; mobile receives a native collapsed disclosure. */
+.article-toc-mobile {display:none}
+.article-toc-desktop > p {font-weight:700;margin:0 0 16px}
+.article-toc-desktop ol {padding-left:20px;margin:0;color:var(--muted)}
+.article-toc-desktop li {margin:12px 0;line-height:1.7;font-size:.88rem}
+.article-toc-desktop a:hover {color:var(--accent-strong)}
+@media (min-width:901px) {
+  .article-layout .article-toc {position:sticky;top:100px;align-self:start}
+}
+
+/* Series navigation surfaces the reading position first and retains the full list on demand. */
+.series-nav .series-status {margin:0;font-weight:700;line-height:1.65}
+.series-nav .series-pager {margin-top:16px}
+.series-nav .series-full-list {margin-top:16px}
+.series-nav .series-full-list summary {
+  width:max-content;
+  max-width:100%;
+  cursor:pointer;
+  color:var(--accent-strong);
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.series-nav .series-full-list ol {
+  display:block;
+  margin:14px 0 0;
+  padding-left:20px;
+  list-style:decimal;
+}
+.series-nav .series-full-list li {margin:8px 0}
+
+/* CTA headings intentionally use h3 so they never become article H2 table-of-contents entries. */
+.article-cta {
+  margin:34px 0;
+  padding:clamp(22px,3vw,32px);
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:12px;
+  background:var(--surface);
+  overflow-wrap:anywhere;
+}
+.article-cta .eyebrow {margin:0 0 10px}
+.article-cta h3 {
+  margin:0;
+  max-width:28ch;
+  font-size:clamp(1.3rem,2.2vw,1.75rem);
+  line-height:1.35;
+  letter-spacing:-.035em;
+}
+.article-cta > p:not(.eyebrow) {max-width:72ch;margin:12px 0 0;color:var(--muted);line-height:1.8}
+.article-cta-actions {display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:22px}
+.article-cta-actions .button {max-width:100%;white-space:normal;text-align:center}
+.article-cta-context-link {
+  display:inline-block;
+  margin-top:16px;
+  color:var(--accent-strong);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  font-size:.91rem;
+}
+.article-cta .button:focus-visible,
+.article-cta-context-link:focus-visible,
+.article-topic-details summary:focus-visible,
+.article-disclosure-details summary:focus-visible,
+.series-nav .series-full-list summary:focus-visible {
+  outline:3px solid var(--accent);
+  outline-offset:4px;
+}
+.article-cta-end {margin-top:46px;margin-bottom:0}
+.article-cta-end.article-end {border-top:1px solid var(--line)}
+
+/* Hidden by default: JavaScript exposes this only after the first core section on small screens. */
+.article-mobile-cta[hidden] {display:none !important}
+.article-mobile-cta {display:none}
+body.article-mobile-cta-active {scroll-padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
+html:has(body.article-mobile-cta-active) {scroll-padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px))}
+@media (max-width:760px) {
+  .blog-page[data-page-type="blog_article"] .article-head {
+    grid-template-columns:minmax(0,1fr);
+    gap:14px;
+    padding:18px 0 24px;
+  }
+  .article-head .article-head-visual {
+    grid-column:auto;
+    grid-row:auto;
+    width:min(54vw,220px);
+    margin:0 0 0 auto;
+  }
+  .article-head-visual figcaption {font-size:.7rem}
+  .article-head .article-summary {margin-top:18px}
+  .article-topic-details {font-size:.8rem}
+  .article-toc-desktop {display:none}
+  .article-toc-mobile {
+    display:block;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--surface);
+  }
+  .article-toc-mobile summary {
+    display:flex;
+    align-items:center;
+    min-height:44px;
+    padding:12px 16px;
+    cursor:pointer;
+    font-weight:700;
+    list-style:none;
+  }
+  .article-toc-mobile summary::-webkit-details-marker {display:none}
+  .article-toc-mobile summary::after {content:'+';margin-left:auto;color:var(--accent);font-size:1.25rem}
+  .article-toc-mobile[open] summary::after {content:'−'}
+  .article-toc-mobile ol {margin:0;padding:0 18px 16px 34px;color:var(--muted)}
+  .article-toc-mobile li {margin:10px 0;font-size:.9rem;line-height:1.65}
+  .article-toc-mobile a {overflow-wrap:anywhere}
+  .article-cta {margin:28px 0;padding:22px 20px}
+  .article-cta-actions {align-items:stretch;flex-direction:column}
+  .article-cta-actions .button {width:100%}
+  .article-mobile-cta:not([hidden]) {
+    position:fixed;
+    z-index:30;
+    right:max(10px, env(safe-area-inset-right, 0px));
+    bottom:max(10px, env(safe-area-inset-bottom, 0px));
+    left:max(10px, env(safe-area-inset-left, 0px));
+    display:flex;
+    align-items:center;
+    gap:10px;
+    max-width:calc(100% - 20px);
+    box-sizing:border-box;
+    padding:8px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--surface);
+    box-shadow:0 10px 30px rgba(13, 21, 20, .16);
+  }
+  .article-mobile-cta-link {
+    min-width:0;
+    flex:1 1 auto;
+    min-height:44px;
+    padding-inline:14px;
+    text-align:center;
+    white-space:normal;
+  }
+  .article-mobile-cta-close {
+    display:grid;
+    width:44px;
+    min-width:44px;
+    height:44px;
+    padding:0;
+    place-items:center;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--surface-strong);
+    color:var(--ink);
+    cursor:pointer;
+    font:inherit;
+    font-size:1.25rem;
+  }
+  .article-mobile-cta-close:focus-visible {outline:3px solid var(--accent);outline-offset:3px}
+  body.article-mobile-cta-active {padding-bottom:calc(104px + env(safe-area-inset-bottom, 0px))}
+}
+@media (prefers-reduced-motion:reduce) {
+  .article-mobile-cta,
+  .article-mobile-cta * {scroll-behavior:auto;transition:none;animation:none}
+}
+
+/* Keep repeat metadata and navigation subordinate to the actual article. */
+.blog-page[data-page-type="blog_article"] .article-head{padding-top:28px}
+.article-head .article-meta{margin:14px 0 0}
+.article-head .article-meta span{display:inline-block;margin:0 16px 4px 0}
+.series-nav{padding:16px 20px;margin-bottom:24px}
+.series-nav .series-pager{display:flex;flex-direction:row;justify-content:space-between;gap:12px;margin-top:10px}
+.series-nav .series-full-list{margin-top:10px}
+@media(max-width:760px){
+.blog-page[data-page-type="blog_article"] .breadcrumbs{flex-wrap:nowrap;white-space:nowrap;overflow:hidden}
+.blog-page[data-page-type="blog_article"] .breadcrumbs [aria-current="page"]{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.article-head .article-meta{font-size:.78rem;line-height:1.5}
+.article-head .article-head-details{grid-row:2}
+.article-head .article-head-visual{grid-row:3;width:150px}
+.article-head-visual figcaption{line-height:1.4;font-size:.7rem}
+.article-head .article-summary{font-size:1rem;line-height:1.75;margin-top:4px}
+.article-head .article-topics li{padding:4px 8px;font-size:.75rem}
+.article-disclosure-short{margin-top:12px}
+.series-nav{padding:14px 16px;margin-bottom:22px}
+.series-nav .series-status{font-size:.9rem}
+.series-nav .series-pager,.series-nav .series-full-list{font-size:.84rem}
+.article-toc{padding-top:0}
+}

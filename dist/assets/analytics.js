@@ -9,7 +9,7 @@
   window.commandTrackingEnabled = allowed && window.commandTrackingEnabled !== false;
   const enabled = () => allowed && window.commandTrackingEnabled === true;
   const seen = new Set();
-  const groups = ['book', 'book_series', 'practical_guide', 'blog_index'];
+  const groups = ['book', 'book_series', 'practical_guide', 'blog_index', 'consulting', 'resources'];
   const slugPattern = /^[a-z0-9_-]{1,80}$/;
   const article = slugPattern.test(page.article || '') ? page.article : '';
   const canonical = document.querySelector('link[rel="canonical"]');
@@ -19,7 +19,8 @@
     event_version: config.version,
     page_path: pagePath,
     page_type: pageType,
-    content_id: article || (pageType === 'landing' ? 'command_marketing_book' : 'blog_index'),
+    content_id: article || (slugPattern.test(page.contentId || '') ? page.contentId : pageType === 'landing' ? 'command_marketing_book' : 'blog_index'),
+    ui_variant: page.uiVariant === 'ux-v1' ? 'ux-v1' : 'legacy-v2',
     content_group: groups.includes(page.contentGroup) ? page.contentGroup : 'book'
   };
   if (article) context.article_slug = article;
@@ -28,6 +29,8 @@
   // Format-checked labels from known UTM keys; no form values or arbitrary query keys.
   const campaigns = {};
   const urlParams = new URLSearchParams(location.search);
+  const sourceArticle = urlParams.get('from');
+  if ((config.article_slugs || []).includes(sourceArticle)) context.source_article_slug = sourceArticle;
   ['source', 'medium', 'campaign', 'content', 'term'].forEach(key => {
     const value = urlParams.get(`utm_${key}`) || '';
     if (/^[\p{L}\p{N}._~-]{1,80}$/u.test(value) && !/^\d{9,15}$/.test(value)) campaigns[`utm_${key}`] = value;
@@ -53,6 +56,10 @@
       const value = clean(key, parameters[key]);
       if (value === undefined) return false;
       extra[key] = value;
+    }
+    for (const key of definition.optional_parameters || []) {
+      const value = clean(key, parameters[key]);
+      if (value !== undefined) extra[key] = value;
     }
     const onceKey = definition.once ? name : definition.once_by ? `${name}:${extra[definition.once_by]}` : null;
     if (onceKey && seen.has(onceKey)) return false;
@@ -106,6 +113,34 @@
     window.fbq('track', 'PageView');
   } catch (_) { /* GA4 and site interactions remain available. */ }
 
+  if ('IntersectionObserver' in window) {
+    const timers = new Map();
+    const visible = new Set();
+    function scheduleCTA(target) {
+      if (timers.has(target) || document.hidden || !visible.has(target)) return;
+      timers.set(target, setTimeout(() => {
+        timers.delete(target);
+        if (document.hidden || !visible.has(target) || target.closest('[hidden]')) return;
+        const style = getComputedStyle(target);
+        if (style.visibility !== 'visible' || Number(style.opacity) === 0) return;
+        emit('view_conversion_cta', { cta_id: target.dataset.ctaId, position: target.dataset.position || pageType });
+      }, 1000));
+    }
+    const ctaObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) { visible.add(entry.target); scheduleCTA(entry.target); }
+        else { visible.delete(entry.target); clearTimeout(timers.get(entry.target)); timers.delete(entry.target); }
+      }
+    }, { threshold: [0, 0.5, 1] });
+    document.querySelectorAll('[data-cta-id]').forEach(target => ctaObserver.observe(target));
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { timers.forEach(clearTimeout); timers.clear(); }
+      else visible.forEach(scheduleCTA);
+    });
+    window.addEventListener('pagehide', () => { timers.forEach(clearTimeout); timers.clear(); });
+    window.addEventListener('pageshow', () => { if (!document.hidden) visible.forEach(scheduleCTA); });
+  }
+
   function position(link) {
     if (slugPattern.test(link.dataset.position || '')) return link.dataset.position;
     if (link.closest('.series-nav')) return 'series-nav';
@@ -119,13 +154,15 @@
     const link = event.target.closest('a');
     if (!link || event.defaultPrevented || event.button !== 0) return;
     const cta = link.dataset.cta;
-    if (cta === 'purchase') {
+    if (link.dataset.resourceId) {
+      emit('resource_access', { resource_id: link.dataset.resourceId, access_type: link.hasAttribute('download') ? 'download' : 'preview', position: position(link) });
+    } else if (cta === 'purchase') {
       const destination = new URL(link.href, location.href);
-      emit('click_book_purchase', { position: position(link), link_domain: destination.hostname });
+      emit('click_book_purchase', { position: position(link), link_domain: destination.hostname, cta_id: link.dataset.ctaId });
     } else if (link.protocol === 'mailto:') {
       emit('inquiry_start', { position: position(link) });
     } else if (link.hasAttribute('data-consulting-path')) {
-      emit('click_consulting_path', { position: position(link) });
+      emit('click_consulting_path', { position: position(link), cta_id: link.dataset.ctaId });
     } else if (cta === 'preview' && !link.hasAttribute('data-diagnosis-start')) {
       emit('preview_open', { position: position(link) });
     } else if (link.hasAttribute('data-personal-path')) {

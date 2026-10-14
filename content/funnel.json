@@ -1,0 +1,9 @@
+{
+  "ui_variant": "ux-v1",
+  "policy_version": "2026-10-14-v1",
+  "policy_approved": true,
+  "modified": "2026-10-14",
+  "operator": "TROE",
+  "contact_email": "chunghyo@troe.kr",
+  "retention": "문의 처리 완료 후 지체 없이 파기하며, 접수일부터 최대 3개월을 넘기지 않습니다. 법령상 보관 의무가 있는 경우 해당 기간을 따릅니다."
+}
