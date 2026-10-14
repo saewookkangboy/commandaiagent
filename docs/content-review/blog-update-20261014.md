@@ -96,7 +96,7 @@ python3 scripts/check_blog.py
 
 편집 원고와 생성 HTML을 함께 커밋해야 합니다. Vercel은 기존처럼 `dist`를 배포하므로 Python은 운영 서버 의존성이 아닙니다.
 
-**GitHub 작업 브랜치:** `feat/book-series-cartoon-thumbnails`. 최초 랜딩·5편은 main에 병합된 상태지만, 이번 후속 확장과 운영 도메인 배포는 별도입니다. Vercel 연결이 이전 단계에서 승인되지 않았으므로 `book.allrounder.im`에 새 글이 반영되었다고 주장하지 않습니다. 후속 PR 링크는 전달 메시지에 제공합니다.
+**GitHub 작업 브랜치:** `feat/book-series-cartoon-thumbnails`. 최초 랜딩·5편은 main에 병합된 상태지만, 이번 후속 확장과 운영 도메인 배포는 별도입니다. Vercel 연결이 이전 단계에서 승인되지 않았으므로 `book.allrounder.im`에 새 글이 반영되었다고 주장하지 않습니다. 후속 변경은 [PR #2](https://github.com/saewookkangboy/commandaiagent/pull/2)에 커밋·푸시했습니다. PR은 OPEN 상태이며 main 병합·운영 배포는 아직 하지 않았습니다.
 
 원본 PDF와 전체 도서 추출 텍스트는 저장소·배포 산출물·전달 패키지에 넣지 않았습니다. 특정 사이트의 Search Console 실측, 실제 색인, AI 서비스 인용, 전환·매출 효과는 이번 콘텐츠 검토의 검증 대상이 아니며 보장되지 않습니다.
 
