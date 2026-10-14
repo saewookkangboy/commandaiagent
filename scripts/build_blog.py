@@ -38,6 +38,11 @@ def graph_json(data):
     return json.dumps(data, ensure_ascii=False).replace('<', '\\u003c')
 
 
+def post_keywords(post):
+    """Editorial topic labels, not a Google ranking mechanism."""
+    return list(dict.fromkeys([post['primary_keyword'], *post['secondary_keywords']]))
+
+
 def head(title, description, path=None, graph=None, post=None, noindex=False):
     url = ORIGIN + path if path is not None else None
     canonical = f'<link rel="canonical" href="{escape(url, quote=True)}">' if url else ''
@@ -46,8 +51,14 @@ def head(title, description, path=None, graph=None, post=None, noindex=False):
     image_alt = post['image_alt'] if post else 'AI Agent를 지휘하는 마케터 도서 이미지'
     image_dimensions = '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="675">' if post else ''
     dates = ''
+    topic_meta = ''
     if post:
         dates = f'<meta property="article:published_time" content="{post["date"]}T00:00:00+09:00"><meta property="article:modified_time" content="{post.get("modified", post["date"])}T00:00:00+09:00">'
+        # Kept as descriptive metadata only: Google ignores meta keywords.
+        keywords = post_keywords(post)
+        topic_meta = f'<meta name="keywords" content="{escape(", ".join(keywords), quote=True)}">\n'
+        topic_meta += f'<meta property="article:section" content="{escape(post["category"], quote=True)}">\n'
+        topic_meta += '\n'.join(f'<meta property="article:tag" content="{escape(keyword, quote=True)}">' for keyword in keywords)
     schema = f'<script type="application/ld+json">{graph_json(graph)}</script>' if graph else ''
     return f'''<!doctype html>
 <html lang="ko"><head>
@@ -64,7 +75,7 @@ def head(title, description, path=None, graph=None, post=None, noindex=False):
 {image_dimensions}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{escape(title, quote=True)}">
 <meta name="twitter:description" content="{escape(description, quote=True)}"><meta name="twitter:image" content="{image}"><meta name="twitter:image:alt" content="{escape(image_alt, quote=True)}">
-{dates}{FAVICON}<link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css">
+{dates}{topic_meta}{FAVICON}<link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="describedby" href="/llms.txt">
 {TRACKING}{PIXEL}{schema}</head>'''
 
@@ -131,6 +142,10 @@ for post in POSTS:
                'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'},
                'isPartOf': {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'name': 'Command Marketing 블로그'},
                'citation': [ref_url for _, ref_url, _ in refs]}
+    article['alternativeHeadline'] = post['seo_title']
+    article['abstract'] = post['search_summary']
+    article['keywords'] = post_keywords(post)
+    article['about'] = [{'@type': 'Thing', 'name': keyword} for keyword in post_keywords(post)]
     is_series = post.get('kind') == 'book-series'
     if is_series:
         article['isBasedOn'] = BOOK
@@ -139,11 +154,14 @@ for post in POSTS:
     related = ''.join(card(BY_SLUG[slug]) for slug in post['related'])
     disclosure = SERIES_DISCLOSURE if is_series else GUIDE_DISCLOSURE
     date_text = f'게시: <time datetime="{post["date"]}">{post["date"]}</time> · 검토·수정: <time datetime="{post.get("modified", post["date"])}">{post.get("modified", post["date"])}</time>'
-    html = head(post['title'], post['description'], path, graph, post=post) + f'''
+    topic_labels = ''.join(f'<li>{escape(keyword)}</li>' for keyword in post_keywords(post))
+    html = head(post['seo_title'], post['description'], path, graph, post=post) + f'''
 <body class="blog-page" data-article="{post['slug']}"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}
 <main class="blog-main wrap" id="main">{breadcrumbs(post)}
 <header class="blog-heading"><p class="eyebrow">{escape(post['category'])}</p><h1>{escape(post['title'])}</h1>
 <p class="article-meta"><span>편집: Command Marketing</span><span>{date_text}</span><span>약 {reading}분 읽기</span></p>
+<p class="article-summary">{escape(post['search_summary'])}</p>
+<ul class="article-topics" aria-label="이 글의 핵심 주제">{topic_labels}</ul>
 <p class="blog-disclosure">{disclosure}</p></header>
 <figure class="article-cover">{picture(post, hero=True)}<figcaption>AI 생성 카툰 · 한국어 손글씨 콘셉트 · 글의 주제를 표현한 편집 일러스트</figcaption></figure>
 {series_navigation(post)}

@@ -35,7 +35,7 @@
 
 운영본의 한국어 조판과 도서 표지 비율을 유지했습니다. 이번 수정본에는 60초 상황 진단, 업무 방식 전후 비교, R-G-C-T-O-R 캠페인 응용 예시, 90초 읽기 경로, DAY 1 훈련 미리보기, 파트별 결과물, 개인·팀 적용 경로와 SEO·GEO·AIEO 실무 가이드 5편이 추가되었습니다. 후속 수정에서는 이 5편을 공식 출처로 점검하고 제공 PDF 중심 책 소개 시리즈 3편과 카툰·한국어 손글씨 썸네일 8종을 추가했습니다.
 
-> 최초 랜딩·블로그 5편은 PR #1로 main에 병합되었습니다(`9531877`). 이번 책 소개·썸네일 확장은 `feat/book-series-cartoon-thumbnails` 브랜치의 후속 변경입니다. `book.allrounder.im`의 Vercel 운영 배포는 접근 연결이 승인되지 않아 아직 미반영입니다. main 병합·GitHub Pages 성공과 운영 도메인 반영은 구분합니다.
+> 최초 랜딩·블로그 5편은 PR #1로 main에 병합되었습니다(`9531877`). 책 소개·썸네일 확장도 PR #2로 main에 병합되었고(`1195354`), 2026-10-14 Vercel Production과 운영 도메인의 글 8편 공개 응답을 확인했습니다. 이번 검색 메타데이터 최적화는 `feat/blog-search-metadata`의 별도 후속 변경입니다. 코드 저장과 운영 배포 상태는 구분합니다.
 
 ## 사이트가 설명하는 것
 
@@ -179,13 +179,19 @@ python3 scripts/check_blog.py
 
 각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 8편의 정규 URL 10개만 포함됩니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
 
+### 검색 의도별 메타데이터 편집
+
+`posts.json`의 `title`은 원고 H1, `seo_title`은 검색·OG·Twitter 제목입니다. `description`은 페이지 설명과 카드 요약에 사용합니다. `primary_keyword`와 `secondary_keywords`는 대표 의도와 보조 주제를 구분하며, `search_summary`는 화면에 보이는 직접 요약입니다. 기존 URL·H1·근거·썸네일은 유지합니다.
+
+요약과 주제 라벨은 초기 HTML에 실제로 표시하고 동일 내용을 BlogPosting의 `abstract`·`keywords`·`about`과 `article:tag`에 사용합니다. `meta keywords`는 편집 주제 보조 정보일 뿐 Google의 색인·순위에 영향을 주지 않습니다. 검색량·유입·AI 인용 상승을 측정하거나 보장한 것이 아닙니다. [편집 원칙과 공식 근거](docs/seo/metadata-principles.md)를 참고하세요.
+
 ## 측정과 공개 경계
 
 GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.im` 호스트에서만 분석 스크립트를 초기화하여 임시 미리보기와 로컬 검증 트래픽을 제외합니다. DAY 1 체크 내용은 저장하거나 분석으로 전송하지 않습니다. 진단은 선택한 경로만 이용 통계로 남길 수 있습니다.
 
 권장 이벤트는 `start_situation_diagnosis`, `select_solo_team_loop`, `open_rgctor_example`, `open_day1_preview`, `click_book_purchase`, `click_consulting_path`입니다. 기존 CTA 이벤트도 보존합니다. 구매 클릭은 구매 완료가 아니며, 이메일 열기는 문의 접수 완료가 아닙니다. `engaged_30s`는 탭이 보이는 시간을 합산하는 지표이지 실제 독서 완료의 증명이 아닙니다.
 
-별도 브랜치의 코드 저장, main 병합, GitHub Pages 배포, Vercel 운영 도메인 배포는 구분합니다. 운영 도메인에는 아직 새 콘텐츠가 반영되지 않았으며, 과거 Lighthouse 수치를 새 버전의 검사 결과로 사용하지 않습니다.
+별도 브랜치의 코드 저장, main 병합, GitHub Pages 배포, Vercel 운영 도메인 배포는 구분합니다. 기존 8편·카툰의 운영 반영은 확인했지만 이번 후속 변경은 별도로 검증·저장합니다. 과거 Lighthouse 수치를 새 버전의 검사 결과로 사용하지 않습니다.
 
 ## TROE · 박충효
 
