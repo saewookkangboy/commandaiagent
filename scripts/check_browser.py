@@ -5,8 +5,9 @@ Then: python3 scripts/check_browser.py
 from playwright.sync_api import sync_playwright
 from pathlib import Path
 import json
+import os
 
-BASE = 'http://127.0.0.1:4173'
+BASE = os.environ.get('PREVIEW_URL', 'http://127.0.0.1:4173')
 ROOT = Path(__file__).resolve().parents[1]
 POSTS = json.loads((ROOT / 'content/blog/posts.json').read_text())
 
@@ -20,7 +21,6 @@ with sync_playwright() as pw:
     page.goto(BASE, wait_until='networkidle')
     assert not errors, errors
     assert not any('googletagmanager' in url or 'facebook.com' in url for url in requests), requests
-    page.evaluate("window.commandTrackingEnabled=true;window.testEvents=[];window.gtag=(kind,name,args)=>window.testEvents.push({name,args});window.fbq=()=>{}")
     page.locator('[data-diagnosis-start]').click()
     for situation in ('solo', 'team', 'loop'):
         page.locator(f'input[name="situation"][value="{situation}"]').check()
@@ -36,19 +36,13 @@ with sync_playwright() as pw:
     page.locator('#day1-preview summary').click()
     assert page.locator('#day1-preview').evaluate('(node)=>node.open')
     page.wait_for_timeout(100)
-    before = page.evaluate('window.testEvents.length')
     for checkbox in page.locator('#day1-preview input[type="checkbox"]').all():
         checkbox.check()
     page.wait_for_timeout(100)
-    after_events = page.evaluate('window.testEvents.slice(' + str(before) + ')')
-    assert not after_events, after_events
     assert page.evaluate('localStorage.length') == 0
     assert page.evaluate('sessionStorage.length') == 0
-    names = page.evaluate('window.testEvents.map(e=>e.name)')
-    assert names.count('start_situation_diagnosis') == 1
-    assert names.count('select_solo_team_loop') == 3
-    assert 'open_rgctor_example' in names and 'open_day1_preview' in names, names
-    print('Interaction and event checks passed:', sorted(set(names)))
+    assert page.evaluate('window.commandTrackingEnabled') is False
+    print('Interaction and preview tracking-block checks passed; common events: scripts/check_analytics.py')
     for width in (390, 768, 1061, 1440):
         page.set_viewport_size({'width':width, 'height':844})
         for path in ['/', '/blog', '/blog/technical-seo-ai-search']:
@@ -72,5 +66,5 @@ with sync_playwright() as pw:
     no_js_page.goto(BASE+'/blog/'+POSTS[0]['slug'])
     assert no_js_page.locator('.article-body').is_visible()
     assert not errors, errors
-    print('5 articles, missing route, no-JS content and zero runtime errors checked.')
+    print(f'{len(POSTS)} articles, missing route, no-JS content and zero runtime errors checked.')
     browser.close()

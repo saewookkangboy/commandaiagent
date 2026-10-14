@@ -2,19 +2,7 @@
 <html lang="ko">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script>
-    window.commandTrackingEnabled = window.location.hostname === 'book.allrounder.im';
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ if (window.commandTrackingEnabled) dataLayer.push(arguments); }
-    if (window.commandTrackingEnabled) {
-      const tag = document.createElement('script');
-      tag.async = true;
-      tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-QK0BMHHNR5';
-      document.head.appendChild(tag);
-      gtag('js', new Date());
-      gtag('config', 'G-QK0BMHHNR5');
-    }
-  </script>
+  <script src="/assets/analytics-config.js" defer></script><script src="/assets/analytics.js" defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>AI Agent를 지휘하는 마케터 | 박충효 · TROE</title>
@@ -303,24 +291,11 @@
   <link rel="stylesheet" href="/assets/enhancements.css">
   <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
   <!-- Meta Pixel Code -->
-  <script>
-  if (window.commandTrackingEnabled) {
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '2327515324662416');
-  fbq('track', 'PageView');
-  }
-  </script>
+
   <!-- End Meta Pixel Code -->
   <meta name="google-site-verification" content="VqNgNXu7ibD_hYh37y74axjP1_E9RGeHC4LM2znCy_U" />
 </head>
-<body>
+<body data-page-type="landing" data-content-group="book">
   <a class="skip-link" href="#main">본문으로 이동</a>
   <header class="site-head"><div class="head-inner"><a class="brand" href="#top" aria-label="TROE 도서 홈"><b>TROE</b><span>PARK CHUNGHYO / COMMAND MARKETING</span></a><nav class="nav" aria-label="주요 메뉴"><a href="#quickstart">빠른 이해</a><a href="#system">업무 시스템</a><a href="#contents">목차</a><a href="/blog">블로그</a><a href="#faq">FAQ</a><a href="#author">저자</a><a class="button secondary nav-purchase" data-cta="purchase" data-position="nav" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a class="button primary" data-consulting-path="" data-cta="consulting" data-position="nav" href="#consulting">강연·컨설팅 안내</a><details class="mobile-menu"><summary>메뉴</summary><nav aria-label="모바일 메뉴"><a href="#quickstart">빠른 이해</a><a href="#system">업무 시스템</a><a href="#contents">목차</a><a href="/blog">블로그</a><a href="#faq">FAQ</a><a href="#author">저자</a><a data-cta="purchase" data-position="mobile-menu" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer">책 구매</a><a data-consulting-path="" data-cta="consulting" data-position="mobile-menu" href="#consulting">강연·컨설팅 안내</a></nav></details></nav></div></header>
   <main id="main">
@@ -379,14 +354,8 @@
     function selectLevel(index){const item=levels[index];buttons.forEach((button,buttonIndex)=>{const selected=buttonIndex===index;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1});panel.setAttribute('aria-labelledby',buttons[index].id);panel.innerHTML=`<div><span class="level">${item.tag}</span><h3>${item.title}</h3><p>${item.body}</p></div><div class="next"><span>NEXT MOVE</span><strong>${item.next}</strong></div>`}
     buttons.forEach((button,index)=>{button.addEventListener('click',()=>selectLevel(index));button.addEventListener('keydown',event=>{if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key))return;event.preventDefault();let nextIndex=index;if(event.key==='ArrowDown')nextIndex=(index+1)%buttons.length;if(event.key==='ArrowUp')nextIndex=(index-1+buttons.length)%buttons.length;if(event.key==='Home')nextIndex=0;if(event.key==='End')nextIndex=buttons.length-1;selectLevel(nextIndex);buttons[nextIndex].focus()})});selectLevel(3);
     const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reducedMotion||!('IntersectionObserver'in window)){document.querySelectorAll('.reveal').forEach(element=>element.classList.add('in'))}else{const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.classList.add('in');observer.unobserve(entry.target)})},{threshold:.14});document.querySelectorAll('.reveal').forEach(element=>observer.observe(element))}
-    document.querySelectorAll('.mobile-menu a').forEach(link=>{link.addEventListener('click',()=>link.closest('details').removeAttribute('open'))});
-    const track=(name,params={})=>{if(!window.commandTrackingEnabled)return;if(typeof window.gtag==='function')window.gtag('event',name,{...params,page_location:window.location.href});if(typeof window.fbq==='function')window.fbq('trackCustom',name,params)};
-    const sourceParams=new URLSearchParams(window.location.search);const campaign=sourceParams.get('utm_campaign')||'(direct)';const content=sourceParams.get('utm_content')||'(none)';
-    document.querySelectorAll('[data-cta]').forEach(link=>link.addEventListener('click',()=>{const cta=link.dataset.cta;track(cta==='purchase'?'book_store_click':cta==='inquiry'?'inquiry_start':'preview_open',{cta_type:cta,position:link.dataset.position||'unknown',utm_campaign:campaign,utm_content:content});if(window.commandTrackingEnabled&&cta==='purchase'&&typeof window.fbq==='function')window.fbq('track','ViewContent',{content_name:'AI Agent를 지휘하는 마케터',content_type:'book'})}));document.querySelectorAll('a[href^="mailto:"]:not([data-cta])').forEach(link=>link.addEventListener('click',()=>track('inquiry_start',{cta_type:'inquiry',position:'closing',utm_campaign:campaign,utm_content:content})));
-    document.querySelectorAll('.maturity-btn').forEach(button=>button.addEventListener('click',()=>track('maturity_select',{level:button.dataset.level})));document.querySelectorAll('.toc details').forEach((item,index)=>item.addEventListener('toggle',()=>{if(item.open)track('part_expand',{part_number:index+1})}));document.querySelectorAll('.faq-card').forEach((item,index)=>item.addEventListener('toggle',()=>{if(item.open)track('faq_expand',{question_id:index+1})}));
-    const practiceSection=document.querySelector('.practice');if(practiceSection){practiceSection.id='practice';practiceSection.dataset.trackSection='practice'};['system','contents','faq','author'].forEach(id=>{const section=document.getElementById(id);if(section)section.dataset.trackSection=id});const trackedSections=new Set();const sectionObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(entry=>{if(!entry.isIntersecting)return;const name=entry.target.closest('[data-track-section]')?.dataset.trackSection;if(name&&!trackedSections.has(name)){trackedSections.add(name);track('section_view',{section_name:name})}}),{threshold:.5}):null;document.querySelectorAll('[data-track-section]').forEach(section=>sectionObserver?.observe(section.querySelector('h2')||section));
-    [25,50,75,90].forEach(mark=>{let sent=false;const check=()=>{if(sent)return;const progress=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100;if(progress>=mark){sent=true;track('scroll_depth',{percent:mark})}};window.addEventListener('scroll',check,{passive:true});});let visibleTime=0,lastTick=performance.now();document.addEventListener('visibilitychange',()=>{lastTick=performance.now()});const engagementTimer=setInterval(()=>{const now=performance.now();if(!document.hidden)visibleTime+=now-lastTick;lastTick=now;if(visibleTime>=30000){track('engaged_30s',{landing_page:'book'});clearInterval(engagementTimer)}},1000);
-  </script>
+
+    </script>
   <script src="/assets/enhancements.js" defer></script>
 </body>
 </html>
