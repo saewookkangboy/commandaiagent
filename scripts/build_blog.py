@@ -25,6 +25,9 @@ STYLE = DIST / 'assets/site.css'
 if not STYLE.exists():
     STYLE.write_text(SOUP.style.string.strip() + '\n')
 HEADER = re.sub(r'href="#', 'href="/#', str(SOUP.select_one('header.site-head')))
+PURCHASE_LINK = SOUP.select_one('header.site-head a[data-cta="purchase"]')
+assert PURCHASE_LINK and PURCHASE_LINK.get('href'), 'A header purchase link is required.'
+PURCHASE_URL = PURCHASE_LINK['href']
 FAVICON = str(SOUP.select_one('link[rel="icon"]'))
 ANALYTICS_CONFIG = json.loads((ROOT / 'content/analytics-events.json').read_text())
 for name, event in ANALYTICS_CONFIG['events'].items():
@@ -55,7 +58,7 @@ def post_keywords(post):
     return list(dict.fromkeys([post['primary_keyword'], *post['secondary_keywords']]))
 
 
-def head(title, description, path=None, graph=None, post=None, noindex=False):
+def head(title, description, path=None, graph=None, post=None, noindex=False, article_ux=False):
     url = ORIGIN + path if path is not None else None
     canonical = f'<link rel="canonical" href="{escape(url, quote=True)}">' if url else ''
     og_url = f'<meta property="og:url" content="{escape(url, quote=True)}">' if url else ''
@@ -72,6 +75,7 @@ def head(title, description, path=None, graph=None, post=None, noindex=False):
         topic_meta += f'<meta property="article:section" content="{escape(post["category"], quote=True)}">\n'
         topic_meta += '\n'.join(f'<meta property="article:tag" content="{escape(keyword, quote=True)}">' for keyword in keywords)
     schema = f'<script type="application/ld+json">{graph_json(graph)}</script>' if graph else ''
+    article_assets = '<link rel="stylesheet" href="/assets/article-ux.css"><script src="/assets/article-ux.js" defer></script>' if article_ux else ''
     return f'''<!doctype html>
 <html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -87,7 +91,7 @@ def head(title, description, path=None, graph=None, post=None, noindex=False):
 {image_dimensions}
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{escape(title, quote=True)}">
 <meta name="twitter:description" content="{escape(description, quote=True)}"><meta name="twitter:image" content="{image}"><meta name="twitter:image:alt" content="{escape(image_alt, quote=True)}">
-{dates}{topic_meta}{FAVICON}<link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css">
+	{dates}{topic_meta}{FAVICON}<link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css">{article_assets}
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="describedby" href="/llms.txt">
 {ANALYTICS}{schema}</head>'''
 
@@ -121,9 +125,76 @@ def series_navigation(post):
         return ''
     entries = ''.join(f'<li><a href="/blog/{p["slug"]}"' + (' aria-current="page"' if p['slug'] == post['slug'] else '') + f'>{p["series_order"]}. {escape(p["short_title"])}</a></li>' for p in SERIES)
     index = SERIES.index(post)
-    previous = f'<a href="/blog/{SERIES[index-1]["slug"]}">← 이전 편: {escape(SERIES[index-1]["short_title"])}</a>' if index else ''
-    following = f'<a href="/blog/{SERIES[index+1]["slug"]}">다음 편: {escape(SERIES[index+1]["short_title"])} →</a>' if index + 1 < len(SERIES) else '<a href="/#contents">책 전체 목차 보기 →</a>'
-    return f'<nav class="series-nav" aria-label="책 소개 시리즈"><p class="eyebrow">책 소개 시리즈 / {post["series_order"]} of {len(SERIES)}</p><ol>{entries}</ol><div class="series-pager">{previous}{following}</div></nav>'
+    previous = f'<a href="/blog/{SERIES[index-1]["slug"]}" aria-label="이전 편: {escape(SERIES[index-1]["short_title"], quote=True)}">← 이전 편</a>' if index else ''
+    following = f'<a href="/blog/{SERIES[index+1]["slug"]}" aria-label="다음 편: {escape(SERIES[index+1]["short_title"], quote=True)}">다음 편 →</a>' if index + 1 < len(SERIES) else '<a href="/#contents">책 전체 구성 보기 →</a>'
+    return f'''<nav class="series-nav" aria-label="책 소개 시리즈"><p class="series-status">책 소개 시리즈 · 현재 {post["series_order"]}/{len(SERIES)}</p><div class="series-pager">{previous}{following}</div>
+<details class="series-full-list"><summary>시리즈 전체 {len(SERIES)}편 보기</summary><ol>{entries}</ol></details></nav>'''
+
+
+WORK_BY_SLUG = {
+    'seo-geo-aieo-guide': 'content',
+    'geo-content-structure': 'content',
+    'technical-seo-ai-search': 'review',
+    'rgctor-content-workflow': 'review',
+    'ai-search-measurement': 'performance',
+}
+
+
+def consulting_href(post, location='direct'):
+    work = WORK_BY_SLUG.get(post['slug'], 'undecided')
+    intent = 'education' if post.get('kind') == 'book-series' else 'workflow'
+    return f'/consulting?from={post["slug"]}&work={work}&intent={intent}&cta={location}-team'
+
+
+def cta_primary(post, location, class_name='button primary'):
+    position = f'article-{location}' if location != 'mobile' else 'mobile-sticky'
+    cta_type = 'book' if post.get('kind') == 'book-series' else 'team'
+    cta_id = f'{location}-{cta_type}'
+    if cta_type == 'book':
+        return f'<a class="{class_name}" href="{escape(PURCHASE_URL, quote=True)}" target="_blank" rel="noreferrer" data-cta="purchase" data-position="{position}" data-cta-id="{cta_id}">교보문고에서 책 구매</a>'
+    return f'<a class="{class_name}" href="{escape(consulting_href(post, location), quote=True)}" data-consulting-path data-position="{position}" data-cta-id="{cta_id}">팀 검수·운영 체계 문의</a>'
+
+
+def article_cta(post, location):
+    position = f'article-{location}'
+    primary = cta_primary(post, location)
+    if post.get('kind') == 'book-series':
+        heading = '책의 전체 구성을 확인하고, 적용 범위를 정하세요.'
+        copy = '도서의 전체 구성과 구매 경로를 확인한 뒤, 조직 적용은 별도 문의에서 현재 업무 범위에 맞춰 살펴볼 수 있습니다.'
+        context_link = '<a class="article-cta-context-link" href="/#contents">책 전체 구성 보기 →</a>'
+        secondary = f'<a class="button secondary" href="{escape(consulting_href(post, location), quote=True)}" data-consulting-path data-position="{position}" data-cta-id="{location}-team">팀 적용 범위 문의</a>'
+    else:
+        heading = '글의 기준을 팀 검수와 운영 흐름에 연결하세요.'
+        copy = f'{escape(post["primary_keyword"])} 내용을 바탕으로, 콘텐츠 검수와 운영 기준을 팀의 현재 업무에 맞춰 확인해 보세요.'
+        resource_path = '/resources/rgctor-worksheet' if post['slug'] == 'rgctor-content-workflow' else '/resources/content-search-checklist'
+        resource_label = 'R-G-C-T-O-R 업무 지시서 워크시트 보기' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표 보기'
+        context_link = ''
+        secondary = f'<a class="button secondary" href="{resource_path}" data-resource-id="{resource_path.rsplit('/',1)[-1]}" data-cta-id="{location}-resource" data-position="{position}">{resource_label}</a>'
+    label = '실행 기준 이어 보기' if location == 'inline' else '다음 단계'
+    return f'''<section class="article-cta article-cta-{location}"{' id="article-end"' if location == 'end' else ''} aria-label="{label}">
+<p class="eyebrow">{label}</p><h3>{heading}</h3><p>{copy}</p>{context_link}<div class="article-cta-actions">{primary}{secondary}</div></section>'''
+
+
+def mobile_cta(post):
+    return f'''<aside class="article-mobile-cta" aria-label="빠른 다음 행동" hidden>
+{cta_primary(post, 'mobile', 'article-mobile-cta-link button primary')}<button class="article-mobile-cta-close" type="button" aria-label="빠른 다음 행동 닫기">×</button></aside>'''
+
+
+def insert_inline_cta(rendered, cta_markup):
+    """Place one CTA after the first practical example or execution-check section."""
+    useful = re.compile(r'예시|실행\s*체크|체크리스트|점검표')
+    headings = rendered.find_all('h2')
+    anchor = next((heading for heading in headings if useful.search(heading.get_text(' ', strip=True))), None)
+    cta = BeautifulSoup(cta_markup, 'html.parser').find('section')
+    assert cta, 'Inline CTA markup must contain one section.'
+    if anchor:
+        following = anchor.find_next_sibling('h2')
+        if following:
+            following.insert_before(cta)
+        else:
+            rendered.append(cta)
+    else:
+        rendered.append(cta)
 
 
 FOOTER = '''<footer class="blog-footer"><div class="wrap"><a class="text-link" href="/">AI Agent를 지휘하는 마케터</a> · <a href="/blog">블로그</a> · <a href="https://troe.kr/">TROE</a><br>© 2026 TROE. ALL RIGHTS RESERVED.</div></footer><script src="/assets/enhancements.js" defer></script></body></html>'''
@@ -166,21 +237,25 @@ for post in POSTS:
     related = ''.join(card(BY_SLUG[slug]) for slug in post['related'])
     disclosure = SERIES_DISCLOSURE if is_series else GUIDE_DISCLOSURE
     date_text = f'게시: <time datetime="{post["date"]}">{post["date"]}</time> · 검토·수정: <time datetime="{post.get("modified", post["date"])}">{post.get("modified", post["date"])}</time>'
-    topic_labels = ''.join(f'<li>{escape(keyword)}</li>' for keyword in post_keywords(post))
-    html = head(post['seo_title'], post['description'], path, graph, post=post) + f'''
-<body class="blog-page" data-page-type="blog_article" data-content-group="{'book_series' if is_series else 'practical_guide'}" data-series-order="{post.get('series_order', '')}" data-article="{post['slug']}"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}
+    topics = post_keywords(post)
+    topic_labels = ''.join(f'<li>{escape(keyword)}</li>' for keyword in topics[:3])
+    remaining_topics = ''.join(f'<li>{escape(keyword)}</li>' for keyword in topics[3:])
+    topic_more = f'<details class="article-topic-details"><summary>주제 {len(topics) - 3}개 더 보기</summary><ul class="article-topics" aria-label="추가 핵심 주제">{remaining_topics}</ul></details>' if remaining_topics else ''
+    disclosure_short = 'Command Marketing 편집 · AI 초안 활용 · ' + ('제공된 최종 내지 PDF를 근거로 한 도서 요약' if is_series else '공개 출처 기반 실무 응용 · 도서 요약 아님')
+    insert_inline_cta(rendered, article_cta(post, 'inline'))
+    html = head(post['seo_title'], post['description'], path, graph, post=post, article_ux=True) + f'''
+<body class="blog-page" data-page-type="blog_article" data-ui-variant="ux-v1" data-content-group="{'book_series' if is_series else 'practical_guide'}" data-series-order="{post.get('series_order', '')}" data-article="{post['slug']}"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}
 <main class="blog-main wrap" id="main">{breadcrumbs(post)}
-<header class="blog-heading"><p class="eyebrow">{escape(post['category'])}</p><h1>{escape(post['title'])}</h1>
-<p class="article-meta"><span>편집: Command Marketing</span><span>{date_text}</span><span>약 {reading}분 읽기</span></p>
-<p class="article-summary">{escape(post['search_summary'])}</p>
-<ul class="article-topics" aria-label="이 글의 핵심 주제">{topic_labels}</ul>
-<p class="blog-disclosure">{disclosure}</p></header>
-<figure class="article-cover">{picture(post, hero=True)}<figcaption>AI 생성 카툰 · 한국어 손글씨 콘셉트 · 글의 주제를 표현한 편집 일러스트</figcaption></figure>
+<header class="blog-heading article-head"><div class="article-head-copy"><p class="eyebrow">{escape(post['category'])}</p><h1>{escape(post['title'])}</h1>
+<p class="article-meta"><span>검토: <time datetime="{post.get('modified', post['date'])}">{post.get('modified', post['date'])}</time></span><span>약 {reading}분 읽기</span></p></div>
+<figure class="article-head-visual">{picture(post, hero=True)}<figcaption>AI 생성 카툰 · 손글씨</figcaption></figure>
+<div class="article-head-details"><p class="article-summary">{escape(post['search_summary'])}</p><ul class="article-topics" aria-label="이 글의 핵심 주제">{topic_labels}</ul>{topic_more}
+<p class="article-disclosure-short">{disclosure_short}</p><details class="article-disclosure-details"><summary>편집·출처 고지 자세히</summary><p>{disclosure}</p><p>{date_text}</p></details></div></header>
 {series_navigation(post)}
-<div class="article-layout"><aside class="article-toc" aria-label="글 목차"><p>이 글의 순서</p><ol>{''.join(toc)}</ol></aside>
-<article class="article-body" aria-label="{escape(post['title'], quote=True)}">{str(rendered)}
-<div class="article-end" id="article-end"><h2>도구보다 운영 기준을 먼저 세우세요.</h2><p>책의 R-G-C-T-O-R 구조와 3주 훈련을 확인하거나 팀에 적용할 범위를 살펴보세요.</p>
-<div class="actions"><a class="button primary" href="/#contents">책 구성 보기</a><a class="button secondary" href="/#consulting" data-consulting-path data-position="blog-article">팀 적용 범위 보기</a></div></div></article></div>
+<div class="article-layout"><aside class="article-toc" aria-label="글 목차"><nav class="article-toc-desktop" aria-label="이 글의 순서"><p>이 글의 순서</p><ol>{''.join(toc)}</ol></nav>
+<details class="article-toc-mobile"><summary>이 글의 순서</summary><ol>{''.join(toc)}</ol></details></aside>
+<article class="article-body" aria-label="{escape(post['title'], quote=True)}">{str(rendered)}{article_cta(post, 'end')}</article></div>
+{mobile_cta(post)}
 <section class="blog-section" style="padding:40px 0 70px" aria-labelledby="related-title"><h2 class="extra-title" id="related-title">함께 읽으면 좋은 글</h2><div class="blog-cards">{related}</div><a class="text-link" href="/blog">블로그 전체 보기 →</a></section></main>{FOOTER}'''
     directory = DIST / 'blog' / post['slug']
     directory.mkdir(parents=True, exist_ok=True)
@@ -205,8 +280,28 @@ home_cards = ''.join(card(p) for p in ordered)
 home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book notes / SEO · GEO · AIEO</p><h2 class="section-title">책 소개와 실무 가이드,<br>여덟 편으로 연결합니다.</h2><p class="section-copy">PDF 근거를 명시한 책 소개 시리즈 3편과 공개 출처 기반 SEO·GEO·AIEO 가이드 5편입니다. 도서 요약과 편집 응용의 범위를 구분했습니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards">{home_cards}</div></div></section>'''
 LANDING = re.sub(r'<!-- BLOG_SECTION_START -->.*?<!-- BLOG_SECTION_END -->', '<!-- BLOG_SECTION_START -->' + home_section + '<!-- BLOG_SECTION_END -->', LANDING, flags=re.S)
 (DIST / 'index.html').write_text(LANDING)
-routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path': '/blog', 'title': '도서 소개와 SEO·GEO·AIEO 블로그'}] + [{'path': '/blog/' + p['slug'], 'title': p['title']} for p in POSTS]
-(DIST / 'manus-routes.json').write_text(json.dumps({'routes': routes}, ensure_ascii=False, indent=2) + '\n')
+
+# build_funnel owns the static consulting/resources pages and returns their route metadata.
+# It is imported only after this module's reusable head, header, footer and site data exist.
+from build_funnel import build_funnel
+
+funnel_routes = build_funnel(DIST, head, HEADER, FOOTER, ORIGIN, SITE)
+REVIEWED = max(REVIEWED, *(route['lastmod'] for route in funnel_routes))
+assert isinstance(funnel_routes, list), 'build_funnel must return a list of route metadata.'
+for route in funnel_routes:
+    assert isinstance(route, dict), 'A funnel route must be a dictionary.'
+    assert isinstance(route.get('path'), str) and route['path'].startswith('/'), route
+    assert isinstance(route.get('title'), str) and route['title'], route
+    assert isinstance(route.get('lastmod'), str), route
+    date.fromisoformat(route['lastmod'])
+    assert 'noindex' not in route or isinstance(route['noindex'], bool), route
+
+base_routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path': '/blog', 'title': '도서 소개와 SEO·GEO·AIEO 블로그'}] + [{'path': '/blog/' + p['slug'], 'title': p['title']} for p in POSTS]
+routes = base_routes + funnel_routes
+assert len({route['path'] for route in routes}) == len(routes), 'Duplicate static route paths are not allowed.'
+indexable_routes = [route for route in routes if not route.get('noindex', False)]
+manifest_routes = [{'path': route['path'], 'title': route['title']} for route in routes]
+(DIST / 'manus-routes.json').write_text(json.dumps({'routes': manifest_routes}, ensure_ascii=False, indent=2) + '\n')
 ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
 ns = 'http://www.sitemaps.org/schemas/sitemap/0.9'
 image_ns = 'http://www.google.com/schemas/sitemap-image/1.1'
@@ -216,8 +311,10 @@ route_images = {'/': BOOK_IMAGE}
 for post in POSTS:
     route_modified['/blog/' + post['slug']] = POST_MODIFIED[post['slug']]
     route_images['/blog/' + post['slug']] = ORIGIN + post['image_jpg']
+for route in funnel_routes:
+    route_modified[route['path']] = route['lastmod']
 root = ET.Element(f'{{{ns}}}urlset')
-for route in routes:
+for route in indexable_routes:
     node = ET.SubElement(root, f'{{{ns}}}url')
     ET.SubElement(node, f'{{{ns}}}loc').text = ORIGIN + route['path']
     ET.SubElement(node, f'{{{ns}}}lastmod').text = route_modified[route['path']]
@@ -232,9 +329,10 @@ llms = (ROOT / 'content/llms-base.md').read_text().rstrip() + '\n'
 for title, group in (('도서 소개 시리즈 3편', SERIES), ('SEO·GEO·AIEO 실무 가이드 5편', GUIDES)):
     llms += '\n## ' + title + '\n\n'
     llms += '\n'.join(f'- [{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' for post in group) + '\n'
-llms += f'\n## 검색 보조 문서\n\n- [XML 사이트맵]({ORIGIN}/sitemap.xml): 홈·블로그 목록·글 8편의 canonical URL 10개와 대표 이미지\n- [크롤러 접근 정책]({ORIGIN}/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분\n'
+llms += f'\n## 공개 편집 자료와 팀 적용 문의\n\n- [R-G-C-T-O-R 업무 지시서 워크시트]({ORIGIN}/resources/rgctor-worksheet): 공개 편집 응용 자료이며 도서 원본 PDF가 아닙니다.\n- [콘텐츠·검색 점검표]({ORIGIN}/resources/content-search-checklist): 공개 편집 응용 자료이며 도서 원본 PDF가 아닙니다.\n- [팀 적용 문의]({ORIGIN}/consulting): 콘텐츠 검수·운영 체계의 적용 범위를 문의하는 경로입니다.\n'
+llms += f'\n## 검색 보조 문서\n\n- [XML 사이트맵]({ORIGIN}/sitemap.xml): 현재 색인 대상 정규 URL {len(indexable_routes)}개와 대표 이미지\n- [크롤러 접근 정책]({ORIGIN}/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분\n'
 llms += f'\n문서 검토 기준일: {REVIEWED}. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.\n'
 for path in (ROOT / 'llms.txt', DIST / 'llms.txt'):
     path.write_text(llms)
 (DIST / '404.html').write_text(head('페이지를 찾을 수 없습니다', '요청한 페이지가 없거나 이동되었습니다. 도서 소개 또는 블로그 목록에서 다시 탐색하세요.', noindex=True) + f'<body class="blog-page">{HEADER}<main class="wrap not-found" id="main"><p class="eyebrow">404 / NOT FOUND</p><h1>이 페이지는 찾을 수 없습니다.</h1><p class="section-copy">도서 소개나 블로그 목록에서 필요한 내용을 다시 찾아보세요.</p><div class="actions"><a class="button primary" href="/">도서 홈</a><a class="button secondary" href="/blog">블로그 목록</a></div></main>{FOOTER}')
-print(f'Static blog built: {len(POSTS)} articles ({len(SERIES)} book series), {len(routes)} indexable pages. Origin: {ORIGIN}')
+print(f'Static blog built: {len(POSTS)} articles ({len(SERIES)} book series), {len(indexable_routes)} indexable pages. Origin: {ORIGIN}')

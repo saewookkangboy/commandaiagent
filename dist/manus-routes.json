@@ -39,6 +39,26 @@
     {
       "path": "/blog/book-command-marketer-03",
       "title": "책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프"
+    },
+    {
+      "path": "/privacy",
+      "title": "문의 개인정보 수집·이용 안내"
+    },
+    {
+      "path": "/consulting",
+      "title": "AI 마케팅 교육·팀 업무 적용 문의"
+    },
+    {
+      "path": "/resources/rgctor-worksheet",
+      "title": "R-G-C-T-O-R 업무 지시서 워크시트"
+    },
+    {
+      "path": "/resources/content-search-checklist",
+      "title": "콘텐츠·SEO·GEO 검색 점검표"
+    },
+    {
+      "path": "/resources",
+      "title": "AI 마케팅 공개 워크시트·검색 점검표"
     }
   ]
 }

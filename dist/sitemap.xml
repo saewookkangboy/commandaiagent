@@ -67,4 +67,20 @@
       <image:loc>https://book.allrounder.im/assets/blog/book-command-marketer-03.jpg</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://book.allrounder.im/consulting</loc>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://book.allrounder.im/resources/rgctor-worksheet</loc>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://book.allrounder.im/resources/content-search-checklist</loc>
+    <lastmod>2026-10-14</lastmod>
+  </url>
+  <url>
+    <loc>https://book.allrounder.im/resources</loc>
+    <lastmod>2026-10-14</lastmod>
+  </url>
 </urlset>

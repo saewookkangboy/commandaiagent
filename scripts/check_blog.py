@@ -85,7 +85,7 @@ for post in posts:
     og = soup.select_one('meta[property="og:image"]')['content']
     assert og == ORIGIN + post['image_jpg']
     assert soup.select_one('meta[name="twitter:image"]')['content'] == og
-    image = soup.select_one('.article-cover img')
+    image = soup.select_one('.article-head img')
     assert image['src'] == post['image_jpg'] and image['alt'] == post['image_alt']
     assert image['loading'] == 'eager' and image['width'] == '1200' and image['height'] == '675'
     assert len(soup.select('.article-body h2')) >= 4
@@ -112,15 +112,20 @@ index = htmls[DIST / 'blog/index.html']
 assert len(index.select('#book-series .blog-card')) == 3
 assert len(index.select('#practical-guides .blog-card')) == 5
 assert len(htmls[DIST / 'index.html'].select('#blog .blog-card')) == 8
-assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == 10
+assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == 15
 urls = [node.text for node in ET.parse(DIST / 'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-assert len(urls) == 10 and len(set(urls)) == 10
-assert set(urls) == {ORIGIN + '/', ORIGIN + '/blog'} | {ORIGIN + '/blog/' + p['slug'] for p in posts}
+assert len(urls) == 14 and len(set(urls)) == 14
+extra_paths = ['/consulting','/resources','/resources/rgctor-worksheet','/resources/content-search-checklist']
+assert set(urls) == {ORIGIN + '/', ORIGIN + '/blog'} | {ORIGIN + '/blog/' + p['slug'] for p in posts} | {ORIGIN + path for path in extra_paths}
+assert ORIGIN + '/privacy' not in urls
+assert htmls[DIST / 'privacy/index.html'].select_one('meta[name=robots]')['content'].startswith('noindex')
 assert (ROOT / 'sitemap.xml').read_bytes() == (DIST / 'sitemap.xml').read_bytes()
 ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'image': 'http://www.google.com/schemas/sitemap-image/1.1'}
 site = json.loads((ROOT / 'content/site.json').read_text())
 expected_modified = {ORIGIN + '/': site['home_modified'], ORIGIN + '/blog': max(p.get('modified', p['date']) for p in posts)}
 expected_images = {ORIGIN + '/': ORIGIN + '/assets/book-flat.jpg'}
+funnel = json.loads((ROOT / 'content/funnel.json').read_text())
+expected_modified.update({ORIGIN + path: funnel['modified'] for path in extra_paths})
 for post in posts:
     url = ORIGIN + '/blog/' + post['slug']
     expected_modified[url] = post.get('modified', post['date'])
@@ -155,4 +160,4 @@ assert '도서 발췌나 저자의 직접 발언이 아닙니다' in llms
 assert '책 소개 시리즈 3편은 제공 PDF를 요약' in llms
 assert not list(DIST.rglob('*.pdf'))
 assert not list((ROOT / 'content').rglob('*.pdf'))
-print('PASS: 8 articles, 10 URLs, unique sharing images, source references, series navigation, all local links, no source PDF exposure')
+print('PASS: 8 articles, 14 indexable URLs, unique sharing images, source references, series navigation, all local links, no source PDF exposure')

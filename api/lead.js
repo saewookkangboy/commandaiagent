@@ -1,6 +1,7 @@
 'use strict';
 const crypto = require('node:crypto');
 const POSTS = require('../content/blog/posts.json');
+const FUNNEL = require('../content/funnel.json');
 const SLUGS = new Set(POSTS.map(post => post.slug));
 const ORIGIN = 'https://book.allrounder.im';
 const POLICY = '2026-10-14-v1';
@@ -26,6 +27,7 @@ function validate(body) {
 }
 
 function backendConfig() {
+  if (FUNNEL.policy_approved !== true) return null;
   const url = process.env.SHEETS_WEBAPP_URL || '';
   const secret = process.env.SHEETS_SIGNING_SECRET || '';
   return /^https:\/\/script\.google\.com\/macros\/s\/[a-zA-Z0-9_-]+\/exec$/.test(url) && secret.length >= 32 ? { url, secret } : null;
