@@ -208,4 +208,4 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
         context.close()
     assert set(CATALOG['events']) - {'view_conversion_cta','lead_form_start','lead_form_error','lead_form_success','resource_access'} <= COVERED, ('Missing legacy coverage',set(CATALOG['events'])-COVERED)
     browser.close()
-    print('PASS all19 legacy events (new funnel actions have dedicated tests) and all8 article contexts; zero live analytics traffic',flush=True)
+    print(f'PASS all19 legacy events (new funnel actions have dedicated tests) and all{len(POSTS)} article contexts; zero live analytics traffic',flush=True)

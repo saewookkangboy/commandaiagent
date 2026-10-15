@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
-assert len(posts) == 8
-assert len({post['slug'] for post in posts}) == 8
+assert len(posts) == 9
+assert len({post['slug'] for post in posts}) == len(posts)
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
-assert len({post['description'] for post in posts}) == 8
-assert len({post['image'] for post in posts}) == 8
-assert len({post['seo_title'] for post in posts}) == 8
-assert len({post['primary_keyword'] for post in posts}) == 8
-assert len({post['search_summary'] for post in posts}) == 8
+assert len({post['description'] for post in posts}) == len(posts)
+assert len({post['image'] for post in posts}) == len(posts)
+assert len({post['seo_title'] for post in posts}) == len(posts)
+assert len({post['primary_keyword'] for post in posts}) == len(posts)
+assert len({post['search_summary'] for post in posts}) == len(posts)
 
 
 def local_file(path):
@@ -110,11 +110,11 @@ for post in posts:
 
 index = htmls[DIST / 'blog/index.html']
 assert len(index.select('#book-series .blog-card')) == 3
-assert len(index.select('#practical-guides .blog-card')) == 5
-assert len(htmls[DIST / 'index.html'].select('#blog .blog-card')) == 8
-assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == 15
+assert len(index.select('#practical-guides .blog-card')) == len([p for p in posts if p['kind'] != 'book-series'])
+assert len(htmls[DIST / 'index.html'].select('#blog .blog-card')) == len(posts)
+assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == len(posts) + 7
 urls = [node.text for node in ET.parse(DIST / 'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-assert len(urls) == 14 and len(set(urls)) == 14
+assert len(urls) == len(posts) + 6 and len(set(urls)) == len(urls)
 extra_paths = ['/consulting','/resources','/resources/rgctor-worksheet','/resources/content-search-checklist']
 assert set(urls) == {ORIGIN + '/', ORIGIN + '/blog'} | {ORIGIN + '/blog/' + p['slug'] for p in posts} | {ORIGIN + path for path in extra_paths}
 assert ORIGIN + '/privacy' not in urls
@@ -146,7 +146,7 @@ expected_reviewed = max(site['llms_reviewed'], site['home_modified'], *expected_
 assert re.findall(r'^문서 검토 기준일: ([0-9-]+)\.', llms, re.M) == [expected_reviewed], 'Stale llms review date; rebuild search documents'
 assert all(p['slug'] in llms for p in posts)
 assert llms.count('## 도서 소개 시리즈 3편') == 1
-assert llms.count('## SEO·GEO·AIEO 실무 가이드 5편') == 1
+assert llms.count('## SEO·GEO·AIEO 실무 가이드 6편') == 1
 for post in posts:
     assert f'[{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' in llms
 for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):
@@ -160,4 +160,5 @@ assert '도서 발췌나 저자의 직접 발언이 아닙니다' in llms
 assert '책 소개 시리즈 3편은 제공 PDF를 요약' in llms
 assert not list(DIST.rglob('*.pdf'))
 assert not list((ROOT / 'content').rglob('*.pdf'))
-print('PASS: 8 articles, 14 indexable URLs, unique sharing images, source references, series navigation, all local links, no source PDF exposure')
+assert set(json.loads((ROOT / 'content/analytics-events.json').read_text())['article_slugs']) == {p['slug'] for p in posts}
+print(f'PASS: {len(posts)} articles, {len(urls)} indexable URLs, unique sharing images, source references, series navigation, analytics slugs, all local links, no source PDF exposure')

@@ -17,7 +17,7 @@
 ## 공식 페이지와 문의
 
 - [공식 도서 소개](https://book.allrounder.im/): 책의 메시지, 구성, 저자와 FAQ
-- [블로그 목록](https://book.allrounder.im/blog): 도서 소개 시리즈 3편과 실무 가이드 5편
+- [블로그 목록](https://book.allrounder.im/blog): 도서 소개 시리즈 3편과 실무 가이드 6편
 - [박충효 공식 프로필](https://park.allrounder.im/): 저자 경력과 공개 프로필
 - [TROE](https://troe.kr/): 브랜드·교육·컨설팅 안내
 - [TROE AX 진단](https://ax.allrounder.im/): 마케팅 AX 진단 및 컨설팅 안내
@@ -37,7 +37,7 @@
 
 ## 콘텐츠 해석과 출처
 
-책 소개 시리즈 3편은 제공 PDF를 요약한 편집 글이며 각 글에 도서 페이지 근거가 있습니다. 원본 PDF는 공개하지 않습니다. 실무 가이드 5편은 공개 출처 기반 응용 콘텐츠로 도서 발췌나 저자의 직접 발언이 아닙니다. 두 유형 모두 AI 초안을 활용한 Command Marketing 편집 콘텐츠이며 저자가 직접 집필한 블로그 글로 해석하지 않습니다. 가상 사례·체크리스트 등은 편집 응용으로 구분합니다.
+책 소개 시리즈 3편은 제공 PDF를 요약한 편집 글이며 각 글에 도서 페이지 근거가 있습니다. 원본 PDF는 공개하지 않습니다. 실무 가이드 6편은 공개 출처 기반 응용 콘텐츠로 도서 발췌나 저자의 직접 발언이 아닙니다. 두 유형 모두 AI 초안을 활용한 Command Marketing 편집 콘텐츠이며 저자가 직접 집필한 블로그 글로 해석하지 않습니다. 가상 사례·체크리스트 등은 편집 응용으로 구분합니다.
 
 AIEO는 사이트 편집상 AI Engine Optimization으로 정의합니다. 보편적으로 합의된 독립 표준이나 검색엔진 공식 순위 요소로 제시하지 않습니다. 인용할 때는 해당 canonical 페이지의 본문, 기준일, 도서 페이지 근거와 공개 출처를 함께 확인하세요. 블로그의 책 소개는 도서 전체를 대체하지 않으며 실제 캠페인 성과·수익·검색 노출·AI 인용을 보장하지 않습니다.
 
@@ -47,8 +47,9 @@ AIEO는 사이트 편집상 AI Engine Optimization으로 정의합니다. 보편
 - [R-G-C-T-O-R 업무 지시서: 설계와 검수 기준](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서의 구성과 콘텐츠·SEO·랜딩페이지 QA 원칙을 책 Part 3·5에 근거해 요약합니다. 가상 사례는 도서 원문이 아닌 편집 응용으로 구분합니다.
 - [AI 마케팅 21일 훈련: 광고·CRM 운영 루프 만들기](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련의 주차별 진행과 광고·CRM·분석 운영 루프를 책의 Part 6·7에 근거해 정리합니다. 실험 로그, 사람의 승인 기준, 월간 점검표까지 살펴봅니다.
 
-## SEO·GEO·AIEO 실무 가이드 5편
+## SEO·GEO·AIEO 실무 가이드 6편
 
+- [AI Agent 워크플로우 설계: 마케터가 정밀하게 운영해야 하는 이유](https://book.allrounder.im/blog/marketer-ai-agent-workflow-design): AI Agent 워크플로우 설계는 빠른 초안과 실제 업무 완료를 구분하는 일입니다. 목표·근거·권한·검수·복구·비용·학습 기준을 B2B 콘텐츠와 문의 흐름 예시로 설명합니다.
 - [SEO·GEO·AIEO 차이와 AI 검색 콘텐츠 전략](https://book.allrounder.im/blog/seo-geo-aieo-guide): SEO·GEO·AIEO 차이를 검색엔진의 이해, 생성형 답변의 출처, 팀 콘텐츠 운영 관점에서 비교합니다. Google 안내와 발행 전 체크리스트, 도서 프레임을 편집에 응용한 예를 함께 소개합니다.
 - [GEO 콘텐츠 작성법: AI 답변 인용을 고려한 본문 구조](https://book.allrounder.im/blog/geo-content-structure): GEO 콘텐츠 작성법의 핵심은 질문에 먼저 답하고 범위·기준일·원출처를 명확히 잇는 것입니다. 한국어 예시와 게시 전 체크리스트, 구조화 데이터 및 연구 결과의 한계를 함께 살펴봅니다.
 - [AI 검색 기술 SEO 체크리스트: 크롤링·구조화 데이터 점검](https://book.allrounder.im/blog/technical-seo-ai-search): AI 검색 기술 SEO 체크리스트에서 초기 HTML, URL 정규화, 구조화 데이터와 검색·학습 크롤러 설정을 확인하고 배포 전 팀별 점검 항목을 살펴봅니다.
@@ -63,7 +64,7 @@ AIEO는 사이트 편집상 AI Engine Optimization으로 정의합니다. 보편
 
 ## 검색 보조 문서
 
-- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 14개와 대표 이미지
+- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 15개와 대표 이미지
 - [크롤러 접근 정책](https://book.allrounder.im/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분
 
-문서 검토 기준일: 2026-10-14. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.
+문서 검토 기준일: 2026-10-15. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.
