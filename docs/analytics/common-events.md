@@ -76,6 +76,14 @@ GA4 탐색 보고서에서 필요할 때 이벤트 범위 맞춤 측정기준으
 
 `python3 scripts/build_blog.py`로 공통 설정과 페이지를 생성한 뒤 `node --check dist/assets/analytics.js`, `node --check dist/assets/analytics-config.js`, `python3 scripts/check_blog.py`, `python3 scripts/check_analytics.py`, `python3 scripts/check_funnel.py`, `node scripts/check_lead_backend.cjs`를 실행합니다. 전용 브라우저 검사는 운영 hostname을 로컬 파일로 모의 응답하고 모든 외부 요청을 차단해 GA4·Meta에 테스트 트래픽을 보내지 않습니다. 로컬·미리보기·404에서는 SDK 초기화와 맞춤 송신을 차단합니다. 기존 동의 관리 방식은 새로 도입하지 않으며 `commandTrackingEnabled=false`일 때 사이트의 맞춤 송신도 중단합니다.
 
+## 신규 블로그에 적용하는 연동 가이드
+
+2026-10-15 추가: 「마케터의 업무에 있어서 AI AGENT 구축은 왜 필요한가?」의 슬러그는 `why-marketers-need-ai-agents`이며 공통 이벤트 계약2.1·기존24개 이벤트가 이미 연결되어 있습니다. [신규 글 GA4·Meta 픽셀 연동 가이드](new-blog-event-integration.md)에 실제 CTA 식별값, payload 예시, GA4 맞춤 정의·핵심 이벤트·문의 퍼널, Meta 매개변수 기반 맞춤 전환과 실수신 확인 순서를 추가했습니다.
+
+글 방문·문의 클릭은 현재 글의 `article_slug` 또는 `content_id`, 문의 저장은 `lead_form_success`와 `source_article_slug`로 구분합니다. `lead_form_success`에는 `cta_id`가 없으므로 CTA별 저장 전환율을 직접 산출할 수 있다고 표시하지 않습니다. 워크시트 이동에는 `from`이 없어 자료 다운로드까지 글 유입이 자동 보존되지 않습니다. 이번 글의 FAQ는 펼침 UI가 아니므로 `faq_expand`가 발생하지 않습니다.
+
+가이드 추가는 새 픽셀·GTM 태그 설치, 이벤트 별칭 생성, GA4·Meta 계정 설정 변경을 뜻하지 않습니다. 실제 수신과 맞춤 정의·핵심 이벤트·맞춤 전환의 등록 상태는 권한 있는 계정에서 별도로 확인합니다.
+
 ## References
 
 [1]: https://support.google.com/analytics/answer/12229021?hl=en "Google Analytics — Custom events and custom dimensions"

@@ -71,3 +71,7 @@
 - [x] 홈·목록10편(책3+실무7), sitemap16개 색인 대상 URL·llms·계측 허용슬러그 갱신. 정적 구문·메타·원고 보존·링크·새 글 문의 문맥 검증 후 커밋/PR/main·기존 운영 사이트에 반영하고 실제 본문·이미지·검색 문서·문의 준비상태 확인.
 
 완료 증거: PR #8 main 병합 5739d44, Vercel Production 성공 https://vercel.com/chunghyos-projects/commandaiagent/2ZrgF4WXWrDVwCRz8oNMHkCy2f1L. 신규 글·홈/목록·관련2편·썸네일2형식·계측설정·sitemap/llms10개 운영 파일 byte 일치. 전체10편·16개 색인 URL, 문의API configured=true 및 실제404 확인. 기존9편 원고·이미지·문의/분석 실행 코드 보존. 신규 글390/1440px 문의 이동과10편 공통 이벤트·개인정보 제외·SDK 오류 회귀 검증은 외부 분석 전송/실제 문의 저장 없이 수행. 빌드·보안·Vercel 리뷰 통과; 추가 CodeRabbit 리뷰는 병합 시 진행 중이었으며 보호 조건을 우회하지 않음.
+
+## 2026-10-15 신규 블로그 GA4·Meta 연동 가이드
+- [x] 최신 글 why-marketers-need-ai-agents의 실제 페이지/CTA/폼 문맥과 맞는 이벤트·발화 조건, source_article_slug 분석, GA4 맞춤 정의/핵심 이벤트/퍼널 및 Meta 테스트/매개변수 맞춤 전환 가이드를 추가. 수신 확인·UTM/자료 이동의 문맥 단절·CTA별 완료 분석 한계·중복 방지·개인정보 제외를 설명.
+- [ ] 공통 정의서와 README에서 새 가이드로 연결하고 완전한 Markdown 가이드와 최신 정의서를 전달. 기존24개 이벤트 계약2.1·분석ID·블로그·문의 실행 코드 보존; 계정 맞춤 정의/핵심 이벤트/Meta 맞춤 전환/광고 목표는 이번 요청에서 실제 변경하지 않음. 문서 변경을 GitHub main에 저장.
