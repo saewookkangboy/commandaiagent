@@ -58,6 +58,32 @@ def post_keywords(post):
     return list(dict.fromkeys([post['primary_keyword'], *post['secondary_keywords']]))
 
 
+def post_author(post):
+    return post.get('author', {'@type': 'Organization', 'name': 'Command Marketing', 'url': ORIGIN + '/blog'})
+
+
+def faq_graph(post, rendered, url):
+    """Only opted-in, visible FAQ text is copied into structured data."""
+    if not post.get('faq_schema'):
+        return None
+    heading = next((node for node in rendered.find_all('h2') if node.get_text(strip=True) == '자주 묻는 질문'), None)
+    assert heading, post['slug']
+    questions = []
+    current = None
+    for node in heading.find_next_siblings():
+        if node.name == 'h2':
+            break
+        if node.name == 'h3':
+            current = {'@type': 'Question', 'name': node.get_text(' ', strip=True), 'acceptedAnswer': {'@type': 'Answer', 'text': ''}}
+            questions.append(current)
+        elif current is not None:
+            text = node.get_text(' ', strip=True)
+            if text:
+                current['acceptedAnswer']['text'] += (' ' if current['acceptedAnswer']['text'] else '') + text
+    assert questions and all(q['acceptedAnswer']['text'] for q in questions), post['slug']
+    return {'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': questions}
+
+
 def head(title, description, path=None, graph=None, post=None, noindex=False, article_ux=False):
     url = ORIGIN + path if path is not None else None
     canonical = f'<link rel="canonical" href="{escape(url, quote=True)}">' if url else ''
@@ -76,12 +102,13 @@ def head(title, description, path=None, graph=None, post=None, noindex=False, ar
         topic_meta += '\n'.join(f'<meta property="article:tag" content="{escape(keyword, quote=True)}">' for keyword in keywords)
     schema = f'<script type="application/ld+json">{graph_json(graph)}</script>' if graph else ''
     article_assets = '<link rel="stylesheet" href="/assets/article-ux.css"><script src="/assets/article-ux.js" defer></script>' if article_ux else ''
+    author_name = post_author(post)['name'] if post else 'Command Marketing'
     return f'''<!doctype html>
 <html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)} | Command Marketing</title>
 <meta name="description" content="{escape(description, quote=True)}">
-<meta name="author" content="Command Marketing"><meta name="publisher" content="TROE">
+<meta name="author" content="{escape(author_name, quote=True)}"><meta name="publisher" content="TROE">
 <meta name="robots" content="{'noindex,follow' if noindex else 'index,follow,max-snippet:-1,max-image-preview:large'}">
 <meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#eef3f1">
 {canonical}<meta property="og:locale" content="ko_KR"><meta property="og:type" content="{'article' if post else 'website'}">
@@ -139,6 +166,7 @@ WORK_BY_SLUG = {
     'ai-search-measurement': 'performance',
     'marketer-ai-agent-workflow-design': 'review',
     'why-marketers-need-ai-agents': 'review',
+    'jev-engineering-guide': 'review',
 }
 
 
@@ -168,7 +196,7 @@ def article_cta(post, location):
     else:
         heading = '글의 기준을 팀 검수와 운영 흐름에 연결하세요.'
         copy = f'{escape(post["primary_keyword"])} 내용을 바탕으로, 콘텐츠 검수와 운영 기준을 팀의 현재 업무에 맞춰 확인해 보세요.'
-        resource_path = '/resources/rgctor-worksheet' if post['slug'] in ('rgctor-content-workflow', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents') else '/resources/content-search-checklist'
+        resource_path = '/resources/rgctor-worksheet' if post['slug'] in ('rgctor-content-workflow', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide') else '/resources/content-search-checklist'
         resource_label = 'R-G-C-T-O-R 업무 지시서 워크시트 보기' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표 보기'
         context_link = ''
         resource_id = resource_path.rsplit('/', 1)[-1]
@@ -224,7 +252,7 @@ for post in POSTS:
                'headline': post['title'], 'description': post['description'], 'datePublished': post['date'],
                'dateModified': post.get('modified', post['date']), 'inLanguage': 'ko-KR',
                'image': {'@type': 'ImageObject', 'url': ORIGIN + post['image_jpg'], 'width': 1200, 'height': 675, 'caption': post['image_alt']},
-               'articleSection': post['category'], 'author': {'@type': 'Organization', 'name': 'Command Marketing', 'url': ORIGIN + '/blog'},
+               'articleSection': post['category'], 'author': post_author(post),
                'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'},
                'isPartOf': {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'name': 'Command Marketing 블로그'},
                'citation': [ref_url for _, ref_url, _ in refs]}
@@ -237,14 +265,17 @@ for post in POSTS:
         article['isBasedOn'] = BOOK
         article['citation'].append(BOOK)
     graph = {'@context': 'https://schema.org', '@graph': [article, breadcrumb_graph(post)]}
+    faq = faq_graph(post, rendered, url)
+    if faq:
+        graph['@graph'].append(faq)
     related = ''.join(card(BY_SLUG[slug]) for slug in post['related'])
-    disclosure = SERIES_DISCLOSURE if is_series else GUIDE_DISCLOSURE
+    disclosure = post.get('disclosure', SERIES_DISCLOSURE if is_series else GUIDE_DISCLOSURE)
     date_text = f'게시: <time datetime="{post["date"]}">{post["date"]}</time> · 검토·수정: <time datetime="{post.get("modified", post["date"])}">{post.get("modified", post["date"])}</time>'
     topics = post_keywords(post)
     topic_labels = ''.join(f'<li>{escape(keyword)}</li>' for keyword in topics[:3])
     remaining_topics = ''.join(f'<li>{escape(keyword)}</li>' for keyword in topics[3:])
     topic_more = f'<details class="article-topic-details"><summary>주제 {len(topics) - 3}개 더 보기</summary><ul class="article-topics" aria-label="추가 핵심 주제">{remaining_topics}</ul></details>' if remaining_topics else ''
-    disclosure_short = 'Command Marketing 편집 · AI 초안 활용 · ' + ('제공된 최종 내지 PDF를 근거로 한 도서 요약' if is_series else '공개 출처 기반 실무 응용 · 도서 요약 아님')
+    disclosure_short = post.get('disclosure_short', 'Command Marketing 편집 · AI 초안 활용 · ' + ('제공된 최종 내지 PDF를 근거로 한 도서 요약' if is_series else '공개 출처 기반 실무 응용 · 도서 요약 아님'))
     insert_inline_cta(rendered, article_cta(post, 'inline'))
     html = head(post['seo_title'], post['description'], path, graph, post=post, article_ux=True) + f'''
 <body class="blog-page" data-page-type="blog_article" data-ui-variant="ux-v1" data-content-group="{'book_series' if is_series else 'practical_guide'}" data-series-order="{post.get('series_order', '')}" data-article="{post['slug']}"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}
@@ -253,7 +284,7 @@ for post in POSTS:
 <p class="article-meta"><span>검토: <time datetime="{post.get('modified', post['date'])}">{post.get('modified', post['date'])}</time></span><span>약 {reading}분 읽기</span></p></div>
 <figure class="article-head-visual">{picture(post, hero=True)}<figcaption>AI 생성 카툰 · 손글씨</figcaption></figure>
 <div class="article-head-details"><p class="article-summary">{escape(post['search_summary'])}</p><ul class="article-topics" aria-label="이 글의 핵심 주제">{topic_labels}</ul>{topic_more}
-<p class="article-disclosure-short">{disclosure_short}</p><details class="article-disclosure-details"><summary>편집·출처 고지 자세히</summary><p>{disclosure}</p><p>{date_text}</p></details></div></header>
+<p class="article-disclosure-short">{escape(disclosure_short)}</p><details class="article-disclosure-details"><summary>편집·출처 고지 자세히</summary><p>{escape(disclosure)}</p><p>{date_text}</p></details></div></header>
 {series_navigation(post)}
 <div class="article-layout"><aside class="article-toc" aria-label="글 목차"><nav class="article-toc-desktop" aria-label="이 글의 순서"><p>이 글의 순서</p><ol>{''.join(toc)}</ol></nav>
 <details class="article-toc-mobile"><summary>이 글의 순서</summary><ol>{''.join(toc)}</ol></details></aside>
@@ -273,14 +304,14 @@ graph = {'@context': 'https://schema.org', '@graph': [
     {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'url': ORIGIN + '/blog', 'name': 'Command Marketing 블로그', 'inLanguage': 'ko-KR', 'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'}}, breadcrumb_graph()]}
 index = head('AI 마케팅 책 소개와 SEO·GEO·AIEO 실무 블로그', f'AI Agent를 지휘하는 마케터 책 소개 시리즈 {len(SERIES)}편과 SEO·GEO·AIEO 실무 가이드 {len(GUIDES)}편. Agent 워크플로우 설계, 거버넌스, 업무 지시서부터 기술 SEO와 AI 검색 성과 측정까지 읽어 보세요.', '/blog', graph) + f'''
 <body class="blog-page" data-page-type="blog_index" data-content-group="blog_index"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}<main class="blog-main wrap" id="main">{breadcrumbs()}
-<header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>책에서 운영으로,<br>검색에서 답변으로.</h1><p class="section-copy">책 소개 시리즈 {len(SERIES)}편으로 AI 마케팅의 운영 구조를 읽고, 실무 가이드 {len(GUIDES)}편으로 Agent 설계·검색·콘텐츠·검수·측정의 기준을 세우세요.</p><nav class="blog-category-nav" aria-label="블로그 콘텐츠 분류"><a href="#book-series">책 소개 시리즈 {len(SERIES)}편</a><a href="#practical-guides">SEO·GEO·AIEO 가이드 {len(GUIDES)}편</a></nav><p class="blog-disclosure">도서 소개는 제공된 최종 내지 PDF의 요약이며, 실무 가이드는 공개 출처 기반 응용 콘텐츠입니다. AI 초안을 활용한 Command Marketing 편집 글로 저자의 직접 집필이 아닙니다.</p></header>
+<header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>책에서 운영으로,<br>검색에서 답변으로.</h1><p class="section-copy">책 소개 시리즈 {len(SERIES)}편으로 AI 마케팅의 운영 구조를 읽고, 실무 가이드 {len(GUIDES)}편으로 Agent 설계·검색·콘텐츠·검수·측정의 기준을 세우세요.</p><nav class="blog-category-nav" aria-label="블로그 콘텐츠 분류"><a href="#book-series">책 소개 시리즈 {len(SERIES)}편</a><a href="#practical-guides">SEO·GEO·AIEO 가이드 {len(GUIDES)}편</a></nav><p class="blog-disclosure">도서 소개는 제공된 최종 내지 PDF의 요약입니다. 실무 가이드는 공개 출처 기반 편집 콘텐츠 또는 사용자 제공 원고의 형식 변환이며, 글별 저자·편집·검토 고지를 확인하세요.</p></header>
 <section class="blog-group" id="book-series" aria-labelledby="series-title"><p class="eyebrow">Book notes / 01 — 03</p><h2 class="extra-title" id="series-title">『AI Agent를 지휘하는 마케터』<br>세 편으로 읽는 핵심 구조</h2><p class="section-copy">일을 맡기는 판단, 업무 지시서, 실행과 검수의 루프를 순서대로 소개합니다. 각 글에 도서 페이지 근거를 표시했습니다.</p><div class="blog-cards series-cards">{series_cards}</div></section>
 <section class="blog-group" id="practical-guides" aria-labelledby="guides-title"><p class="eyebrow">Practical guides / SEO · GEO · AIEO</p><h2 class="extra-title" id="guides-title">검색과 AI 답변을 위한 실무 가이드</h2><div class="blog-cards">{guide_cards}</div></section>
 <div class="article-end"><p class="eyebrow">Read the system</p><h2 class="extra-title">콘텐츠 제작을 반복 가능한 운영으로 바꾸고 싶다면.</h2><p class="section-copy">책의 업무 지시서와 검수·승인 구조를 확인하세요.</p><div class="actions"><a class="button primary" href="/#system">R-G-C-T-O-R 보기</a><a class="button secondary" href="/#diagnosis">내 상황 진단하기</a></div></div></main>{FOOTER}'''
 (DIST / 'blog/index.html').write_text(index)
 
 home_cards = ''.join(card(p) for p in ordered)
-home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book notes / SEO · GEO · AIEO</p><h2 class="section-title">책 소개와 실무 가이드,<br>{len(POSTS)}편으로 연결합니다.</h2><p class="section-copy">PDF 근거를 명시한 책 소개 시리즈 {len(SERIES)}편과 공개 출처 기반 SEO·GEO·AIEO 가이드 {len(GUIDES)}편입니다. Agent 워크플로우 설계부터 검색과 콘텐츠 운영까지, 도서 요약과 편집 응용의 범위를 구분했습니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards">{home_cards}</div></div></section>'''
+home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book notes / SEO · GEO · AIEO</p><h2 class="section-title">책 소개와 실무 가이드,<br>{len(POSTS)}편으로 연결합니다.</h2><p class="section-copy">PDF 근거를 명시한 책 소개 시리즈 {len(SERIES)}편과 공개 출처·사용자 제공 원고 기반 SEO·GEO·AIEO 실무 가이드 {len(GUIDES)}편입니다. Agent 워크플로우 설계부터 검색과 콘텐츠 운영까지, 도서 요약과 편집 응용의 범위를 구분했습니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards">{home_cards}</div></div></section>'''
 LANDING = re.sub(r'<!-- BLOG_SECTION_START -->.*?<!-- BLOG_SECTION_END -->', '<!-- BLOG_SECTION_START -->' + home_section + '<!-- BLOG_SECTION_END -->', LANDING, flags=re.S)
 (DIST / 'index.html').write_text(LANDING)
 

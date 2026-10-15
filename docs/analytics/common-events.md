@@ -1,12 +1,12 @@
 # GA4·Meta Pixel 공통 이벤트 정의서 v2.1
 
-홈·블로그 목록·글 10편·문의·공개 자료 페이지에서 동일한 이벤트명과 맞춤 매개변수를 GA4 `gtag('event')`와 Meta `fbq('trackCustom')`에 보냅니다. 원본은 `content/analytics-events.json`이고 정적 설정은 `dist/assets/analytics-config.js`입니다. `analytics.js`가 SDK 초기화와 공통 전송을, `enhancements.js`가 진단·읽기 경로 UI의 실제 실행 시점을 담당합니다. GA4 ID `G-QK0BMHHNR5`와 Meta Pixel ID `2327515324662416`은 기존 값을 유지합니다.
+홈·블로그 목록·글 11편·문의·공개 자료 페이지에서 동일한 이벤트명과 맞춤 매개변수를 GA4 `gtag('event')`와 Meta `fbq('trackCustom')`에 보냅니다. 원본은 `content/analytics-events.json`이고 정적 설정은 `dist/assets/analytics-config.js`입니다. `analytics.js`가 SDK 초기화와 공통 전송을, `enhancements.js`가 진단·읽기 경로 UI의 실제 실행 시점을 담당합니다. GA4 ID `G-QK0BMHHNR5`와 Meta Pixel ID `2327515324662416`은 기존 값을 유지합니다.
 
 맞춤 이벤트는 이름과 매개변수로 구성되며, GA4 보고서에서 사용자 정의 매개변수를 활용하려면 별도 맞춤 정의가 필요합니다.[1] GA4의 이름·매개변수 제한과 Meta 맞춤 이벤트 형식에 맞춰 소문자 snake_case와 짧은 식별값을 사용합니다.[2] [3]
 
 ## 공통으로 보내는 항목
 
-모든 맞춤 이벤트는 `event_version=2.1`, `event_id`, `page_path`, `page_type`, `content_id`, `content_group`, `funnel_stage`를 공유합니다. 글 페이지에는 `article_slug`를, 도서 시리즈에는 숫자 `series_order`도 포함합니다. `page_type`은 기존 유형과 `consulting`, `resource_index`, `resource_detail`, `privacy`를 포함합니다. `content_group`은 기존 유형과 `consulting`, `resources`를 포함합니다. `funnel_stage`는 `exploration`, `engagement`, `intent`, 실제 저장 확인의 `conversion`입니다. `ui_variant`는 새 UX의 `ux-v1` 또는 기존 `legacy-v2`입니다. 허용된 10개 글 슬러그의 `from` 유입 문맥은 `source_article_slug`로만 포함하며 쿼리 전체를 전송하지 않습니다.
+모든 맞춤 이벤트는 `event_version=2.1`, `event_id`, `page_path`, `page_type`, `content_id`, `content_group`, `funnel_stage`를 공유합니다. 글 페이지에는 `article_slug`를, 도서 시리즈에는 숫자 `series_order`도 포함합니다. `page_type`은 기존 유형과 `consulting`, `resource_index`, `resource_detail`, `privacy`를 포함합니다. `content_group`은 기존 유형과 `consulting`, `resources`를 포함합니다. `funnel_stage`는 `exploration`, `engagement`, `intent`, 실제 저장 확인의 `conversion`입니다. `ui_variant`는 새 UX의 `ux-v1` 또는 기존 `legacy-v2`입니다. 허용된 11개 글 슬러그의 `from` 유입 문맥은 `source_article_slug`로만 포함하며 쿼리 전체를 전송하지 않습니다.
 
 `event_id`는 이벤트 발생마다 새로 만든 일회성 식별자이며 사용자 ID가 아닙니다. 같은 발생 건의 GA4·Meta 맞춤 payload에 같은 값이 들어가고, Meta에는 네 번째 인자의 `eventID`로도 전달합니다. 이는 향후 CAPI와 연결할 때 사용할 수 있는 식별 규칙이지 현재 CAPI 연동이나 GA4 일반 맞춤 이벤트 자동 중복 제거를 뜻하지 않습니다.[4] 사이트 내부 중복은 단일 리스너·한 번 발화 조건으로 방지합니다.
 

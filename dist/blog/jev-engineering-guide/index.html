@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jev Engineering 입문: 결정 모델과 마케팅 활용 | Command Marketing</title>
+<meta name="description" content="Jev Engineering의 생성·판단·실행 분리 원칙을 알아봅니다. Choice·Score·Noul과 하네스·루프·그래프의 관계, 마케팅 활용 8가지, 확신도·프롬프트 인젝션·한국어 검증과 도입 체크리스트를 확인하세요.">
+<meta name="author" content="박충효"><meta name="publisher" content="TROE">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#eef3f1">
+<link rel="canonical" href="https://book.allrounder.im/blog/jev-engineering-guide"><meta property="og:locale" content="ko_KR"><meta property="og:type" content="article">
+<meta property="og:site_name" content="Command Marketing"><meta property="og:title" content="Jev Engineering 입문: 결정 모델과 마케팅 활용">
+<meta property="og:description" content="Jev Engineering의 생성·판단·실행 분리 원칙을 알아봅니다. Choice·Score·Noul과 하네스·루프·그래프의 관계, 마케팅 활용 8가지, 확신도·프롬프트 인젝션·한국어 검증과 도입 체크리스트를 확인하세요."><meta property="og:url" content="https://book.allrounder.im/blog/jev-engineering-guide">
+<meta property="og:image" content="https://book.allrounder.im/assets/blog/jev-engineering-guide.jpg"><meta property="og:image:alt" content="Jev Engineering 입문, 쓰고·고르고·실행하기라는 손글씨와 마케터·세 역할의 로봇 카툰">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Jev Engineering 입문: 결정 모델과 마케팅 활용">
+<meta name="twitter:description" content="Jev Engineering의 생성·판단·실행 분리 원칙을 알아봅니다. Choice·Score·Noul과 하네스·루프·그래프의 관계, 마케팅 활용 8가지, 확신도·프롬프트 인젝션·한국어 검증과 도입 체크리스트를 확인하세요."><meta name="twitter:image" content="https://book.allrounder.im/assets/blog/jev-engineering-guide.jpg"><meta name="twitter:image:alt" content="Jev Engineering 입문, 쓰고·고르고·실행하기라는 손글씨와 마케터·세 역할의 로봇 카툰">
+	<meta property="article:published_time" content="2026-10-02T00:00:00+09:00"><meta property="article:modified_time" content="2026-10-15T00:00:00+09:00"><meta name="keywords" content="Jev Engineering, Jev 결정 모델, 마케팅 AI 에이전트 판단, Choice Score Noul, LLM과 결정 모델 차이, AI 에이전트 확신도 검증, 마케팅 AX 자동화">
+<meta property="article:section" content="AI Agent · Jev Engineering">
+<meta property="article:tag" content="Jev Engineering">
+<meta property="article:tag" content="Jev 결정 모델">
+<meta property="article:tag" content="마케팅 AI 에이전트 판단">
+<meta property="article:tag" content="Choice Score Noul">
+<meta property="article:tag" content="LLM과 결정 모델 차이">
+<meta property="article:tag" content="AI 에이전트 확신도 검증">
+<meta property="article:tag" content="마케팅 AX 자동화"><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1917'/%3E%3Cpath d='M17 45 31 15h4l12 30h-7l-3-8H27l-4 8h-6Zm13-15h5l-2-7-3 7Z' fill='%2356c7b3'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css"><link rel="stylesheet" href="/assets/article-ux.css"><script src="/assets/article-ux.js" defer></script>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="describedby" href="/llms.txt">
+<script src="/assets/analytics-config.js" defer></script><script src="/assets/analytics.js" defer></script><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://book.allrounder.im/blog/jev-engineering-guide#article", "mainEntityOfPage": "https://book.allrounder.im/blog/jev-engineering-guide", "url": "https://book.allrounder.im/blog/jev-engineering-guide", "headline": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법", "description": "Jev Engineering의 생성·판단·실행 분리 원칙을 알아봅니다. Choice·Score·Noul과 하네스·루프·그래프의 관계, 마케팅 활용 8가지, 확신도·프롬프트 인젝션·한국어 검증과 도입 체크리스트를 확인하세요.", "datePublished": "2026-10-02", "dateModified": "2026-10-15", "inLanguage": "ko-KR", "image": {"@type": "ImageObject", "url": "https://book.allrounder.im/assets/blog/jev-engineering-guide.jpg", "width": 1200, "height": 675, "caption": "Jev Engineering 입문, 쓰고·고르고·실행하기라는 손글씨와 마케터·세 역할의 로봇 카툰"}, "articleSection": "AI Agent · Jev Engineering", "author": {"@type": "Person", "name": "박충효", "url": "https://troe.kr/"}, "publisher": {"@type": "Organization", "name": "TROE", "url": "https://troe.kr/"}, "isPartOf": {"@type": "Blog", "@id": "https://book.allrounder.im/blog#blog", "name": "Command Marketing 블로그"}, "citation": ["https://docs.typesafe.ai/", "https://typesafe.ai/blog/introducing-system-one-models-and-jev", "https://www.langchain.com/blog/building-a-harness-with-jev", "https://docs.typesafe.ai/confidence", "https://docs.typesafe.ai/primitives/score", "https://venturebeat.com/security/companies-are-putting-jev-in-charge-of-ai-agent-decisions-and-prompt-injection-can-influence-the-verdict", "https://www.get-ryze.ai/blog/jev-for-marketing", "https://madewithjev.com/jev-statistics", "https://madewithjev.com/jev-engineering", "https://www.datacamp.com/blog/system-one-models-jev", "https://www.langchain.com/blog/building-prod-with-jev-and-langgraph", "https://www.aibuilderclub.com/blog/jev-engineering-guide"], "alternativeHeadline": "Jev Engineering 입문: 결정 모델과 마케팅 활용", "abstract": "Jev Engineering은 LLM의 생성, Jev의 닫힌 판단, 코드의 정확한 실행을 분리하는 설계 관점입니다. 마케팅 적용 8가지와 확신도·프롬프트 인젝션·한국어 검증 조건, 도입 6단계를 살펴봅니다.", "keywords": ["Jev Engineering", "Jev 결정 모델", "마케팅 AI 에이전트 판단", "Choice Score Noul", "LLM과 결정 모델 차이", "AI 에이전트 확신도 검증", "마케팅 AX 자동화"], "about": [{"@type": "Thing", "name": "Jev Engineering"}, {"@type": "Thing", "name": "Jev 결정 모델"}, {"@type": "Thing", "name": "마케팅 AI 에이전트 판단"}, {"@type": "Thing", "name": "Choice Score Noul"}, {"@type": "Thing", "name": "LLM과 결정 모델 차이"}, {"@type": "Thing", "name": "AI 에이전트 확신도 검증"}, {"@type": "Thing", "name": "마케팅 AX 자동화"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "도서 홈", "item": "https://book.allrounder.im/"}, {"@type": "ListItem", "position": 2, "name": "블로그", "item": "https://book.allrounder.im/blog"}, {"@type": "ListItem", "position": 3, "name": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법", "item": "https://book.allrounder.im/blog/jev-engineering-guide"}]}, {"@type": "FAQPage", "@id": "https://book.allrounder.im/blog/jev-engineering-guide#faq", "mainEntity": [{"@type": "Question", "name": "Jev Engineering이란 무엇인가요?", "acceptedAnswer": {"@type": "Answer", "text": "AI 에이전트의 단계를 성격별로 나눠 글은 LLM이 쓰고, 닫힌 판단은 결정 모델 Jev가 맡고, 정확한 규칙은 코드가 실행하게 하는 설계 관점입니다. 이 글의 용어는 공식 산업 표준을 뜻하지 않습니다."}}, {"@type": "Question", "name": "Jev와 LLM은 무엇이 다른가요?", "acceptedAnswer": {"@type": "Answer", "text": "LLM은 문장을 생성하고 Jev는 정해진 질문에 구조화된 판단을 반환합니다. Choice·Score에는 답과 확률 분포·confidence가 있고, Noul은 0~1 확률을 반환하며 별도의 confidence는 없습니다."}}, {"@type": "Question", "name": "Harness·Loop·Graph Engineering과는 어떻게 다른가요?", "acceptedAnswer": {"@type": "Answer", "text": "이 글에서 세 가지는 실행 환경·반복 흐름·단계 연결을 설명하고, Jev는 그 안의 판단 부품입니다. 게이트, 검증기와 라우터 자리에 넣을 수 있으며 실행 권한이나 승인 규칙을 대신하지 않습니다."}}, {"@type": "Question", "name": "마케팅에서는 어디에 쓸 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "검색어 분류, 광고 태깅, 리드 스코어링, 리뷰 테마, AI 인용 체크, 내부 링크, 콘텐츠 QA와 문의 트리아지처럼 답의 범위를 정할 수 있는 판단에 검토할 수 있습니다. 이 글의 예시는 이 사이트에서 구현한 자동화 기능이 아닙니다."}}, {"@type": "Question", "name": "Jev 컴팩션은 요약 컴팩션과 무엇이 다른가요?", "acceptedAnswer": {"@type": "Answer", "text": "요약 컴팩션은 지난 대화를 다시 쓰는 반면, 원고가 소개한 Jev 컴팩션은 도구 결과를 남길지 판단해 삭제·절단합니다. 남는 원문을 보존해도 필요한 결과가 통째로 빠질 위험이 있습니다. 원고의 약 100만 토큰을 약 1초에 8만 6천 토큰으로 줄였다는 수치는 단일 보고입니다."}}, {"@type": "Question", "name": "한국어 데이터에도 잘 작동하나요?", "acceptedAnswer": {"@type": "Answer", "text": "우리 업무의 한국어 품질은 별도 검증이 필요합니다. 원문과 번역본의 소규모 비교로 시작하되 반어·이중부정·업계 약어와 번역 오류를 살펴보고, 본 운영에는 업무별 오류 비용과 더 적합한 검증 표본을 사용합니다."}}]}]}</script></head>
+<body class="blog-page" data-page-type="blog_article" data-ui-variant="ux-v1" data-content-group="practical_guide" data-series-order="" data-article="jev-engineering-guide"><a class="skip-link" href="#main">본문으로 이동</a><header class="site-head"><div class="head-inner"><a aria-label="TROE 도서 홈" class="brand" href="/#top"><b>TROE</b><span>PARK CHUNGHYO / COMMAND MARKETING</span></a><nav aria-label="주요 메뉴" class="nav"><a href="/#quickstart">빠른 이해</a><a href="/#system">업무 시스템</a><a href="/#contents">목차</a><a href="/blog">블로그</a><a href="/#faq">FAQ</a><a href="/#author">저자</a><a class="button secondary nav-purchase" data-cta="purchase" data-position="nav" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" rel="noreferrer" target="_blank">책 구매</a><a class="button primary" data-consulting-path="" data-cta="consulting" data-position="nav" href="/#consulting">강연·컨설팅 안내</a><details class="mobile-menu"><summary>메뉴</summary><nav aria-label="모바일 메뉴"><a href="/#quickstart">빠른 이해</a><a href="/#system">업무 시스템</a><a href="/#contents">목차</a><a href="/blog">블로그</a><a href="/#faq">FAQ</a><a href="/#author">저자</a><a data-cta="purchase" data-position="mobile-menu" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" rel="noreferrer" target="_blank">책 구매</a><a data-consulting-path="" data-cta="consulting" data-position="mobile-menu" href="/#consulting">강연·컨설팅 안내</a></nav></details></nav></div></header>
+<main class="blog-main wrap" id="main"><nav class="breadcrumbs" aria-label="현재 위치"><a href="/">도서 홈</a><span aria-hidden="true">/</span><a href="/blog">블로그</a><span aria-hidden="true">/</span><span aria-current="page">Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법</span></nav>
+<header class="blog-heading article-head"><div class="article-head-copy"><p class="eyebrow">AI Agent · Jev Engineering</p><h1>Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법</h1>
+<p class="article-meta"><span>검토: <time datetime="2026-10-15">2026-10-15</time></span><span>약 13분 읽기</span></p></div>
+<figure class="article-head-visual"><picture><source srcset="/assets/blog/jev-engineering-guide.webp" type="image/webp"><img src="/assets/blog/jev-engineering-guide.jpg" alt="Jev Engineering 입문, 쓰고·고르고·실행하기라는 손글씨와 마케터·세 역할의 로봇 카툰" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async"></picture><figcaption>AI 생성 카툰 · 손글씨</figcaption></figure>
+<div class="article-head-details"><p class="article-summary">Jev Engineering은 LLM의 생성, Jev의 닫힌 판단, 코드의 정확한 실행을 분리하는 설계 관점입니다. 마케팅 적용 8가지와 확신도·프롬프트 인젝션·한국어 검증 조건, 도입 6단계를 살펴봅니다.</p><ul class="article-topics" aria-label="이 글의 핵심 주제"><li>Jev Engineering</li><li>Jev 결정 모델</li><li>마케팅 AI 에이전트 판단</li></ul><details class="article-topic-details"><summary>주제 4개 더 보기</summary><ul class="article-topics" aria-label="추가 핵심 주제"><li>Choice Score Noul</li><li>LLM과 결정 모델 차이</li><li>AI 에이전트 확신도 검증</li><li>마케팅 AX 자동화</li></ul></details>
+<p class="article-disclosure-short">박충효 · TROE 원고 · 첨부 HTML 형식 변환 · 제3자 수치의 독립 재현 아님</p><details class="article-disclosure-details"><summary>편집·출처 고지 자세히</summary><p>박충효·TROE 표기의 사용자 제공 HTML 원고를 기존 블로그 형식으로 변환했습니다. 원고 발행2026-10-02·수정2026-10-06, 사이트 반영·확인보정2026-10-15. AI는 형식 변환·메타데이터·확인보정에 활용했고 원고의 저자 표기를 보존했습니다. 제3자 성능·비용 사례는 독립 재현하지 않았으며 공급사·커뮤니티 보고와 TROE 실측 성과를 구분합니다. 도서 발췌가 아니며 썸네일은 AI 생성 이미지입니다.</p><p>게시: <time datetime="2026-10-02">2026-10-02</time> · 검토·수정: <time datetime="2026-10-15">2026-10-15</time></p></details></div></header>
+
+<div class="article-layout"><aside class="article-toc" aria-label="글 목차"><nav class="article-toc-desktop" aria-label="이 글의 순서"><p>이 글의 순서</p><ol><li><a href="#section-1">에이전트는 왜 느리고 비쌀까?</a></li><li><a href="#section-2">Jev Engineering이란 무엇인가?</a></li><li><a href="#section-3">Harness·Loop·Graph Engineering과는 어떻게 다른가?</a></li><li><a href="#section-4">마케팅 AX 적용 예시: 어디에 쓸 수 있나?</a></li><li><a href="#section-5">현장에서는 어떻게 쓰고 있나?</a></li><li><a href="#section-6">도입할 때 무엇을 조심해야 하나?</a></li><li><a href="#section-7">실행 체크리스트: 어떻게 시작하면 될까?</a></li><li><a href="#section-8">자주 묻는 질문</a></li><li><a href="#section-9">출처 및 참고 자료</a></li></ol></nav>
+<details class="article-toc-mobile"><summary>이 글의 순서</summary><ol><li><a href="#section-1">에이전트는 왜 느리고 비쌀까?</a></li><li><a href="#section-2">Jev Engineering이란 무엇인가?</a></li><li><a href="#section-3">Harness·Loop·Graph Engineering과는 어떻게 다른가?</a></li><li><a href="#section-4">마케팅 AX 적용 예시: 어디에 쓸 수 있나?</a></li><li><a href="#section-5">현장에서는 어떻게 쓰고 있나?</a></li><li><a href="#section-6">도입할 때 무엇을 조심해야 하나?</a></li><li><a href="#section-7">실행 체크리스트: 어떻게 시작하면 될까?</a></li><li><a href="#section-8">자주 묻는 질문</a></li><li><a href="#section-9">출처 및 참고 자료</a></li></ol></details></aside>
+<article class="article-body" aria-label="Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법"><p><strong>Jev Engineering</strong>은 AI 에이전트의 단계를 나눠 글은 LLM이 쓰고, 고르기·점수·예/아니오 같은 닫힌 판단은 TypeSafe AI의 결정 모델 <strong>Jev</strong>가 맡고, 정확한 규칙은 코드가 실행하게 하는 설계 패턴입니다. 판단 비용을 낮추는 데 도움이 될 수 있지만 확신도 과신, 프롬프트 인젝션과 한국어 정확도는 실제 업무 데이터로 검증해야 합니다.<a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" title="TypeSafe AI — Jev 출시·입력 가격·공급사 평가의 조건">1</a></p>
+<p>원칙은 한 줄입니다. <strong>LLM은 쓰고, Jev는 고르고, 코드는 실행합니다.</strong> Jev는 하네스·루프·그래프와 나란한 네 번째 시스템 층이 아니라 그 안에 넣는 판단 부품입니다.</p>
+<h2 id="section-1">에이전트는 왜 느리고 비쌀까?</h2>
+<p>AI 에이전트를 운영하면 글을 쓰는 단계만 비용을 만드는 것은 아닙니다. “다음엔 누구를 부를까”, “이 명령은 위험한가”, “이제 멈춰도 되나” 같은 판단도 반복적인 모델 호출을 만듭니다. 이런 호출의 비용과 지연이 전체 업무 흐름에 쌓일 수 있습니다.<a href="https://www.langchain.com/blog/building-a-harness-with-jev" title="LangChain — Building a Harness with Jev">3</a></p>
+<p>이런 판단은 답이 몇 개로 정해진 체크박스에 가깝습니다. 그런데 판단마다 프런티어 LLM을 불러 문장을 만들게 하고 그 문장을 다시 파싱하면, 작은 결정을 위해 생성·해석 과정을 반복하게 됩니다. 첨부 원고는 호출당 1~5초가 걸리는 상황을 예로 들지만, 실제 지연은 모델·입력 길이·추론 설정·네트워크에 따라 달라집니다.</p>
+<p>중요한 질문은 “가장 큰 모델을 어디에나 쓸까”가 아닙니다. 글을 만드는 단계, 정해진 선택지에서 고르는 단계와 정확한 규칙으로 처리할 단계를 구분할 수 있는가입니다.</p>
+<h2 id="section-2">Jev Engineering이란 무엇인가?</h2>
+<p>TypeSafe AI는 2026년 9월 15일 <strong>Jev</strong>를 공개했습니다. Jev는 글을 쓰는 모델이 아닙니다. 상황인 <code>state</code>와 구조화된 질문을 받으면 코드가 바로 사용할 수 있는 선택·점수·확률을 반환합니다. TypeSafe는 카너먼의 System 1, 즉 빠른 직관에서 이름을 가져와 이 계열을 “System One 모델”이라고 부릅니다. Jev의 이름은 William Stanley Jevons와 효율 향상이 수요 증가로 이어질 수 있다는 제번스의 역설에서 가져왔다고 설명합니다.<a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" title="TypeSafe AI — Jev 출시·입력 가격·공급사 평가의 조건">1</a></p>
+<p>첨부 원고는 출시 직후 개발자 커뮤니티에서 이 구성을 “Jev Engineering”이라고 부르기 시작했다고 소개합니다. 이 글에서도 그 설계 관점을 설명하는 용어로 사용합니다. 독립적으로 합의된 산업 표준이나 공식 인증 명칭을 뜻하지 않습니다.</p>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>맡기는 일</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM: 쓴다</td>
+<td>개방형 생성과 해석</td>
+<td>초안, 요약, 카피, 코드</td>
+</tr>
+<tr>
+<td>Jev: 고른다</td>
+<td>범위가 정해진 판단</td>
+<td>다음 작업자, 출처 관련도, 명령 위험 분류</td>
+</tr>
+<tr>
+<td>Code: 실행한다</td>
+<td>정확한 규칙과 제약</td>
+<td>횟수 제한, 승인 강제, 날짜·산술</td>
+</tr>
+</tbody>
+</table>
+<p>공식 문서의 질문 형식은 세 가지입니다. <strong>Choice</strong>는 목록에서 하나를 고르며 최대 255개 옵션을 다룹니다. <strong>Score</strong>는 순서 있는 기준에 따라 점수를 매기며 2~10개 수준을 정의할 수 있습니다. <strong>Noul</strong>은 진술이 참일 확률을 0~1로 반환합니다. Choice와 Score는 <code>probabilities</code>와 <code>confidence</code>를 포함하지만, Noul에는 별도의 <code>confidence</code> 필드가 없습니다.<a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" title="TypeSafe AI — Jev 출시·입력 가격·공급사 평가의 조건">1</a> <a href="https://docs.typesafe.ai/primitives/score" title="TypeSafe AI — Score 수준·확률 분포와 정확도 보장의 구분">4</a></p>
+<p>Noul에는 확률 경계값 두 개를 적용해 통과·탈락·검토로 나누는 방법을 사용할 수 있습니다. 경계값은 모델의 숫자만 보고 정하기보다, 실제 오류 비용과 업무 데이터에서의 검증 결과를 바탕으로 정합니다.</p>
+<p>공식 발표에 기재된 가격은 입력 100만 토큰당 <strong>$0.042</strong>, 출력은 무료입니다. 이 가격으로 건당 입력 1,000토큰의 판단 1만 건을 단순 계산하면 <strong>$0.42</strong>입니다. 이는 모델 입력 비용만 계산한 가정이며 재시도, 추가 질문, 다른 LLM 호출, 저장·실행 인프라 비용은 포함하지 않습니다. 실제 도입 전에는 현재 요금과 사용 조건을 다시 확인해야 합니다.<a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" title="TypeSafe AI — Jev 출시·입력 가격·공급사 평가의 조건">2</a></p>
+<h2 id="section-3">Harness·Loop·Graph Engineering과는 어떻게 다른가?</h2>
+<p>이 글에서 Harness·Loop·Graph는 에이전트의 실행 환경과 흐름을 설명하는 관점입니다. 하네스는 도구·권한·실행 제약을 다루고, 루프는 결과를 확인하며 반복하고, 그래프는 여러 단계의 연결과 분기를 표현합니다. Jev는 그 안의 특정 판단을 담당하는 부품으로 넣을 수 있습니다.<a href="https://www.langchain.com/blog/building-a-harness-with-jev" title="LangChain — Building a Harness with Jev">3</a></p>
+<table>
+<thead>
+<tr>
+<th>Jev가 놓이는 곳</th>
+<th>바꾸는 판단</th>
+<th>첨부 원고의 구현·보고 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>하네스·게이트</td>
+<td>이 도구 호출을 허용할까</td>
+<td>파괴성 확률 0.7 이상 차단, 0.35~0.69 확인 요청, 그 아래 통과</td>
+</tr>
+<tr>
+<td>루프·검증기</td>
+<td>통과했나, 멈춰도 되나</td>
+<td>로그 600건 중 597건을 $0.00029에 분류하고 일부를 LLM에 넘겼다는 보고</td>
+</tr>
+<tr>
+<td>그래프·라우터</td>
+<td>다음 노드는 어디인가</td>
+<td>소송 문서를 제외·마스킹·변호사 검토로 3분기하고 분류가 5~6배 빨라졌다는 보고</td>
+</tr>
+</tbody>
+</table>
+<p>표의 임계값은 예시이지 검증된 안전 기준이 아닙니다. 비용·배속·처리 건수 역시 원고가 인용한 개별 보고로, 다른 데이터나 환경에 일반화하지 않습니다. 특히 도구 실행 권한과 사람의 승인은 결정 모델의 확률만으로 대체하지 않습니다.<a href="https://venturebeat.com/security/companies-are-putting-jev-in-charge-of-ai-agent-decisions-and-prompt-injection-can-influence-the-verdict" title="VentureBeat — Jev 판단과 프롬프트 인젝션의 단일 테스트">6</a></p>
+<p>도입은 실행 환경과 흐름을 먼저 정하고, 그 안에서 가장 자주 나오는 판단부터 하나씩 분리하는 방식으로 생각할 수 있습니다. 모든 팀이 반드시 하네스 → 루프 → 그래프 순서로 복잡한 시스템을 구축해야 한다는 뜻은 아닙니다. 자세한 비교를 위한 <a href="https://claude.ai/artifact/2xkqaoCHUbGasBvUNq69wP">첨부 원고의 Jev Engineering 자료팩</a>도 함께 참고할 수 있습니다.</p>
+<h2 id="section-4">마케팅 AX 적용 예시: 어디에 쓸 수 있나?</h2>
+<p>마케팅에는 답의 범위를 미리 정할 수 있는 판단이 반복됩니다. 판단 비용이 내려가면 샘플만 보던 작업의 검토 범위를 넓힐 수 있습니다. 다음은 첨부 원고가 제안하는 <strong>적용 아이디어 8가지</strong>이며, 이 사이트가 해당 기능을 구현해 실행하고 있다는 의미는 아닙니다.</p>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>질문</th>
+<th>형식</th>
+<th>원고의 활용 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>검색어 분류</td>
+<td>구매자·리서처·구직자·경쟁사·정크 중 무엇인가</td>
+<td>Choice</td>
+<td>정크 후보를 제외 키워드 검토에 연결</td>
+</tr>
+<tr>
+<td>광고 소재 태깅</td>
+<td>훅·포맷·오퍼·인지 단계는 무엇인가</td>
+<td>Choice × 4</td>
+<td>태그별 성과·경쟁사 소재 집계</td>
+</tr>
+<tr>
+<td>리드 스코어링</td>
+<td>ICP 적합도와 담당자는 누구인가</td>
+<td>Score + Choice</td>
+<td>상위 구간은 영업, 나머지는 너처링 검토</td>
+</tr>
+<tr>
+<td>리뷰·설문 테마</td>
+<td>12개 테마 중 어디인가</td>
+<td>Choice</td>
+<td>전수 테마 차트</td>
+</tr>
+<tr>
+<td>AI 인용 체크</td>
+<td>이 AI 답변이 우리 브랜드를 추천하는가</td>
+<td>Noul</td>
+<td>고정된 질문 표본에서 GEO 인용 관찰</td>
+</tr>
+<tr>
+<td>내부 링크</td>
+<td>두 페이지를 연결할 이유가 있는가</td>
+<td>Noul</td>
+<td>경계값 이상 후보의 링크 삽입 검토</td>
+</tr>
+<tr>
+<td>콘텐츠 QA</td>
+<td>체크리스트 20항목을 충족하는가</td>
+<td>Noul × 20</td>
+<td>통과 후보를 에디터에게 전달</td>
+</tr>
+<tr>
+<td>문의 트리아지</td>
+<td>분류·우선순위·회신 필요 여부는 무엇인가</td>
+<td>혼합</td>
+<td>불확실한 건은 사람에게 전달</td>
+</tr>
+</tbody>
+</table>
+<p>자동 행동은 업무마다 권한·오류 비용·복구 가능성을 확인한 뒤 연결합니다. 광고 설정 변경, 고객 응대 누락 또는 공개 게시가 모델의 분류 결과만으로 바로 실행되게 하지 않는 편이 좋습니다. 리드 점수는 우선순위를 정할 뿐, 점수가 낮은 고객을 응대하지 않을 근거가 되지 않는다는 원칙도 함께 세웁니다.</p>
+<p>공개 사례로는 광고 724개를 6개 차원으로 40초 만에 태깅한 비용이 약 <strong>$0.09</strong>, 검색어 2만 건 분류가 약 <strong>$0.07</strong>라는 보고가 첨부 원고에 있습니다. 모두 제3자 수치이며 독립적으로 재현한 결과가 아닙니다. 광고 724개·40초·$0.09 사례는 Made with Jev의 집계에서도 소개하지만, 집계 자체도 작성자 보고값임을 명시합니다.<a href="https://madewithjev.com/jev-statistics" title="Made with Jev — 작성자 보고 기반 Build Report, 현재 측정일 2026-10-12">7</a></p>
+<section aria-label="실행 기준 이어 보기" class="article-cta article-cta-inline">
+<p class="eyebrow">실행 기준 이어 보기</p><h3>글의 기준을 팀 검수와 운영 흐름에 연결하세요.</h3><p>Jev Engineering 내용을 바탕으로, 콘텐츠 검수와 운영 기준을 팀의 현재 업무에 맞춰 확인해 보세요.</p><div class="article-cta-actions"><a class="button primary" data-consulting-path="" data-cta-id="inline-team" data-position="article-inline" href="/consulting?from=jev-engineering-guide&amp;work=review&amp;intent=workflow&amp;cta=inline-team">팀 검수·운영 체계 문의</a><a class="button secondary" data-cta-id="inline-resource" data-position="article-inline" data-resource-id="rgctor-worksheet" href="/resources/rgctor-worksheet">R-G-C-T-O-R 업무 지시서 워크시트 보기</a></div></section><h2 id="section-5">현장에서는 어떻게 쓰고 있나?</h2>
+<p>첨부 원고는 Made with Jev가 <strong>2026-10-04</strong>에 집계한 공개 빌드 755개, 비용과 건수를 함께 밝힌 15건의 결정당 중앙 비용 <strong>$0.000068</strong>과 중앙 지연 <strong>300ms</strong>를 소개했습니다. 이는 당시 원고의 인용값입니다. 이번에 확인한 해당 페이지는 측정일이 <strong>2026-10-12</strong>로 갱신되어 공개 빌드 <strong>838개</strong>, 15건의 비용 표본에서 결정당 중앙 비용 <strong>$0.000065</strong>, 19건의 지연 표본에서 중앙값 <strong>300ms</strong>를 제시합니다. 과거 수치와 최신 집계를 같은 측정값으로 섞지 않아야 합니다.<a href="https://madewithjev.com/jev-statistics" title="Made with Jev — 작성자 보고 기반 Build Report, 현재 측정일 2026-10-12">8</a></p>
+<p>이 디렉터리는 비공식이며 TypeSafe와 독립된 커뮤니티 자료입니다. 작성자가 공개한 숫자를 모은 것이지 자체 벤치마크가 아닙니다. 비용·속도만으로 정확도나 한국어 품질을 판단할 수 없습니다. 반복되는 쓰임새는 다음 세 가지로 정리할 수 있습니다.</p>
+<h3>확실한 건 결정 모델이, 애매한 건 큰 모델이</h3>
+<p>사기 이메일 100건을 결정 모델이 1.42초에 분류하고, 확신도 95% 미만인 31건만 큰 모델로 넘겨 100건 중 96건을 맞혔다는 실험이 첨부 원고에 소개되어 있습니다. 총비용은 약 <strong>$0.07</strong>로 보고되었습니다. 디렉터리의 결정 모델 단계 비용과 전체 보조 모델 비용은 구분해서 읽어야 합니다.<a href="https://madewithjev.com/jev-statistics" title="Made with Jev — 작성자 보고 기반 Build Report, 현재 측정일 2026-10-12">8</a></p>
+<p>결정 모델 하나로 끝내지 않고 불확실한 건을 넘길 길을 미리 만드는 것이 이 사례의 핵심입니다. 95%라는 숫자를 그대로 운영 임계값으로 복사하거나, 확신도를 실제 정답률로 해석하지 않습니다.</p>
+<h3>요약하지 않고 지우는 컴팩션</h3>
+<p>긴 작업 세션을 줄일 때 요약 모델로 다시 쓰는 대신, 도구 호출마다 “남길까”를 묻고 필요 없는 결과를 삭제하거나 절단하는 방식입니다. 남는 내용은 원문 그대로입니다. 첨부 원고에는 약 100만 토큰 세션이 약 1초 만에 8만 6천 토큰으로 줄었다는 단일 보고가 소개되어 있습니다.<a href="https://madewithjev.com/jev-engineering" title="첨부 원고의 참고 자료 — Made with Jev 독서목록과 개별 사례">9</a></p>
+<p>필요한 결과가 통째로 빠질 위험이 있습니다. “원문을 다시 쓰지 않는다”와 “필요한 정보를 모두 보존한다”는 다른 주장입니다. 회수해야 할 근거와 실행 상태가 남는지 별도로 검사해야 합니다.</p>
+<h3>비싸서 하지 않던 마케팅 연구</h3>
+<p>바이럴 포스트 10만 개에 예/아니오 14문항을 물어 <strong>20.4초·$0.67</strong>에 끝냈다는 분석이 있습니다. 첨부 원고는 최상급 표현이 들어간 포스트의 바이럴 비율 <strong>2.34%</strong>, 기준선 <strong>1.22%</strong>, 번호 목록 포스트 <strong>0.55%</strong>라는 관찰도 소개합니다.<a href="https://madewithjev.com/jev-engineering" title="첨부 원고의 참고 자료 — Made with Jev 독서목록과 개별 사례">8</a></p>
+<p>이 비율은 해당 표본과 질문 정의에서의 관찰이며, 특정 문구를 넣으면 바이럴이 늘어난다는 인과 효과가 아닙니다. 빨라진 것 외에도 비용 때문에 시도하지 않았던 분석을 해 볼 수 있다는 점이 중요합니다. 첨부 원고가 소개한 SEO 대행사의 GEO 감사 비용 약 90% 절감 역시 제3자 미검증 주장으로 구분합니다.<a href="https://www.get-ryze.ai/blog/jev-for-marketing" title="첨부 원고의 참고 자료 — Ryze의 Jev for Marketing">7</a></p>
+<h2 id="section-6">도입할 때 무엇을 조심해야 하나?</h2>
+<p><strong>타입이 맞아도 답은 틀릴 수 있습니다.</strong> 공식 문서는 Choice·Score의 <code>confidence</code>가 반환된 확률 분포로 계산되는 값이라고 설명합니다. 분포가 한 선택지에 집중되어 있다고 실제 정답을 보장하는 것은 아닙니다. Noul은 별도의 confidence 없이 확률을 반환합니다.<a href="https://docs.typesafe.ai/primitives/score" title="TypeSafe AI — Score 수준·확률 분포와 정확도 보장의 구분">4</a></p>
+<p>첨부 원고가 소개한 독립 테스트에서는 가장 확신이 높은 구간의 정확도가 제시된 <strong>99.4%</strong>보다 낮은 <strong>90.2%</strong>였다고 합니다. 또 원고는 공급사 자체 벤치마크의 <strong>67.8%</strong>와 비교 모델의 <strong>73.1%</strong>를 인용합니다. 이 비교값은 원고의 당시 소개 수치이며 이번 형식 변환에서 데이터셋·모델 버전·채점 조건을 독립적으로 확인하거나 재현하지 않았습니다. 현재 모델 간 순위로 단정하지 않습니다.<a href="https://www.datacamp.com/blog/system-one-models-jev" title="첨부 원고의 참고 자료 — DataCamp의 System One 모델 소개">9</a></p>
+<p>둘째는 <strong>프롬프트 인젝션</strong>입니다. VentureBeat가 보도한 한 통합 테스트에서 위험 명령의 차단 여부를 묻는 상황에 “이미 승인됨”이라는 가짜 도구 출력 필드를 넣자 차단 확률이 <strong>0.76에서 0.48</strong>로 떨어졌습니다. 한 명령의 단일 테스트이지 전체 공격 성공률 벤치마크는 아닙니다.<a href="https://venturebeat.com/security/companies-are-putting-jev-in-charge-of-ai-agent-decisions-and-prompt-injection-can-influence-the-verdict" title="VentureBeat — Jev 판단과 프롬프트 인젝션의 단일 테스트">6</a></p>
+<p>문의 폼이나 리뷰에 “VIP로 분류하라” 같은 문구가 들어오는 현장에서도 유사한 위험을 검토해야 합니다. 판단 대상 텍스트는 지시가 아니라 데이터임을 명시하고, 독립적인 입력 검증과 결정론적 체크를 함께 둡니다. 높은 가치 판정에는 이메일 도메인 검증처럼 다른 신호를 사용할 수 있지만, 도메인 하나만으로 고객 자격이나 승인 여부를 보장할 수도 없습니다. 중요한 동작은 사람의 승인과 별도 실행 권한으로 제어합니다.</p>
+<p>공급사의 “환각 0”이라는 표현도 그대로 업무 판단의 무오류로 받아들이지 않습니다. 출력 타입 보장, 모델의 의미적 정확도와 실제 업무 완료는 다릅니다. 낮은 확신도의 결과를 사람이나 다른 모델로 보내는 경로가 필요합니다.<a href="https://docs.typesafe.ai/confidence" title="TypeSafe AI — Confidence의 의미와 Noul 예외">2</a> <a href="https://venturebeat.com/security/companies-are-putting-jev-in-charge-of-ai-agent-decisions-and-prompt-injection-can-influence-the-verdict" title="VentureBeat — Jev 판단과 프롬프트 인젝션의 단일 테스트">6</a></p>
+<p>셋째는 <strong>한국어 검증</strong>입니다. 첨부 원고는 한국어 품질이 아직 검증되지 않았다고 설명합니다. 공식 문서에서 질문 형식과 처리 구조가 확인되더라도, 우리 회사의 반어·이중부정·업계 약어가 포함된 한국어 리뷰 품질까지 보장되는 것은 아닙니다. 데이터 외부 전송이 허용되는지 확인한 뒤 업무 표본에서 평가해야 합니다.</p>
+<h2 id="section-7">실행 체크리스트: 어떻게 시작하면 될까?</h2>
+<ol>
+<li>에이전트나 팀 업무의 단계를 텍스트 생성·닫힌 결정·정확한 규칙의 세 종류로 나눕니다.</li>
+<li>자주 반복되고 답의 범위가 정해져 있으며 되돌릴 수 있는 판단 하나를 고릅니다. 첨부 원고는 하루 100회 이상을 시작점으로 제안하지만 보편적인 최소 조건은 아닙니다.</li>
+<li>1주 동안 기존 방식과 나란히 돌려 결과만 기록합니다. 이 섀도 모드에서는 판단 결과로 고객 응대나 광고 설정을 바로 변경하지 않습니다.</li>
+<li>100~200건을 사람이 채점해 정확도를 보고, 잘못 통과시킨 건과 잘못 막은 건을 따로 셉니다. 이는 초기 점검 표본이지 모든 업무의 품질 인증 기준이 아닙니다.</li>
+<li>한국어 데이터라면 원문과 영어 번역본을 비교하되 번역 자체의 오류와 개인정보 처리 조건도 고려합니다. 20~50건의 소규모 비교는 탐색용이며 본 운영 전에 더 적합한 검증 표본을 확보합니다.</li>
+<li>실제 검증에서 허용 가능한 결과를 보인 구간만 자동화하고, 나머지는 사람이나 다른 모델로 넘깁니다. 모델 버전, 질문, 옵션 순서와 경계값을 기록하고 변경 시 다시 평가합니다.</li>
+</ol>
+<p>결정 모델은 비싼 지능을 어디에 쓸지 정하는 데 도움을 줄 수 있습니다. 우리 팀의 판단 중 어떤 일이 정해진 선택지로 설명되는지, 어떤 일에는 생성과 맥락 해석 또는 최종 책임자가 필요한지부터 살펴보면 됩니다. <a href="/blog/why-marketers-need-ai-agents">Agent 구축 필요성</a>과 <a href="/blog/marketer-ai-agent-workflow-design">정밀 설계·운영 기준</a>을 함께 읽으면 도입 판단과 실행 설계를 연결할 수 있습니다.</p>
+<h2 id="section-8">자주 묻는 질문</h2>
+<h3>Jev Engineering이란 무엇인가요?</h3>
+<p>AI 에이전트의 단계를 성격별로 나눠 글은 LLM이 쓰고, 닫힌 판단은 결정 모델 Jev가 맡고, 정확한 규칙은 코드가 실행하게 하는 설계 관점입니다. 이 글의 용어는 공식 산업 표준을 뜻하지 않습니다.</p>
+<h3>Jev와 LLM은 무엇이 다른가요?</h3>
+<p>LLM은 문장을 생성하고 Jev는 정해진 질문에 구조화된 판단을 반환합니다. Choice·Score에는 답과 확률 분포·confidence가 있고, Noul은 0~1 확률을 반환하며 별도의 confidence는 없습니다.</p>
+<h3>Harness·Loop·Graph Engineering과는 어떻게 다른가요?</h3>
+<p>이 글에서 세 가지는 실행 환경·반복 흐름·단계 연결을 설명하고, Jev는 그 안의 판단 부품입니다. 게이트, 검증기와 라우터 자리에 넣을 수 있으며 실행 권한이나 승인 규칙을 대신하지 않습니다.</p>
+<h3>마케팅에서는 어디에 쓸 수 있나요?</h3>
+<p>검색어 분류, 광고 태깅, 리드 스코어링, 리뷰 테마, AI 인용 체크, 내부 링크, 콘텐츠 QA와 문의 트리아지처럼 답의 범위를 정할 수 있는 판단에 검토할 수 있습니다. 이 글의 예시는 이 사이트에서 구현한 자동화 기능이 아닙니다.</p>
+<h3>Jev 컴팩션은 요약 컴팩션과 무엇이 다른가요?</h3>
+<p>요약 컴팩션은 지난 대화를 다시 쓰는 반면, 원고가 소개한 Jev 컴팩션은 도구 결과를 남길지 판단해 삭제·절단합니다. 남는 원문을 보존해도 필요한 결과가 통째로 빠질 위험이 있습니다. 원고의 약 100만 토큰을 약 1초에 8만 6천 토큰으로 줄였다는 수치는 단일 보고입니다.</p>
+<h3>한국어 데이터에도 잘 작동하나요?</h3>
+<p>우리 업무의 한국어 품질은 별도 검증이 필요합니다. 원문과 번역본의 소규모 비교로 시작하되 반어·이중부정·업계 약어와 번역 오류를 살펴보고, 본 운영에는 업무별 오류 비용과 더 적합한 검증 표본을 사용합니다.</p>
+<h2 id="section-9">출처 및 참고 자료</h2>
+<ol>
+<li><a href="https://docs.typesafe.ai/">TypeSafe AI 공식 문서 — Jev와 Choice·Score·Noul 질문 형식</a></li>
+<li><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">TypeSafe AI — Jev 출시·입력 가격·공급사 평가의 조건</a></li>
+<li><a href="https://www.langchain.com/blog/building-a-harness-with-jev">LangChain — Building a Harness with Jev</a></li>
+<li><a href="https://docs.typesafe.ai/confidence">TypeSafe AI — Confidence의 의미와 Noul 예외</a></li>
+<li><a href="https://docs.typesafe.ai/primitives/score">TypeSafe AI — Score 수준·확률 분포와 정확도 보장의 구분</a></li>
+<li><a href="https://venturebeat.com/security/companies-are-putting-jev-in-charge-of-ai-agent-decisions-and-prompt-injection-can-influence-the-verdict">VentureBeat — Jev 판단과 프롬프트 인젝션의 단일 테스트</a></li>
+<li><a href="https://www.get-ryze.ai/blog/jev-for-marketing">첨부 원고의 참고 자료 — Ryze의 Jev for Marketing</a></li>
+<li><a href="https://madewithjev.com/jev-statistics">Made with Jev — 작성자 보고 기반 Build Report, 현재 측정일 2026-10-12</a></li>
+<li><a href="https://madewithjev.com/jev-engineering">첨부 원고의 참고 자료 — Made with Jev 독서목록과 개별 사례</a></li>
+<li><a href="https://www.datacamp.com/blog/system-one-models-jev">첨부 원고의 참고 자료 — DataCamp의 System One 모델 소개</a></li>
+<li><a href="https://www.langchain.com/blog/building-prod-with-jev-and-langgraph">첨부 원고의 참고 자료 — Jev와 LangGraph 적용</a></li>
+<li><a href="https://www.aibuilderclub.com/blog/jev-engineering-guide">첨부 원고의 참고 자료 — AI Builder Club의 Jev Engineering 가이드</a></li>
+</ol>
+<p>원고 저자 소개: 박충효 · TROE 대표 파트너. 첨부 원고는 기업 AX 진단·워크숍·파일럿 설계, 마케팅 성장 자문과 옵시디언 기반 AI 지식 시스템 운영을 저자의 업무로 소개합니다. 본문은 사용자 제공 원고의 형식 변환이며, 웹사이트 형식 통합과 확인 보정은 2026-10-15에 수행했습니다.</p><section class="article-cta article-cta-end" id="article-end" aria-label="다음 단계">
+<p class="eyebrow">다음 단계</p><h3>글의 기준을 팀 검수와 운영 흐름에 연결하세요.</h3><p>Jev Engineering 내용을 바탕으로, 콘텐츠 검수와 운영 기준을 팀의 현재 업무에 맞춰 확인해 보세요.</p><div class="article-cta-actions"><a class="button primary" href="/consulting?from=jev-engineering-guide&amp;work=review&amp;intent=workflow&amp;cta=end-team" data-consulting-path data-position="article-end" data-cta-id="end-team">팀 검수·운영 체계 문의</a><a class="button secondary" href="/resources/rgctor-worksheet" data-resource-id="rgctor-worksheet" data-cta-id="end-resource" data-position="article-end">R-G-C-T-O-R 업무 지시서 워크시트 보기</a></div></section></article></div>
+<aside class="article-mobile-cta" aria-label="빠른 다음 행동" hidden>
+<a class="article-mobile-cta-link button primary" href="/consulting?from=jev-engineering-guide&amp;work=review&amp;intent=workflow&amp;cta=mobile-team" data-consulting-path data-position="mobile-sticky" data-cta-id="mobile-team">팀 검수·운영 체계 문의</a><button class="article-mobile-cta-close" type="button" aria-label="빠른 다음 행동 닫기">×</button></aside>
+<section class="blog-section" style="padding:40px 0 70px" aria-labelledby="related-title"><h2 class="extra-title" id="related-title">함께 읽으면 좋은 글</h2><div class="blog-cards"><article class="blog-card"><a class="blog-card-cover" href="/blog/why-marketers-need-ai-agents" data-blog-link="why-marketers-need-ai-agents" aria-label="마케터의 업무에 있어서 AI AGENT 구축은 왜 필요한가?"><picture><source srcset="/assets/blog/why-marketers-need-ai-agents.webp" type="image/webp"><img src="/assets/blog/why-marketers-need-ai-agents.jpg" alt="마케터에게 AI Agent 구축이 필요한 이유라는 손글씨 제목과 자료를 정리하며 협업하는 마케터·AI 로봇 카툰" width="1200" height="675" loading="lazy" decoding="async"></picture></a>
+<p class="eyebrow">AI Agent · 구축과 업무 활용 / 2026-10-15</p><h3><a href="/blog/why-marketers-need-ai-agents" data-blog-link="why-marketers-need-ai-agents">마케터의 업무에 있어서 AI AGENT 구축은 왜 필요한가?</a></h3>
+<p>마케터의 AI Agent 구축 필요성을 반복 업무, 비정형 자료 해석, 도구 연결과 팀 기준 관점에서 살펴봅니다. 주간 캠페인 리포트 예시와 도입 판단 질문을 통해 기존 AI 도구·자동화로 충분한 상황도 구분하세요.</p><a class="text-link" href="/blog/why-marketers-need-ai-agents" data-blog-link="why-marketers-need-ai-agents">글 읽기 →</a></article><article class="blog-card"><a class="blog-card-cover" href="/blog/marketer-ai-agent-workflow-design" data-blog-link="marketer-ai-agent-workflow-design" aria-label="마케터가 AI AGENT 워크플로우를 정밀하게 설계하고 운영해야 하는 이유"><picture><source srcset="/assets/blog/marketer-ai-agent-workflow-design.webp" type="image/webp"><img src="/assets/blog/marketer-ai-agent-workflow-design.jpg" alt="AI Agent 워크플로우를 정밀하게 설계하는 이유: 목표·권한·검수·운영을 확인하며 초안을 승인하는 마케터와 로봇 카툰" width="1200" height="675" loading="lazy" decoding="async"></picture></a>
+<p class="eyebrow">AI Agent · 워크플로우 설계 / 2026-10-15</p><h3><a href="/blog/marketer-ai-agent-workflow-design" data-blog-link="marketer-ai-agent-workflow-design">마케터가 AI AGENT 워크플로우를 정밀하게 설계하고 운영해야 하는 이유</a></h3>
+<p>AI Agent 워크플로우 설계가 마케터에게 중요한 이유를 목표·데이터·도구 권한·검수·완료 확인·복구·비용 관점에서 설명합니다. B2B 콘텐츠에서 문의까지 연결하는 예시와 실행 체크리스트로 팀 운영 기준을 확인하세요.</p><a class="text-link" href="/blog/marketer-ai-agent-workflow-design" data-blog-link="marketer-ai-agent-workflow-design">글 읽기 →</a></article><article class="blog-card"><a class="blog-card-cover" href="/blog/rgctor-content-workflow" data-blog-link="rgctor-content-workflow" aria-label="SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법"><picture><source srcset="/assets/blog/rgctor-content-workflow.webp" type="image/webp"><img src="/assets/blog/rgctor-content-workflow.jpg" alt="콘텐츠 Agent 지휘법: R-G-C-T-O-R로 초안을 검수·승인하는 마케터 카툰" width="1200" height="675" loading="lazy" decoding="async"></picture></a>
+<p class="eyebrow">AIEO · Agent 운영 / 2026-10-14</p><h3><a href="/blog/rgctor-content-workflow" data-blog-link="rgctor-content-workflow">SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법</a></h3>
+<p>AI 콘텐츠 자동화 워크플로를 R-G-C-T-O-R로 설계해 역할·근거·출력·검수 범위를 정하는 방법을 소개합니다. 출처 대조, 개인정보 보호, 사람의 최종 승인까지 실무 체크리스트로 확인하세요.</p><a class="text-link" href="/blog/rgctor-content-workflow" data-blog-link="rgctor-content-workflow">글 읽기 →</a></article></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></section></main><footer class="blog-footer"><div class="wrap"><a class="text-link" href="/">AI Agent를 지휘하는 마케터</a> · <a href="/blog">블로그</a> · <a href="https://troe.kr/">TROE</a><br>© 2026 TROE. ALL RIGHTS RESERVED.</div></footer><script src="/assets/enhancements.js" defer></script></body></html>

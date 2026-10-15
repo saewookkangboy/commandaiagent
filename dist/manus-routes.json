@@ -9,6 +9,10 @@
       "title": "도서 소개와 SEO·GEO·AIEO 블로그"
     },
     {
+      "path": "/blog/jev-engineering-guide",
+      "title": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법"
+    },
+    {
       "path": "/blog/why-marketers-need-ai-agents",
       "title": "마케터의 업무에 있어서 AI AGENT 구축은 왜 필요한가?"
     },
