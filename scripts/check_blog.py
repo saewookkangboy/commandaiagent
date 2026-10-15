@@ -147,6 +147,17 @@ assert re.findall(r'^문서 검토 기준일: ([0-9-]+)\.', llms, re.M) == [expe
 assert all(p['slug'] in llms for p in posts)
 assert llms.count('## 도서 소개 시리즈 3편') == 1
 assert llms.count(f'## SEO·GEO·AIEO 실무 가이드 {len(posts)-3}편') == 1
+assert len(re.findall(r'^# ', llms, re.M)) == 1
+intro, *link_sections = re.split(r'^## [^\n]+\n', llms, flags=re.M)
+assert intro.startswith('# AI Agent를 지휘하는 마케터\n\n> ')
+for label in ('도서와 운영 관점', '업무 지시서와 도서 구성', '대상 독자와 읽기 방식',
+              '도입 판단과 정밀 설계의 구분', '검색·콘텐츠 운영의 범위',
+              '도서 근거와 편집 콘텐츠', '자료 접근과 문의의 의미', '인용과 해석 기준'):
+    assert '**' + label + '.**' in intro, ('Missing pre-H2 llms detail', label)
+assert len(link_sections) >= 5
+for section in link_sections:
+    assert section.lstrip().startswith('- ['), 'H2 llms sections must begin with a link list'
+    assert re.search(r'^- \[[^\]]+\]\([^\s)]+\): .+', section, re.M)
 for post in posts:
     assert f'[{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' in llms
 for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):
