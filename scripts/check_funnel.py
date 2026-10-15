@@ -129,4 +129,28 @@ with sync_playwright() as pw:
     assert not sent and not errors
     context.close()
     print('PASS real downloadable resource action is not counted as a lead',flush=True)
+
+    # New editorial content must retain its context through actual CTA navigation.
+    for width in (390, 1440):
+        slug = 'marketer-ai-agent-workflow-design'
+        context,page,sent,mode,errors,outside=setup('/blog/'+slug,width=width)
+        assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
+        assert page.locator('[data-cta-id="end-resource"]').get_attribute('href') == '/resources/rgctor-worksheet'
+        article_events = page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="view_blog_article")')
+        assert len(article_events)==1 and article_events[0][2]['article_slug']==slug
+        page.locator('[data-cta-id="end-team"]').click()
+        page.wait_for_url(ORIGIN+'/consulting?**')
+        page.locator('#consulting-form').wait_for(state='visible')
+        assert page.locator('#work_area').input_value()=='review'
+        assert page.locator('#inquiry_type').input_value()=='workflow'
+        page.locator('#email').fill('private-new-article@example.invalid')
+        page.wait_for_timeout(100)
+        ga=page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="lead_form_start")')
+        meta=page.evaluate('window.__meta.filter(e=>e[0]==="trackCustom"&&e[1]==="lead_form_start")')
+        assert len(ga)==len(meta)==1 and ga[0][1:3]==meta[0][1:3]
+        assert ga[0][2]['source_article_slug']==slug and 'cta=end-team' in page.url
+        assert 'private-new-article' not in json.dumps(ga)
+        assert not sent and not errors
+        context.close()
+    print('PASS new article mobile/desktop CTA navigation, prefill and private-data-free source context; no real leads',flush=True)
     browser.close()

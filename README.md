@@ -33,9 +33,9 @@
 
 이 저장소는 박충효 저 『AI Agent를 지휘하는 마케터』의 핵심 메시지를 웹에서 경험할 수 있도록 만든 반응형 프로모션 사이트입니다. 책 표지의 청록색 인상과 TROE의 절제된 브랜드 시스템을 비대칭 출판물 레이아웃으로 연결했습니다.
 
-운영본의 한국어 조판과 도서 표지 비율을 유지했습니다. 이번 수정본에는 60초 상황 진단, 업무 방식 전후 비교, R-G-C-T-O-R 캠페인 응용 예시, 90초 읽기 경로, DAY 1 훈련 미리보기, 파트별 결과물, 개인·팀 적용 경로와 SEO·GEO·AIEO 실무 가이드 5편이 추가되었습니다. 후속 수정에서는 이 5편을 공식 출처로 점검하고 제공 PDF 중심 책 소개 시리즈 3편과 카툰·한국어 손글씨 썸네일 8종을 추가했습니다.
+운영본의 한국어 조판과 도서 표지 비율을 유지했습니다. 이번 수정본에는 60초 상황 진단, 업무 방식 전후 비교, R-G-C-T-O-R 캠페인 응용 예시, 90초 읽기 경로, DAY 1 훈련 미리보기, 파트별 결과물, 개인·팀 적용 경로와 SEO·GEO·AIEO 실무 가이드 6편이 추가되었습니다. 후속 수정에서는 이 5편을 공식 출처로 점검하고 제공 PDF 중심 책 소개 시리즈 3편과 카툰·한국어 손글씨 썸네일 8종을 추가했습니다.
 
-> 최초 랜딩·블로그 5편은 PR #1로 main에 병합되었습니다(`9531877`). 책 소개·썸네일 확장도 PR #2로 main에 병합되었고(`1195354`), 2026-10-14 Vercel Production과 운영 도메인의 글 8편 공개 응답을 확인했습니다. 이번 검색 메타데이터 최적화는 `feat/blog-search-metadata`의 별도 후속 변경입니다. 코드 저장과 운영 배포 상태는 구분합니다.
+> 최초 랜딩·블로그 5편은 PR #1로 main에 병합되었습니다(`9531877`). 책 소개·썸네일 확장도 PR #2로 main에 병합되었고(`1195354`), 2026-10-14 Vercel Production과 운영 도메인의 글 9편 공개 응답을 확인했습니다. 이번 검색 메타데이터 최적화는 `feat/blog-search-metadata`의 별도 후속 변경입니다. 코드 저장과 운영 배포 상태는 구분합니다.
 
 ## 사이트가 설명하는 것
 
@@ -62,7 +62,7 @@ python3 scripts/serve_preview.py --port 4173
 
 ## 구현 원칙
 
-- HTML, CSS, Vanilla JavaScript로 구성한 정적 랜딩페이지와 블로그 목록·글 8편, 총 10개 색인 대상 페이지
+- HTML, CSS, Vanilla JavaScript로 구성한 정적 랜딩페이지와 블로그 목록·글 9편, 총 10개 색인 대상 페이지
 - 외부 프레임워크와 웹폰트 의존성 없음
 - 1440px 데스크톱부터 390px 모바일까지 명시적인 반응형 레이아웃
 - `word-break: keep-all`과 `text-wrap: pretty`를 활용한 한국어 중심 조판
@@ -106,7 +106,7 @@ python3 scripts/serve_preview.py --port 4173
 |---|---|
 | `dist/index.html` | 랜딩 본문, 스타일, 기존 인터랙션과 구조화 데이터 |
 | `dist/assets/` | 기존 도서 이미지, 공유 스타일, 새 섹션 스타일·인터랙션 |
-| `dist/blog/` | 블로그 목록과 실무 가이드 5편·책 소개 시리즈 3편의 초기 HTML |
+| `dist/blog/` | 블로그 목록과 실무 가이드 6편·책 소개 시리즈 3편의 초기 HTML |
 | `content/blog/` | 편집 원고 Markdown과 메타데이터 JSON |
 | `scripts/build_blog.py` | 원고를 정적 HTML·sitemap·llms로 재생성 |
 | `scripts/serve_preview.py` | clean URL·실제 404·미리보기 noindex 응답 |
@@ -151,7 +151,7 @@ python3 scripts/serve_preview.py --port 4173
 
 ## 새 블로그와 콘텐츠 유지보수
 
-`/blog`에서는 책 소개 시리즈 3편과 다음 실무 가이드 5편을 구분해 탐색합니다.
+`/blog`에서는 책 소개 시리즈 3편과 다음 실무 가이드 6편을 구분해 탐색합니다.
 
 1. SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?
 2. AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드
@@ -159,7 +159,7 @@ python3 scripts/serve_preview.py --port 4173
 4. SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법
 5. SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법
 
-기존 실무 가이드 5편은 공개 출처 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. 신규 책 소개 시리즈 3편은 제공된 최종 내지 PDF를 요약·소개하고 해당 문장 옆에 도서 페이지 근거를 표시합니다. 가상 사례와 체크리스트는 편집 응용으로 구분하며 저자의 직접 집필 글이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
+기존 실무 가이드 6편은 공개 출처 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. 신규 책 소개 시리즈 3편은 제공된 최종 내지 PDF를 요약·소개하고 해당 문장 옆에 도서 페이지 근거를 표시합니다. 가상 사례와 체크리스트는 편집 응용으로 구분하며 저자의 직접 집필 글이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
 
 원고 수정 후에는 아래 명령으로 HTML과 검색 보조 문서를 갱신합니다. Vercel은 기존처럼 `dist`를 그대로 배포하므로 프로덕션에 Python이나 새 빌드 단계는 필요하지 않습니다.
 
@@ -177,7 +177,7 @@ python3 scripts/check_blog.py
 
 생성 일러스트는 실존 저자의 초상화가 아니라 가상 인물·로봇 카툰입니다. 원본 PDF나 전체 도서 추출 텍스트는 저장소·배포 산출물에 포함하지 않습니다.
 
-각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 8편의 정규 URL 10개만 포함됩니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
+각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 9편의 정규 URL 10개만 포함됩니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
 
 ### 검색 의도별 메타데이터 편집
 
@@ -207,13 +207,19 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 
 ## 블로그 상세·리드 퍼널 UX v1
 
-- 블로그 8편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
+- 블로그 9편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
 - `/consulting`: 필수3개·선택2개, 저장 확인 후 완료, 실패 시 입력 유지 및 이메일 대체
 - `/resources`: 공개 편집 워크시트2종, HTML 미리보기와 Markdown 다운로드; 이메일 등록 없음
-- `/privacy`: 문의 개인정보 안내(noindex); 15개 페이지 경로 중14개만 sitemap에 포함
+- `/privacy`: 문의 개인정보 안내(noindex); 16개 페이지 경로 중15개만 sitemap에 포함
 - 비공개 Google Sheets 저장: `api/lead.js` + `apps-script/Code.gs`; 서명 비밀은 Git/정적 파일에 포함하지 않음
 - 공통 이벤트v2.1·24개: [정의서](docs/analytics/common-events.md), [시트 운영](docs/analytics/sheets-lead-operations.md)
 - 접수 검증: `node scripts/check_lead_backend.cjs`, `python3 scripts/check_funnel.py` (실제 외부 전송 없는 모형 검증; 운영 연결 확인과 구분)
 - 보유·삭제 기준은 운영자 수동 관리이며 자동 삭제/메일 자동 발송을 구성하지 않음
 
 실제 저장 연결과 운영 배포의 완료 여부는 PR·배포 결과와 실제 시트 행 대조 증거를 기준으로 확인합니다.
+
+## 2026-10-15 신규 실무 콘텐츠
+
+- `/blog/marketer-ai-agent-workflow-design`: 마케터가 AI Agent 워크플로우를 정밀하게 설계·운영해야 하는 이유. 목표·권한·단계 간 검증·완료 확인·복구·비용·학습 기준과 가상 B2B 예시, FAQ를 제공.
+- 현재 글9편: 실무6편+책 소개3편. 공개 페이지16개 중 개인정보 안내1개는 noindex, 사이트맵에는15개 포함.
+- 새 카툰·손글씨 썸네일, 고유 메타·양방향 관련 글·R-G-C-T-O-R 워크시트·워크플로 문의·동일 GA4/Meta 이벤트 문맥 연결. 기존 이벤트24개 의미와 Sheets 접수 방식은 유지.

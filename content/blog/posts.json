@@ -1,5 +1,33 @@
 [
   {
+    "slug": "marketer-ai-agent-workflow-design",
+    "title": "마케터가 AI AGENT 워크플로우를 정밀하게 설계하고 운영해야 하는 이유",
+    "seo_title": "AI Agent 워크플로우 설계: 마케터가 정밀하게 운영해야 하는 이유",
+    "description": "AI Agent 워크플로우 설계가 마케터에게 중요한 이유를 목표·데이터·도구 권한·검수·완료 확인·복구·비용 관점에서 설명합니다. B2B 콘텐츠에서 문의까지 연결하는 예시와 실행 체크리스트로 팀 운영 기준을 확인하세요.",
+    "category": "AI Agent · 워크플로우 설계",
+    "date": "2026-10-15",
+    "modified": "2026-10-15",
+    "kind": "guide",
+    "image": "/assets/blog/marketer-ai-agent-workflow-design.webp",
+    "image_jpg": "/assets/blog/marketer-ai-agent-workflow-design.jpg",
+    "image_alt": "AI Agent 워크플로우를 정밀하게 설계하는 이유: 목표·권한·검수·운영을 확인하며 초안을 승인하는 마케터와 로봇 카툰",
+    "primary_keyword": "AI Agent 워크플로우 설계",
+    "secondary_keywords": [
+      "마케팅 AI 에이전트 운영",
+      "AI Agent 검수와 승인",
+      "AI 워크플로우 권한 관리",
+      "AI 마케팅 자동화 실패 대응",
+      "AI Agent 성과 평가"
+    ],
+    "search_intent": "AI Agent를 마케팅 업무에 도입하려는 마케터와 팀 리더가 정밀한 설계·운영의 필요성과 목표·권한·검증·실패 대응의 기준을 확인하려는 정보 탐색 및 실무 적용 의도.",
+    "search_summary": "AI Agent 워크플로우 설계는 빠른 초안과 실제 업무 완료를 구분하는 일입니다. 목표·근거·권한·검수·복구·비용·학습 기준을 B2B 콘텐츠와 문의 흐름 예시로 설명합니다.",
+    "related": [
+      "rgctor-content-workflow",
+      "book-command-marketer-02",
+      "ai-search-measurement"
+    ]
+  },
+  {
     "slug": "seo-geo-aieo-guide",
     "title": "SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?",
     "description": "SEO·GEO·AIEO 차이를 정의와 적용 범위로 비교하고, Google의 AI 검색 안내에 비춰 SEO 기본기와 생성형 검색 대응을 정리합니다. 발행 전 체크리스트와 도서 프레임의 편집 응용 예를 확인하세요.",
@@ -89,10 +117,11 @@
     "category": "AIEO · Agent 운영",
     "date": "2026-10-14",
     "related": [
+      "marketer-ai-agent-workflow-design",
       "seo-geo-aieo-guide",
       "ai-search-measurement"
     ],
-    "modified": "2026-10-14",
+    "modified": "2026-10-15",
     "image": "/assets/blog/rgctor-content-workflow.webp",
     "image_jpg": "/assets/blog/rgctor-content-workflow.jpg",
     "image_alt": "콘텐츠 Agent 지휘법: R-G-C-T-O-R로 초안을 검수·승인하는 마케터 카툰",
@@ -175,10 +204,11 @@
     "series_order": 2,
     "date": "2026-10-14",
     "related": [
+      "marketer-ai-agent-workflow-design",
       "book-command-marketer-03",
       "geo-content-structure"
     ],
-    "modified": "2026-10-14",
+    "modified": "2026-10-15",
     "image": "/assets/blog/book-command-marketer-02.webp",
     "image_jpg": "/assets/blog/book-command-marketer-02.jpg",
     "image_alt": "책 소개 2: 프롬프트보다 업무 지시서, R-G-C-T-O-R를 작성하는 카툰",
