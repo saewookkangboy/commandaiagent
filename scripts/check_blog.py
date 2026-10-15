@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
-assert len(posts) == 9
+assert len(posts) == 10
 assert len({post['slug'] for post in posts}) == len(posts)
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
 assert len({post['description'] for post in posts}) == len(posts)
@@ -146,7 +146,7 @@ expected_reviewed = max(site['llms_reviewed'], site['home_modified'], *expected_
 assert re.findall(r'^문서 검토 기준일: ([0-9-]+)\.', llms, re.M) == [expected_reviewed], 'Stale llms review date; rebuild search documents'
 assert all(p['slug'] in llms for p in posts)
 assert llms.count('## 도서 소개 시리즈 3편') == 1
-assert llms.count('## SEO·GEO·AIEO 실무 가이드 6편') == 1
+assert llms.count(f'## SEO·GEO·AIEO 실무 가이드 {len(posts)-3}편') == 1
 for post in posts:
     assert f'[{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' in llms
 for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):

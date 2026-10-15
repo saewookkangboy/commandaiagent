@@ -177,7 +177,7 @@ python3 scripts/check_blog.py
 
 생성 일러스트는 실존 저자의 초상화가 아니라 가상 인물·로봇 카툰입니다. 원본 PDF나 전체 도서 추출 텍스트는 저장소·배포 산출물에 포함하지 않습니다.
 
-각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 9편의 정규 URL 10개만 포함됩니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
+각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 10편·문의·공개 자료 경로의 정규 URL 16개가 포함됩니다. 개인정보 안내는 noindex이며 sitemap에서 제외합니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
 
 ### 검색 의도별 메타데이터 편집
 
@@ -207,10 +207,10 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 
 ## 블로그 상세·리드 퍼널 UX v1
 
-- 블로그 9편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
+- 블로그 10편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
 - `/consulting`: 필수3개·선택2개, 저장 확인 후 완료, 실패 시 입력 유지 및 이메일 대체
 - `/resources`: 공개 편집 워크시트2종, HTML 미리보기와 Markdown 다운로드; 이메일 등록 없음
-- `/privacy`: 문의 개인정보 안내(noindex); 16개 페이지 경로 중15개만 sitemap에 포함
+- `/privacy`: 문의 개인정보 안내(noindex); 17개 페이지 경로 중16개만 sitemap에 포함
 - 비공개 Google Sheets 저장: `api/lead.js` + `apps-script/Code.gs`; 서명 비밀은 Git/정적 파일에 포함하지 않음
 - 공통 이벤트v2.1·24개: [정의서](docs/analytics/common-events.md), [시트 운영](docs/analytics/sheets-lead-operations.md)
 - 접수 검증: `node scripts/check_lead_backend.cjs`, `python3 scripts/check_funnel.py` (실제 외부 전송 없는 모형 검증; 운영 연결 확인과 구분)
@@ -221,5 +221,9 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 ## 2026-10-15 신규 실무 콘텐츠
 
 - `/blog/marketer-ai-agent-workflow-design`: 마케터가 AI Agent 워크플로우를 정밀하게 설계·운영해야 하는 이유. 목표·권한·단계 간 검증·완료 확인·복구·비용·학습 기준과 가상 B2B 예시, FAQ를 제공.
-- 현재 글9편: 실무6편+책 소개3편. 공개 페이지16개 중 개인정보 안내1개는 noindex, 사이트맵에는15개 포함.
+- 현재 글10편: 실무7편+책 소개3편. 공개 페이지17개 중 개인정보 안내1개는 noindex, 사이트맵에는16개 포함.
 - 새 카툰·손글씨 썸네일, 고유 메타·양방향 관련 글·R-G-C-T-O-R 워크시트·워크플로 문의·동일 GA4/Meta 이벤트 문맥 연결. 기존 이벤트24개 의미와 Sheets 접수 방식은 유지.
+
+### 마케터의 Agent 구축 필요성
+
+`/blog/why-marketers-need-ai-agents`는 반복 업무·비정형 자료·도구 연결·팀 기준을 관점으로 Agent 도입이 필요한 상황과 기존 AI 도구/자동화로 충분한 상황을 구분합니다. 가상 주간 캠페인 리포트, 도입 판단5문항, FAQ5개와 공식 출처를 제공하며 이전 워크플로우 정밀 설계 글에 이어집니다. 자체 개발·다중 Agent·성과 개선을 필수 또는 보장으로 제시하지 않습니다. 새 글에도 카툰·손글씨 썸네일·고유 메타·직접 요약·관련 글·워크시트/문의와24개 공통 이벤트 문맥을 연결합니다.

@@ -138,6 +138,7 @@ WORK_BY_SLUG = {
     'rgctor-content-workflow': 'review',
     'ai-search-measurement': 'performance',
     'marketer-ai-agent-workflow-design': 'review',
+    'why-marketers-need-ai-agents': 'review',
 }
 
 
@@ -167,7 +168,7 @@ def article_cta(post, location):
     else:
         heading = '글의 기준을 팀 검수와 운영 흐름에 연결하세요.'
         copy = f'{escape(post["primary_keyword"])} 내용을 바탕으로, 콘텐츠 검수와 운영 기준을 팀의 현재 업무에 맞춰 확인해 보세요.'
-        resource_path = '/resources/rgctor-worksheet' if post['slug'] in ('rgctor-content-workflow', 'marketer-ai-agent-workflow-design') else '/resources/content-search-checklist'
+        resource_path = '/resources/rgctor-worksheet' if post['slug'] in ('rgctor-content-workflow', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents') else '/resources/content-search-checklist'
         resource_label = 'R-G-C-T-O-R 업무 지시서 워크시트 보기' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표 보기'
         context_link = ''
         resource_id = resource_path.rsplit('/', 1)[-1]

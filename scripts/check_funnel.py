@@ -131,8 +131,7 @@ with sync_playwright() as pw:
     print('PASS real downloadable resource action is not counted as a lead',flush=True)
 
     # New editorial content must retain its context through actual CTA navigation.
-    for width in (390, 1440):
-        slug = 'marketer-ai-agent-workflow-design'
+    for slug, width in ((slug, width) for slug in ('marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents') for width in (390, 1440)):
         context,page,sent,mode,errors,outside=setup('/blog/'+slug,width=width)
         assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
         assert page.locator('[data-cta-id="end-resource"]').get_attribute('href') == '/resources/rgctor-worksheet'
