@@ -1,5 +1,44 @@
 [
   {
+    "slug": "jev-engineering-guide",
+    "title": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법",
+    "seo_title": "Jev Engineering 입문: 결정 모델과 마케팅 활용",
+    "description": "Jev Engineering의 생성·판단·실행 분리 원칙을 알아봅니다. Choice·Score·Noul과 하네스·루프·그래프의 관계, 마케팅 활용 8가지, 확신도·프롬프트 인젝션·한국어 검증과 도입 체크리스트를 확인하세요.",
+    "category": "AI Agent · Jev Engineering",
+    "date": "2026-10-02",
+    "modified": "2026-10-15",
+    "kind": "guide",
+    "author": {
+      "@type": "Person",
+      "name": "박충효",
+      "url": "https://troe.kr/"
+    },
+    "source_modified": "2026-10-06",
+    "imported": "2026-10-15",
+    "image": "/assets/blog/jev-engineering-guide.webp",
+    "image_jpg": "/assets/blog/jev-engineering-guide.jpg",
+    "image_alt": "Jev Engineering 입문, 쓰고·고르고·실행하기라는 손글씨와 마케터·세 역할의 로봇 카툰",
+    "primary_keyword": "Jev Engineering",
+    "secondary_keywords": [
+      "Jev 결정 모델",
+      "마케팅 AI 에이전트 판단",
+      "Choice Score Noul",
+      "LLM과 결정 모델 차이",
+      "AI 에이전트 확신도 검증",
+      "마케팅 AX 자동화"
+    ],
+    "search_intent": "마케터·AX 실무자가 Jev 결정 모델의 역할과 LLM 차이, 하네스·루프·그래프 연결, 적용 업무·위험·도입 방법을 이해하려는 정보 탐색 의도.",
+    "search_summary": "Jev Engineering은 LLM의 생성, Jev의 닫힌 판단, 코드의 정확한 실행을 분리하는 설계 관점입니다. 마케팅 적용 8가지와 확신도·프롬프트 인젝션·한국어 검증 조건, 도입 6단계를 살펴봅니다.",
+    "related": [
+      "why-marketers-need-ai-agents",
+      "marketer-ai-agent-workflow-design",
+      "rgctor-content-workflow"
+    ],
+    "faq_schema": true,
+    "disclosure": "박충효·TROE 표기의 사용자 제공 HTML 원고를 기존 블로그 형식으로 변환했습니다. 원고 발행2026-10-02·수정2026-10-06, 사이트 반영·확인보정2026-10-15. AI는 형식 변환·메타데이터·확인보정에 활용했고 원고의 저자 표기를 보존했습니다. 제3자 성능·비용 사례는 독립 재현하지 않았으며 공급사·커뮤니티 보고와 TROE 실측 성과를 구분합니다. 도서 발췌가 아니며 썸네일은 AI 생성 이미지입니다.",
+    "disclosure_short": "박충효 · TROE 원고 · 첨부 HTML 형식 변환 · 제3자 수치의 독립 재현 아님"
+  },
+  {
     "slug": "why-marketers-need-ai-agents",
     "title": "마케터의 업무에 있어서 AI AGENT 구축은 왜 필요한가?",
     "seo_title": "마케터의 AI Agent 구축 필요성: 업무 활용과 도입 판단 기준",
@@ -22,9 +61,9 @@
     "search_intent": "마케터와 팀 리더가 AI Agent를 왜 구축해야 하는지, 어떤 업무가 적합한지, 기존 AI 도구·고정 자동화와 어떤 기준으로 선택할지 이해하려는 정보 탐색 및 도입 검토 의도.",
     "search_summary": "마케터의 AI Agent 구축 필요성은 반복되는 자료 탐색과 해석을 업무 결과로 연결하는 데 있습니다. 가상 캠페인 리포트 예시와 판단 질문으로 Agent가 필요한 업무와 기존 도구로 충분한 상황을 구분합니다.",
     "related": [
+      "jev-engineering-guide",
       "marketer-ai-agent-workflow-design",
-      "book-command-marketer-01",
-      "ai-search-measurement"
+      "book-command-marketer-01"
     ]
   },
   {
@@ -50,10 +89,9 @@
     "search_intent": "AI Agent를 마케팅 업무에 도입하려는 마케터와 팀 리더가 정밀한 설계·운영의 필요성과 목표·권한·검증·실패 대응의 기준을 확인하려는 정보 탐색 및 실무 적용 의도.",
     "search_summary": "AI Agent 워크플로우 설계는 빠른 초안과 실제 업무 완료를 구분하는 일입니다. 목표·근거·권한·검수·복구·비용·학습 기준을 B2B 콘텐츠와 문의 흐름 예시로 설명합니다.",
     "related": [
+      "jev-engineering-guide",
       "why-marketers-need-ai-agents",
-      "rgctor-content-workflow",
-      "book-command-marketer-02",
-      "ai-search-measurement"
+      "rgctor-content-workflow"
     ]
   },
   {

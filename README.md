@@ -159,7 +159,7 @@ python3 scripts/serve_preview.py --port 4173
 4. SEO·GEO 콘텐츠 Agent, R-G-C-T-O-R로 안전하게 운영하는 법
 5. SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법
 
-기존 실무 가이드 6편은 공개 출처 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. 신규 책 소개 시리즈 3편은 제공된 최종 내지 PDF를 요약·소개하고 해당 문장 옆에 도서 페이지 근거를 표시합니다. 가상 사례와 체크리스트는 편집 응용으로 구분하며 저자의 직접 집필 글이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
+Jev 입문을 제외한 실무 가이드 7편은 공개 출처 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. 신규 책 소개 시리즈 3편은 제공된 최종 내지 PDF를 요약·소개하고 해당 문장 옆에 도서 페이지 근거를 표시합니다. 가상 사례와 체크리스트는 편집 응용으로 구분하며 저자의 직접 집필 글이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
 
 원고 수정 후에는 아래 명령으로 HTML과 검색 보조 문서를 갱신합니다. Vercel은 기존처럼 `dist`를 그대로 배포하므로 프로덕션에 Python이나 새 빌드 단계는 필요하지 않습니다.
 
@@ -177,7 +177,7 @@ python3 scripts/check_blog.py
 
 생성 일러스트는 실존 저자의 초상화가 아니라 가상 인물·로봇 카툰입니다. 원본 PDF나 전체 도서 추출 텍스트는 저장소·배포 산출물에 포함하지 않습니다.
 
-각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 10편·문의·공개 자료 경로의 정규 URL 16개가 포함됩니다. 개인정보 안내는 noindex이며 sitemap에서 제외합니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
+각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글 11편·문의·공개 자료 경로의 정규 URL 17개가 포함됩니다. 개인정보 안내는 noindex이며 sitemap에서 제외합니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
 
 ### 검색 의도별 메타데이터 편집
 
@@ -207,10 +207,10 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 
 ## 블로그 상세·리드 퍼널 UX v1
 
-- 블로그 10편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
+- 블로그 11편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
 - `/consulting`: 필수3개·선택2개, 저장 확인 후 완료, 실패 시 입력 유지 및 이메일 대체
 - `/resources`: 공개 편집 워크시트2종, HTML 미리보기와 Markdown 다운로드; 이메일 등록 없음
-- `/privacy`: 문의 개인정보 안내(noindex); 17개 페이지 경로 중16개만 sitemap에 포함
+- `/privacy`: 문의 개인정보 안내(noindex); 18개 페이지 경로 중17개만 sitemap에 포함
 - 비공개 Google Sheets 저장: `api/lead.js` + `apps-script/Code.gs`; 서명 비밀은 Git/정적 파일에 포함하지 않음
 - 공통 이벤트v2.1·24개: [정의서](docs/analytics/common-events.md), [시트 운영](docs/analytics/sheets-lead-operations.md)
 - 접수 검증: `node scripts/check_lead_backend.cjs`, `python3 scripts/check_funnel.py` (실제 외부 전송 없는 모형 검증; 운영 연결 확인과 구분)
@@ -221,7 +221,7 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 ## 2026-10-15 신규 실무 콘텐츠
 
 - `/blog/marketer-ai-agent-workflow-design`: 마케터가 AI Agent 워크플로우를 정밀하게 설계·운영해야 하는 이유. 목표·권한·단계 간 검증·완료 확인·복구·비용·학습 기준과 가상 B2B 예시, FAQ를 제공.
-- 현재 글10편: 실무7편+책 소개3편. 공개 페이지17개 중 개인정보 안내1개는 noindex, 사이트맵에는16개 포함.
+- 현재 글11편: 실무8편+책 소개3편. 공개 페이지18개 중 개인정보 안내1개는 noindex, 사이트맵에는17개 포함.
 - 새 카툰·손글씨 썸네일, 고유 메타·양방향 관련 글·R-G-C-T-O-R 워크시트·워크플로 문의·동일 GA4/Meta 이벤트 문맥 연결. 기존 이벤트24개 의미와 Sheets 접수 방식은 유지.
 
 ### 마케터의 Agent 구축 필요성
@@ -231,3 +231,7 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 ### 신규 블로그 GA4·Meta 연동 설정 가이드
 
 [최신 글 전용 연동 가이드](docs/analytics/new-blog-event-integration.md)는 `why-marketers-need-ai-agents`의 실제 이벤트·CTA·문의 유입 문맥, GA4 맞춤 정의·핵심 이벤트·퍼널, Meta 테스트·매개변수 기반 맞춤 전환 설정 방법을 설명합니다. 공통 계약은2.1·24개 이벤트로 유지합니다. 별도 태그 설치·계정 설정 변경 없이 문서만 추가했으며 실제 계정 수신/등록 상태는 권한 있는 계정에서 확인해야 합니다.
+
+## Jev Engineering 사용자 원고 변환 — 2026-10-15
+
+`/blog/jev-engineering-guide`는 박충효·TROE 표기의 첨부 HTML 원고를 현재 블로그 형식으로 변환한 글입니다. 원고 발행2026-10-02·수정2026-10-06과 사이트 반영·확인보정2026-10-15를 구분합니다. Noul의 confidence 예외는 공식 문서에 맞춰 보정했고 제3자 수치의 날짜·비검증 범위를 표시했습니다. 이 글의 Person 저자·고지는 선택적 메타데이터이며 기존10편의 Command Marketing 기본 편집 고지를 변경하지 않습니다. 새글의 공통 이벤트·워크시트·문의 문맥을 등록했으며 새로운 이벤트나 GA4/Meta 계정 설정은 만들지 않았습니다.

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
-assert len(posts) == 10
+assert len(posts) == 11
 assert len({post['slug'] for post in posts}) == len(posts)
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
 assert len({post['description'] for post in posts}) == len(posts)
@@ -93,13 +93,39 @@ for post in posts:
     graph = json.loads(soup.select_one('script[type="application/ld+json"]').string)
     article = next(row for row in graph['@graph'] if row['@type'] == 'BlogPosting')
     assert article['image']['url'] == og
-    assert article['author']['name'] == 'Command Marketing'
+    author = post.get('author', {'@type': 'Organization', 'name': 'Command Marketing', 'url': ORIGIN + '/blog'})
+    assert article['author'] == author
+    assert soup.select_one('meta[name="author"]')['content'] == author['name']
     assert article['headline'] == post['title']
     assert article['alternativeHeadline'] == post['seo_title']
     assert article['abstract'] == post['search_summary']
     assert article['description'] == post['description']
     assert article['keywords'] == keywords
     assert [topic['name'] for topic in article['about']] == keywords
+    assert article['datePublished'] == post['date']
+    assert article['dateModified'] == post.get('modified', post['date'])
+    if slug == 'jev-engineering-guide':
+        assert author['@type'] == 'Person' and author['name'] == '박충효'
+        assert post['date'] == '2026-10-02' and post['source_modified'] == '2026-10-06'
+        assert post['disclosure_short'] == soup.select_one('.article-disclosure-short').get_text()
+        assert post['disclosure'] == soup.select_one('.article-disclosure-details p').get_text()
+        assert len(soup.select('.article-body table')) == 3
+        assert len(soup.select('.article-body ol')) == 2  # six steps + rendered source list
+        faq = next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')
+        assert len(faq['mainEntity']) == 6
+        heading = next(h for h in soup.select('.article-body h2') if h.get_text() == '자주 묻는 질문')
+        visible = []
+        for node in heading.find_next_siblings():
+            if node.name == 'h2':
+                break
+            if node.name == 'h3':
+                visible.append((node.get_text(' ', strip=True), node.find_next_sibling('p').get_text(' ', strip=True)))
+        assert visible == [(q['name'], q['acceptedAnswer']['text']) for q in faq['mainEntity']]
+        assert '별도의 confidence는 없습니다' in faq['mainEntity'][1]['acceptedAnswer']['text']
+        assert any('/resources/rgctor-worksheet' in a['href'] for a in soup.select('.article-cta a[href]'))
+        context_links = soup.select('.article-cta a[data-consulting-path], .article-mobile-cta a[data-consulting-path]')
+        assert len(context_links) == 3
+        assert all('from=jev-engineering-guide' in a['href'] and 'work=review' in a['href'] for a in context_links)
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1
@@ -169,6 +195,8 @@ for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):
             assert BeautifulSoup(target.read_text(), 'html.parser').find(id=unquote(url.fragment)), href
 assert '도서 발췌나 저자의 직접 발언이 아닙니다' in llms
 assert '책 소개 시리즈 3편은 제공 PDF를 요약' in llms
+assert '박충효·TROE 표기의 사용자 제공 HTML 원고' in llms
+assert 'Jev 입문을 제외한' in llms and '**결정 모델과 Jev Engineering.**' in intro
 assert not list(DIST.rglob('*.pdf'))
 assert not list((ROOT / 'content').rglob('*.pdf'))
 assert set(json.loads((ROOT / 'content/analytics-events.json').read_text())['article_slugs']) == {p['slug'] for p in posts}
