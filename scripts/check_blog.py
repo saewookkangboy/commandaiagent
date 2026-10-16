@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
-assert len(posts) == 11
+assert len(posts) == 12
 assert len({post['slug'] for post in posts}) == len(posts)
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
 assert len({post['description'] for post in posts}) == len(posts)
@@ -126,6 +126,19 @@ for post in posts:
         context_links = soup.select('.article-cta a[data-consulting-path], .article-mobile-cta a[data-consulting-path]')
         assert len(context_links) == 3
         assert all('from=jev-engineering-guide' in a['href'] and 'work=review' in a['href'] for a in context_links)
+    if slug == 'command-marketing-book-practical-guide':
+        assert post['kind'] == 'guide' and post['book_based'] is True
+        assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
+        assert author['@type'] == 'Organization' and not soup.select('.series-nav')
+        assert soup.select_one('.article-disclosure-short').get_text() == post['disclosure_short']
+        assert soup.select_one('.article-disclosure-details p').get_text() == post['disclosure']
+        assert '도서 근거와 편집 범위' in source and '편집 응용' in source
+        assert len(soup.select('.article-body pre code')) == 1
+        assert len(next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']) == 5
+        context_links = soup.select('.article-cta a[data-consulting-path], .article-mobile-cta a[data-consulting-path]')
+        assert len(context_links) == 3
+        assert all(f'from={slug}' in a['href'] and 'work=review' in a['href'] and 'intent=workflow' in a['href'] for a in context_links)
+        assert len(soup.select('.article-cta a[href="/resources/rgctor-worksheet"]')) == 2
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1

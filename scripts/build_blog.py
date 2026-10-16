@@ -167,6 +167,7 @@ WORK_BY_SLUG = {
     'marketer-ai-agent-workflow-design': 'review',
     'why-marketers-need-ai-agents': 'review',
     'jev-engineering-guide': 'review',
+    'command-marketing-book-practical-guide': 'review',
 }
 
 
@@ -196,7 +197,7 @@ def article_cta(post, location):
     else:
         heading = '글의 기준을 팀 검수와 운영 흐름에 연결하세요.'
         copy = f'{escape(post["primary_keyword"])} 내용을 바탕으로, 콘텐츠 검수와 운영 기준을 팀의 현재 업무에 맞춰 확인해 보세요.'
-        resource_path = '/resources/rgctor-worksheet' if post['slug'] in ('rgctor-content-workflow', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide') else '/resources/content-search-checklist'
+        resource_path = '/resources/rgctor-worksheet' if post['slug'] in ('rgctor-content-workflow', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide', 'command-marketing-book-practical-guide') else '/resources/content-search-checklist'
         resource_label = 'R-G-C-T-O-R 업무 지시서 워크시트 보기' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표 보기'
         context_link = ''
         resource_id = resource_path.rsplit('/', 1)[-1]
@@ -261,7 +262,7 @@ for post in POSTS:
     article['keywords'] = post_keywords(post)
     article['about'] = [{'@type': 'Thing', 'name': keyword} for keyword in post_keywords(post)]
     is_series = post.get('kind') == 'book-series'
-    if is_series:
+    if is_series or post.get('book_based'):
         article['isBasedOn'] = BOOK
         article['citation'].append(BOOK)
     graph = {'@context': 'https://schema.org', '@graph': [article, breadcrumb_graph(post)]}
@@ -304,14 +305,14 @@ graph = {'@context': 'https://schema.org', '@graph': [
     {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'url': ORIGIN + '/blog', 'name': 'Command Marketing 블로그', 'inLanguage': 'ko-KR', 'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'}}, breadcrumb_graph()]}
 index = head('AI 마케팅 책 소개와 SEO·GEO·AIEO 실무 블로그', f'AI Agent를 지휘하는 마케터 책 소개 시리즈 {len(SERIES)}편과 SEO·GEO·AIEO 실무 가이드 {len(GUIDES)}편. Agent 워크플로우 설계, 거버넌스, 업무 지시서부터 기술 SEO와 AI 검색 성과 측정까지 읽어 보세요.', '/blog', graph) + f'''
 <body class="blog-page" data-page-type="blog_index" data-content-group="blog_index"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}<main class="blog-main wrap" id="main">{breadcrumbs()}
-<header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>책에서 운영으로,<br>검색에서 답변으로.</h1><p class="section-copy">책 소개 시리즈 {len(SERIES)}편으로 AI 마케팅의 운영 구조를 읽고, 실무 가이드 {len(GUIDES)}편으로 Agent 설계·검색·콘텐츠·검수·측정의 기준을 세우세요.</p><nav class="blog-category-nav" aria-label="블로그 콘텐츠 분류"><a href="#book-series">책 소개 시리즈 {len(SERIES)}편</a><a href="#practical-guides">SEO·GEO·AIEO 가이드 {len(GUIDES)}편</a></nav><p class="blog-disclosure">도서 소개는 제공된 최종 내지 PDF의 요약입니다. 실무 가이드는 공개 출처 기반 편집 콘텐츠 또는 사용자 제공 원고의 형식 변환이며, 글별 저자·편집·검토 고지를 확인하세요.</p></header>
+<header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>책에서 운영으로,<br>검색에서 답변으로.</h1><p class="section-copy">책 소개 시리즈 {len(SERIES)}편으로 AI 마케팅의 운영 구조를 읽고, 실무 가이드 {len(GUIDES)}편으로 Agent 설계·검색·콘텐츠·검수·측정의 기준을 세우세요.</p><nav class="blog-category-nav" aria-label="블로그 콘텐츠 분류"><a href="#book-series">책 소개 시리즈 {len(SERIES)}편</a><a href="#practical-guides">SEO·GEO·AIEO 가이드 {len(GUIDES)}편</a></nav><p class="blog-disclosure">도서 소개는 제공된 최종 내지 PDF의 요약입니다. 실무 가이드는 도서 프레임·공개 출처 기반 편집 응용 또는 사용자 제공 원고의 형식 변환이며, 글별 저자·편집·검토 고지를 확인하세요.</p></header>
 <section class="blog-group" id="book-series" aria-labelledby="series-title"><p class="eyebrow">Book notes / 01 — 03</p><h2 class="extra-title" id="series-title">『AI Agent를 지휘하는 마케터』<br>세 편으로 읽는 핵심 구조</h2><p class="section-copy">일을 맡기는 판단, 업무 지시서, 실행과 검수의 루프를 순서대로 소개합니다. 각 글에 도서 페이지 근거를 표시했습니다.</p><div class="blog-cards series-cards">{series_cards}</div></section>
 <section class="blog-group" id="practical-guides" aria-labelledby="guides-title"><p class="eyebrow">Practical guides / SEO · GEO · AIEO</p><h2 class="extra-title" id="guides-title">검색과 AI 답변을 위한 실무 가이드</h2><div class="blog-cards">{guide_cards}</div></section>
 <div class="article-end"><p class="eyebrow">Read the system</p><h2 class="extra-title">콘텐츠 제작을 반복 가능한 운영으로 바꾸고 싶다면.</h2><p class="section-copy">책의 업무 지시서와 검수·승인 구조를 확인하세요.</p><div class="actions"><a class="button primary" href="/#system">R-G-C-T-O-R 보기</a><a class="button secondary" href="/#diagnosis">내 상황 진단하기</a></div></div></main>{FOOTER}'''
 (DIST / 'blog/index.html').write_text(index)
 
 home_cards = ''.join(card(p) for p in ordered)
-home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book notes / SEO · GEO · AIEO</p><h2 class="section-title">책 소개와 실무 가이드,<br>{len(POSTS)}편으로 연결합니다.</h2><p class="section-copy">PDF 근거를 명시한 책 소개 시리즈 {len(SERIES)}편과 공개 출처·사용자 제공 원고 기반 SEO·GEO·AIEO 실무 가이드 {len(GUIDES)}편입니다. Agent 워크플로우 설계부터 검색과 콘텐츠 운영까지, 도서 요약과 편집 응용의 범위를 구분했습니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards">{home_cards}</div></div></section>'''
+home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book notes / SEO · GEO · AIEO</p><h2 class="section-title">책 소개와 실무 가이드,<br>{len(POSTS)}편으로 연결합니다.</h2><p class="section-copy">PDF 근거를 명시한 책 소개 시리즈 {len(SERIES)}편과 도서 프레임·공개 출처·사용자 제공 원고 기반 실무 가이드 {len(GUIDES)}편입니다. Agent 워크플로우 설계부터 검색과 콘텐츠 운영까지, 도서 요약과 편집 응용의 범위를 구분했습니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards">{home_cards}</div></div></section>'''
 LANDING = re.sub(r'<!-- BLOG_SECTION_START -->.*?<!-- BLOG_SECTION_END -->', '<!-- BLOG_SECTION_START -->' + home_section + '<!-- BLOG_SECTION_END -->', LANDING, flags=re.S)
 (DIST / 'index.html').write_text(LANDING)
 
