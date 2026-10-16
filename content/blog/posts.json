@@ -1,5 +1,37 @@
 [
   {
+    "slug": "command-marketing-book-practical-guide",
+    "title": "『AI AGENT를 지휘하는 마케터』를 실제 실무에서 활용하는 방법",
+    "seo_title": "AI Agent를 지휘하는 마케터 실무 활용법",
+    "description": "AI 마케팅 책 실무 활용을 업무 선택부터 지시서·아웃라인 승인·초안 검수·인계·성과 회고까지 연결합니다. 『AI Agent를 지휘하는 마케터』의 도서 근거와 가상 B2B 캠페인 지시서, 실행 점검으로 첫 업무에 적용해 보세요.",
+    "category": "책 실무 적용 · 업무 지시와 검수",
+    "kind": "guide",
+    "book_based": true,
+    "date": "2026-10-16",
+    "modified": "2026-10-16",
+    "image": "/assets/blog/command-marketing-book-practical-guide.webp",
+    "image_jpg": "/assets/blog/command-marketing-book-practical-guide.jpg",
+    "image_alt": "책에서 실무로, AI Agent 활용법과 한 업무부터 검수까지라는 손글씨, 업무 문서를 검수하는 마케터와 AI 로봇 카툰",
+    "primary_keyword": "AI 마케팅 책 실무 활용",
+    "secondary_keywords": [
+      "AI Agent를 지휘하는 마케터 활용법",
+      "R-G-C-T-O-R 실무 지시서",
+      "AI 콘텐츠 아웃라인 승인",
+      "마케팅 AI 초안 검수",
+      "AI 마케팅 업무 개선 기록"
+    ],
+    "search_intent": "도서를 실제 마케팅 업무에 적용하려는 독자가 작은 업무 선택, 자료 준비, 지시서 작성, 초안 검수와 재사용 기록의 구체적인 실행 방법을 찾는 실무 적용 의도.",
+    "search_summary": "AI 마케팅 책 실무 활용은 한 업무의 입력 자료, R-G-C-T-O-R 지시서, 아웃라인 승인과 초안 검수, 인계·회고를 연결하는 일입니다. 도서 페이지 근거와 가상 B2B 캠페인 예시로 따라 적용할 방법을 안내합니다.",
+    "related": [
+      "book-command-marketer-02",
+      "book-command-marketer-03",
+      "marketer-ai-agent-workflow-design"
+    ],
+    "faq_schema": true,
+    "disclosure_short": "Command Marketing 편집 · AI 초안 활용 · 도서 프레임 기반 실무 응용",
+    "disclosure": "제공된 『AI Agent를 지휘하는 마케터』 최종 내지 PDF의 원칙과 공개 소개를 근거로 작성한 Command Marketing 편집 콘텐츠입니다. AI 초안을 활용했으며 저자가 직접 집필한 글은 아닙니다. 도서 페이지 근거와 가상 B2B 캠페인·복사형 지시서·점검표의 편집 응용을 구분합니다. 원본 PDF는 공개하지 않으며 업무 효율·검색 노출·AI 인용·문의·매출을 보장하지 않습니다. 썸네일은 AI 생성 이미지입니다."
+  },
+  {
     "slug": "jev-engineering-guide",
     "title": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법",
     "seo_title": "Jev Engineering 입문: 결정 모델과 마케팅 활용",
@@ -272,11 +304,11 @@
     "series_order": 2,
     "date": "2026-10-14",
     "related": [
+      "command-marketing-book-practical-guide",
       "marketer-ai-agent-workflow-design",
-      "book-command-marketer-03",
-      "geo-content-structure"
+      "book-command-marketer-03"
     ],
-    "modified": "2026-10-15",
+    "modified": "2026-10-16",
     "image": "/assets/blog/book-command-marketer-02.webp",
     "image_jpg": "/assets/blog/book-command-marketer-02.jpg",
     "image_alt": "책 소개 2: 프롬프트보다 업무 지시서, R-G-C-T-O-R를 작성하는 카툰",
@@ -303,10 +335,11 @@
     "series_order": 3,
     "date": "2026-10-14",
     "related": [
+      "command-marketing-book-practical-guide",
       "book-command-marketer-01",
       "ai-search-measurement"
     ],
-    "modified": "2026-10-14",
+    "modified": "2026-10-16",
     "image": "/assets/blog/book-command-marketer-03.webp",
     "image_jpg": "/assets/blog/book-command-marketer-03.jpg",
     "image_alt": "책 소개 3: 21일 작은 업무부터, 실행과 검수를 연습하는 마케터 카툰",
