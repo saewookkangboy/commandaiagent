@@ -6,6 +6,7 @@ import json
 import re
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
+from article_cta import validate_cta_layout
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
@@ -78,6 +79,7 @@ for post in posts:
     used = set(re.findall(r'\[(\d+)\]', source_without_reference_definitions))
     assert used <= refs, (slug, used - refs)
     soup = htmls[DIST / 'blog' / slug / 'index.html']
+    validate_cta_layout(soup.select_one('.article-body'))
     assert soup.h1.get_text() == post['title']
     assert soup.select_one('link[rel="canonical"]')['href'] == ORIGIN + '/blog/' + slug
     assert soup.select_one('meta[name="description"]')['content'] == post['description']

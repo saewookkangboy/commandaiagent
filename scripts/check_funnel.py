@@ -134,6 +134,15 @@ with sync_playwright() as pw:
     for slug, width in ((slug, width) for slug in ('marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide', 'command-marketing-book-practical-guide', 'agentic-ai-harness-loop-graph-jev-marketer-guide') for width in (390, 1440)):
         context,page,sent,mode,errors,outside=setup('/blog/'+slug,width=width)
         assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
+        assert page.locator('.article-cta-inline h3').inner_text() != page.locator('.article-cta-end h3').inner_text()
+        if slug == 'agentic-ai-harness-loop-graph-jev-marketer-guide':
+            assert page.locator('.article-cta-inline').evaluate('e=>e.nextElementSibling.textContent.startsWith("8.")')
+            page.locator('.article-cta-inline').scroll_into_view_if_needed()
+            page.wait_for_timeout(200)
+            assert page.locator('.article-mobile-cta').is_hidden()
+            page.locator('#article-end').scroll_into_view_if_needed()
+            page.wait_for_timeout(200)
+            assert page.locator('.article-mobile-cta').is_hidden()
         assert page.locator('[data-cta-id="end-resource"]').get_attribute('href') == '/resources/rgctor-worksheet'
         article_events = page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="view_blog_article")')
         assert len(article_events)==1 and article_events[0][2]['article_slug']==slug
