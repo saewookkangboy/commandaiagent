@@ -11,6 +11,7 @@ import math
 import xml.etree.ElementTree as ET
 import markdown
 from bs4 import BeautifulSoup
+from article_cta import insert_inline_cta, validate_cta_layout
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
@@ -206,6 +207,13 @@ def article_cta(post, location):
         context_link = ''
         resource_id = resource_path.rsplit('/', 1)[-1]
         secondary = f'<a class="button secondary" href="{resource_path}" data-resource-id="{resource_id}" data-cta-id="{location}-resource" data-position="{position}">{resource_label}</a>'
+    if location == 'inline':
+        if post.get('kind') == 'book-series':
+            heading = '읽은 내용을 내 업무에 대입해 보세요.'
+            copy = '책의 전체 구성에서 지금 필요한 주제를 고르세요. 팀 교육이나 조직 적용이 필요하다면 현재 업무 범위로 문의할 수 있습니다.'
+        else:
+            heading = '지금 읽은 기준으로 업무 한 가지를 정리해 보세요.'
+            copy = '업무 지시서 워크시트에 목표·입력·검수 기준을 적어 보세요. 팀 단위로 적용하려면 현재 운영 흐름을 바탕으로 문의할 수 있습니다.' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표로 현재 게시물을 확인해 보세요. 팀 단위 검수가 필요하면 현재 운영 흐름을 바탕으로 문의할 수 있습니다.'
     label = '실행 기준 이어 보기' if location == 'inline' else '다음 단계'
     return f'''<section class="article-cta article-cta-{location}"{' id="article-end"' if location == 'end' else ''} aria-label="{label}">
 <p class="eyebrow">{label}</p><h3>{heading}</h3><p>{copy}</p>{context_link}<div class="article-cta-actions">{primary}{secondary}</div></section>'''
@@ -214,23 +222,6 @@ def article_cta(post, location):
 def mobile_cta(post):
     return f'''<aside class="article-mobile-cta" aria-label="빠른 다음 행동" hidden>
 {cta_primary(post, 'mobile', 'article-mobile-cta-link button primary')}<button class="article-mobile-cta-close" type="button" aria-label="빠른 다음 행동 닫기">×</button></aside>'''
-
-
-def insert_inline_cta(rendered, cta_markup):
-    """Place one CTA after the first practical example or execution-check section."""
-    useful = re.compile(r'예시|실행\s*체크|체크리스트|점검표')
-    headings = rendered.find_all('h2')
-    anchor = next((heading for heading in headings if useful.search(heading.get_text(' ', strip=True))), None)
-    cta = BeautifulSoup(cta_markup, 'html.parser').find('section')
-    assert cta, 'Inline CTA markup must contain one section.'
-    if anchor:
-        following = anchor.find_next_sibling('h2')
-        if following:
-            following.insert_before(cta)
-        else:
-            rendered.append(cta)
-    else:
-        rendered.append(cta)
 
 
 FOOTER = '''<footer class="blog-footer"><div class="wrap"><a class="text-link" href="/">AI Agent를 지휘하는 마케터</a> · <a href="/blog">블로그</a> · <a href="https://troe.kr/">TROE</a><br>© 2026 TROE. ALL RIGHTS RESERVED.</div></footer><script src="/assets/enhancements.js" defer></script></body></html>'''
@@ -307,6 +298,7 @@ for post in POSTS:
 <section class="blog-section" style="padding:40px 0 70px" aria-labelledby="related-title"><h2 class="extra-title" id="related-title">함께 읽으면 좋은 글</h2><div class="blog-cards">{related}</div><a class="text-link" href="/blog">블로그 전체 보기 →</a></section></main>{FOOTER}'''
     directory = DIST / 'blog' / post['slug']
     directory.mkdir(parents=True, exist_ok=True)
+    validate_cta_layout(BeautifulSoup(html, 'html.parser').select_one('.article-body'))
     (directory / 'index.html').write_text(html)
 
 series_cards = ''.join(card(p) for p in SERIES)
