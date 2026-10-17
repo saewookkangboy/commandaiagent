@@ -2,113 +2,120 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://book.allrounder.im/</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/book-flat.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://book.allrounder.im/blog/agentic-ai-harness-loop-graph-jev-marketer-guide</loc>
+    <lastmod>2026-10-17</lastmod>
+    <image:image>
+      <image:loc>https://book.allrounder.im/assets/blog/agentic-ai-harness-loop-graph-jev-marketer-guide.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/command-marketing-book-practical-guide</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/command-marketing-book-practical-guide.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/jev-engineering-guide</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/jev-engineering-guide.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/why-marketers-need-ai-agents</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/why-marketers-need-ai-agents.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/marketer-ai-agent-workflow-design</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/marketer-ai-agent-workflow-design.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/seo-geo-aieo-guide</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/seo-geo-aieo-guide.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/geo-content-structure</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/geo-content-structure.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/technical-seo-ai-search</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/technical-seo-ai-search.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/rgctor-content-workflow</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/rgctor-content-workflow.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/ai-search-measurement</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/ai-search-measurement.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/book-command-marketer-01</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/book-command-marketer-01.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/book-command-marketer-02</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/book-command-marketer-02.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/book-command-marketer-03</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/book-command-marketer-03.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/consulting</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://book.allrounder.im/resources/rgctor-worksheet</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://book.allrounder.im/resources/content-search-checklist</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
   </url>
   <url>
     <loc>https://book.allrounder.im/resources</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-17</lastmod>
   </url>
 </urlset>
