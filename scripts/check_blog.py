@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
-assert len(posts) == 12
+assert len(posts) == 13
 assert len({post['slug'] for post in posts}) == len(posts)
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
 assert len({post['description'] for post in posts}) == len(posts)
@@ -19,6 +19,15 @@ assert len({post['image'] for post in posts}) == len(posts)
 assert len({post['seo_title'] for post in posts}) == len(posts)
 assert len({post['primary_keyword'] for post in posts}) == len(posts)
 assert len({post['search_summary'] for post in posts}) == len(posts)
+
+SOURCE_PROVENANCE_MARKERS = ('pdf', '최종 내지', '최종내지', '페이지 마커', '인쇄 페이지', 'footer')
+BOOK_TITLE = 'AI Agent를 지휘하는 마케터'
+PUBLIC_SOURCE_REQUIREMENTS = {
+    'book-command-marketer-01': ('https://book.allrounder.im/', 'https://developers.google.com/search/docs/appearance/ai-features'),
+    'book-command-marketer-02': ('https://book.allrounder.im/', 'https://developers.google.com/search/docs/appearance/ai-features'),
+    'book-command-marketer-03': ('https://book.allrounder.im/', 'https://developers.google.com/search/docs/appearance/ai-features'),
+    'command-marketing-book-practical-guide': ('https://book.allrounder.im/', 'https://www.anthropic.com/engineering/building-effective-agents'),
+}
 
 
 def local_file(path):
@@ -34,6 +43,8 @@ def local_file(path):
 
 htmls = {p: BeautifulSoup(p.read_text(), 'html.parser') for p in DIST.rglob('*.html')}
 for file, soup in htmls.items():
+    visible_html = soup.get_text(' ', strip=True).lower()
+    assert all(marker not in visible_html for marker in SOURCE_PROVENANCE_MARKERS), (file, 'provided-file provenance is visible')
     assert len(soup.select('h1')) == 1, file
     ids = [tag['id'] for tag in soup.select('[id]')]
     assert len(ids) == len(set(ids)), (file, 'duplicate IDs')
@@ -56,10 +67,15 @@ for post in posts:
     slug = post['slug']
     source = (ROOT / 'content/blog' / f'{slug}.md').read_text()
     assert source.splitlines()[0] == '# ' + post['title']
-    refs = set(re.findall(r'^\[(\d+)\]:\s+https?://\S+\s+"[^"\n]+"\s*$', source, re.M))
+    source_without_reference_definitions = re.sub(r'^\[\d+\]:.*$', '', source, flags=re.M)
+    source_visible = re.sub(r'\]\([^)]+\)', ']', source_without_reference_definitions).lower()
+    assert all(marker not in source_visible for marker in SOURCE_PROVENANCE_MARKERS), (slug, 'provided-file provenance is in the manuscript')
+    reference_entries = re.findall(r'^\[(\d+)\]:\s+(https?://\S+)\s+"[^"\n]+"\s*$', source, re.M)
+    refs = {number for number, _ in reference_entries}
+    ref_urls = {url for _, url in reference_entries}
     assert len(refs) >= 2, slug
-    inline_source = re.sub(r'^\[\d+\]:.*$', '', source, flags=re.M)
-    used = set(re.findall(r'\[(\d+)\]', inline_source))
+    assert all(url in ref_urls for url in PUBLIC_SOURCE_REQUIREMENTS.get(slug, ())), (slug, ref_urls)
+    used = set(re.findall(r'\[(\d+)\]', source_without_reference_definitions))
     assert used <= refs, (slug, used - refs)
     soup = htmls[DIST / 'blog' / slug / 'index.html']
     assert soup.h1.get_text() == post['title']
@@ -90,6 +106,19 @@ for post in posts:
     assert image['loading'] == 'eager' and image['width'] == '1200' and image['height'] == '675'
     assert len(soup.select('.article-body h2')) >= 4
     assert '[1]' not in soup.select_one('.article-body').get_text(), (slug, 'unresolved reference')
+    reference_urls = dict(reference_entries)
+    rendered_reference_numbers = set()
+    for link in soup.select('.article-body a[href]'):
+        number = link.get_text(strip=True)
+        if re.fullmatch(r'\d+', number):
+            assert number in reference_urls and link['href'] == reference_urls[number], (slug, 'mismatched inline reference', number, link['href'])
+            rendered_reference_numbers.add(number)
+    named_references = set()
+    for label, number in re.findall(r'\[([^\[\]\n]+)\]\[(\d+)\]', source):
+        if not label.isdigit():
+            assert any(a.get_text(strip=True) == label and a['href'] == reference_urls[number] for a in soup.select('.article-body a[href]')), (slug, 'mismatched named reference', label)
+            named_references.add(number)
+    assert used <= rendered_reference_numbers | named_references, (slug, 'missing inline reference', used - rendered_reference_numbers - named_references)
     graph = json.loads(soup.select_one('script[type="application/ld+json"]').string)
     article = next(row for row in graph['@graph'] if row['@type'] == 'BlogPosting')
     assert article['image']['url'] == og
@@ -130,11 +159,27 @@ for post in posts:
         assert post['kind'] == 'guide' and post['book_based'] is True
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert author['@type'] == 'Organization' and not soup.select('.series-nav')
-        assert soup.select_one('.article-disclosure-short').get_text() == post['disclosure_short']
-        assert soup.select_one('.article-disclosure-details p').get_text() == post['disclosure']
-        assert '도서 근거와 편집 범위' in source and '편집 응용' in source
+        disclosure_short = soup.select_one('.article-disclosure-short').get_text()
+        disclosure_detail = soup.select_one('.article-disclosure-details p').get_text()
+        assert 'AI 초안 활용' in disclosure_short and '도서 주제를 바탕으로 한 실무 응용' in disclosure_short
+        assert 'AI 초안 활용' in disclosure_detail and '저자가 직접 집필한 글은 아닙니다' in disclosure_detail
+        assert '함께 읽을 내용과 적용 범위' in source and '편집 응용' in source
+        assert BOOK_TITLE in source and '박충효' in source and 'AI 초안' in source
         assert len(soup.select('.article-body pre code')) == 1
         assert len(next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']) == 5
+        context_links = soup.select('.article-cta a[data-consulting-path], .article-mobile-cta a[data-consulting-path]')
+        assert len(context_links) == 3
+        assert all(f'from={slug}' in a['href'] and 'work=review' in a['href'] and 'intent=workflow' in a['href'] for a in context_links)
+        assert len(soup.select('.article-cta a[href="/resources/rgctor-worksheet"]')) == 2
+    if slug == 'agentic-ai-harness-loop-graph-jev-marketer-guide':
+        assert post['date'] == '2026-10-17' and post['kind'] == 'guide'
+        assert author['@type'] == 'Organization'
+        assert post['disclosure'] == soup.select_one('.article-disclosure-details p').get_text()
+        assert len(soup.select('.article-body pre code')) == 4
+        assert '필수 교체 단계가 아닙니다' in source
+        assert '확신도는 허가나 실제 정답률이 아닙니다' in source
+        assert len(next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']) == 6
+        assert len(refs) == 9
         context_links = soup.select('.article-cta a[data-consulting-path], .article-mobile-cta a[data-consulting-path]')
         assert len(context_links) == 3
         assert all(f'from={slug}' in a['href'] and 'work=review' in a['href'] and 'intent=workflow' in a['href'] for a in context_links)
@@ -143,8 +188,10 @@ for post in posts:
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1
         assert len(soup.select('.series-nav ol a')) == 3
-        assert len(re.findall(r'도서 p', source)) >= 4
-        assert '편집 응용' in source and '도서 근거와 편집 범위' in source
+        assert '편집 응용' in source and '함께 읽을 내용과 적용 범위' in source
+        assert BOOK_TITLE in source and '박충효' in source and 'AI 초안' in source
+        assert 'AI 초안 활용' in soup.select_one('.article-disclosure-short').get_text()
+        assert '저자가 직접 집필한 블로그 글은 아닙니다' in soup.select_one('.article-disclosure-details p').get_text()
     print('PASS', slug)
 
 index = htmls[DIST / 'blog/index.html']
@@ -191,7 +238,7 @@ intro, *link_sections = re.split(r'^## [^\n]+\n', llms, flags=re.M)
 assert intro.startswith('# AI Agent를 지휘하는 마케터\n\n> ')
 for label in ('도서와 운영 관점', '업무 지시서와 도서 구성', '대상 독자와 읽기 방식',
               '도입 판단과 정밀 설계의 구분', '검색·콘텐츠 운영의 범위',
-              '도서 근거와 편집 콘텐츠', '자료 접근과 문의의 의미', '인용과 해석 기준'):
+              '도서 소개와 편집 콘텐츠', '자료 접근과 문의의 의미', '인용과 해석 기준'):
     assert '**' + label + '.**' in intro, ('Missing pre-H2 llms detail', label)
 assert len(link_sections) >= 5
 for section in link_sections:
@@ -207,10 +254,11 @@ for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):
         if url.fragment:
             assert BeautifulSoup(target.read_text(), 'html.parser').find(id=unquote(url.fragment)), href
 assert '도서 발췌나 저자의 직접 발언이 아닙니다' in llms
-assert '책 소개 시리즈 3편은 제공 PDF를 요약' in llms
+assert '책 소개 시리즈 3편은 『AI Agent를 지휘하는 마케터』의 주제와 구성을 소개하는 편집 글입니다' in llms
+assert all(marker not in llms.lower() for marker in SOURCE_PROVENANCE_MARKERS), 'provided-file provenance is in llms.txt'
 assert '박충효·TROE 표기의 사용자 제공 HTML 원고' in llms
 assert 'Jev 입문을 제외한' in llms and '**결정 모델과 Jev Engineering.**' in intro
 assert not list(DIST.rglob('*.pdf'))
 assert not list((ROOT / 'content').rglob('*.pdf'))
 assert set(json.loads((ROOT / 'content/analytics-events.json').read_text())['article_slugs']) == {p['slug'] for p in posts}
-print(f'PASS: {len(posts)} articles, {len(urls)} indexable URLs, unique sharing images, source references, series navigation, analytics slugs, all local links, no source PDF exposure')
+print(f'PASS: {len(posts)} articles, {len(urls)} indexable URLs, unique sharing images, public source references, series navigation, analytics slugs, all local links, no supplied-file provenance')
