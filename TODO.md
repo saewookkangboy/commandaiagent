@@ -134,4 +134,4 @@
 
 ## 2026-10-19 네이버 서치어드바이저 소유확인
 
-- [ ] 운영 홈의 초기 HTML `<head>`에 사용자 제공 `<meta name="naver-site-verification" content="b8f0f6212f1c00a481d9634ce7eec49d0afe4b46" />`를 중복 없이 반영하고 이후 블로그 재생성에도 보존한다. 기존 콘텐츠·계측·검색 문서는 변경하지 않는다. 기존 GitHub main·운영 배포와 실제 HTTP 응답을 확인하며 네이버 관리자에서의 소유확인 완료와는 구분한다.
+- [x] 운영 홈의 초기 HTML `<head>`에 사용자 제공 `<meta name="naver-site-verification" content="b8f0f6212f1c00a481d9634ce7eec49d0afe4b46" />`를 중복 없이 반영하고 이후 블로그 재생성에도 보존한다. 기존 콘텐츠·계측·검색 문서는 변경하지 않는다. 기존 GitHub main·운영 배포와 실제 HTTP 응답을 확인하며 네이버 관리자에서의 소유확인 완료와는 구분한다.
