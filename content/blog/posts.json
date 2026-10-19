@@ -1,9 +1,9 @@
 [
   {
     "slug": "book-ai-agent-roles-reading-guide",
-    "title": "책 속 AI Agent 17가지 역할: 내 업무에 맞게 읽는 가이드",
-    "seo_title": "AI Agent 역할별 특징: 책에서 찾는 마케팅 업무 가이드",
-    "description": "AI Agent 역할별 특징을 『AI Agent를 지휘하는 마케터』의 17개 업무로 정리합니다. 리서치·콘텐츠·광고·CRM·분석에서 Agent가 맡는 일과 책에서 확인할 입력·산출물·검수 기준을 살펴보세요.",
+    "title": "마케팅 AI 에이전트 17가지 역할: 책에서 확인할 업무별 특징",
+    "seo_title": "AI Agent 역할별 특징: 마케팅 업무 17가지와 책 읽기 가이드",
+    "description": "AI Agent 역할별 특징과 마케팅 AI 에이전트 업무를 책의 17개 역할로 정리합니다. 『AI Agent를 지휘하는 마케터』에서 리서치·콘텐츠·광고·CRM·분석의 입력·산출물·검수 기준을 확인하세요.",
     "category": "책 독서 가이드 · AI Agent 역할별 특징",
     "kind": "guide",
     "book_based": true,
@@ -15,14 +15,15 @@
     "image_alt": "AI Agent, 역할부터 이해하기와 책에서 찾는 내 업무 가이드라는 손글씨, 책을 읽는 가상 마케터와 리서치·콘텐츠·분석 로봇의 카툰",
     "primary_keyword": "AI Agent 역할별 특징",
     "secondary_keywords": [
-      "AI Agent를 지휘하는 마케터 책 내용",
       "마케팅 AI 에이전트 역할",
-      "리서치 콘텐츠 광고 CRM Agent",
-      "AI Agent 입력과 산출물",
-      "AI Agent 검수 기준"
+      "AI Agent를 지휘하는 마케터 책 내용",
+      "마케팅 AI 에이전트 업무",
+      "콘텐츠 기획 AI 에이전트",
+      "CRM AI 에이전트 역할",
+      "AI 에이전트 검수 기준"
     ],
-    "search_intent": "책의 업무별 AI Agent 특징과 실제 다루는 내용을 짧게 확인하고 자신의 리서치·콘텐츠·광고·CRM·분석 업무에 맞는 파트를 찾으려는 도서 검토 및 정보 탐색 의도.",
-    "search_summary": "AI Agent 역할별 특징은 조사·기획·제작·운영·검수에서 무엇을 맡기고 무엇을 사람이 결정하는지에 있습니다. 책의 17개 역할과 확인할 내용을 짧게 안내해 내 업무에 맞는 읽기 경로를 찾도록 돕습니다.",
+    "search_intent": "마케팅 AI 에이전트가 맡는 업무와 역할별 차이를 비교하고 『AI Agent를 지휘하는 마케터』의 어느 장에서 입력·산출물·검수를 확인할지 찾는 정보 탐색 및 도서 검토 의도. 구축 방법·도구 추천·자동 실행 실습과 구분한 독서 가이드.",
+    "search_summary": "AI Agent 역할별 특징은 리서치, 콘텐츠 제작, 광고·CRM·성과분석에서 맡는 일과 검수 지점에 따라 다릅니다. 책의 17개 업무 역할과 준비할 자료·산출물을 비교하고, 내 업무에 맞는 장과 읽기 경로를 확인하세요.",
     "related": [
       "book-command-marketer-01",
       "book-command-marketer-02",

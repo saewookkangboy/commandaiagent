@@ -57,7 +57,7 @@
 
 ## SEO·GEO·AIEO 실무 가이드 11편
 
-- [AI Agent 역할별 특징: 책에서 찾는 마케팅 업무 가이드](https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide): AI Agent 역할별 특징은 조사·기획·제작·운영·검수에서 무엇을 맡기고 무엇을 사람이 결정하는지에 있습니다. 책의 17개 역할과 확인할 내용을 짧게 안내해 내 업무에 맞는 읽기 경로를 찾도록 돕습니다.
+- [AI Agent 역할별 특징: 마케팅 업무 17가지와 책 읽기 가이드](https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide): AI Agent 역할별 특징은 리서치, 콘텐츠 제작, 광고·CRM·성과분석에서 맡는 일과 검수 지점에 따라 다릅니다. 책의 17개 업무 역할과 준비할 자료·산출물을 비교하고, 내 업무에 맞는 장과 읽기 경로를 확인하세요.
 - [Agentic AI 마케팅: Harness·Loop·Graph·Jev](https://book.allrounder.im/blog/agentic-ai-harness-loop-graph-jev-marketer-guide): Agentic AI 마케팅의 기술 대응은 운영 규칙, 제한된 반복, 상태·승인 경로와 좁은 판단을 분리하는 일입니다. 2026년10월 공개 근거와 B2B 예시, 로컬 정책 코드·한국어 평가·4주 로드맵으로 Harness·Loop·Graph·Jev를 업무에 조합합니다.
 - [AI Agent를 지휘하는 마케터 실무 활용법](https://book.allrounder.im/blog/command-marketing-book-practical-guide): AI 마케팅 책 실무 활용은 한 업무의 입력 자료, R-G-C-T-O-R 지시서, 아웃라인 승인과 초안 검수, 인계·회고를 연결하는 일입니다. 도서의 핵심 원칙과 가상 B2B 캠페인 예시로 따라 적용할 방법을 안내합니다.
 - [Jev Engineering 입문: 결정 모델과 마케팅 활용](https://book.allrounder.im/blog/jev-engineering-guide): Jev Engineering은 LLM의 생성, Jev의 닫힌 판단, 코드의 정확한 실행을 분리하는 설계 관점입니다. 마케팅 적용 8가지와 확신도·프롬프트 인젝션·한국어 검증 조건, 도입 6단계를 살펴봅니다.
