@@ -253,3 +253,5 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 ### 책 속 AI Agent 역할별 독서 가이드 — 2026-10-19
 
 `/blog/book-ai-agent-roles-reading-guide`는 Part4의5개, Part5의6개, Part6의6개로 총17개 업무별 Agent의 특징과 책에서 확인할 내용을 소개합니다. 기존 소개 시리즈3편을 유지한 독립 독서 가이드이며 저자 직접 집필·도서 전체 대체·자동 실행·성과 보장을 주장하지 않습니다. 중간과 후반에 서로 다른 안내 문구의 책 CTA를1개씩 배치하고 기존 교보문고·전체 목차로 연결합니다. 카툰·손글씨 썸네일과 고유 메타·FAQ·관련글·공통계측의 새 글 문맥을 연결하며 기존 문의/분석 실행 코드와24개 이벤트 의미는 보존합니다.
+
+운영 발행 확인: 2026-10-19 PR#13을 main에 병합한 `50527e5822e5deaa990ef801bc9872138f9e7a15`의 콘텐츠가 https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide 에서 HTTP200으로 응답했습니다. 17개 역할, 중간·후반 책 CTA 각1개(중간은8번째 역할 뒤), sitemap20개, llms 최신 글·검토일과 썸네일·계측 설정 등8개 운영 파일이 생성본과 바이트 일치했습니다. Googlebot·Yeti·OAI-SearchBot·ChatGPT-User·Claude-SearchBot·Claude-User의 새 글 응답도200입니다. 검색 색인·AI인용·전환 성과는 보장하지 않으며 이번 글의 GA4/Meta 관리자 집계 재감사는 수행하지 않았습니다.
