@@ -163,7 +163,7 @@ python3 scripts/serve_preview.py --port 4173
 8. Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법
 9. 『AI AGENT를 지휘하는 마케터』를 실제 실무에서 활용하는 방법
 10. Agentic AI 시대 마케터의 기술 대응: Harness·Loop·Graph·Jev Engineering 실무 가이드
-11. 책 속 AI Agent17가지 역할: 내 업무에 맞게 읽는 가이드
+11. 마케팅 AI 에이전트17가지 역할: 책에서 확인할 업무별 특징
 
 Jev 입문을 제외한 실무 가이드 9편은 공개 출처 또는 제공 도서 프레임 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. 책 소개 시리즈 3편은 도서의 핵심 내용을 요약·소개합니다. 가상 사례와 체크리스트는 편집 응용으로 구분하며 저자의 직접 집필 글이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
 
@@ -187,7 +187,7 @@ python3 scripts/check_blog.py
 
 ### 검색 의도별 메타데이터 편집
 
-`posts.json`의 `title`은 원고 H1, `seo_title`은 검색·OG·Twitter 제목입니다. `description`은 페이지 설명과 카드 요약에 사용합니다. `primary_keyword`와 `secondary_keywords`는 대표 의도와 보조 주제를 구분하며, `search_summary`는 화면에 보이는 직접 요약입니다. 기존 URL·H1·근거·썸네일은 유지합니다.
+`posts.json`의 `title`은 원고 H1, `seo_title`은 검색·OG·Twitter 제목입니다. `description`은 페이지 설명과 카드 요약에 사용합니다. `primary_keyword`와 `secondary_keywords`는 대표 의도와 보조 주제를 구분하며, `search_summary`는 화면에 보이는 직접 요약입니다. 기존 URL·근거·썸네일은 유지하며, 승인된 SEO 편집에서는 검색용 제목과 H1을 실제 콘텐츠에 맞춰 함께 수정할 수 있습니다.
 
 요약과 주제 라벨은 초기 HTML에 실제로 표시하고 동일 내용을 BlogPosting의 `abstract`·`keywords`·`about`과 `article:tag`에 사용합니다. `meta keywords`는 편집 주제 보조 정보일 뿐 Google의 색인·순위에 영향을 주지 않습니다. 검색량·유입·AI 인용 상승을 측정하거나 보장한 것이 아닙니다. [편집 원칙과 공식 근거](docs/seo/metadata-principles.md)를 참고하세요.
 
@@ -255,3 +255,9 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 `/blog/book-ai-agent-roles-reading-guide`는 Part4의5개, Part5의6개, Part6의6개로 총17개 업무별 Agent의 특징과 책에서 확인할 내용을 소개합니다. 기존 소개 시리즈3편을 유지한 독립 독서 가이드이며 저자 직접 집필·도서 전체 대체·자동 실행·성과 보장을 주장하지 않습니다. 중간과 후반에 서로 다른 안내 문구의 책 CTA를1개씩 배치하고 기존 교보문고·전체 목차로 연결합니다. 카툰·손글씨 썸네일과 고유 메타·FAQ·관련글·공통계측의 새 글 문맥을 연결하며 기존 문의/분석 실행 코드와24개 이벤트 의미는 보존합니다.
 
 운영 발행 확인: 2026-10-19 PR#13을 main에 병합한 `50527e5822e5deaa990ef801bc9872138f9e7a15`의 콘텐츠가 https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide 에서 HTTP200으로 응답했습니다. 17개 역할, 중간·후반 책 CTA 각1개(중간은8번째 역할 뒤), sitemap20개, llms 최신 글·검토일과 썸네일·계측 설정 등8개 운영 파일이 생성본과 바이트 일치했습니다. Googlebot·Yeti·OAI-SearchBot·ChatGPT-User·Claude-SearchBot·Claude-User의 새 글 응답도200입니다. 검색 색인·AI인용·전환 성과는 보장하지 않으며 이번 글의 GA4/Meta 관리자 집계 재감사는 수행하지 않았습니다.
+
+### 역할별 독서 가이드 추가 SEO — 2026-10-19
+
+승인된 제안에 따라 대표 키워드는 ‘AI Agent 역할별 특징’으로 유지하고 제목·H1·도입부에 마케팅 업무와 독서 목적을 보강했습니다. 17개 역할명은 보존한 채 고객 인사이트·경쟁사 분석·콘텐츠 기획·CRM·리포팅의 한글 표현을 해당 설명에 배치했습니다. FAQ는 기존 질문과 통합해6개로 구성하며 가시 답변과 스키마를 일치시킵니다. 책 소개2편과 실무 활용 글에는 역할 선택 문맥의 링크를 각각1개 추가하고, 도입 필요성·워크플로우 설계는 기존 전문 글로 연결합니다. 대표1+보조6개 주제·llms 요약·목록/관련 카드 메타를 동기화하고 기존 URL·썸네일·20개 사이트맵·24개 공통 이벤트는 유지합니다.
+
+Search Console의 효과 관찰은 별도 수동 확인입니다. 이 글의 정규URL로 페이지 필터를 설정한 뒤 도서명 검색과 일반 업무 검색의 노출·클릭·CTR·평균 게재순위를 구분합니다. 처음2~4주는 제안된 관찰 기간이며 자동 예약·색인 기한·성과 보장이 아닙니다. 노출이 없으면 먼저 색인 상태를 확인하고, 검색 유입 이후 책 CTA 클릭은 구매 완료와 구분합니다. 이번 수정에서는 실제 검색어 집계·자동 모니터·계정 설정 변경·실제 문의/구매를 수행하지 않습니다.

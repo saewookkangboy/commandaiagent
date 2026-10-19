@@ -197,7 +197,28 @@ for post in posts:
         role_headings = re.findall(r'^### (\d+)\. (.+ Agent)$', source, re.M)
         assert [int(number) for number, _ in role_headings] == list(range(1, 18))
         assert '17개' in source and '18개' not in source
-        assert len(next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']) == 4
+        assert post['primary_keyword'] == 'AI Agent 역할별 특징'
+        assert post['seo_title'] == 'AI Agent 역할별 특징: 마케팅 업무 17가지와 책 읽기 가이드'
+        for term in ('마케팅 AI 에이전트 역할', '마케팅 AI 에이전트 업무', '고객 인사이트 AI 에이전트',
+                     '경쟁사 분석 AI 에이전트', '콘텐츠 기획 AI 에이전트', 'CRM AI 에이전트 역할',
+                     '마케팅 데이터 리포팅 AI 에이전트', 'AI 에이전트 검수 기준'):
+            assert term in source, (slug, 'missing natural-language topic', term)
+        faq = next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']
+        assert len(faq) == 6 and len({row['name'] for row in faq}) == 6
+        heading = next(h for h in soup.select('.article-body h2') if h.get_text() == '자주 묻는 질문')
+        visible = []
+        for node in heading.find_next_siblings():
+            if node.name == 'h2':
+                break
+            if node.name == 'h3':
+                visible.append((node.get_text(' ', strip=True), node.find_next_sibling('p').get_text(' ', strip=True)))
+        assert visible == [(row['name'], row['acceptedAnswer']['text']) for row in faq]
+        for linked in ('book-command-marketer-02', 'command-marketing-book-practical-guide'):
+            linked_source = (ROOT / 'content/blog' / f'{linked}.md').read_text()
+            assert linked_source.count('](/blog/' + slug + ')') == 1
+            assert '마케팅 AI 에이전트 17가지 역할과 독서 가이드' in linked_source
+        for linked in ('why-marketers-need-ai-agents', 'marketer-ai-agent-workflow-design'):
+            assert '](/blog/' + linked + ')' in source
         inline = soup.select_one('.article-cta-inline')
         end = soup.select_one('.article-cta-end')
         assert inline and end and 'Part 5. 랜딩' in inline.find_next_sibling('h2').get_text()
