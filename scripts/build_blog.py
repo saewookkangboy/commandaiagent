@@ -38,6 +38,12 @@ for name, event in ANALYTICS_CONFIG['events'].items():
 ANALYTICS = '<script src="/assets/analytics-config.js" defer></script><script src="/assets/analytics.js" defer></script>'
 BOOK_IMAGE = ORIGIN + '/assets/book-flat.jpg'
 SITE = json.loads((ROOT / 'content/site.json').read_text())
+HOME_DESCRIPTION = SITE['home_description']
+assert HOME_DESCRIPTION == HOME_DESCRIPTION.strip() and 1 <= len(HOME_DESCRIPTION) <= 80, 'Home description must meet the supplied Naver URL-inspection recommendation.'
+for attribute, name in (('name', 'description'), ('property', 'og:description'), ('name', 'twitter:description')):
+    pattern = rf'(<meta\s+{attribute}="{re.escape(name)}"\s+content=")[^"]*("\s*/?>)'
+    LANDING, count = re.subn(pattern, lambda match: match[1] + escape(HOME_DESCRIPTION, quote=True) + match[2], LANDING)
+    assert count == 1, f'Home {name} metadata is missing or duplicated.'
 POST_MODIFIED = {post['slug']: post.get('modified', post['date']) for post in POSTS}
 for post in POSTS:
     assert date.fromisoformat(POST_MODIFIED[post['slug']]) >= date.fromisoformat(post['date']), post['slug']

@@ -50,6 +50,13 @@ verification = home.select('meta[name="naver-site-verification"]')
 assert len(verification) == 1, 'Naver ownership verification tag is missing or duplicated'
 assert verification[0].parent is home.head, 'Naver verification tag must be in the initial HTML head'
 assert verification[0]['content'] == 'b8f0f6212f1c00a481d9634ce7eec49d0afe4b46'
+home_description = json.loads((ROOT / 'content/site.json').read_text())['home_description']
+assert home_description == home_description.strip() and 1 <= len(home_description) <= 80, 'Home description exceeds the supplied Naver URL-inspection recommendation.'
+for selector in ('meta[name="description"]', 'meta[property="og:description"]', 'meta[name="twitter:description"]'):
+    tags = home.select(selector)
+    assert len(tags) == 1 and tags[0].parent is home.head, (selector, 'missing, duplicated or outside the initial head')
+    assert tags[0]['content'] == home_description, (selector, 'home description differs from site configuration')
+assert all(home_description != post['description'] for post in posts), 'Do not replace distinct blog descriptions with the home description.'
 for file, soup in htmls.items():
     visible_html = soup.get_text(' ', strip=True).lower()
     assert all(marker not in visible_html for marker in SOURCE_PROVENANCE_MARKERS), (file, 'provided-file provenance is visible')
