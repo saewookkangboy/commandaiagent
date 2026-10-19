@@ -184,10 +184,11 @@ def consulting_href(post, location='direct'):
 
 def cta_primary(post, location, class_name='button primary'):
     position = f'article-{location}' if location != 'mobile' else 'mobile-sticky'
-    cta_type = 'book' if post.get('kind') == 'book-series' else 'team'
+    cta_type = 'book' if post.get('kind') == 'book-series' or post.get('cta_goal') == 'book' else 'team'
     cta_id = f'{location}-{cta_type}'
     if cta_type == 'book':
-        return f'<a class="{class_name}" href="{escape(PURCHASE_URL, quote=True)}" target="_blank" rel="noreferrer" data-cta="purchase" data-position="{position}" data-cta-id="{cta_id}">교보문고에서 책 구매</a>'
+        label = escape(post.get('book_cta_label', '교보문고에서 책 구매'))
+        return f'<a class="{class_name}" href="{escape(PURCHASE_URL, quote=True)}" target="_blank" rel="noreferrer" data-cta="purchase" data-position="{position}" data-cta-id="{cta_id}">{label}</a>'
     return f'<a class="{class_name}" href="{escape(consulting_href(post, location), quote=True)}" data-consulting-path data-position="{position}" data-cta-id="{cta_id}">팀 검수·운영 체계 문의</a>'
 
 
@@ -214,6 +215,12 @@ def article_cta(post, location):
         else:
             heading = '지금 읽은 기준으로 업무 한 가지를 정리해 보세요.'
             copy = '업무 지시서 워크시트에 목표·입력·검수 기준을 적어 보세요. 팀 단위로 적용하려면 현재 운영 흐름을 바탕으로 문의할 수 있습니다.' if resource_path.endswith('rgctor-worksheet') else '콘텐츠·검색 점검표로 현재 게시물을 확인해 보세요. 팀 단위 검수가 필요하면 현재 운영 흐름을 바탕으로 문의할 수 있습니다.'
+    if post.get('cta_goal') == 'book':
+        content = post['cta_copy'][location]
+        heading = escape(content['heading'])
+        copy = escape(content['copy'])
+        context_link = ''
+        secondary = f'<a class="button secondary" href="/#contents" data-cta="preview" data-cta-id="{location}-contents" data-position="{position}">책 전체 목차 보기</a>'
     label = '실행 기준 이어 보기' if location == 'inline' else '다음 단계'
     return f'''<section class="article-cta article-cta-{location}"{' id="article-end"' if location == 'end' else ''} aria-label="{label}">
 <p class="eyebrow">{label}</p><h3>{heading}</h3><p>{copy}</p>{context_link}<div class="article-cta-actions">{primary}{secondary}</div></section>'''
@@ -270,6 +277,9 @@ for post in POSTS:
     if is_series:
         disclosure = SERIES_DISCLOSURE
         disclosure_short = SERIES_SHORT_DISCLOSURE
+    elif post.get('book_overview'):
+        disclosure = post['disclosure']
+        disclosure_short = post['disclosure_short']
     elif post.get('book_based'):
         disclosure = BOOK_BASED_GUIDE_DISCLOSURE
         disclosure_short = BOOK_BASED_GUIDE_SHORT_DISCLOSURE
