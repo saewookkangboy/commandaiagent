@@ -45,6 +45,11 @@ def local_file(path):
 
 
 htmls = {p: BeautifulSoup(p.read_text(), 'html.parser') for p in DIST.rglob('*.html')}
+home = htmls[DIST / 'index.html']
+verification = home.select('meta[name="naver-site-verification"]')
+assert len(verification) == 1, 'Naver ownership verification tag is missing or duplicated'
+assert verification[0].parent is home.head, 'Naver verification tag must be in the initial HTML head'
+assert verification[0]['content'] == 'b8f0f6212f1c00a481d9634ce7eec49d0afe4b46'
 for file, soup in htmls.items():
     visible_html = soup.get_text(' ', strip=True).lower()
     assert all(marker not in visible_html for marker in SOURCE_PROVENANCE_MARKERS), (file, 'provided-file provenance is visible')
