@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
-assert len(posts) == 13
+assert len(posts) >= 14
+assert 'book-ai-agent-roles-reading-guide' in {post['slug'] for post in posts}
 assert len({post['slug'] for post in posts}) == len(posts)
 assert len([p for p in posts if p['kind'] == 'book-series']) == 3
 assert len({post['description'] for post in posts}) == len(posts)
@@ -28,6 +29,7 @@ PUBLIC_SOURCE_REQUIREMENTS = {
     'book-command-marketer-02': ('https://book.allrounder.im/', 'https://developers.google.com/search/docs/appearance/ai-features'),
     'book-command-marketer-03': ('https://book.allrounder.im/', 'https://developers.google.com/search/docs/appearance/ai-features'),
     'command-marketing-book-practical-guide': ('https://book.allrounder.im/', 'https://www.anthropic.com/engineering/building-effective-agents'),
+    'book-ai-agent-roles-reading-guide': ('https://book.allrounder.im/', 'https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=402869781'),
 }
 
 
@@ -186,6 +188,28 @@ for post in posts:
         assert len(context_links) == 3
         assert all(f'from={slug}' in a['href'] and 'work=review' in a['href'] and 'intent=workflow' in a['href'] for a in context_links)
         assert len(soup.select('.article-cta a[href="/resources/rgctor-worksheet"]')) == 2
+    if slug == 'book-ai-agent-roles-reading-guide':
+        assert post['kind'] == 'guide' and post['book_based'] and post['book_overview']
+        assert article['isBasedOn']['name'] == BOOK_TITLE
+        assert author['@type'] == 'Organization' and not soup.select('.series-nav')
+        assert post['disclosure'] == soup.select_one('.article-disclosure-details p').get_text()
+        assert post['disclosure_short'] == soup.select_one('.article-disclosure-short').get_text()
+        role_headings = re.findall(r'^### (\d+)\. (.+ Agent)$', source, re.M)
+        assert [int(number) for number, _ in role_headings] == list(range(1, 18))
+        assert '17개' in source and '18개' not in source
+        assert len(next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']) == 4
+        inline = soup.select_one('.article-cta-inline')
+        end = soup.select_one('.article-cta-end')
+        assert inline and end and 'Part 5. 랜딩' in inline.find_next_sibling('h2').get_text()
+        assert len(inline.find_all_previous('h3')) == 8
+        for location in ('inline', 'end'):
+            link = soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-book"]')
+            assert link.get_text() == '책을 통해서 확인해보세요'
+            assert link['href'] == 'https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP'
+            assert link['data-cta'] == 'purchase' and link['data-position'] == f'article-{location}'
+            assert soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-contents"]')['href'] == '/#contents'
+        assert soup.select_one('.article-mobile-cta a')['data-cta-id'] == 'mobile-book'
+        assert not soup.select('.article-cta a[data-consulting-path]')
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1

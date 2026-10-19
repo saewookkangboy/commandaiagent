@@ -161,4 +161,37 @@ with sync_playwright() as pw:
         assert not sent and not errors
         context.close()
     print('PASS new article mobile/desktop CTA navigation, prefill and private-data-free source context; no real leads',flush=True)
+    for width in (360, 390, 768, 1440):
+        slug = 'book-ai-agent-roles-reading-guide'
+        context,page,sent,mode,errors,outside=setup('/blog/'+slug,width=width)
+        assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
+        assert page.locator('.article-cta-inline h3').inner_text() != page.locator('.article-cta-end h3').inner_text()
+        for location in ('inline', 'end'):
+            panel = page.locator('.article-cta-'+location)
+            panel.scroll_into_view_if_needed()
+            page.wait_for_timeout(1200)
+            assert page.locator('.article-mobile-cta').is_hidden()
+            link = panel.locator('[data-cta="purchase"]')
+            assert link.get_attribute('data-cta-id') == location+'-book'
+            assert link.inner_text() == '책을 통해서 확인해보세요'
+            assert panel.locator('[data-cta-id="'+location+'-contents"]').get_attribute('href') == '/#contents'
+            with page.expect_popup() as opened:
+                link.click()
+            opened.value.close()
+        ga = page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="click_book_purchase")')
+        meta = page.evaluate('window.__meta.filter(e=>e[0]==="trackCustom"&&e[1]==="click_book_purchase")')
+        assert len(ga) == len(meta) == 2
+        assert [row[2]['cta_id'] for row in ga] == ['inline-book', 'end-book']
+        for google,facebook in zip(ga,meta):
+            assert google[1:3] == facebook[1:3]
+            assert google[2]['article_slug'] == slug and google[2]['content_id'] == slug
+            assert facebook[3]['eventID'] == google[2]['event_id']
+        exposure = page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="view_conversion_cta")')
+        assert {'inline-book', 'end-book'} <= {row[2]['cta_id'] for row in exposure}
+        assert not page.evaluate('window.__ga.some(e=>e[1]==="lead_form_success"||e[1]==="purchase")')
+        assert not sent and not errors
+        blocked_hosts = {'product.kyobobook.co.kr', 'www.kyobobook.co.kr', 'www.googletagmanager.com'}
+        assert {urlsplit(url).hostname for url in outside} <= blocked_hosts, sorted({urlsplit(url).hostname for url in outside})
+        context.close()
+    print('PASS book reading guide at360/390/768/1440px: two book CTA panels, sticky exclusion, matching GA4/Meta purchase-intent and exposure; zero live requests',flush=True)
     browser.close()
