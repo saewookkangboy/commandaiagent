@@ -1,0 +1,15 @@
+{
+  "timezone": "Asia/Seoul",
+  "metadata_sha256": "817055bf6f40b748846d85b7fd3a58498d5d1d2f529d0f81f19c4774ef69d276",
+  "sha256": {
+    "assets/command-marketing-agent-maintenance.jpg": "847130541296c65ec51881f51b9b7ccec2db0fc5e427de69d7fba3bf04356794",
+    "assets/command-marketing-agent-maintenance.webp": "7146acdb251b340d5e5115c29a1a887234228bee37df9179e6c70e64c33df709",
+    "assets/command-marketing-ai-strategy.jpg": "455b63d17a018afa4bc5d6aabaa4b0df894f2371492a6a2a55a12a0c8ef63fd7",
+    "assets/command-marketing-ai-strategy.webp": "9d06525dc881e8a0b04ec45e97d82d4c6ea40f21b8d8442d9f5b07c129f2aedf",
+    "assets/command-marketing-personal-os.jpg": "dda943b82282bdac9eec13fc5cce9efe74db13b56068ddb0e2b870dbb6eb83ef",
+    "assets/command-marketing-personal-os.webp": "c87ce774f5339b787750b9ccc52849c0998bdae757392e970434e25e9b537ee7",
+    "command-marketing-agent-maintenance.md": "dd2a0fd714c22845c88ce44dad5de175efa5a2bbf7c5ba6dd47ac2d9f506f6df",
+    "command-marketing-ai-strategy.md": "c8bea9bb57ca26f731b42a5a99a3e4dc8545ee318567d8fd5fef3120933ab806",
+    "command-marketing-personal-os.md": "652a46b80f281d2eb2321eb1a13ae56630f69bc7fbb1c5f5106da52459f0d7d1"
+  }
+}
