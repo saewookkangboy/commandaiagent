@@ -55,8 +55,9 @@
 - [R-G-C-T-O-R 업무 지시서: 설계와 검수 기준](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서의 구성과 콘텐츠·SEO·랜딩페이지 QA 원칙을 책 Part 3·5에 근거해 요약합니다. 가상 사례는 도서 원문이 아닌 편집 응용으로 구분합니다.
 - [AI 마케팅 21일 훈련: 광고·CRM 운영 루프 만들기](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련의 주차별 진행과 광고·CRM·분석 운영 루프를 책의 Part 6·7에 근거해 정리합니다. 실험 로그, 사람의 승인 기준, 월간 점검표까지 살펴봅니다.
 
-## SEO·GEO·AIEO 실무 가이드 11편
+## SEO·GEO·AIEO 실무 가이드 12편
 
+- [커맨드 마케팅: AI 활용 전략과 도서의 연결](https://book.allrounder.im/blog/command-marketing-ai-strategy): 커맨드 마케팅은 AI에게 맡길 일과 사람이 책임질 판단을 목표·맥락·출력·검수 기준으로 설계하는 업무 운영 관점입니다. 책의 거버넌스·OS·역할별 Agent·운영 매뉴얼을 연결해, 가상 주간 콘텐츠 업무의 통합 전략을 정리합니다.
 - [AI Agent 역할별 특징: 마케팅 업무 17가지와 책 읽기 가이드](https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide): AI Agent 역할별 특징은 리서치, 콘텐츠 제작, 광고·CRM·성과분석에서 맡는 일과 검수 지점에 따라 다릅니다. 책의 17개 업무 역할과 준비할 자료·산출물을 비교하고, 내 업무에 맞는 장과 읽기 경로를 확인하세요.
 - [Agentic AI 마케팅: Harness·Loop·Graph·Jev](https://book.allrounder.im/blog/agentic-ai-harness-loop-graph-jev-marketer-guide): Agentic AI 마케팅의 기술 대응은 운영 규칙, 제한된 반복, 상태·승인 경로와 좁은 판단을 분리하는 일입니다. 2026년10월 공개 근거와 B2B 예시, 로컬 정책 코드·한국어 평가·4주 로드맵으로 Harness·Loop·Graph·Jev를 업무에 조합합니다.
 - [AI Agent를 지휘하는 마케터 실무 활용법](https://book.allrounder.im/blog/command-marketing-book-practical-guide): AI 마케팅 책 실무 활용은 한 업무의 입력 자료, R-G-C-T-O-R 지시서, 아웃라인 승인과 초안 검수, 인계·회고를 연결하는 일입니다. 도서의 핵심 원칙과 가상 B2B 캠페인 예시로 따라 적용할 방법을 안내합니다.
@@ -77,7 +78,7 @@
 
 ## 검색 보조 문서
 
-- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 20개와 대표 이미지
+- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 21개와 대표 이미지
 - [크롤러 접근 정책](https://book.allrounder.im/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분
 
-문서 검토 기준일: 2026-10-19. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.
+문서 검토 기준일: 2026-10-20. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.
