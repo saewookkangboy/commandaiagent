@@ -2,18 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://book.allrounder.im/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/book-flat.jpg</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-21</lastmod>
+  </url>
+  <url>
+    <loc>https://book.allrounder.im/blog/command-marketing-personal-os</loc>
+    <lastmod>2026-10-21</lastmod>
+    <image:image>
+      <image:loc>https://book.allrounder.im/assets/blog/command-marketing-personal-os.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://book.allrounder.im/blog/command-marketing-ai-strategy</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <image:image>
       <image:loc>https://book.allrounder.im/assets/blog/command-marketing-ai-strategy.jpg</image:loc>
     </image:image>
