@@ -118,6 +118,11 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     page.locator('.maturity-btn').first.click()
     maturity = page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="maturity_select").map(a=>a[2].level)')
     assert maturity == [1, 2, 1], maturity
+    page.locator('.maturity-btn').last.click()
+    maturity = page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="maturity_select").map(a=>a[2].level)')
+    assert maturity == [1, 2, 1, 5], maturity
+    page.locator('.maturity-btn').last.press('End')
+    assert page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="maturity_select").map(a=>a[2].level)') == maturity
     page.evaluate("window.commandAnalytics.emit('inquiry_start',{position:'manual',email:'private@example.com',subject:'private-message',body:'private-body'})")
     assert page.evaluate("window.commandAnalytics.emit('Purchase',{})") is False
     assert page.evaluate("window.commandAnalytics.emit('inquiry_start',{position:'private@example.com'})") is False
