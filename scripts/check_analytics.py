@@ -85,6 +85,11 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     context, page, records, outside, errors = make_page(ORIGIN+'/?utm_source=naver&utm_medium=organic&utm_campaign=book-oct&email=private%40example.com&utm_content=private%40example.com&subject=private-message')
     assert len(page.evaluate('window.__ga.filter(a=>a[0]==="config")')) == 1
     assert len(page.evaluate('window.__meta.filter(a=>a[0]==="track"&&a[1]==="PageView")')) == 1
+    page_view = page.evaluate('window.__meta.find(a=>a[0]==="track"&&a[1]==="PageView")')
+    assert len(page_view) == 4 and set(page_view[2]) == {'event_id'}
+    assert page_view[3] == {'eventID': page_view[2]['event_id']} and page_view[2]['event_id']
+    assert not any(e[0]=='event' and e[1]=='maturity_select' for e in page.evaluate('window.__ga'))
+    page.locator('.maturity-btn[aria-selected="true"]').click()
     assert not any(e[0]=='event' and e[1]=='maturity_select' for e in page.evaluate('window.__ga'))
     # Prevent the mail application's default action only after the production listener.
     page.evaluate("document.addEventListener('click',e=>{if(e.target.closest('a[href^=\"mailto:\"]'))e.preventDefault()})")
@@ -108,12 +113,17 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     page.locator('[data-personal-path]').click()
     page.locator('.faq-card summary').last.click()
     page.locator('.maturity-btn').first.click()
+    page.locator('.maturity-btn').first.press('Home')
     page.locator('.maturity-btn').first.press('ArrowDown')
+    page.locator('.maturity-btn').first.click()
+    maturity = page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="maturity_select").map(a=>a[2].level)')
+    assert maturity == [1, 2, 1], maturity
     page.evaluate("window.commandAnalytics.emit('inquiry_start',{position:'manual',email:'private@example.com',subject:'private-message',body:'private-body'})")
     assert page.evaluate("window.commandAnalytics.emit('Purchase',{})") is False
     assert page.evaluate("window.commandAnalytics.emit('inquiry_start',{position:'private@example.com'})") is False
     page.add_script_tag(path=str(DIST/'assets/analytics.js'))
     assert len(page.evaluate('window.__ga.filter(a=>a[0]==="config")')) == 1
+    assert page.evaluate('window.__meta.filter(a=>a[0]==="track"&&a[1]==="PageView")') == [page_view]
     page.wait_for_timeout(100)
     ga = check_pairs(records)
     names = [event[1] for event in ga]
@@ -172,6 +182,35 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     context.close()
     print('PASS visible30s, bottom-plus-time completion and BFCache pause/resume',flush=True)
 
+    # An observer entry received while hidden must be remembered, not counted then lost.
+    context,page,records,outside,errors=make_page()
+    page.evaluate("document.documentElement.style.scrollBehavior='auto';window.__testHidden=true;document.dispatchEvent(new Event('visibilitychange'));document.querySelector('#system h2').scrollIntoView({block:'center'})")
+    page.wait_for_timeout(150)
+    assert not page.evaluate('window.__ga.some(a=>a[0]==="event"&&a[1]==="section_view"&&a[2].section_name==="system")')
+    page.evaluate("window.__testHidden=false;document.dispatchEvent(new Event('visibilitychange'))")
+    page.wait_for_timeout(100)
+    system_views=page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="section_view"&&a[2].section_name==="system")')
+    assert len(system_views)==1,system_views
+    page.evaluate("document.dispatchEvent(new Event('visibilitychange'));window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}))")
+    page.wait_for_timeout(100)
+    assert len(page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="section_view"&&a[2].section_name==="system")'))==1
+    check_pairs(records)
+    assert not errors,errors
+    context.close()
+
+    # Merely intersecting at less than 50% does not qualify as a section view.
+    context,page,records,outside,errors=make_page()
+    page.evaluate("document.documentElement.style.scrollBehavior='auto';const h=document.querySelector('#system h2');window.scrollTo(0,h.getBoundingClientRect().top+scrollY-innerHeight+h.getBoundingClientRect().height*0.25)")
+    page.wait_for_timeout(150)
+    assert not page.evaluate('window.__ga.some(a=>a[0]==="event"&&a[1]==="section_view"&&a[2].section_name==="system")')
+    page.evaluate("document.querySelector('#system h2').scrollIntoView({block:'center'})")
+    page.wait_for_timeout(150)
+    assert len(page.evaluate('window.__ga.filter(a=>a[0]==="event"&&a[1]==="section_view"&&a[2].section_name==="system")'))==1
+    check_pairs(records)
+    assert not errors,errors
+    context.close()
+    print('PASS PageView eventID, unchanged maturity suppression, visible section recovery and 50% threshold',flush=True)
+
     for url in ('http://localhost/','https://preview.example.test/blog/book-command-marketer-01',ORIGIN+'/missing-analytics-test'):
         context,page,records,outside,errors=make_page(url)
         page.evaluate('window.commandTrackingEnabled=true')
@@ -194,6 +233,8 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     assert page.evaluate('dataLayer.filter(a=>a[0]==="config").length')==1
     assert page.evaluate('fbq.queue.filter(a=>a[0]==="init").length')==1
     assert page.evaluate('fbq.queue.filter(a=>a[0]==="track"&&a[1]==="PageView").length')==1
+    queued_page_view=page.evaluate('Array.from(fbq.queue.find(a=>a[0]==="track"&&a[1]==="PageView"))')
+    assert queued_page_view[3] == {'eventID': queued_page_view[2]['event_id']}
     assert any('googletagmanager.com' in url for url in outside) and any('connect.facebook.net' in url for url in outside)
     assert not errors,errors
     context.close()

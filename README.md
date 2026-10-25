@@ -269,3 +269,7 @@ Search Console의 효과 관찰은 별도 수동 확인입니다. 이 글의 정
 커맨드 마케팅과 도서의 연결을 통합 AI 활용 전략 → 마케터 개인 OS → 운영·유지보수·Agent 고도화로 설명하는 새 시리즈3편을 준비했습니다. `content/scheduled/command-marketing-os`의 원고·메타·카툰 이미지는 공개 `dist`와 분리합니다. 2026-10-20·21·22 한국시간09시 예약 실행마다 당일 한 편만 등록·생성·검사·main 병합·Vercel 운영 확인하며, 준비·예약 등록과 미래 실제 공개를 구분합니다. 기존 책소개3편과 독립된 순서 내비는 공개된 편만 링크로 제공합니다. 중간/후반 책 CTA, FAQ·고유 메타·공통 계측·검색 문서를 연결하고 최초 게시일을 보존합니다.
 
 실행·안전 기준은 [`docs/command-marketing-os-scheduled-series.md`](docs/command-marketing-os-scheduled-series.md)를 참고하세요. `scripts/publish_scheduled.py --dry-run`은 당일 가능 여부만 검사합니다. `scripts/check_scheduled.py --full`은 **초기 준비본에서만** 별도 사본으로 세 날짜의 공개·미공개·재실행·중단 정합성·검색 문서·CTA·오프라인 계측과 기존 문의 모형을 검증합니다. 이미 등록된 상태는 운영 배포 성공이 아니므로 `scripts/verify_scheduled_production.py`로 실제 도메인 응답을 확인해야 합니다. 실제 예약 실행에서는 신규 스케줄이나 원고를 추가하지 않고 당일 공개분만 처리합니다.
+
+## 2026-10-25 Meta 이벤트 데이터 품질 보강
+
+[이벤트 활동·매칭 품질 운영 기준](docs/analytics/meta-event-health.md)에 낮은 활동과 과거 이벤트명·6.1점 매칭 품질·중복 제거를 구분해 기록했습니다. 기존24개 맞춤 이벤트·17편 콘텐츠·분석ID·문의 저장·개인정보 경계를 유지하고, Meta 표준 PageView의 일회성 eventID, 성숙도 실제 변경만 기록하는 가드,50% 이상 제목 노출 및 숨김 탭/BFCache 복귀 시 누락 방지를 보강합니다. 실제 과거 집계·광고/예산·매칭용 개인정보 공유 설정은 바꾸지 않습니다. 웹 코드 구현·운영 반영과 이후 Meta 점수/수신·권장 문구 해소는 별도 확인입니다.
