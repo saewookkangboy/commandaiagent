@@ -1,14 +1,16 @@
 # GA4·Meta Pixel 공통 이벤트 정의서 v2.1
 
-홈·블로그 목록·글 13편·문의·공개 자료 페이지에서 동일한 이벤트명과 맞춤 매개변수를 GA4 `gtag('event')`와 Meta `fbq('trackCustom')`에 보냅니다. 원본은 `content/analytics-events.json`이고 정적 설정은 `dist/assets/analytics-config.js`입니다. `analytics.js`가 SDK 초기화와 공통 전송을, `enhancements.js`가 진단·읽기 경로 UI의 실제 실행 시점을 담당합니다. GA4 ID `G-QK0BMHHNR5`와 Meta Pixel ID `2327515324662416`은 기존 값을 유지합니다.
+홈·블로그 목록·공개된 모든 글·문의·공개 자료 페이지에서 동일한 이벤트명과 맞춤 매개변수를 GA4 `gtag('event')`와 Meta `fbq('trackCustom')`에 보냅니다. 원본은 `content/analytics-events.json`이고 정적 설정은 `dist/assets/analytics-config.js`입니다. `analytics.js`가 SDK 초기화와 공통 전송을, `enhancements.js`가 진단·읽기 경로 UI의 실제 실행 시점을 담당합니다. GA4 ID `G-QK0BMHHNR5`와 Meta Pixel ID `2327515324662416`은 기존 값을 유지합니다.
 
 맞춤 이벤트는 이름과 매개변수로 구성되며, GA4 보고서에서 사용자 정의 매개변수를 활용하려면 별도 맞춤 정의가 필요합니다.[1] GA4의 이름·매개변수 제한과 Meta 맞춤 이벤트 형식에 맞춰 소문자 snake_case와 짧은 식별값을 사용합니다.[2] [3]
 
 ## 공통으로 보내는 항목
 
-모든 맞춤 이벤트는 `event_version=2.1`, `event_id`, `page_path`, `page_type`, `content_id`, `content_group`, `funnel_stage`를 공유합니다. 글 페이지에는 `article_slug`를, 도서 시리즈에는 숫자 `series_order`도 포함합니다. `page_type`은 기존 유형과 `consulting`, `resource_index`, `resource_detail`, `privacy`를 포함합니다. `content_group`은 기존 유형과 `consulting`, `resources`를 포함합니다. `funnel_stage`는 `exploration`, `engagement`, `intent`, 실제 저장 확인의 `conversion`입니다. `ui_variant`는 새 UX의 `ux-v1` 또는 기존 `legacy-v2`입니다. 허용된 13개 글 슬러그의 `from` 유입 문맥은 `source_article_slug`로만 포함하며 쿼리 전체를 전송하지 않습니다.
+모든 맞춤 이벤트는 `event_version=2.1`, `event_id`, `page_path`, `page_type`, `content_id`, `content_group`, `funnel_stage`를 공유합니다. 글 페이지에는 `article_slug`를, 도서 시리즈에는 숫자 `series_order`도 포함합니다. `page_type`은 기존 유형과 `consulting`, `resource_index`, `resource_detail`, `privacy`를 포함합니다. `content_group`은 기존 유형과 `consulting`, `resources`를 포함합니다. `funnel_stage`는 `exploration`, `engagement`, `intent`, 실제 저장 확인의 `conversion`입니다. `ui_variant`는 새 UX의 `ux-v1` 또는 기존 `legacy-v2`입니다. `content/analytics-events.json`의 `article_slugs`에 등록된 현재 공개 글의 `from` 유입 문맥은 `source_article_slug`로만 포함하며 쿼리 전체를 전송하지 않습니다.
 
-`event_id`는 이벤트 발생마다 새로 만든 일회성 식별자이며 사용자 ID가 아닙니다. 같은 발생 건의 GA4·Meta 맞춤 payload에 같은 값이 들어가고, Meta에는 네 번째 인자의 `eventID`로도 전달합니다. 이는 향후 CAPI와 연결할 때 사용할 수 있는 식별 규칙이지 현재 CAPI 연동이나 GA4 일반 맞춤 이벤트 자동 중복 제거를 뜻하지 않습니다.[4] 사이트 내부 중복은 단일 리스너·한 번 발화 조건으로 방지합니다.
+`event_id`는 이벤트 발생마다 새로 만든 일회성 식별자이며 사용자 ID가 아닙니다. 같은 발생 건의 GA4·Meta 맞춤 payload에 같은 값이 들어가고, Meta에는 네 번째 인자의 `eventID`로도 전달합니다. 2026-10-25부터 표준 Meta `PageView`에도 같은 방식의 일회성 `event_id`/`eventID`를 제공합니다. 이를 사용자 식별자로 재사용하거나 GA4 일반 맞춤 이벤트 자동 중복 제거로 해석하지 않습니다.[4] 사이트 내부 중복은 단일 리스너·한 번 발화 조건으로 방지합니다.
+
+2026-10-25 관리자에서 기존 Meta Hosted CAPI 활동을 확인했으나 이 저장소가 직접 서버 전환 API를 새로 제공하는 것은 아닙니다. 실제 Pixel·CAPI 중복 제거에는 같은 이벤트명과 동일한 ID를 서버 측에서도 전달해야 하며, 관리자에서 확인한 `section_view` 중복 제거 화면은 처리 중이었습니다. 브라우저 식별자 구현과 플랫폼 중복 제거 완료를 구분합니다.
 
 현재 페이지 URL의 `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`은 형식 검증을 통과한 캠페인 표식만 최대80자로 포함합니다. 문자·숫자·점·밑줄·물결표·하이픈만 허용하며 이메일 표기, 공백, URL, 9~15자리 숫자열 등은 제외합니다. 고정된 캠페인명 목록을 운영하는 방식은 아니며 새 캠페인명도 같은 형식이면 허용합니다. 문자 형식 검사만으로 사람 이름 같은 개인정보를 완벽하게 판별할 수 없으므로 UTM에는 캠페인 코드만 넣고 개인정보를 사용하지 마세요. 쿼리 전체나 `fbclid`, `gclid`, 폼 입력값을 맞춤 payload에 복사하지 않습니다. 브라우저 저장소에 캠페인을 별도 저장하지 않으므로 다음 페이지의 맞춤 UTM 값은 해당 페이지 URL에 있을 때만 포함합니다. GA4 자체 세션·유입 처리는 별개입니다.
 
@@ -26,7 +28,7 @@ GA4 설정의 `page_location`은 정규 페이지 URL, `page_referrer`는 참조
 - `select_reading_path`: 추천 파트 경로 클릭. `situation`, `parts`(예: `3,5,7`).
 - `select_personal_path`: 개인 학습용 책 구성 경로 클릭. `position`.
 - `open_blog_article`: 글 링크 클릭. `article_slug`는 이동할 글, `position`은 클릭 위치. 글 도착이나 읽기 완료는 아님.
-- `maturity_select`: 성숙도 단계 클릭·키보드 선택. `level`은 1~5. 초기 기본 선택은 전송하지 않음.
+- `maturity_select`: 클릭·키보드로 성숙도 단계가 실제 변경됨. `level`은 1~5. 초기 기본 선택·같은 단계 재선택·양끝에서 Home/End의 무변경 조작은 전송하지 않음.
 
 ### 콘텐츠 관여
 
@@ -35,7 +37,7 @@ GA4 설정의 `page_location`은 정규 페이지 URL, `page_referrer`는 참조
 - `open_day1_preview`: DAY1 훈련 처음 펼침; 페이지당 한 번. 체크박스 선택값은 수집·저장하지 않음.
 - `part_expand`: 파트 처음 펼침. `part_number`는 1~7; 파트별 페이지당 한 번. 읽기 경로·해시 자동 펼침도 포함.
 - `faq_expand`: FAQ 처음 펼침. `question_id`는 페이지의 항목 순번; 항목별 페이지당 한 번. 질문 문구를 전송하지 않음.
-- `section_view`: 섹션 제목의50%가 화면에 처음 보임. `section_name`; 섹션별 페이지당 한 번.
+- `section_view`: 섹션 제목의50% 이상이 가시 탭에서 처음 보임. `section_name`; 섹션별 페이지당 한 번. 숨김 탭의 교차 상태는 기억하되 전송하지 않고, 가시 탭/BFCache 복귀 시 아직 기록하지 않은 현재 노출만 확인함.
 - `scroll_depth`: 스크롤 발생 후 화면 하단이 문서25·50·75·90% 지점에 도달. `percent`; 기준별 페이지당 한 번. 프로그램에 의한 앵커 이동도 스크롤을 발생시킬 수 있음.
 - `engaged_30s`: 탭이 보이는 누적 시간이30초를 넘김. `active_seconds=30`; 페이지당 한 번. 숨겨진 탭 시간은 제외하고 뒤로가기 캐시 복귀 시 재개.
 - `blog_article_complete`: 본문 하단 도달과 누적 가시시간30초를 모두 충족. `article_slug`, `active_seconds=30`; 페이지당 한 번. 이전 버전의 하단 도달만 체크하던 지표와 기준이 달라졌으며 정독을 보장하지 않음.

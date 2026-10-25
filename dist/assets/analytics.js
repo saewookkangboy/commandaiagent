@@ -48,6 +48,10 @@
     return undefined;
   }
 
+  function makeEventID() {
+    return globalThis.crypto?.randomUUID?.() || `cm-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  }
+
   function emit(name, parameters = {}) {
     if (!enabled() || !Object.prototype.hasOwnProperty.call(config.events, name)) return false;
     const definition = config.events[name];
@@ -63,7 +67,7 @@
     }
     const onceKey = definition.once ? name : definition.once_by ? `${name}:${extra[definition.once_by]}` : null;
     if (onceKey && seen.has(onceKey)) return false;
-    const id = globalThis.crypto?.randomUUID?.() || `cm-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+    const id = makeEventID();
     const payload = { ...context, ...campaigns, ...extra, funnel_stage: definition.stage, event_id: id };
     let sent = false;
     // One SDK failing must not break the other SDK or the visitor's navigation.
@@ -110,7 +114,8 @@
   }
   try {
     window.fbq('init', config.meta_pixel_id);
-    window.fbq('track', 'PageView');
+    const pageViewID = makeEventID();
+    window.fbq('track', 'PageView', { event_id: pageViewID }, { eventID: pageViewID });
   } catch (_) { /* GA4 and site interactions remain available. */ }
 
   if ('IntersectionObserver' in window) {
@@ -174,16 +179,22 @@
     }
   });
 
+  let selectedMaturity = document.querySelector('.maturity-btn[aria-selected="true"]');
+  function measureMaturityChange() {
+    const selected = document.querySelector('.maturity-btn[aria-selected="true"]');
+    if (!selected || selected === selectedMaturity) return;
+    selectedMaturity = selected;
+    emit('maturity_select', { level: Number(selected.dataset.level) + 1 });
+  }
   document.addEventListener('click', event => {
     if (!(event.target instanceof Element)) return;
     const button = event.target.closest('.maturity-btn');
-    if (button) emit('maturity_select', { level: Number(button.dataset.level) + 1 });
+    if (button && event.button === 0) measureMaturityChange();
   });
   document.addEventListener('keydown', event => {
     if (!(event.target instanceof Element)) return;
     if (!event.target.closest('.maturity-btn') || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
-    const selected = document.querySelector('.maturity-btn[aria-selected="true"]');
-    if (selected) emit('maturity_select', { level: Number(selected.dataset.level) + 1 });
+    measureMaturityChange();
   });
   document.addEventListener('toggle', event => {
     const item = event.target;
@@ -194,15 +205,27 @@
 
   const sections = [...new Set(document.querySelectorAll('[data-track-section],#system,#contents,#faq,#author'))];
   if ('IntersectionObserver' in window) {
-    const sectionObserver = new IntersectionObserver(entries => {
+    const visibleHeadings = new Set();
+    function measureVisibleSections() {
       if (document.hidden) return;
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        const section = entry.target.closest('[data-track-section],#system,#contents,#faq,#author');
+      for (const target of visibleHeadings) {
+        if (target.closest('[hidden]')) continue;
+        const style = getComputedStyle(target);
+        if (style.visibility !== 'visible' || Number(style.opacity) === 0) continue;
+        const section = target.closest('[data-track-section],#system,#contents,#faq,#author');
         if (section) emit('section_view', { section_name: section.dataset.trackSection || section.id });
       }
-    }, { threshold: 0.5 });
+    }
+    const sectionObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) visibleHeadings.add(entry.target);
+        else visibleHeadings.delete(entry.target);
+      }
+      measureVisibleSections();
+    }, { threshold: [0, 0.5, 1] });
     sections.forEach(section => sectionObserver.observe(section.querySelector('h2') || section));
+    document.addEventListener('visibilitychange', measureVisibleSections);
+    window.addEventListener('pageshow', measureVisibleSections);
   }
   window.addEventListener('scroll', () => {
     if (document.hidden) return;
