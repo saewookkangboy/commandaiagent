@@ -100,6 +100,14 @@ python3 scripts/serve_preview.py --port 4173
 
 `llms.txt`는 일부 AI 시스템을 위한 보조 문서입니다. 검색 노출의 기본은 공개 URL, 크롤링 가능성, 유용한 본문과 일관된 구조화 데이터입니다.
 
+## 블로그 주제와 정렬
+
+홈 블로그 섹션과 `/blog`는 `content/blog/sections.json`의 한 분류 원본으로 구성합니다. 도서 읽기·실무 활용, 커맨드 마케팅 전략·개인 OS, Agent 도입·조직 협업, Agentic AI 기술 이해, SEO·GEO·AIEO 검색 최적화의 주제별로 모든 공개 글을 한 번씩 표시합니다. 개별 글의 기존 카테고리·검색 의도·URL·게시일·원고·CTA는 바꾸지 않습니다.
+
+`reading`은 원본의 읽기 흐름, `series`는 `series_key`에 속한 `series_order` 오름차순, `latest`는 최초 게시일 내림차순입니다. 도서 소개와 OS 연결 시리즈의 1→2→3 순서를 보존하고 같은 게시일은 슬러그 내림차순으로 재현합니다. 홈·목록·CollectionPage/ItemList·llms의 주제와 글 순서는 같은 원본을 사용합니다. 목록 변경일은 `content/site.json`의 `blog_modified`로 관리하며 개별 글의 게시·수정일을 허위로 갱신하지 않습니다.
+
+새 글을 등록할 때는 `content/blog/posts.json`과 분석 허용 슬러그뿐 아니라 `sections.json`의 해당 주제 `slugs`에도 추가하세요. 미분류·중복·존재하지 않는 글·혼합 시리즈는 빌드에서 차단됩니다. 상세 메타데이터에 목록 분류 필드를 덧붙이지 않으므로 승인된 예약 원고·메타의 무결성도 보존합니다. `python3 scripts/check_blog.py`는 카드와 구조화 데이터·llms 순서를, `python3 scripts/check_blog_sections.py`는 잘못된 분류의 차단과 외부 요청 없는 모바일·키보드·앵커 탐색을 검사합니다. 기존 `/blog#book-series`와 `/blog#practical-guides` 접근은 유지합니다.
+
 ## 프로젝트 구조
 
 | 경로 | 역할 |
