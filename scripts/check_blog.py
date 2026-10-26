@@ -30,6 +30,7 @@ PUBLIC_SOURCE_REQUIREMENTS = {
     'book-command-marketer-03': ('https://book.allrounder.im/', 'https://developers.google.com/search/docs/appearance/ai-features'),
     'command-marketing-book-practical-guide': ('https://book.allrounder.im/', 'https://www.anthropic.com/engineering/building-effective-agents'),
     'book-ai-agent-roles-reading-guide': ('https://book.allrounder.im/', 'https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=402869781'),
+    'ai-agent-organization-collaboration': ('https://book.allrounder.im/', 'https://brunch.co.kr/@saewookkangboy/282', 'https://www.anthropic.com/engineering/building-effective-agents'),
 }
 
 
@@ -243,6 +244,40 @@ for post in posts:
             assert soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-contents"]')['href'] == '/#contents'
         assert soup.select_one('.article-mobile-cta a')['data-cta-id'] == 'mobile-book'
         assert not soup.select('.article-cta a[data-consulting-path]')
+    if slug == 'ai-agent-organization-collaboration':
+        assert post['kind'] == 'guide' and post['book_based'] and post['book_overview']
+        assert article['isBasedOn']['name'] == BOOK_TITLE and author['@type'] == 'Organization'
+        assert post['disclosure'] == soup.select_one('.article-disclosure-details p').get_text()
+        assert post['disclosure_short'] == soup.select_one('.article-disclosure-short').get_text()
+        assert not soup.select('.series-nav') and len(refs) == 3
+        for term in ('AI Agent 조직 협업', '실무자', '의사결정권자', 'RACI', 'Human-in-the-loop',
+                     'AI 업무 인수인계', '마케팅 AI 업무 생산성', '기업 AI 에이전트 도입',
+                     '작업 시간과', '경과 시간', '가상 B2B SaaS', '편집 응용'):
+            assert term in source, (slug, 'missing collaboration topic', term)
+        faq = next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']
+        assert len(faq) == 6 and len({row['name'] for row in faq}) == 6
+        heading = next(h for h in soup.select('.article-body h2') if h.get_text() == '자주 묻는 질문')
+        visible = []
+        for node in heading.find_next_siblings():
+            if node.name == 'h2':
+                break
+            if node.name == 'h3':
+                visible.append((node.get_text(' ', strip=True), node.find_next_sibling('p').get_text(' ', strip=True)))
+        assert visible == [(row['name'], row['acceptedAnswer']['text']) for row in faq]
+        inline = soup.select_one('.article-cta-inline')
+        assert inline and inline.find_next_sibling('h2').get_text() == 'AI 업무 인수인계에는 결과물의 상태가 포함돼야 한다'
+        for location in ('inline', 'end'):
+            link = soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-book"]')
+            assert link.get_text() == '책을 통해서 확인해보세요'
+            assert link['href'] == home.select_one('header a[data-cta="purchase"]')['href']
+            assert link['data-position'] == f'article-{location}'
+            assert soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-contents"]')['href'] == '/#contents'
+        assert soup.select_one('.article-mobile-cta a')['data-cta-id'] == 'mobile-book'
+        assert not soup.select('.article-cta a[data-consulting-path]')
+        for related in ('command-marketing-ai-strategy', 'command-marketing-personal-os', 'command-marketing-agent-maintenance'):
+            assert '](/blog/' + related + ')' in source
+        linked = (ROOT / 'content/blog/book-command-marketer-01.md').read_text()
+        assert linked.count('](/blog/' + slug + ')') == 1
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1
