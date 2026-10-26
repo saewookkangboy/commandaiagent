@@ -7,6 +7,7 @@ import re
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from article_cta import validate_cta_layout
+from blog_sections import load_sections
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
@@ -289,9 +290,31 @@ for post in posts:
     print('PASS', slug)
 
 index = htmls[DIST / 'blog/index.html']
-assert len(index.select('#book-series .blog-card')) == 3
-assert len(index.select('#practical-guides .blog-card')) == len([p for p in posts if p['kind'] != 'book-series'])
-assert len(htmls[DIST / 'index.html'].select('#blog .blog-card')) == len(posts)
+sections = load_sections(ROOT / 'content/blog/sections.json', posts)
+ordered_slugs = [post['slug'] for section in sections for post in section['posts']]
+for soup, prefix in ((index, ''), (home.select_one('#blog'), 'home-')):
+    groups = soup.select('.blog-topic-group')
+    assert [group['data-blog-topic'] for group in groups] == [section['id'] for section in sections]
+    assert [link['href'] for link in soup.select('.blog-topic-nav a')] == ['#' + prefix + section['id'] for section in sections]
+    visible_slugs = []
+    for group, section in zip(groups, sections):
+        assert group['id'] == prefix + section['id']
+        assert group.select_one('h2').get_text() == section['title']
+        assert group.select_one('.section-copy').get_text() == section['description']
+        assert group.select_one('.blog-topic-total').get_text() == f'{len(section["posts"])}편'
+        cards = group.select('.blog-card')
+        slugs = [card.select_one('h3 a')['data-blog-link'] for card in cards]
+        assert slugs == [post['slug'] for post in section['posts']], section['id']
+        visible_slugs.extend(slugs)
+    assert visible_slugs == ordered_slugs and len(set(visible_slugs)) == len(posts), 'Missing or duplicate topic cards.'
+assert [slug for slug in ordered_slugs if next(post for post in posts if post['slug'] == slug)['kind'] == 'book-series'] == [post['slug'] for post in sorted((p for p in posts if p['kind'] == 'book-series'), key=lambda p: p['series_order'])]
+assert index.find(id='practical-guides'), 'Legacy blog anchor is missing.'
+collection = next(item for item in json.loads(index.select_one('script[type="application/ld+json"]').string)['@graph'] if item['@type'] == 'CollectionPage')
+assert collection['mainEntity']['numberOfItems'] == len(posts)
+assert [item['url'] for item in collection['mainEntity']['itemListElement']] == [ORIGIN + '/blog/' + slug for slug in ordered_slugs]
+assert [item['position'] for item in collection['mainEntity']['itemListElement']] == list(range(1, len(posts) + 1))
+assert index.select_one('link[rel="canonical"]')['href'] == ORIGIN + '/blog'
+assert index.select_one('meta[name="description"]')['content'] == index.select_one('meta[property="og:description"]')['content'] == index.select_one('meta[name="twitter:description"]')['content']
 assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == len(posts) + 7
 urls = [node.text for node in ET.parse(DIST / 'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
 assert len(urls) == len(posts) + 6 and len(set(urls)) == len(urls)
@@ -302,7 +325,7 @@ assert htmls[DIST / 'privacy/index.html'].select_one('meta[name=robots]')['conte
 assert (ROOT / 'sitemap.xml').read_bytes() == (DIST / 'sitemap.xml').read_bytes()
 ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'image': 'http://www.google.com/schemas/sitemap-image/1.1'}
 site = json.loads((ROOT / 'content/site.json').read_text())
-expected_modified = {ORIGIN + '/': site['home_modified'], ORIGIN + '/blog': max(p.get('modified', p['date']) for p in posts)}
+expected_modified = {ORIGIN + '/': site['home_modified'], ORIGIN + '/blog': max(site.get('blog_modified', '0001-01-01'), *(p.get('modified', p['date']) for p in posts))}
 expected_images = {ORIGIN + '/': ORIGIN + '/assets/book-flat.jpg'}
 funnel = json.loads((ROOT / 'content/funnel.json').read_text())
 expected_modified.update({ORIGIN + path: funnel['modified'] for path in extra_paths})
@@ -325,8 +348,12 @@ assert llms.startswith((ROOT / 'content/llms-base.md').read_text().rstrip())
 expected_reviewed = max(site['llms_reviewed'], site['home_modified'], *expected_modified.values())
 assert re.findall(r'^문서 검토 기준일: ([0-9-]+)\.', llms, re.M) == [expected_reviewed], 'Stale llms review date; rebuild search documents'
 assert all(p['slug'] in llms for p in posts)
-assert llms.count('## 도서 소개 시리즈 3편') == 1
-assert llms.count(f'## SEO·GEO·AIEO 실무 가이드 {len(posts)-3}편') == 1
+for section in sections:
+    assert llms.count(f'## {section["title"]} {len(section["posts"])}편\n') == 1
+    assert f'({ORIGIN}/blog#{section["id"]}): {section["description"]}' in llms
+    for post in section['posts']:
+        assert llms.count(f'({ORIGIN}/blog/{post["slug"]}):') == 1, 'Article link duplicated in llms.'
+assert [slug for slug in re.findall(r'https://book\.allrounder\.im/blog/([a-z0-9-]+)\):', llms)] == ordered_slugs
 assert len(re.findall(r'^# ', llms, re.M)) == 1
 intro, *link_sections = re.split(r'^## [^\n]+\n', llms, flags=re.M)
 assert intro.startswith('# AI Agent를 지휘하는 마케터\n\n> ')

@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 import markdown
 from bs4 import BeautifulSoup
 from article_cta import insert_inline_cta, validate_cta_layout
+from blog_sections import load_sections
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
@@ -22,6 +23,7 @@ SERIES = sorted([p for p in POSTS if p.get('kind') == 'book-series'], key=lambda
 SCHEDULED_SERIES_FILE = ROOT / 'content/scheduled/command-marketing-os/posts.json'
 COMMAND_SERIES = json.loads(SCHEDULED_SERIES_FILE.read_text()) if SCHEDULED_SERIES_FILE.exists() else []
 GUIDES = [p for p in POSTS if p.get('kind') != 'book-series']
+TOPIC_SECTIONS = load_sections(ROOT / 'content/blog/sections.json', POSTS)
 LANDING = (DIST / 'index.html').read_text()
 SOUP = BeautifulSoup(LANDING, 'html.parser')
 STYLE = DIST / 'assets/site.css'
@@ -49,7 +51,7 @@ for attribute, name in (('name', 'description'), ('property', 'og:description'),
 POST_MODIFIED = {post['slug']: post.get('modified', post['date']) for post in POSTS}
 for post in POSTS:
     assert date.fromisoformat(POST_MODIFIED[post['slug']]) >= date.fromisoformat(post['date']), post['slug']
-BLOG_MODIFIED = max(POST_MODIFIED.values())
+BLOG_MODIFIED = max(SITE.get('blog_modified', '0001-01-01'), *POST_MODIFIED.values())
 REVIEWED = max(SITE['llms_reviewed'], SITE['home_modified'], BLOG_MODIFIED)
 for value in (SITE['home_modified'], REVIEWED):
     date.fromisoformat(value)
@@ -345,23 +347,42 @@ for post in POSTS:
     validate_cta_layout(BeautifulSoup(html, 'html.parser').select_one('.article-body'))
     (directory / 'index.html').write_text(html)
 
-series_cards = ''.join(card(p) for p in SERIES)
-guide_cards = ''.join(card(p) for p in GUIDES)
-ordered = SERIES + GUIDES
+
+def topic_navigation(home=False):
+    prefix = '#home-' if home else '#'
+    links = ''.join(f'<a href="{prefix}{section["id"]}">{escape(section["title"])} <span class="blog-topic-count">{len(section["posts"])}편</span></a>' for section in TOPIC_SECTIONS)
+    return f'<nav class="blog-category-nav blog-topic-nav" aria-label="블로그 주제 바로가기">{links}</nav>'
+
+
+def topic_groups(home=False):
+    groups = []
+    for section in TOPIC_SECTIONS:
+        identifier = ('home-' if home else '') + section['id']
+        layout = ' series-cards' if section['sort'] == 'series' else ''
+        cards = ''.join(card(post) for post in section['posts'])
+        # Preserve old inbound #practical-guides links without adding duplicate cards.
+        legacy = '<span id="practical-guides" class="blog-legacy-anchor" aria-hidden="true"></span>' if not home and section['id'] == 'command-marketing-os' else ''
+        groups.append(f'''{legacy}<section class="blog-group blog-topic-group" id="{identifier}" data-blog-topic="{section['id']}" aria-labelledby="{identifier}-title">
+<header class="blog-topic-heading"><div><p class="eyebrow">{escape(section['eyebrow'])}</p><h2 class="extra-title" id="{identifier}-title">{escape(section['title'])}</h2><p class="section-copy">{escape(section['description'])}</p></div><p class="blog-topic-total">{len(section['posts'])}편</p></header>
+<div class="blog-cards{layout}">{cards}</div></section>''')
+    return '\n'.join(groups)
+
+
+ordered = [post for section in TOPIC_SECTIONS for post in section['posts']]
+BLOG_TITLE = 'AI Agent·커맨드 마케팅·SEO 실무 블로그'
+BLOG_DESCRIPTION = f'AI Agent 도서 활용, 커맨드 마케팅 OS, 조직 협업, Agentic AI 기술, SEO·GEO·AIEO의 {len(POSTS)}편을 주제별로 읽어보세요.'
 items = [{'@type': 'ListItem', 'position': i + 1, 'url': ORIGIN + '/blog/' + p['slug'], 'name': p['title']} for i, p in enumerate(ordered)]
 graph = {'@context': 'https://schema.org', '@graph': [
-    {'@type': 'CollectionPage', '@id': ORIGIN + '/blog#webpage', 'url': ORIGIN + '/blog', 'name': 'AI 마케팅 책 소개와 SEO·GEO·AIEO 실무 블로그', 'inLanguage': 'ko-KR', 'mainEntity': {'@type': 'ItemList', 'itemListElement': items}},
+    {'@type': 'CollectionPage', '@id': ORIGIN + '/blog#webpage', 'url': ORIGIN + '/blog', 'name': BLOG_TITLE, 'inLanguage': 'ko-KR', 'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(items), 'itemListElement': items}},
     {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'url': ORIGIN + '/blog', 'name': 'Command Marketing 블로그', 'inLanguage': 'ko-KR', 'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'}}, breadcrumb_graph()]}
-index = head('AI 마케팅 책 소개와 SEO·GEO·AIEO 실무 블로그', f'AI Agent를 지휘하는 마케터 책 소개 시리즈 {len(SERIES)}편과 SEO·GEO·AIEO 실무 가이드 {len(GUIDES)}편. Agent 워크플로우 설계, 거버넌스, 업무 지시서부터 기술 SEO와 AI 검색 성과 측정까지 읽어 보세요.', '/blog', graph) + f'''
+index = head(BLOG_TITLE, BLOG_DESCRIPTION, '/blog', graph) + f'''
 <body class="blog-page" data-page-type="blog_index" data-content-group="blog_index"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}<main class="blog-main wrap" id="main">{breadcrumbs()}
-<header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>책에서 운영으로,<br>검색에서 답변으로.</h1><p class="section-copy">책 소개 시리즈 {len(SERIES)}편으로 AI 마케팅의 운영 구조를 읽고, 실무 가이드 {len(GUIDES)}편으로 Agent 설계·검색·콘텐츠·검수·측정의 기준을 세우세요.</p><nav class="blog-category-nav" aria-label="블로그 콘텐츠 분류"><a href="#book-series">책 소개 시리즈 {len(SERIES)}편</a><a href="#practical-guides">SEO·GEO·AIEO 가이드 {len(GUIDES)}편</a></nav><p class="blog-disclosure">도서 소개는 『AI Agent를 지휘하는 마케터』의 주제와 구성을 안내합니다. 실무 가이드는 도서의 일반 주제·공개 출처 기반 편집 응용 또는 사용자 제공 원고의 형식 변환이며, 글별 저자·편집·검토 고지를 확인하세요.</p></header>
-<section class="blog-group" id="book-series" aria-labelledby="series-title"><p class="eyebrow">Book notes / 01 — 03</p><h2 class="extra-title" id="series-title">『AI Agent를 지휘하는 마케터』<br>세 편으로 읽는 핵심 구조</h2><p class="section-copy">일을 맡기는 판단, 업무 지시서, 실행과 검수의 루프를 순서대로 소개합니다. 각 글의 편집·적용 범위를 확인하세요.</p><div class="blog-cards series-cards">{series_cards}</div></section>
-<section class="blog-group" id="practical-guides" aria-labelledby="guides-title"><p class="eyebrow">Practical guides / SEO · GEO · AIEO</p><h2 class="extra-title" id="guides-title">검색과 AI 답변을 위한 실무 가이드</h2><div class="blog-cards">{guide_cards}</div></section>
+<header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>AI Agent의 이해부터,<br>내 업무·팀 운영·검색까지.</h1><p class="section-copy">{len(POSTS)}편을 {len(TOPIC_SECTIONS)}개 주제로 나눴습니다. 책의 핵심을 읽고 개인 OS와 조직 협업을 설계하거나, Agentic AI 기술·검색 최적화부터 필요한 내용을 찾아보세요. 시리즈는 1→2→3, 도입·협업과 기술 글은 최근 게시일순입니다.</p>{topic_navigation()}<p class="blog-disclosure">도서 소개는 『AI Agent를 지휘하는 마케터』의 주제와 구성을 안내합니다. 실무 가이드는 도서의 일반 주제·공개 출처 기반 편집 응용 또는 사용자 제공 원고의 형식 변환이며, 글별 저자·편집·검토 고지를 확인하세요.</p></header>
+{topic_groups()}
 <div class="article-end"><p class="eyebrow">Read the system</p><h2 class="extra-title">콘텐츠 제작을 반복 가능한 운영으로 바꾸고 싶다면.</h2><p class="section-copy">책의 업무 지시서와 검수·승인 구조를 확인하세요.</p><div class="actions"><a class="button primary" href="/#system">R-G-C-T-O-R 보기</a><a class="button secondary" href="/#diagnosis">내 상황 진단하기</a></div></div></main>{FOOTER}'''
 (DIST / 'blog/index.html').write_text(index)
 
-home_cards = ''.join(card(p) for p in ordered)
-home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book notes / SEO · GEO · AIEO</p><h2 class="section-title">책 소개와 실무 가이드,<br>{len(POSTS)}편으로 연결합니다.</h2><p class="section-copy">도서의 주제와 구성을 소개하는 책 소개 시리즈 {len(SERIES)}편과 도서의 일반 주제·공개 출처·사용자 제공 원고 기반 실무 가이드 {len(GUIDES)}편입니다. Agent 워크플로우 설계부터 검색과 콘텐츠 운영까지, 도서 소개와 편집 응용의 범위를 구분했습니다.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div><div class="blog-cards">{home_cards}</div></div></section>'''
+home_section = f'''<section class="blog-section section" id="blog" data-track-section="blog"><div class="wrap"><div class="blog-head"><div><p class="eyebrow">Book · OS · Team · Technology · Search</p><h2 class="section-title">지금 필요한 주제부터,<br>마케팅 AI를 업무로 연결하세요.</h2><p class="section-copy">도서 읽기·실무 활용, 커맨드 마케팅 OS, 조직 협업, Agentic AI 기술, 검색 최적화. {len(POSTS)}편을 {len(TOPIC_SECTIONS)}개 주제로 정리했습니다. 두 시리즈는 순서대로, 나머지는 안내된 읽기 흐름으로 탐색하세요.</p></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></div>{topic_navigation(home=True)}{topic_groups(home=True)}</div></section>'''
 LANDING = re.sub(r'<!-- BLOG_SECTION_START -->.*?<!-- BLOG_SECTION_END -->', '<!-- BLOG_SECTION_START -->' + home_section + '<!-- BLOG_SECTION_END -->', LANDING, flags=re.S)
 (DIST / 'index.html').write_text(LANDING)
 
@@ -380,7 +401,7 @@ for route in funnel_routes:
     date.fromisoformat(route['lastmod'])
     assert 'noindex' not in route or isinstance(route['noindex'], bool), route
 
-base_routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path': '/blog', 'title': '도서 소개와 SEO·GEO·AIEO 블로그'}] + [{'path': '/blog/' + p['slug'], 'title': p['title']} for p in POSTS]
+base_routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path': '/blog', 'title': BLOG_TITLE}] + [{'path': '/blog/' + p['slug'], 'title': p['title']} for p in POSTS]
 routes = base_routes + funnel_routes
 assert len({route['path'] for route in routes}) == len(routes), 'Duplicate static route paths are not allowed.'
 indexable_routes = [route for route in routes if not route.get('noindex', False)]
@@ -410,8 +431,10 @@ sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encodin
 for path in (ROOT / 'sitemap.xml', DIST / 'sitemap.xml'):
     path.write_text(sitemap)
 llms = (ROOT / 'content/llms-base.md').read_text().rstrip() + '\n'
-for title, group in ((f'도서 소개 시리즈 {len(SERIES)}편', SERIES), (f'SEO·GEO·AIEO 실무 가이드 {len(GUIDES)}편', GUIDES)):
-    llms += '\n## ' + title + '\n\n'
+for section in TOPIC_SECTIONS:
+    group = section['posts']
+    llms += f'\n## {section["title"]} {len(group)}편\n\n'
+    llms += f'- [{section["title"]} 목록]({ORIGIN}/blog#{section["id"]}): {section["description"]}\n'
     llms += '\n'.join(f'- [{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' for post in group) + '\n'
 llms += f'\n## 공개 편집 자료와 팀 적용 문의\n\n- [R-G-C-T-O-R 업무 지시서 워크시트]({ORIGIN}/resources/rgctor-worksheet): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.\n- [콘텐츠·검색 점검표]({ORIGIN}/resources/content-search-checklist): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.\n- [팀 적용 문의]({ORIGIN}/consulting): 콘텐츠 검수·운영 체계의 적용 범위를 문의하는 경로입니다.\n'
 llms += f'\n## 검색 보조 문서\n\n- [XML 사이트맵]({ORIGIN}/sitemap.xml): 현재 색인 대상 정규 URL {len(indexable_routes)}개와 대표 이미지\n- [크롤러 접근 정책]({ORIGIN}/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분\n'

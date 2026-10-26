@@ -1,0 +1,66 @@
+[
+  {
+    "id": "book-series",
+    "title": "도서 읽기·실무 활용",
+    "eyebrow": "01 / Book · Reading · Practice",
+    "description": "책 소개 1→2→3으로 거버넌스·업무 지시·운영 루프를 읽고, 역할별 독서 가이드와 실무 활용 글로 내 업무의 시작점을 고르세요.",
+    "sort": "reading",
+    "slugs": [
+      "book-command-marketer-01",
+      "book-command-marketer-02",
+      "book-command-marketer-03",
+      "book-ai-agent-roles-reading-guide",
+      "command-marketing-book-practical-guide"
+    ]
+  },
+  {
+    "id": "command-marketing-os",
+    "title": "커맨드 마케팅 전략·개인 OS",
+    "eyebrow": "02 / Strategy · Personal OS · Maintenance",
+    "description": "통합 AI 활용 전략 → 내 업무의 개인 OS → 정기 운영·고도화. 도서와 커맨드 마케팅의 연결을 3편의 순서로 확인하세요.",
+    "sort": "series",
+    "series_key": "command-marketing-os",
+    "slugs": [
+      "command-marketing-ai-strategy",
+      "command-marketing-personal-os",
+      "command-marketing-agent-maintenance"
+    ]
+  },
+  {
+    "id": "agent-team-workflows",
+    "title": "Agent 도입·조직 협업",
+    "eyebrow": "03 / Adoption · Workflow · Team",
+    "description": "Agent가 필요한 업무를 판단하고, 워크플로우·권한·검수를 설계하세요. 실무자와 의사결정권자의 인계·승인·생산성 기준까지 연결합니다. 최근 게시 글부터 표시합니다.",
+    "sort": "latest",
+    "slugs": [
+      "ai-agent-organization-collaboration",
+      "why-marketers-need-ai-agents",
+      "marketer-ai-agent-workflow-design"
+    ]
+  },
+  {
+    "id": "agentic-ai-technology",
+    "title": "Agentic AI 기술 이해",
+    "eyebrow": "04 / Harness · Loop · Graph · Jev",
+    "description": "Harness·Loop·Graph·Jev의 역할과 조합을 이해하고, 마케팅 업무에 적용할 기술·권한·판단의 경계를 확인하세요. 최근 게시 글부터 표시합니다.",
+    "sort": "latest",
+    "slugs": [
+      "agentic-ai-harness-loop-graph-jev-marketer-guide",
+      "jev-engineering-guide"
+    ]
+  },
+  {
+    "id": "search-optimization",
+    "title": "SEO·GEO·AIEO 검색 최적화",
+    "eyebrow": "05 / Search · Content · Measurement",
+    "description": "개념과 전략 → 답변형 콘텐츠 → 기술 SEO → 콘텐츠 Agent 운영 → 성과 측정의 흐름으로 읽으세요. 검색 유입·AI 인용·전환을 구분합니다.",
+    "sort": "reading",
+    "slugs": [
+      "seo-geo-aieo-guide",
+      "geo-content-structure",
+      "technical-seo-ai-search",
+      "rgctor-content-workflow",
+      "ai-search-measurement"
+    ]
+  }
+]
