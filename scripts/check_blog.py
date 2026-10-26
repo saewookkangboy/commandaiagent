@@ -315,9 +315,31 @@ assert [item['url'] for item in collection['mainEntity']['itemListElement']] == 
 assert [item['position'] for item in collection['mainEntity']['itemListElement']] == list(range(1, len(posts) + 1))
 assert index.select_one('link[rel="canonical"]')['href'] == ORIGIN + '/blog'
 assert index.select_one('meta[name="description"]')['content'] == index.select_one('meta[property="og:description"]')['content'] == index.select_one('meta[name="twitter:description"]')['content']
+site = json.loads((ROOT / 'content/site.json').read_text())
+assert index.title.get_text() == site['blog_title'] + ' | Command Marketing'
+assert index.select_one('meta[property="og:title"]')['content'] == index.select_one('meta[name="twitter:title"]')['content'] == site['blog_title']
+assert index.select_one('meta[name="description"]')['content'] == collection['description'] == site['blog_description']
+assert collection['name'] == site['blog_title'] and 50 <= len(site['blog_description']) <= 80
+assert 30 <= len(index.title.get_text()) <= 60
+expected_part_ids = [ORIGIN + '/blog#' + section['id'] for section in sections]
+assert [ref['@id'] for ref in collection['hasPart']] == expected_part_ids
+assert [topic['name'] for topic in collection['about']] == [section['title'] for section in sections]
+index_graph = json.loads(index.select_one('script[type="application/ld+json"]').string)['@graph']
+parts = [item for item in index_graph if item['@type'] == 'WebPageElement']
+assert [part['@id'] for part in parts] == expected_part_ids
+for part, section in zip(parts, sections):
+    assert part['url'] == part['@id'] and part['name'] == section['title'] and part['description'] == section['description']
+    assert part['isPartOf'] == {'@id': collection['@id']}
+    assert index.find(id=urlsplit(part['url']).fragment), 'Schema topic must be a visible page element.'
+    assert part['mainEntity']['numberOfItems'] == len(section['posts'])
+    assert [item['position'] for item in part['mainEntity']['itemListElement']] == list(range(1, len(section['posts']) + 1))
+    assert [item['url'] for item in part['mainEntity']['itemListElement']] == [ORIGIN + '/blog/' + post['slug'] for post in section['posts']]
+    assert [item['name'] for item in part['mainEntity']['itemListElement']] == [post['title'] for post in section['posts']]
 assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == len(posts) + 7
 urls = [node.text for node in ET.parse(DIST / 'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
 assert len(urls) == len(posts) + 6 and len(set(urls)) == len(urls)
+assert [url.rsplit('/', 1)[-1] for url in urls if urlsplit(url).path.startswith('/blog/')] == ordered_slugs
+assert all(urlsplit(url).scheme == 'https' and urlsplit(url).netloc == urlsplit(ORIGIN).netloc and not urlsplit(url).fragment and not urlsplit(url).query for url in urls)
 extra_paths = ['/consulting','/resources','/resources/rgctor-worksheet','/resources/content-search-checklist']
 assert set(urls) == {ORIGIN + '/', ORIGIN + '/blog'} | {ORIGIN + '/blog/' + p['slug'] for p in posts} | {ORIGIN + path for path in extra_paths}
 assert ORIGIN + '/privacy' not in urls
@@ -326,6 +348,7 @@ assert (ROOT / 'sitemap.xml').read_bytes() == (DIST / 'sitemap.xml').read_bytes(
 ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'image': 'http://www.google.com/schemas/sitemap-image/1.1'}
 site = json.loads((ROOT / 'content/site.json').read_text())
 expected_modified = {ORIGIN + '/': site['home_modified'], ORIGIN + '/blog': max(site.get('blog_modified', '0001-01-01'), *(p.get('modified', p['date']) for p in posts))}
+assert collection['dateModified'] == expected_modified[ORIGIN + '/blog']
 expected_images = {ORIGIN + '/': ORIGIN + '/assets/book-flat.jpg'}
 funnel = json.loads((ROOT / 'content/funnel.json').read_text())
 expected_modified.update({ORIGIN + path: funnel['modified'] for path in extra_paths})

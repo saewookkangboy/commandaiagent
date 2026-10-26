@@ -369,12 +369,27 @@ def topic_groups(home=False):
 
 
 ordered = [post for section in TOPIC_SECTIONS for post in section['posts']]
-BLOG_TITLE = 'AI Agent·커맨드 마케팅·SEO 실무 블로그'
-BLOG_DESCRIPTION = f'AI Agent 도서 활용, 커맨드 마케팅 OS, 조직 협업, Agentic AI 기술, SEO·GEO·AIEO의 {len(POSTS)}편을 주제별로 읽어보세요.'
+BLOG_TITLE = SITE['blog_title']
+BLOG_DESCRIPTION = SITE['blog_description']
+assert BLOG_TITLE == BLOG_TITLE.strip() and 30 <= len(BLOG_TITLE + ' | Command Marketing') <= 60, 'Blog title is missing or outside the project editorial limit.'
+assert BLOG_DESCRIPTION == BLOG_DESCRIPTION.strip() and 50 <= len(BLOG_DESCRIPTION) <= 80, 'Blog description must meet the project Naver inspection recommendation.'
 items = [{'@type': 'ListItem', 'position': i + 1, 'url': ORIGIN + '/blog/' + p['slug'], 'name': p['title']} for i, p in enumerate(ordered)]
+topic_parts = [{
+    '@type': 'WebPageElement', '@id': ORIGIN + '/blog#' + section['id'],
+    'url': ORIGIN + '/blog#' + section['id'], 'name': section['title'],
+    'description': section['description'], 'inLanguage': 'ko-KR',
+    'isPartOf': {'@id': ORIGIN + '/blog#webpage'},
+    'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(section['posts']),
+                   'itemListElement': [{'@type': 'ListItem', 'position': i + 1,
+                                        'url': ORIGIN + '/blog/' + post['slug'],
+                                        'name': post['title']}
+                                       for i, post in enumerate(section['posts'])]}
+} for section in TOPIC_SECTIONS]
+topics = [{'@type': 'Thing', 'name': section['title']} for section in TOPIC_SECTIONS]
 graph = {'@context': 'https://schema.org', '@graph': [
-    {'@type': 'CollectionPage', '@id': ORIGIN + '/blog#webpage', 'url': ORIGIN + '/blog', 'name': BLOG_TITLE, 'inLanguage': 'ko-KR', 'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(items), 'itemListElement': items}},
-    {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'url': ORIGIN + '/blog', 'name': 'Command Marketing 블로그', 'inLanguage': 'ko-KR', 'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'}}, breadcrumb_graph()]}
+    {'@type': 'CollectionPage', '@id': ORIGIN + '/blog#webpage', 'url': ORIGIN + '/blog', 'name': BLOG_TITLE, 'description': BLOG_DESCRIPTION, 'dateModified': BLOG_MODIFIED, 'inLanguage': 'ko-KR', 'about': topics, 'hasPart': [{'@id': part['@id']} for part in topic_parts], 'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(items), 'itemListElement': items}},
+    {'@type': 'Blog', '@id': ORIGIN + '/blog#blog', 'url': ORIGIN + '/blog', 'name': 'Command Marketing 블로그', 'inLanguage': 'ko-KR', 'about': topics, 'publisher': {'@type': 'Organization', 'name': 'TROE', 'url': 'https://troe.kr/'}},
+    *topic_parts, breadcrumb_graph()]}
 index = head(BLOG_TITLE, BLOG_DESCRIPTION, '/blog', graph) + f'''
 <body class="blog-page" data-page-type="blog_index" data-content-group="blog_index"><a class="skip-link" href="#main">본문으로 이동</a>{HEADER}<main class="blog-main wrap" id="main">{breadcrumbs()}
 <header class="blog-heading"><p class="eyebrow">Command Marketing / Field notes</p><h1>AI Agent의 이해부터,<br>내 업무·팀 운영·검색까지.</h1><p class="section-copy">{len(POSTS)}편을 {len(TOPIC_SECTIONS)}개 주제로 나눴습니다. 책의 핵심을 읽고 개인 OS와 조직 협업을 설계하거나, Agentic AI 기술·검색 최적화부터 필요한 내용을 찾아보세요. 시리즈는 1→2→3, 도입·협업과 기술 글은 최근 게시일순입니다.</p>{topic_navigation()}<p class="blog-disclosure">도서 소개는 『AI Agent를 지휘하는 마케터』의 주제와 구성을 안내합니다. 실무 가이드는 도서의 일반 주제·공개 출처 기반 편집 응용 또는 사용자 제공 원고의 형식 변환이며, 글별 저자·편집·검토 고지를 확인하세요.</p></header>
@@ -401,7 +416,9 @@ for route in funnel_routes:
     date.fromisoformat(route['lastmod'])
     assert 'noindex' not in route or isinstance(route['noindex'], bool), route
 
-base_routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path': '/blog', 'title': BLOG_TITLE}] + [{'path': '/blog/' + p['slug'], 'title': p['title']} for p in POSTS]
+# Keep the canonical URL set; anchors represent portions of /blog, not pages.
+# Sitemap ordering is for source consistency, not a Google ranking signal.
+base_routes = [{'path': '/', 'title': 'AI Agent를 지휘하는 마케터'}, {'path': '/blog', 'title': BLOG_TITLE}] + [{'path': '/blog/' + p['slug'], 'title': p['title']} for p in ordered]
 routes = base_routes + funnel_routes
 assert len({route['path'] for route in routes}) == len(routes), 'Duplicate static route paths are not allowed.'
 indexable_routes = [route for route in routes if not route.get('noindex', False)]

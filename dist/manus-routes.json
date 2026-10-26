@@ -6,39 +6,43 @@
     },
     {
       "path": "/blog",
-      "title": "AI Agent·커맨드 마케팅·SEO 실무 블로그"
+      "title": "마케팅 AI 에이전트·커맨드 마케팅·SEO 블로그"
     },
     {
-      "path": "/blog/ai-agent-organization-collaboration",
-      "title": "AI Agent 조직 협업이 필요한 이유: 실무자와 의사결정권자의 생산성을 연결하는 법"
+      "path": "/blog/book-command-marketer-01",
+      "title": "책 소개 1 | AI를 쓰는 마케터에서 지휘하는 마케터로: Agent와 거버넌스"
     },
     {
-      "path": "/blog/command-marketing-agent-maintenance",
-      "title": "AI Agent 유지보수와 고도화: 커맨드 마케팅을 지속 가능한 운영으로 만드는 법"
+      "path": "/blog/book-command-marketer-02",
+      "title": "책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서"
     },
     {
-      "path": "/blog/command-marketing-personal-os",
-      "title": "마케터 개인 OS 만들기: 커맨드 마케팅을 내 업무의 실행 체계로 바꾸는 법"
-    },
-    {
-      "path": "/blog/command-marketing-ai-strategy",
-      "title": "커맨드 마케팅은 왜 AI 활용 전략인가: 『AI Agent를 지휘하는 마케터』를 읽는 관점"
+      "path": "/blog/book-command-marketer-03",
+      "title": "책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프"
     },
     {
       "path": "/blog/book-ai-agent-roles-reading-guide",
       "title": "마케팅 AI 에이전트 17가지 역할: 책에서 확인할 업무별 특징"
     },
     {
-      "path": "/blog/agentic-ai-harness-loop-graph-jev-marketer-guide",
-      "title": "Agentic AI 시대 마케터의 기술 대응: Harness·Loop·Graph·Jev Engineering 실무 가이드"
-    },
-    {
       "path": "/blog/command-marketing-book-practical-guide",
       "title": "『AI AGENT를 지휘하는 마케터』를 실제 실무에서 활용하는 방법"
     },
     {
-      "path": "/blog/jev-engineering-guide",
-      "title": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법"
+      "path": "/blog/command-marketing-ai-strategy",
+      "title": "커맨드 마케팅은 왜 AI 활용 전략인가: 『AI Agent를 지휘하는 마케터』를 읽는 관점"
+    },
+    {
+      "path": "/blog/command-marketing-personal-os",
+      "title": "마케터 개인 OS 만들기: 커맨드 마케팅을 내 업무의 실행 체계로 바꾸는 법"
+    },
+    {
+      "path": "/blog/command-marketing-agent-maintenance",
+      "title": "AI Agent 유지보수와 고도화: 커맨드 마케팅을 지속 가능한 운영으로 만드는 법"
+    },
+    {
+      "path": "/blog/ai-agent-organization-collaboration",
+      "title": "AI Agent 조직 협업이 필요한 이유: 실무자와 의사결정권자의 생산성을 연결하는 법"
     },
     {
       "path": "/blog/why-marketers-need-ai-agents",
@@ -47,6 +51,14 @@
     {
       "path": "/blog/marketer-ai-agent-workflow-design",
       "title": "마케터가 AI AGENT 워크플로우를 정밀하게 설계하고 운영해야 하는 이유"
+    },
+    {
+      "path": "/blog/agentic-ai-harness-loop-graph-jev-marketer-guide",
+      "title": "Agentic AI 시대 마케터의 기술 대응: Harness·Loop·Graph·Jev Engineering 실무 가이드"
+    },
+    {
+      "path": "/blog/jev-engineering-guide",
+      "title": "Jev Engineering 입문: AI 에이전트의 판단을 결정 모델에 맡기는 법"
     },
     {
       "path": "/blog/seo-geo-aieo-guide",
@@ -67,18 +79,6 @@
     {
       "path": "/blog/ai-search-measurement",
       "title": "SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법"
-    },
-    {
-      "path": "/blog/book-command-marketer-01",
-      "title": "책 소개 1 | AI를 쓰는 마케터에서 지휘하는 마케터로: Agent와 거버넌스"
-    },
-    {
-      "path": "/blog/book-command-marketer-02",
-      "title": "책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서"
-    },
-    {
-      "path": "/blog/book-command-marketer-03",
-      "title": "책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프"
     },
     {
       "path": "/privacy",
