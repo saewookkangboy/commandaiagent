@@ -274,7 +274,7 @@ for post in posts:
             assert soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-contents"]')['href'] == '/#contents'
         assert soup.select_one('.article-mobile-cta a')['data-cta-id'] == 'mobile-book'
         assert not soup.select('.article-cta a[data-consulting-path]')
-        for related in ('command-marketing-ai-strategy', 'command-marketing-personal-os', 'command-marketing-agent-maintenance'):
+        for related in (*post['related'], 'command-marketing-personal-os'):
             assert '](/blog/' + related + ')' in source
         linked = (ROOT / 'content/blog/book-command-marketer-01.md').read_text()
         assert linked.count('](/blog/' + slug + ')') == 1
