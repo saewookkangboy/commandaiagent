@@ -279,6 +279,38 @@ for post in posts:
             assert '](/blog/' + related + ')' in source
         linked = (ROOT / 'content/blog/book-command-marketer-01.md').read_text()
         assert linked.count('](/blog/' + slug + ')') == 1
+    if slug == 'ai-agent-marketing-kpi':
+        assert post['kind'] == 'guide' and post['book_based'] and post['book_overview']
+        assert article['isBasedOn']['name'] == BOOK_TITLE and author['@type'] == 'Organization'
+        assert post['disclosure'] == soup.select_one('.article-disclosure-details p').get_text()
+        assert not soup.select('.series-nav') and len(refs) == 4
+        for term in ('AI 에이전트 도입 성과 측정', '총작업 시간', '경과 시간', '총원가',
+                     '최초 검수 통과율', '재작업 시간 비중', '오류율', '적격 리드 전환율',
+                     '영업 기회 전환율', '업무 단위 완료 성공률', '재사용률', '미측정 또는 N/A',
+                     '추정 노동가치', '증분 기여이익', '10%포인트', '가상 비교 예시', '편집 응용'):
+            assert term in source, (slug, 'missing measurement definition', term)
+        numbered = [node for node in soup.select('.article-body h3') if re.match(r'^\d+\. ', node.get_text())]
+        assert len(numbered) == 12
+        faq = next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']
+        heading = next(h for h in soup.select('.article-body h2') if h.get_text() == '자주 묻는 질문')
+        visible = []
+        for node in heading.find_next_siblings():
+            if node.name == 'h2':
+                break
+            if node.name == 'h3':
+                visible.append((node.get_text(' ', strip=True), node.find_next_sibling('p').get_text(' ', strip=True)))
+        assert len(faq) == 6 and visible == [(row['name'], row['acceptedAnswer']['text']) for row in faq]
+        inline = soup.select_one('.article-cta-inline')
+        assert inline and inline.find_next_sibling('h2').get_text() == 'AI 도입 ROI와 마케팅 매출 기여를 구분한다'
+        for location in ('inline', 'end'):
+            link = soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-book"]')
+            assert link.get_text() == '책을 통해서 확인해보세요'
+            assert link['href'] == home.select_one('header a[data-cta="purchase"]')['href']
+            assert soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-contents"]')['href'] == '/#contents'
+        for related in post['related']:
+            assert '](/blog/' + related + ')' in source
+        linked = (ROOT / 'content/blog/ai-agent-organization-collaboration.md').read_text()
+        assert linked.count('](/blog/' + slug + ')') == 1
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1

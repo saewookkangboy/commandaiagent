@@ -33,6 +33,7 @@
     "description": "Agent가 필요한 업무를 판단하고, 워크플로우·권한·검수를 설계하세요. 실무자와 의사결정권자의 인계·승인·생산성 기준까지 연결합니다. 최근 게시 글부터 표시합니다.",
     "sort": "latest",
     "slugs": [
+      "ai-agent-marketing-kpi",
       "ai-agent-organization-collaboration",
       "why-marketers-need-ai-agents",
       "marketer-ai-agent-workflow-design"
