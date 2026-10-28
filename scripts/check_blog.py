@@ -311,6 +311,41 @@ for post in posts:
             assert '](/blog/' + related + ')' in source
         linked = (ROOT / 'content/blog/ai-agent-organization-collaboration.md').read_text()
         assert linked.count('](/blog/' + slug + ')') == 1
+    if slug == 'everyday-ai-agent-purpose':
+        assert post['kind'] == 'guide' and post['book_based'] and post['book_overview']
+        assert article['isBasedOn']['name'] == BOOK_TITLE and author['@type'] == 'Organization'
+        assert post['disclosure'] == soup.select_one('.article-disclosure-details p').get_text()
+        assert post['disclosure_short'] == soup.select_one('.article-disclosure-short').get_text()
+        assert not soup.select('.series-nav') and len(refs) == 2
+        for term in ('AI Agent 운영 목적', '일반 독자', '마케팅 실무서', '편집 응용',
+                     '개인 반복 업무 자동화', 'AI 에이전트 도입 판단', 'Chat AI', '고정 자동화',
+                     'AI 워크플로우', 'R-G-C-T-O-R', '확인 불가', '24시간',
+                     '입력 준비·실행 확인·검수·수정', '사람의 최종 판단'):
+            assert term in source or term in post['search_summary'], (slug, 'missing purpose or boundary', term)
+        faq = next(row for row in graph['@graph'] if row['@type'] == 'FAQPage')['mainEntity']
+        heading = next(h for h in soup.select('.article-body h2') if h.get_text() == '자주 묻는 질문')
+        visible = []
+        for node in heading.find_next_siblings():
+            if node.name == 'h2':
+                break
+            if node.name == 'h3':
+                visible.append((node.get_text(' ', strip=True), node.find_next_sibling('p').get_text(' ', strip=True)))
+        assert len(faq) == 6 and len({row['name'] for row in faq}) == 6
+        assert visible == [(row['name'], row['acceptedAnswer']['text']) for row in faq]
+        inline = soup.select_one('.article-cta-inline')
+        assert inline and inline.find_next_sibling('h2').get_text() == 'AI 업무 지시서 작성: R-G-C-T-O-R로 내 일을 질문한다'
+        for location in ('inline', 'end'):
+            link = soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-book"]')
+            assert link.get_text() == '책을 통해서 확인해보세요'
+            assert link['href'] == home.select_one('header a[data-cta="purchase"]')['href']
+            assert link['data-position'] == f'article-{location}'
+            assert soup.select_one(f'.article-cta-{location} a[data-cta-id="{location}-contents"]')['href'] == '/#contents'
+        assert soup.select_one('.article-mobile-cta a')['data-cta-id'] == 'mobile-book'
+        assert not soup.select('.article-cta a[data-consulting-path]')
+        for related in post['related']:
+            assert '](/blog/' + related + ')' in source
+        linked = (ROOT / 'content/blog/why-marketers-need-ai-agents.md').read_text()
+        assert linked.count('](/blog/' + slug + ')') == 1
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1

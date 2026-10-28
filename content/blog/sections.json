@@ -30,9 +30,10 @@
     "id": "agent-team-workflows",
     "title": "Agent 도입·조직 협업",
     "eyebrow": "03 / Adoption · Workflow · Team",
-    "description": "Agent가 필요한 업무를 판단하고, 워크플로우·권한·검수를 설계하세요. 실무자와 의사결정권자의 인계·승인·생산성 기준까지 연결합니다. 최근 게시 글부터 표시합니다.",
+    "description": "개인과 팀의 반복 업무에서 Agent가 필요한 목적을 판단하고, 워크플로우·권한·검수를 설계하세요. 실무자와 의사결정권자의 인계·승인·생산성 기준까지 연결합니다. 최근 게시 글부터 표시합니다.",
     "sort": "latest",
     "slugs": [
+      "everyday-ai-agent-purpose",
       "ai-agent-marketing-kpi",
       "ai-agent-organization-collaboration",
       "why-marketers-need-ai-agents",
