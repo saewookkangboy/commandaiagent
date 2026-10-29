@@ -48,7 +48,10 @@ with TemporaryDirectory() as temporary:
             section['slugs'].reverse()
     path.write_text(json.dumps(shuffled))
     sorted_sections = load_sections(path, POSTS)
-    assert [p['series_order'] for s in sorted_sections if s['sort'] == 'series' for p in s['posts']] == [1, 2, 3]
+    for section in sorted_sections:
+        if section['sort'] == 'series':
+            orders = [post['series_order'] for post in section['posts']]
+            assert orders == list(range(1, len(orders) + 1)), (section['id'], orders)
 print('PASS missing/duplicate/unknown topics, mixed series and deterministic order', flush=True)
 
 with sync_playwright() as pw:

@@ -20,8 +20,15 @@ ORIGIN = 'https://book.allrounder.im'
 POSTS = json.loads((ROOT / 'content/blog/posts.json').read_text())
 BY_SLUG = {post['slug']: post for post in POSTS}
 SERIES = sorted([p for p in POSTS if p.get('kind') == 'book-series'], key=lambda p: p['series_order'])
-SCHEDULED_SERIES_FILE = ROOT / 'content/scheduled/command-marketing-os/posts.json'
-COMMAND_SERIES = json.loads(SCHEDULED_SERIES_FILE.read_text()) if SCHEDULED_SERIES_FILE.exists() else []
+SCHEDULED_SERIES = {}
+for schedule_file in sorted((ROOT / 'content/scheduled').glob('*/posts.json')):
+    for scheduled_post in json.loads(schedule_file.read_text()):
+        series_key = scheduled_post.get('series_key')
+        if series_key:
+            SCHEDULED_SERIES.setdefault(series_key, []).append(scheduled_post)
+for members in SCHEDULED_SERIES.values():
+    members.sort(key=lambda post: post['series_order'])
+    assert len({post['slug'] for post in members}) == len(members)
 GUIDES = [p for p in POSTS if p.get('kind') != 'book-series']
 TOPIC_SECTIONS = load_sections(ROOT / 'content/blog/sections.json', POSTS)
 LANDING = (DIST / 'index.html').read_text()
@@ -162,8 +169,10 @@ def card(post):
 
 
 def series_navigation(post):
-    if post.get('series_key') == 'command-marketing-os':
-        members = sorted(COMMAND_SERIES, key=lambda p: p['series_order'])
+    series_key = post.get('series_key')
+    if series_key in SCHEDULED_SERIES:
+        members = SCHEDULED_SERIES[series_key]
+        series_title = post.get('series_title') or ('커맨드 마케팅 OS 연결 시리즈' if series_key == 'command-marketing-os' else 'AI Agent 실습 시리즈')
         index = next(i for i, member in enumerate(members) if member['slug'] == post['slug'])
         entries = []
         for member in members:
@@ -179,14 +188,14 @@ def series_navigation(post):
             member = members[index - 1]
             if member['slug'] in BY_SLUG:
                 previous = f'<a href="/blog/{member["slug"]}" aria-label="이전 편: {escape(member["short_title"], quote=True)}">← 이전 편</a>'
-        following = '<a href="/#contents">책 전체 구성 보기 →</a>'
+        following = '<a href="/#contents">책 전체 구성 보기 →</a>' if series_key == 'command-marketing-os' else '<a href="/blog">블로그 전체 보기 →</a>'
         if index + 1 < len(members):
             member = members[index + 1]
             if member['slug'] in BY_SLUG:
                 following = f'<a href="/blog/{member["slug"]}" aria-label="다음 편: {escape(member["short_title"], quote=True)}">다음 편 →</a>'
             else:
                 following = f'<span class="series-pending">다음 편 · {member["date"]} 발행 예정</span>'
-        return f'''<nav class="series-nav" aria-label="커맨드 마케팅 OS 연결 시리즈"><p class="series-status">커맨드 마케팅 OS 연결 시리즈 · 현재 {post["series_order"]}/{len(members)}</p><div class="series-pager">{previous}{following}</div>
+        return f'''<nav class="series-nav" aria-label="{escape(series_title, quote=True)}"><p class="series-status">{escape(series_title)} · 현재 {post["series_order"]}/{len(members)}</p><div class="series-pager">{previous}{following}</div>
 <details class="series-full-list"><summary>시리즈 전체 {len(members)}편 보기</summary><ol>{''.join(entries)}</ol></details></nav>'''
     if post.get('kind') != 'book-series':
         return ''
@@ -316,6 +325,9 @@ for post in POSTS:
     elif post.get('book_overview'):
         disclosure = post['disclosure']
         disclosure_short = post['disclosure_short']
+    elif post.get('custom_disclosure'):
+        disclosure = post['disclosure']
+        disclosure_short = post.get('disclosure_short', BOOK_BASED_GUIDE_SHORT_DISCLOSURE)
     elif post.get('book_based'):
         disclosure = BOOK_BASED_GUIDE_DISCLOSURE
         disclosure_short = BOOK_BASED_GUIDE_SHORT_DISCLOSURE

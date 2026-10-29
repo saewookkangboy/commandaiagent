@@ -1,0 +1,22 @@
+{
+  "timezone": "Asia/Seoul",
+  "metadata_sha256": "26911f81490979810bc85d4ea744ff4e1a72a3c88597269bd5c65026f2299692",
+  "section_sha256": "74569d12ad1bbb7de5ae91888b83fe7fe6f3380a105b175d42d224a35ab18819",
+  "sha256": {
+    "assets/everyday-ai-practice-01-discovery.jpg": "a9d46bc5b5fbb253b4d955c8c565c853c7134769ca40ca4da0474e6af151cc9d",
+    "assets/everyday-ai-practice-01-discovery.webp": "ef0bfeaa5cae5d18664c14959bcc750dac6508bcbbfd3c02be9d6e655827425d",
+    "assets/everyday-ai-practice-02-purpose.jpg": "64a5282b7baccabc2a291882304f00063f08d645a251d0416b5edec0d215e4e9",
+    "assets/everyday-ai-practice-02-purpose.webp": "af69caef001cac4b01294e034138399ea54bbed25b99ba0c1cf2f2fbbc1bcd34",
+    "assets/everyday-ai-practice-03-prompt.jpg": "98228229d66ca27d34716851e6bf37ac45c96a2567abda7cb7d647b5ab5e0c49",
+    "assets/everyday-ai-practice-03-prompt.webp": "75237e6865c2b941aa2ff3de3e947125e2a6c22a188c83336887b37dcea11e22",
+    "assets/everyday-ai-practice-04-test.jpg": "4eed2cb65674dd0a1a8b2dde86b91d17ea5dbcc417b2687c99d0e5d6ab4df0bc",
+    "assets/everyday-ai-practice-04-test.webp": "ff3ecf260ac02d3a6cdd519c8eb413cb26772a9c9b2ee03e7d0f2701a5f9af3c",
+    "assets/everyday-ai-practice-05-operation.jpg": "1220918ac823a3049d9fa4dac2a0e9ad2d196d3daffc0b4711be437ba52a0da5",
+    "assets/everyday-ai-practice-05-operation.webp": "d282d11898cf794cd2103233b8c27fa31a91efd56dd28a8845557a099c13b5d8",
+    "everyday-ai-practice-01-discovery.md": "b673721a616979d6767a47cadfdedd414e77ce2b6d6d012eff9b9f094c8a26f0",
+    "everyday-ai-practice-02-purpose.md": "eb7784467fa238cdc6e0528399fb69f1bef150165b48cb128ba26c2165ddd02b",
+    "everyday-ai-practice-03-prompt.md": "db4022abac7d60e7ca91090593711a735866eaab4da55396d3cfe6b92880478d",
+    "everyday-ai-practice-04-test.md": "a0ef7002a31d23574e88ca8e81c63400cc0ce5c069cc4edd6eb7cfda64b643c2",
+    "everyday-ai-practice-05-operation.md": "8dbc6de4a42c582693bf2793168c8bcdbd3841e5d76c8f2a7467e4e7e4446c55"
+  }
+}

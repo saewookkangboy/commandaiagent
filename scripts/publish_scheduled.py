@@ -3,7 +3,7 @@
 This stages local source files only. It never commits, pushes, changes accounts,
 contacts analytics, or deploys. The authorized scheduled agent handles checks,
 GitHub PR/main integration and verification of the existing Vercel deployment.
-Run: python3 scripts/publish_scheduled.py [--dry-run]
+Run: python3 scripts/publish_scheduled.py [--schedule-dir content/scheduled/command-marketing-os] [--dry-run]
 Clock injection is available only to tests in a separate workspace.
 """
 from copy import deepcopy
@@ -40,7 +40,7 @@ def digest(path):
     return sha256(path.read_bytes()).hexdigest()
 
 
-def stage_today(workspace, *, now=None, dry_run=False):
+def stage_today(workspace, *, now=None, dry_run=False, schedule_dir=SCHEDULE_PATH):
     root = Path(workspace).resolve()
     if now is not None and root == ROOT:
         raise ValueError('An injected clock must never stage the real working repository.')
@@ -48,12 +48,24 @@ def stage_today(workspace, *, now=None, dry_run=False):
     if clock.tzinfo is None:
         raise ValueError('Use a timezone-aware timestamp.')
     clock = clock.astimezone(KST)
-    directory = root / SCHEDULE_PATH
+    relative_schedule_dir = Path(schedule_dir)
+    if relative_schedule_dir.is_absolute() or '..' in relative_schedule_dir.parts:
+        raise ValueError('The schedule directory must stay within the repository.')
+    directory = root / relative_schedule_dir
     schedule = read_json(directory / 'posts.json')
     proof = read_json(directory / 'publication-proof.json')
     assert proof['timezone'] == 'Asia/Seoul'
     assert len({p['slug'] for p in schedule}) == len(schedule)
     assert [p['series_order'] for p in schedule] == list(range(1, len(schedule) + 1))
+    series_keys = {p['series_key'] for p in schedule}
+    assert len(series_keys) == 1, 'A schedule folder must contain exactly one series.'
+    series_key = next(iter(series_keys))
+    section_config_path = directory / 'section.json'
+    section_config = read_json(section_config_path) if section_config_path.exists() else None
+    if section_config:
+        assert section_config['series_key'] == series_key
+        assert section_config['slugs'] == [p['slug'] for p in schedule]
+        assert proof.get('section_sha256') == digest(section_config_path), 'Approved section definition changed.'
     published = read_json(root / 'content/blog/posts.json')
     published_by_slug = {p['slug']: p for p in published}
     assert len(published_by_slug) == len(published)
@@ -63,7 +75,7 @@ def stage_today(workspace, *, now=None, dry_run=False):
         release = datetime.fromisoformat(post['publish_at'])
         assert release.tzinfo and release.utcoffset() == KST.utcoffset(release)
         assert release.astimezone(KST).date().isoformat() == post['date']
-        assert post['series_key'] == 'command-marketing-os'
+        assert post['series_key'] == series_key
         slots.append((release, post))
     assert [release for release, _ in slots] == sorted(release for release, _ in slots)
     matches = [(release, post) for release, post in slots if release.date() == clock.date()]
@@ -85,6 +97,12 @@ def stage_today(workspace, *, now=None, dry_run=False):
             if not target.is_file() or digest(source) != proof['sha256'][relative] or digest(target) != proof['sha256'][relative]:
                 raise ValueError('Incomplete or conflicting registered article files; recover before deployment.')
         assert digest(directory / 'posts.json') == proof['metadata_sha256'], 'Approved metadata changed.'
+        if section_config:
+            public_sections = read_json(root / 'content/blog/sections.json')
+            registered_section = next((item for item in public_sections if item['id'] == section_config['id']), None)
+            expected_slugs = [item['slug'] for item in schedule if item['slug'] in published_by_slug]
+            if registered_section is None or registered_section['slugs'] != expected_slugs:
+                raise ValueError('Incomplete registration: published series slugs differ from the topic section.')
         registered_catalog = read_json(root / 'content/analytics-events.json')
         registered_site = read_json(root / 'content/site.json')
         if set(registered_catalog['article_slugs']) != set(published_by_slug) or len(registered_catalog['article_slugs']) != len(published_by_slug):
@@ -113,6 +131,16 @@ def stage_today(workspace, *, now=None, dry_run=False):
     catalog = read_json(root / 'content/analytics-events.json')
     assert set(catalog['article_slugs']) == set(published_by_slug)
     site = read_json(root / 'content/site.json')
+    if section_config:
+        public_sections = read_json(root / 'content/blog/sections.json')
+        registered_section = next((item for item in public_sections if item['id'] == section_config['id']), None)
+        expected_before = [item['slug'] for item in schedule if item['series_order'] < post['series_order']]
+        if registered_section is None:
+            assert not expected_before, 'The first series post is missing its public section.'
+            registered_section = deepcopy(section_config)
+            registered_section['slugs'] = []
+            public_sections.append(registered_section)
+        assert registered_section['slugs'] == expected_before, 'Series section contains an unpublished or missing article.'
     if dry_run:
         return {'status': 'ready', 'slug': slug, 'publish_at': post['publish_at'], 'changed': False}
     # Copy assets/source before registering the article; partial staging is safe
@@ -127,19 +155,24 @@ def stage_today(workspace, *, now=None, dry_run=False):
     catalog['article_slugs'].append(slug)
     site['home_modified'] = max(site['home_modified'], post['date'])
     site['llms_reviewed'] = max(site['llms_reviewed'], post['date'])
+    if section_config:
+        registered_section['slugs'].append(slug)
     # Registration files are atomically replaced individually. Tests/build must
     # pass before any Git commit, so a failed transaction cannot be deployed.
     write_atomic(root / 'content/blog/posts.json', json_bytes(published))
     write_atomic(root / 'content/analytics-events.json', json_bytes(catalog))
     write_atomic(root / 'content/site.json', json_bytes(site))
+    if section_config:
+        write_atomic(root / 'content/blog/sections.json', json_bytes(public_sections))
     return {'status': 'staged', 'slug': slug, 'publish_at': post['publish_at'], 'changed': True}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--dry-run', action='store_true')
+    parser.add_argument('--schedule-dir', default=SCHEDULE_PATH.as_posix())
     args = parser.parse_args()
-    print(json.dumps(stage_today(ROOT, dry_run=args.dry_run), ensure_ascii=False, indent=2))
+    print(json.dumps(stage_today(ROOT, dry_run=args.dry_run, schedule_dir=args.schedule_dir), ensure_ascii=False, indent=2))
 
 
 if __name__ == '__main__':

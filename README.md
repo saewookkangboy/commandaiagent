@@ -159,7 +159,7 @@ python3 scripts/serve_preview.py --port 4173
 
 ## 새 블로그와 콘텐츠 유지보수
 
-`/blog`에서는 책 소개 시리즈3편과 다음 독서·실무 가이드15편을 구분해 탐색합니다.
+`/blog`에서는 도서 소개 시리즈와 실무 가이드를 주제별로 탐색합니다. 각 글은 고유한 검색 의도와 편집 범위를 가지며, 공개된 예약 시리즈는 승인된 순서대로 목록에 노출됩니다.
 
 1. SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?
 2. AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드
@@ -176,6 +176,8 @@ python3 scripts/serve_preview.py --port 4173
 13. 마케터 개인 OS: 내 업무의 실행 체계
 14. AI Agent 유지보수·운영·고도화
 15. AI Agent 조직 협업: 실무자와 의사결정권자의 생산성 연결
+
+일반 독자를 위한 「내 반복 업무를 AI에게 맡기는 법」은 업무 관찰 → 목표·경계 → 프롬프트 v1 → 테스트와 v2 → 재사용 운영 카드의 5편 실습입니다. 도서는 마케팅 실무서이며, 학습 메모·카드·프롬프트는 일반 독자를 위한 편집 응용입니다. 예약 운영 절차와 공개일은 [시리즈 운영 문서](docs/everyday-ai-practice-scheduled-series.md)를 참고하세요.
 
 Jev 입문을 제외한 실무 가이드는 공개 출처 또는 제공 도서 프레임 기반의 AI 초안 활용 편집 콘텐츠이며 도서 발췌나 저자의 직접 발언이 아닙니다. 책 소개 시리즈 3편은 도서의 핵심 내용을 요약·소개합니다. 가상 사례와 체크리스트는 편집 응용으로 구분하며 저자의 직접 집필 글이 아닙니다. AIEO는 이 사이트에서 AI Engine Optimization이라는 편집상 용어로 사용합니다. 노출·인용을 보장하지 않습니다.
 
@@ -195,7 +197,7 @@ python3 scripts/check_blog.py
 
 생성 일러스트는 실존 저자의 초상화가 아니라 가상 인물·로봇 카툰입니다. 도서 본문 전체나 전체 추출 텍스트는 저장소·배포 산출물에 포함하지 않습니다.
 
-각 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·글19편·문의·공개 자료 경로의 정규 URL25개가 포함됩니다. 개인정보 안내는 noindex이며 sitemap에서 제외합니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 책 소개 시리즈는 1~3편 목차와 이전·다음 링크를 제공합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
+각 공개 글은 독립 canonical·Open Graph·Twitter Card와 BlogPosting·BreadcrumbList를 갖습니다. sitemap에는 도서 홈·블로그 목록·공개 글·문의·공개 자료 경로만 포함됩니다. 개인정보 안내는 noindex이며 sitemap에서 제외합니다. 글별 WebP/JPG 썸네일은 카드·글 상단·OG/Twitter·BlogPosting 이미지와 연결됩니다. 예약 시리즈는 공개된 편만 링크하고 미발행 편은 예정으로 표시합니다. `robots.txt`의 검색/학습 크롤러 분리 정책은 유지합니다.
 
 ### 검색 의도별 메타데이터 편집
 
@@ -225,10 +227,10 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 
 ## 블로그 상세·리드 퍼널 UX v1
 
-- 블로그19편의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
+- 블로그 글의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
 - `/consulting`: 필수3개·선택2개, 저장 확인 후 완료, 실패 시 입력 유지 및 이메일 대체
 - `/resources`: 공개 편집 워크시트2종, HTML 미리보기와 Markdown 다운로드; 이메일 등록 없음
-- `/privacy`: 문의 개인정보 안내(noindex); 25개 페이지 경로 중24개만 sitemap에 포함
+- `/privacy`: 문의 개인정보 안내(noindex); sitemap에는 색인 대상 정규 URL만 포함
 - 비공개 Google Sheets 저장: `api/lead.js` + `apps-script/Code.gs`; 서명 비밀은 Git/정적 파일에 포함하지 않음
 - 공통 이벤트v2.1·24개: [정의서](docs/analytics/common-events.md), [시트 운영](docs/analytics/sheets-lead-operations.md)
 - 접수 검증: `node scripts/check_lead_backend.cjs`, `python3 scripts/check_funnel.py` (실제 외부 전송 없는 모형 검증; 운영 연결 확인과 구분)

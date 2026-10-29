@@ -97,6 +97,11 @@
 - [AI 콘텐츠 자동화 워크플로: 사람 검수와 승인 절차](https://book.allrounder.im/blog/rgctor-content-workflow): AI 콘텐츠 자동화 워크플로에 R-G-C-T-O-R을 적용해 초안 작성, 근거 확인, 개인정보 보호와 사람의 최종 승인 절차를 정리합니다.
 - [GEO 성과 측정: 클릭·인용·전환을 구분하는 방법](https://book.allrounder.im/blog/ai-search-measurement): GEO 성과 측정은 검색 노출, 사이트 방문, AI 답변 인용, 전환을 서로 다른 지표로 살피는 일입니다. 고정 질문 표본과 단일변수 실험으로 변화와 한계를 기록하는 방법을 소개합니다.
 
+## 일반 독자를 위한 AI Agent 실습 1편
+
+- [일반 독자를 위한 AI Agent 실습 목록](https://book.allrounder.im/blog#everyday-ai-practice): 반복 업무 후보를 발견하고 목적과 경계를 정한 뒤 프롬프트를 작성·검수·운영하는 5편 실습 시리즈입니다. 공개된 편부터 순서대로 읽을 수 있습니다.
+- [반복 업무 발굴: AI에게 맡길 후보 찾기 실습](https://book.allrounder.im/blog/everyday-ai-practice-01-discovery): 반복 업무 발굴은 AI 도구를 고르기 전에 실제 행동과 자료 흐름을 관찰하는 일입니다. 입력·처리·출력, 확인된 반복과 병목을 기록하고 사람이 결과를 검수할 수 있는 후보 한 가지를 고릅니다.
+
 ## 공개 편집 자료와 팀 적용 문의
 
 - [R-G-C-T-O-R 업무 지시서 워크시트](https://book.allrounder.im/resources/rgctor-worksheet): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.
@@ -105,7 +110,7 @@
 
 ## 검색 보조 문서
 
-- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 26개와 대표 이미지
+- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 27개와 대표 이미지
 - [크롤러 접근 정책](https://book.allrounder.im/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분
 
-문서 검토 기준일: 2026-10-28. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.
+문서 검토 기준일: 2026-10-29. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.

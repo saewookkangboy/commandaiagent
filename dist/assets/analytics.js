@@ -24,7 +24,7 @@
     content_group: groups.includes(page.contentGroup) ? page.contentGroup : 'book'
   };
   if (article) context.article_slug = article;
-  if (/^[1-3]$/.test(page.seriesOrder || '')) context.series_order = Number(page.seriesOrder);
+  if (/^[1-5]$/.test(page.seriesOrder || '')) context.series_order = Number(page.seriesOrder);
 
   // Format-checked labels from known UTM keys; no form values or arbitrary query keys.
   const campaigns = {};

@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
 ORIGIN = 'https://book.allrounder.im'
 POSTS = [p for p in json.loads((ROOT / 'content/blog/posts.json').read_text())
-         if p.get('series_key') == 'command-marketing-os']
+         if p.get('series_key')]
 
 with sync_playwright() as pw:
     browser = pw.chromium.launch(executable_path='/usr/bin/chromium', headless=True, args=['--no-sandbox'])
@@ -47,11 +47,17 @@ with sync_playwright() as pw:
         # Prevent only the destination action, after production analytics listeners.
         # No real external bookstore page or purchase is opened.
         page.evaluate('document.addEventListener("click",e=>{if(e.target.closest("a[data-cta=purchase]"))e.preventDefault()})')
+        available_locations = []
         for location in ('inline', 'end'):
             selector = f'.article-cta-{location} a[data-cta-id="{location}-book"]'
-            page.locator(selector).scroll_into_view_if_needed()
+            locator = page.locator(selector)
+            if not locator.count():
+                assert location == 'inline', f'Missing required end CTA: {post["slug"]}'
+                continue
+            available_locations.append(location)
+            locator.scroll_into_view_if_needed()
             page.wait_for_timeout(1200)
-            page.locator(selector).click()
+            locator.click()
             page.wait_for_timeout(100)
         google = page.evaluate('window.__ga.filter(e=>e[0]==="event")')
         facebook = page.evaluate('window.__meta.filter(e=>e[0]==="trackCustom")')
@@ -63,7 +69,8 @@ with sync_playwright() as pw:
             assert ga[2]['series_order'] == post['series_order']
         for event in ('view_conversion_cta', 'click_book_purchase'):
             ids = {e[2]['cta_id'] for e in google if e[1] == event}
-            assert {'inline-book', 'end-book'} <= ids, (post['slug'], event, ids)
+            required_ids = {f'{location}-book' for location in available_locations}
+            assert required_ids <= ids, (post['slug'], event, ids, required_ids)
         assert not {'lead_form_success', 'purchase', 'generate_lead'} & {e[1] for e in google}
         nav_links = page.locator('.series-nav a[href^="/blog/"]:not([aria-current="page"])')
         if nav_links.count():
@@ -76,6 +83,6 @@ with sync_playwright() as pw:
         assert not unexpected, unexpected
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth')
         context.close()
-        print(f'PASS {post["slug"]}: identical GA4/Meta article/series context, book CTA exposure/click, series navigation, no real purchase or form submission', flush=True)
+        print(f'PASS {post["slug"]}: identical GA4/Meta article/series context, visible CTA exposure/click, series navigation, no real purchase or form submission', flush=True)
     browser.close()
 print(f'PASS new series offline analytics: {len(POSTS)} published articles, zero live analytics traffic', flush=True)
