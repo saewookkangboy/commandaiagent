@@ -80,6 +80,7 @@ with sync_playwright() as pw:
     assert sent[-1]['source_article_slug']=='rgctor-content-workflow' and sent[-1]['cta_id']=='end-team'
     assert page.locator('#consulting-form').is_hidden()
     assert page.locator('#form-success').evaluate('e=>e===document.activeElement')
+    page.wait_for_function('window.__ga.filter(e=>e[0]==="event").length===window.__meta.filter(e=>e[0]==="trackCustom").length&&window.__ga.filter(e=>e[0]==="event").length>=5')
     ga=page.evaluate('window.__ga.filter(e=>e[0]==="event")')
     meta=page.evaluate('window.__meta.filter(e=>e[0]==="trackCustom")')
     assert len(ga)==len(meta)

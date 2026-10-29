@@ -1,5 +1,5 @@
 """Read-only production verification; no scripts, events, submissions or purchases.
-Run after GitHub main merge: python3 scripts/verify_scheduled_production.py
+Run after GitHub main merge: python3 scripts/verify_scheduled_production.py [--schedule-dir content/scheduled/command-marketing-os]
 A finite retry is allowed for Vercel propagation, not for future unattended work.
 """
 from concurrent.futures import ThreadPoolExecutor
@@ -15,7 +15,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://book.allrounder.im'
-SCHEDULE = ROOT / 'content/scheduled/command-marketing-os/posts.json'
+DEFAULT_SCHEDULE_DIR = Path('content/scheduled/command-marketing-os')
 
 
 def fetch(path, agent='CommandMarketing-ReleaseVerifier/1.0'):
@@ -27,8 +27,9 @@ def fetch(path, agent='CommandMarketing-ReleaseVerifier/1.0'):
         return error.code, error.read()
 
 
-def verify():
-    scheduled = json.loads(SCHEDULE.read_text())
+def verify(schedule_dir=DEFAULT_SCHEDULE_DIR):
+    schedule_path = ROOT / schedule_dir / 'posts.json'
+    scheduled = json.loads(schedule_path.read_text())
     posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
     live_slugs = {post['slug'] for post in posts}
     published = [p for p in scheduled if p['slug'] in live_slugs]
@@ -73,12 +74,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--wait-seconds', type=int, default=0)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--schedule-dir', type=Path, default=DEFAULT_SCHEDULE_DIR)
     args = parser.parse_args()
     assert 0 <= args.wait_seconds <= 900
     deadline = time.monotonic() + args.wait_seconds
     while True:
         try:
-            result = verify()
+            result = verify(args.schedule_dir)
             break
         except (AssertionError, OSError) as error:
             if time.monotonic() >= deadline:
