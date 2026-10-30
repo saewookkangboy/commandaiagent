@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI에 맡길 업무: 목적과 사람의 판단선 정하기 | Command Marketing</title>
+<meta name="description" content="AI에 맡길 업무 하나를 정해 목적·완료 조건·자료 범위와 사람의 판단선을 기록하고, Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 방식을 고릅니다.">
+<meta name="author" content="Command Marketing"><meta name="publisher" content="TROE">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta name="theme-color" content="#eef3f1">
+<link rel="canonical" href="https://book.allrounder.im/blog/everyday-ai-practice-02-purpose"><meta property="og:locale" content="ko_KR"><meta property="og:type" content="article">
+<meta property="og:site_name" content="Command Marketing"><meta property="og:title" content="AI에 맡길 업무: 목적과 사람의 판단선 정하기">
+<meta property="og:description" content="AI에 맡길 업무 하나를 정해 목적·완료 조건·자료 범위와 사람의 판단선을 기록하고, Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 방식을 고릅니다."><meta property="og:url" content="https://book.allrounder.im/blog/everyday-ai-practice-02-purpose">
+<meta property="og:image" content="https://book.allrounder.im/assets/blog/everyday-ai-practice-02-purpose.jpg"><meta property="og:image:alt" content="업무 메모 옆에서 AI 보조 범위와 사람이 직접 결정할 항목을 나누는 장면">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="675">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AI에 맡길 업무: 목적과 사람의 판단선 정하기">
+<meta name="twitter:description" content="AI에 맡길 업무 하나를 정해 목적·완료 조건·자료 범위와 사람의 판단선을 기록하고, Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 방식을 고릅니다."><meta name="twitter:image" content="https://book.allrounder.im/assets/blog/everyday-ai-practice-02-purpose.jpg"><meta name="twitter:image:alt" content="업무 메모 옆에서 AI 보조 범위와 사람이 직접 결정할 항목을 나누는 장면">
+	<meta property="article:published_time" content="2026-10-30T00:00:00+09:00"><meta property="article:modified_time" content="2026-10-30T00:00:00+09:00"><meta name="keywords" content="AI에 맡길 업무, AI 업무 목적 정하기, 반복 업무 자동화, AI 검수 기준, Chat AI와 Agent 차이">
+<meta property="article:section" content="일반인 AI Agent 실습 시리즈 · 2/5 목적과 경계">
+<meta property="article:tag" content="AI에 맡길 업무">
+<meta property="article:tag" content="AI 업무 목적 정하기">
+<meta property="article:tag" content="반복 업무 자동화">
+<meta property="article:tag" content="AI 검수 기준">
+<meta property="article:tag" content="Chat AI와 Agent 차이"><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1917'/%3E%3Cpath d='M17 45 31 15h4l12 30h-7l-3-8H27l-4 8h-6Zm13-15h5l-2-7-3 7Z' fill='%2356c7b3'/%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/enhancements.css"><link rel="stylesheet" href="/assets/article-ux.css"><script src="/assets/article-ux.js" defer></script>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="describedby" href="/llms.txt">
+<script src="/assets/analytics-config.js" defer></script><script src="/assets/analytics.js" defer></script><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://book.allrounder.im/blog/everyday-ai-practice-02-purpose#article", "mainEntityOfPage": "https://book.allrounder.im/blog/everyday-ai-practice-02-purpose", "url": "https://book.allrounder.im/blog/everyday-ai-practice-02-purpose", "headline": "이 업무를 AI에 맡겨도 될까? 목적·완료 조건·사람의 판단선 정하기", "description": "AI에 맡길 업무 하나를 정해 목적·완료 조건·자료 범위와 사람의 판단선을 기록하고, Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 방식을 고릅니다.", "datePublished": "2026-10-30", "dateModified": "2026-10-30", "inLanguage": "ko-KR", "image": {"@type": "ImageObject", "url": "https://book.allrounder.im/assets/blog/everyday-ai-practice-02-purpose.jpg", "width": 1200, "height": 675, "caption": "업무 메모 옆에서 AI 보조 범위와 사람이 직접 결정할 항목을 나누는 장면"}, "articleSection": "일반인 AI Agent 실습 시리즈 · 2/5 목적과 경계", "author": {"@type": "Organization", "name": "Command Marketing", "url": "https://book.allrounder.im/blog"}, "publisher": {"@type": "Organization", "name": "TROE", "url": "https://troe.kr/"}, "isPartOf": {"@type": "Blog", "@id": "https://book.allrounder.im/blog#blog", "name": "Command Marketing 블로그"}, "citation": ["https://book.allrounder.im/", "https://book.allrounder.im/blog/everyday-ai-agent-purpose", {"@type": "Book", "name": "AI Agent를 지휘하는 마케터", "author": {"@type": "Person", "name": "박충효"}, "url": "https://book.allrounder.im/"}], "alternativeHeadline": "AI에 맡길 업무: 목적과 사람의 판단선 정하기", "abstract": "AI에 맡길 업무는 반복 여부만으로 정하지 않습니다. 목적과 완료 조건, 자료 범위, 사람이 직접 판단할 일을 먼저 적고 Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 만큼만 선택합니다.", "keywords": ["AI에 맡길 업무", "AI 업무 목적 정하기", "반복 업무 자동화", "AI 검수 기준", "Chat AI와 Agent 차이"], "about": [{"@type": "Thing", "name": "AI에 맡길 업무"}, {"@type": "Thing", "name": "AI 업무 목적 정하기"}, {"@type": "Thing", "name": "반복 업무 자동화"}, {"@type": "Thing", "name": "AI 검수 기준"}, {"@type": "Thing", "name": "Chat AI와 Agent 차이"}], "isBasedOn": {"@type": "Book", "name": "AI Agent를 지휘하는 마케터", "author": {"@type": "Person", "name": "박충효"}, "url": "https://book.allrounder.im/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "도서 홈", "item": "https://book.allrounder.im/"}, {"@type": "ListItem", "position": 2, "name": "블로그", "item": "https://book.allrounder.im/blog"}, {"@type": "ListItem", "position": 3, "name": "이 업무를 AI에 맡겨도 될까? 목적·완료 조건·사람의 판단선 정하기", "item": "https://book.allrounder.im/blog/everyday-ai-practice-02-purpose"}]}, {"@type": "FAQPage", "@id": "https://book.allrounder.im/blog/everyday-ai-practice-02-purpose#faq", "mainEntity": [{"@type": "Question", "name": "반복 업무라면 Agent로 만드는 게 좋나요?", "acceptedAnswer": {"@type": "Answer", "text": "꼭 그렇지는 않습니다. 제공 메모를 한 번 정리하는 일은 Chat AI 요청이나 고정된 절차로 충분할 수 있습니다. 상황별로 처리 경로를 바꾸어야 하고 필요한 도구·권한·중단 장치가 준비된 경우에만 Agent를 검토하세요."}}, {"@type": "Question", "name": "메모에 없는 자료나 다음 주 일정을 AI가 보완해도 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 제공되지 않은 자료 B의 내용, 자료 C의 나머지 부분, 확정되지 않은 일정은 만들지 않습니다. 확인할 수 없는 정보는 미확인으로 표시하고, 다음 학습 후보와 일정은 사람이 결정합니다."}}]}]}</script></head>
+<body class="blog-page" data-page-type="blog_article" data-ui-variant="ux-v1" data-content-group="practical_guide" data-series-order="2" data-article="everyday-ai-practice-02-purpose"><a class="skip-link" href="#main">본문으로 이동</a><header class="site-head"><div class="head-inner"><a aria-label="TROE 도서 홈" class="brand" href="/#top"><b>TROE</b><span>PARK CHUNGHYO / COMMAND MARKETING</span></a><nav aria-label="주요 메뉴" class="nav"><a href="/#quickstart">빠른 이해</a><a href="/#system">업무 시스템</a><a href="/#contents">목차</a><a href="/blog">블로그</a><a href="/#faq">FAQ</a><a href="/#author">저자</a><a class="button secondary nav-purchase" data-cta="purchase" data-position="nav" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" rel="noreferrer" target="_blank">책 구매</a><a class="button primary" data-consulting-path="" data-cta="consulting" data-position="nav" href="/#consulting">강연·컨설팅 안내</a><details class="mobile-menu"><summary>메뉴</summary><nav aria-label="모바일 메뉴"><a href="/#quickstart">빠른 이해</a><a href="/#system">업무 시스템</a><a href="/#contents">목차</a><a href="/blog">블로그</a><a href="/#faq">FAQ</a><a href="/#author">저자</a><a data-cta="purchase" data-position="mobile-menu" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" rel="noreferrer" target="_blank">책 구매</a><a data-consulting-path="" data-cta="consulting" data-position="mobile-menu" href="/#consulting">강연·컨설팅 안내</a></nav></details></nav></div></header>
+<main class="blog-main wrap" id="main"><nav class="breadcrumbs" aria-label="현재 위치"><a href="/">도서 홈</a><span aria-hidden="true">/</span><a href="/blog">블로그</a><span aria-hidden="true">/</span><span aria-current="page">이 업무를 AI에 맡겨도 될까? 목적·완료 조건·사람의 판단선 정하기</span></nav>
+<header class="blog-heading article-head"><div class="article-head-copy"><p class="eyebrow">일반인 AI Agent 실습 시리즈 · 2/5 목적과 경계</p><h1>이 업무를 AI에 맡겨도 될까? 목적·완료 조건·사람의 판단선 정하기</h1>
+<p class="article-meta"><span>검토: <time datetime="2026-10-30">2026-10-30</time></span><span>약 6분 읽기</span></p></div>
+<figure class="article-head-visual"><picture><source srcset="/assets/blog/everyday-ai-practice-02-purpose.webp" type="image/webp"><img src="/assets/blog/everyday-ai-practice-02-purpose.jpg" alt="업무 메모 옆에서 AI 보조 범위와 사람이 직접 결정할 항목을 나누는 장면" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async"></picture><figcaption>AI 생성 카툰 · 손글씨</figcaption></figure>
+<div class="article-head-details"><p class="article-summary">AI에 맡길 업무는 반복 여부만으로 정하지 않습니다. 목적과 완료 조건, 자료 범위, 사람이 직접 판단할 일을 먼저 적고 Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 만큼만 선택합니다.</p><ul class="article-topics" aria-label="이 글의 핵심 주제"><li>AI에 맡길 업무</li><li>AI 업무 목적 정하기</li><li>반복 업무 자동화</li></ul><details class="article-topic-details"><summary>주제 2개 더 보기</summary><ul class="article-topics" aria-label="추가 핵심 주제"><li>AI 검수 기준</li><li>Chat AI와 Agent 차이</li></ul></details>
+<p class="article-disclosure-short">Command Marketing 편집 콘텐츠 · AI 초안 활용 · 일반 독자 실습은 편집 응용</p><details class="article-disclosure-details"><summary>편집·출처 고지 자세히</summary><p>『AI Agent를 지휘하는 마케터』의 공개 공식 소개와 Agent 이해·업무 관찰·R-G-C-T-O-R·검수·운영 주제를 바탕으로 작성한 Command Marketing 편집 콘텐츠입니다. AI 초안을 활용했으며 저자가 직접 집필한 블로그 글은 아닙니다. 주간 학습 메모·실습 카드·프롬프트와 가상 예시는 일반 독자용 편집 응용이며 실제 사용자 사례나 성과가 아닙니다. 이 책은 마케팅 실무서이며 도서 전체나 생활 자동화 구축 안내를 대체하지 않습니다. 실제 자료의 사용 권한과 개인정보·회사 기밀 보호를 확인하고, 사람의 검수와 최종 판단을 유지해야 합니다. Agent 도입·업무 효율·시간 절감·자동화 완성·검색 노출·AI 인용을 보장하지 않습니다. 썸네일은 AI 생성 이미지입니다.</p><p>게시: <time datetime="2026-10-30">2026-10-30</time> · 검토·수정: <time datetime="2026-10-30">2026-10-30</time></p></details></div></header>
+<nav class="series-nav" aria-label="일반인 AI Agent 반복 업무·프롬프트 실습 시리즈"><p class="series-status">일반인 AI Agent 반복 업무·프롬프트 실습 시리즈 · 현재 2/5</p><div class="series-pager"><a href="/blog/everyday-ai-practice-01-discovery" aria-label="이전 편: 반복 업무 후보 찾기">← 이전 편</a><span class="series-pending">다음 편 · 2026-11-02 발행 예정</span></div>
+<details class="series-full-list"><summary>시리즈 전체 5편 보기</summary><ol><li><a href="/blog/everyday-ai-practice-01-discovery">1. 반복 업무 후보 찾기</a></li><li><a href="/blog/everyday-ai-practice-02-purpose" aria-current="page">2. 목적과 사람의 판단선</a></li><li><span class="series-pending">3. 프롬프트 v1 작성 · 2026-11-02 발행 예정</span></li><li><span class="series-pending">4. 테스트와 v2 수정 · 2026-11-03 발행 예정</span></li><li><span class="series-pending">5. 재사용 운영 카드 · 2026-11-04 발행 예정</span></li></ol></details></nav>
+<div class="article-layout"><aside class="article-toc" aria-label="글 목차"><nav class="article-toc-desktop" aria-label="이 글의 순서"><p>이 글의 순서</p><ol><li><a href="#section-1">줄이고 싶은 준비 부담과 원하는 결과를 구분하기</a></li><li><a href="#section-2">자료 범위와 사람의 판단선을 미리 긋기</a></li><li><a href="#section-3">목표·경계 카드 작성하기</a></li><li><a href="#section-4">필요한 기술 수준을 고르기</a></li><li><a href="#section-5">완료 조건과 사람의 책임을 확인하기</a></li><li><a href="#section-6">자주 묻는 질문</a></li><li><a href="#section-7">다음 편</a></li><li><a href="#section-8">출처 및 참고 자료</a></li></ol></nav>
+<details class="article-toc-mobile"><summary>이 글의 순서</summary><ol><li><a href="#section-1">줄이고 싶은 준비 부담과 원하는 결과를 구분하기</a></li><li><a href="#section-2">자료 범위와 사람의 판단선을 미리 긋기</a></li><li><a href="#section-3">목표·경계 카드 작성하기</a></li><li><a href="#section-4">필요한 기술 수준을 고르기</a></li><li><a href="#section-5">완료 조건과 사람의 책임을 확인하기</a></li><li><a href="#section-6">자주 묻는 질문</a></li><li><a href="#section-7">다음 편</a></li><li><a href="#section-8">출처 및 참고 자료</a></li></ol></details></aside>
+<article class="article-body" aria-label="이 업무를 AI에 맡겨도 될까? 목적·완료 조건·사람의 판단선 정하기"><p>반복 업무 후보를 찾았더라도 바로 자동화부터 할 필요는 없습니다. 먼저 “무엇을 줄이고 싶은가?”, “어떤 상태면 일이 끝났다고 볼 수 있는가?”, “무엇은 내가 직접 확인하고 결정해야 하는가?”를 정해야 합니다. 이 글에서는 1편의 관찰 카드를 가져와 한 업무의 목적·완료 조건·자료 범위·사람의 판단선을 적고, 필요한 기술 수준을 고릅니다.</p>
+<p>여기서 다루는 공통 사례는 본인이 제공한 비민감 주간 학습 메모를 정리하는 일입니다. 외부 자료를 찾거나 다음 주 계획을 확정하는 실습은 아닙니다. 목적과 경계를 정하는 일이 우선이며, Agent가 필요하지 않다고 판단해도 괜찮습니다.</p>
+<h2 id="section-1">줄이고 싶은 준비 부담과 원하는 결과를 구분하기</h2>
+<p>“공부를 자동화하고 싶다”는 표현에는 여러 작업이 섞여 있습니다. 읽은 자료를 정리하는 일, 다음 공부를 고르는 일, 일정을 확정하는 일은 서로 다른 판단과 권한을 필요로 합니다. 하나의 후보 업무에 집중하려면 줄이고 싶은 부담과 남겨야 할 결과를 따로 적어야 합니다.</p>
+<p>이번 예시의 목적은 다음처럼 좁힐 수 있습니다.</p>
+<ul>
+<li><strong>줄이고 싶은 준비 부담:</strong> 여러 학습 메모에서 열람 상태와 다시 찾은 기록을 매번 새로 정리하는 부담</li>
+<li><strong>받고 싶은 결과:</strong> 읽은 자료, 재탐색 기록, 미확인 항목, 다음 학습 후보가 구분된 요약</li>
+<li><strong>완료 상태:</strong> 각 항목을 원문 메모와 대조할 수 있고, 알 수 없는 내용은 미확인으로 표시되어 있으며, 다음 행동의 최종 선택은 사람에게 남아 있음</li>
+</ul>
+<p>“좋은 답변을 받으면 완료”보다 구체적인 상태를 적으면 결과를 확인하기 쉬워집니다. 실제로 자료 내용을 요약해야 한다면 읽을 권한과 본문을 제공해야 합니다. 이 예시처럼 메모에 자료 제목이나 읽음 상태만 있다면, 그 이상을 안다고 가정하지 않습니다.</p>
+<h2 id="section-2">자료 범위와 사람의 판단선을 미리 긋기</h2>
+<p>AI가 참고해도 되는 자료와 해서는 안 되는 일을 구분하면, 결과가 그럴듯하더라도 범위를 넘지 않았는지 판단할 수 있습니다. 실제 실습에는 본인이 사용할 권한이 있는 비민감 자료만 사용하세요. 민감한 개인정보나 회사 기밀은 넣지 않습니다.</p>
+<p>가상 주간 메모에서 허용된 입력은 사용자가 제공한 세 줄의 메모뿐입니다. 자료 B는 제목만 있어 본문 내용은 확인할 수 없고, 자료 C는 중간까지만 읽었다고 되어 있습니다. 다음 주 일정도 정해지지 않았습니다. 그러므로 B의 내용, C의 남은 부분, 외부 URL, 확정 마감일을 만들지 않습니다.</p>
+<p>사람이 직접 확인할 항목도 적습니다. 예를 들어 각 분류가 원문 메모에 근거하는지, 같은 자료를 다시 찾은 일이 실제로 기록되어 있는지, 다음 학습 후보를 내가 선택할 수 있는지를 봅니다. 자료가 부족하거나 기록이 서로 맞지 않으면 ‘확인 불가’ 또는 질문으로 남기고 멈춥니다.</p>
+<h2 id="section-3">목표·경계 카드 작성하기</h2>
+<p>아래 양식을 복사해 1편의 후보 업무 한 가지를 가져와 채우세요.</p>
+<pre><code class="language-text">[목표·경계 카드]
+후보 업무:
+줄이고 싶은 준비 부담:
+받고 싶은 결과:
+완료 상태 — 무엇을 보면 끝났다고 판단할까:
+사용해도 되는 자료:
+만들거나 실행하면 안 되는 정보·행동:
+내가 직접 확인하고 결정할 것:
+자료 부족·모순·범위 초과 시 처리:
+필요한 기술 수준과 그 이유:
+</code></pre>
+<p>이번 예시에 적용하면 목적은 “중복 탐색과 정리 부담을 줄이고, 내가 다음 학습을 고를 근거를 준비한다”입니다. 완료 조건은 열람 상태·재탐색 기록·미확인 항목·후보가 나뉘고, 각 판단에 근거가 있으며, 사람이 원문과 대조한 상태입니다. 자료 부족이나 모순이 있으면 추측 대신 질문을 남깁니다.</p>
+<h2 id="section-4">필요한 기술 수준을 고르기</h2>
+<p>기술은 마지막에 고릅니다. 다음 구분은 이 실습에서 복잡도를 비교하기 위한 간단한 설명입니다.</p>
+<ul>
+<li><strong>한 번의 Chat AI 요청:</strong> 제공된 자료를 한 번 요약·분류하는 정도라면 충분할 수 있습니다.</li>
+<li><strong>규칙 자동화:</strong> 조건이 분명하고 같은 규칙으로 반복할 수 있는 부분이라면 규칙 기반 처리를 검토할 수 있습니다.</li>
+<li><strong>고정 AI 워크플로우:</strong> 입력과 출력, AI 처리 단계의 순서가 매번 비슷하다면 정해진 흐름으로 처리하는 방식이 알맞을 수 있습니다.</li>
+<li><strong>AI Agent:</strong> 여러 단계 사이에서 상황에 따라 다음 경로를 선택해야 하고, 필요한 도구와 권한, 사람이 중단할 방법을 갖춘 경우 검토합니다.</li>
+</ul>
+<p>주간 학습 메모 사례는 제공된 텍스트를 한 번 정리하는 실습이므로 Chat AI 요청이나 고정된 처리 절차로 충분할 수 있습니다. 반복 업무라는 이유만으로 Agent를 선택할 필요는 없습니다. 프롬프트 한 장을 작성했다고 도구가 연결되거나 예약 실행이 시작되는 것도 아닙니다.</p>
+<blockquote>
+<p>AI를 어디에 적용할지, 어떤 책임과 검수 원칙을 고려할지 더 넓은 맥락에서 읽고 싶다면 마케팅 실무서 『AI Agent를 지휘하는 마케터』의 <a href="https://book.allrounder.im/">공식 소개와 파트 구성</a>을 참고해 보세요. 책의 원래 독자와 업무 맥락은 마케팅 실무이며, 이 글의 목표·경계 카드는 일반 독자용 편집 응용입니다 <a href="https://book.allrounder.im/" title="AI Agent를 지휘하는 마케터 공식 도서 소개">1</a>.</p>
+</blockquote>
+<h2 id="section-5">완료 조건과 사람의 책임을 확인하기</h2>
+<p>카드가 완성되면 다음을 확인합니다.</p>
+<ul>
+<li>목표가 하나의 관찰된 업무에 한정되어 있는가?</li>
+<li>완료 상태가 결과물을 보고 판단할 수 있도록 쓰였는가?</li>
+<li>허용 자료와 금지할 행동이 구분되어 있는가?</li>
+<li>사람이 원문 대조와 최종 선택을 맡는가?</li>
+<li>자료가 부족하거나 결과가 범위를 넘으면 어떻게 할지 적혀 있는가?</li>
+<li>선택한 기술 수준이 업무에 필요한 만큼만 복잡한가?</li>
+</ul>
+<p>빈칸을 억지로 채울 필요는 없습니다. 검수 기준을 정할 수 없거나 자료 사용 권한이 불분명하면 범위를 더 줄이거나 다른 후보를 고르세요. 다음 편에서는 이 카드의 답을 R-G-C-T-O-R 구조로 옮겨 수정 가능한 프롬프트 v1을 만듭니다.</p>
+<p>기존 글 <a href="/blog/everyday-ai-agent-purpose">AI Agent에 무엇을 왜 맡길지 판단하는 안내</a>는 적용 목적을 생각하는 배경을 다룹니다. 이 편은 개념 소개를 반복하기보다 독자가 목표·경계 카드를 직접 작성하도록 돕습니다 <a href="https://book.allrounder.im/blog/everyday-ai-agent-purpose" title="일반 독자의 AI Agent 운영 목적 안내">2</a>.</p>
+<h2 id="section-6">자주 묻는 질문</h2>
+<h3>반복 업무라면 Agent로 만드는 게 좋나요?</h3>
+<p>꼭 그렇지는 않습니다. 제공 메모를 한 번 정리하는 일은 Chat AI 요청이나 고정된 절차로 충분할 수 있습니다. 상황별로 처리 경로를 바꾸어야 하고 필요한 도구·권한·중단 장치가 준비된 경우에만 Agent를 검토하세요.</p>
+<h3>메모에 없는 자료나 다음 주 일정을 AI가 보완해도 되나요?</h3>
+<p>아니요. 제공되지 않은 자료 B의 내용, 자료 C의 나머지 부분, 확정되지 않은 일정은 만들지 않습니다. 확인할 수 없는 정보는 미확인으로 표시하고, 다음 학습 후보와 일정은 사람이 결정합니다.</p>
+<h2 id="section-7">다음 편</h2>
+<p>3편에서는 이 카드의 목적·입력 범위·결과·검수선을 R-G-C-T-O-R 구조의 <strong>프롬프트 v1</strong>로 옮깁니다.</p>
+<h2 id="section-8">출처 및 참고 자료</h2>
+<ol>
+<li><a href="https://book.allrounder.im/">AI Agent를 지휘하는 마케터 공식 도서 소개</a></li>
+<li><a href="https://book.allrounder.im/blog/everyday-ai-agent-purpose">일반 독자의 AI Agent 운영 목적 안내</a></li>
+</ol><section class="article-cta article-cta-end" id="article-end" aria-label="다음 단계">
+<p class="eyebrow">다음 단계</p><h3>업무 목적이 정해졌다면, 지시문에 담을 내용을 골라 보세요.</h3><p>완료 상태와 중단 조건을 확인하고, 필요한 기술 수준을 최소한으로 선택하세요. Agent 사용이나 자동화 성과를 전제로 하지 않습니다.</p><div class="article-cta-actions"><a class="button primary" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer" data-cta="purchase" data-position="article-end" data-cta-id="end-book">책을 통해서 확인해보세요</a><a class="button secondary" href="/#contents" data-cta="preview" data-cta-id="end-contents" data-position="article-end">책 전체 목차 보기</a></div></section></article></div>
+<aside class="article-mobile-cta" aria-label="빠른 다음 행동" hidden>
+<a class="article-mobile-cta-link button primary" href="https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP" target="_blank" rel="noreferrer" data-cta="purchase" data-position="mobile-sticky" data-cta-id="mobile-book">책을 통해서 확인해보세요</a><button class="article-mobile-cta-close" type="button" aria-label="빠른 다음 행동 닫기">×</button></aside>
+<section class="blog-section" style="padding:40px 0 70px" aria-labelledby="related-title"><h2 class="extra-title" id="related-title">함께 읽으면 좋은 글</h2><div class="blog-cards"><article class="blog-card"><a class="blog-card-cover" href="/blog/everyday-ai-practice-01-discovery" data-blog-link="everyday-ai-practice-01-discovery" aria-label="반복 업무를 발견하는 법: 내 일에서 AI 후보 하나 찾기"><picture><source srcset="/assets/blog/everyday-ai-practice-01-discovery.webp" type="image/webp"><img src="/assets/blog/everyday-ai-practice-01-discovery.jpg" alt="주간 메모를 살펴 반복 업무 후보 하나를 관찰 카드에 기록하는 직장인" width="1200" height="675" loading="lazy" decoding="async"></picture></a>
+<p class="eyebrow">일반인 AI Agent 실습 시리즈 · 1/5 반복 업무 발견 / 2026-10-29</p><h3><a href="/blog/everyday-ai-practice-01-discovery" data-blog-link="everyday-ai-practice-01-discovery">반복 업무를 발견하는 법: 내 일에서 AI 후보 하나 찾기</a></h3>
+<p>반복 업무 발굴을 위한 관찰 카드를 따라 입력·처리·출력과 확인된 반복·병목을 기록하고, 사람이 결과를 검수할 수 있는 AI 업무 후보 하나를 고릅니다.</p><a class="text-link" href="/blog/everyday-ai-practice-01-discovery" data-blog-link="everyday-ai-practice-01-discovery">글 읽기 →</a></article><article class="blog-card"><a class="blog-card-cover" href="/blog/everyday-ai-agent-purpose" data-blog-link="everyday-ai-agent-purpose" aria-label="일반인도 AI Agent를 운영해야 할까? 반복 업무와 목적부터 정하는 법"><picture><source srcset="/assets/blog/everyday-ai-agent-purpose.webp" type="image/webp"><img src="/assets/blog/everyday-ai-agent-purpose.jpg" alt="AI Agent, 나에게 왜 필요할까와 내 반복 업무, 도구보다 목적부터라는 한국어 손글씨, 가상의 개인 학습자가 집의 책상에서 자료와 목표를 정리하고 작은 로봇이 초안을 보조하는 부드러운 카툰" width="1200" height="675" loading="lazy" decoding="async"></picture></a>
+<p class="eyebrow">AI Agent · 개인 활용과 목적 설계 / 2026-10-28</p><h3><a href="/blog/everyday-ai-agent-purpose" data-blog-link="everyday-ai-agent-purpose">일반인도 AI Agent를 운영해야 할까? 반복 업무와 목적부터 정하는 법</a></h3>
+<p>AI Agent 운영 목적을 내 반복 업무의 발견·목적 설정·기술 선택에서 찾습니다. 일반 독자의 가상 학습 사례와 책의 업무 지시·검수·운영 노하우를 연결해, 무엇을 맡기고 직접 판단할지 확인하세요.</p><a class="text-link" href="/blog/everyday-ai-agent-purpose" data-blog-link="everyday-ai-agent-purpose">글 읽기 →</a></article><article class="blog-card"><a class="blog-card-cover" href="/blog/command-marketing-book-practical-guide" data-blog-link="command-marketing-book-practical-guide" aria-label="『AI AGENT를 지휘하는 마케터』를 실제 실무에서 활용하는 방법"><picture><source srcset="/assets/blog/command-marketing-book-practical-guide.webp" type="image/webp"><img src="/assets/blog/command-marketing-book-practical-guide.jpg" alt="책에서 실무로, AI Agent 활용법과 한 업무부터 검수까지라는 손글씨, 업무 문서를 검수하는 마케터와 AI 로봇 카툰" width="1200" height="675" loading="lazy" decoding="async"></picture></a>
+<p class="eyebrow">책 실무 적용 · 업무 지시와 검수 / 2026-10-16</p><h3><a href="/blog/command-marketing-book-practical-guide" data-blog-link="command-marketing-book-practical-guide">『AI AGENT를 지휘하는 마케터』를 실제 실무에서 활용하는 방법</a></h3>
+<p>AI 마케팅 책 실무 활용을 업무 선택부터 지시서·아웃라인 승인·초안 검수·인계·성과 회고까지 연결합니다. 『AI Agent를 지휘하는 마케터』의 핵심 원칙과 가상 B2B 캠페인 지시서, 실행 점검으로 첫 업무에 적용해 보세요.</p><a class="text-link" href="/blog/command-marketing-book-practical-guide" data-blog-link="command-marketing-book-practical-guide">글 읽기 →</a></article></div><a class="text-link" href="/blog">블로그 전체 보기 →</a></section></main><footer class="blog-footer"><div class="wrap"><a class="text-link" href="/">AI Agent를 지휘하는 마케터</a> · <a href="/blog">블로그</a> · <a href="https://troe.kr/">TROE</a><br>© 2026 TROE. ALL RIGHTS RESERVED.</div></footer><script src="/assets/enhancements.js" defer></script></body></html>
