@@ -1,5 +1,54 @@
 [
   {
+    "slug": "everyday-ai-practice-02-purpose",
+    "title": "이 업무를 AI에 맡겨도 될까? 목적·완료 조건·사람의 판단선 정하기",
+    "seo_title": "AI에 맡길 업무: 목적과 사람의 판단선 정하기",
+    "short_title": "목적과 사람의 판단선",
+    "description": "AI에 맡길 업무 하나를 정해 목적·완료 조건·자료 범위와 사람의 판단선을 기록하고, Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 방식을 고릅니다.",
+    "category": "일반인 AI Agent 실습 시리즈 · 2/5 목적과 경계",
+    "primary_keyword": "AI에 맡길 업무",
+    "secondary_keywords": [
+      "AI 업무 목적 정하기",
+      "반복 업무 자동화",
+      "AI 검수 기준",
+      "Chat AI와 Agent 차이"
+    ],
+    "search_intent": "관찰한 업무를 AI에 어디까지 맡길지 판단하고, 목적·완료 조건·허용 자료·사람의 책임 범위를 직접 정하려는 일반 독자의 정보 탐색 의도.",
+    "search_summary": "AI에 맡길 업무는 반복 여부만으로 정하지 않습니다. 목적과 완료 조건, 자료 범위, 사람이 직접 판단할 일을 먼저 적고 Chat AI·규칙 자동화·워크플로우·Agent 중 필요한 만큼만 선택합니다.",
+    "image_alt": "업무 메모 옆에서 AI 보조 범위와 사람이 직접 결정할 항목을 나누는 장면",
+    "related": [
+      "everyday-ai-practice-01-discovery",
+      "everyday-ai-agent-purpose",
+      "command-marketing-book-practical-guide"
+    ],
+    "kind": "guide",
+    "book_based": true,
+    "custom_disclosure": true,
+    "series_key": "everyday-ai-practice",
+    "series_title": "일반인 AI Agent 반복 업무·프롬프트 실습 시리즈",
+    "series_order": 2,
+    "date": "2026-10-30",
+    "modified": "2026-10-30",
+    "publish_at": "2026-10-30T09:00:00+09:00",
+    "image": "/assets/blog/everyday-ai-practice-02-purpose.webp",
+    "image_jpg": "/assets/blog/everyday-ai-practice-02-purpose.jpg",
+    "faq_schema": true,
+    "cta_goal": "book",
+    "book_cta_label": "책을 통해서 확인해보세요",
+    "cta_copy": {
+      "inline": {
+        "heading": "목표와 사람의 책임선을 책의 업무 지휘 관점과 함께 살펴보세요.",
+        "copy": "Part 1·2·3의 업무 선택·자료 보호·목표와 맥락 주제를 읽고, 허용 자료와 직접 결정할 일을 구분해 보세요. 이 카드와 일반 독자 예시는 편집 응용입니다."
+      },
+      "end": {
+        "heading": "업무 목적이 정해졌다면, 지시문에 담을 내용을 골라 보세요.",
+        "copy": "완료 상태와 중단 조건을 확인하고, 필요한 기술 수준을 최소한으로 선택하세요. Agent 사용이나 자동화 성과를 전제로 하지 않습니다."
+      }
+    },
+    "disclosure_short": "Command Marketing 편집 콘텐츠 · AI 초안 활용 · 일반 독자 실습은 편집 응용",
+    "disclosure": "『AI Agent를 지휘하는 마케터』의 공개 공식 소개와 Agent 이해·업무 관찰·R-G-C-T-O-R·검수·운영 주제를 바탕으로 작성한 Command Marketing 편집 콘텐츠입니다. AI 초안을 활용했으며 저자가 직접 집필한 블로그 글은 아닙니다. 주간 학습 메모·실습 카드·프롬프트와 가상 예시는 일반 독자용 편집 응용이며 실제 사용자 사례나 성과가 아닙니다. 이 책은 마케팅 실무서이며 도서 전체나 생활 자동화 구축 안내를 대체하지 않습니다. 실제 자료의 사용 권한과 개인정보·회사 기밀 보호를 확인하고, 사람의 검수와 최종 판단을 유지해야 합니다. Agent 도입·업무 효율·시간 절감·자동화 완성·검색 노출·AI 인용을 보장하지 않습니다. 썸네일은 AI 생성 이미지입니다."
+  },
+  {
     "slug": "everyday-ai-practice-01-discovery",
     "title": "반복 업무를 발견하는 법: 내 일에서 AI 후보 하나 찾기",
     "seo_title": "반복 업무 발굴: AI에게 맡길 후보 찾기 실습",
@@ -28,7 +77,7 @@
     "series_title": "일반인 AI Agent 반복 업무·프롬프트 실습 시리즈",
     "series_order": 1,
     "date": "2026-10-29",
-    "modified": "2026-10-29",
+    "modified": "2026-10-30",
     "publish_at": "2026-10-29T09:00:00+09:00",
     "image": "/assets/blog/everyday-ai-practice-01-discovery.webp",
     "image_jpg": "/assets/blog/everyday-ai-practice-01-discovery.jpg",
