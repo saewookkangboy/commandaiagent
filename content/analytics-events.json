@@ -100,7 +100,7 @@
         "position",
         "link_domain"
       ],
-      "description": "외부 교보문고 구매 페이지로 이동하는 클릭. 구매 완료가 아님.",
+      "description": "외부 서점 구매 페이지로 이동하는 클릭. 구매 완료가 아님.",
       "optional_parameters": [
         "cta_id"
       ]

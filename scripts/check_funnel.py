@@ -121,6 +121,30 @@ with sync_playwright() as pw:
     context.close()
     print('PASS delayed mobile CTA exposure, inline exclusion, dismiss and no horizontal overflow',flush=True)
 
+    # The landing's mobile purchase bar has one Kyobo action. One click creates one
+    # matching purchase-intent event pair and never a lead or a real bookstore visit.
+    context,page,sent,mode,errors,outside=setup('/',width=390)
+    mobile_purchase=page.locator('[data-cta-id="mobile-sticky-kyobo"]')
+    assert mobile_purchase.is_visible()
+    assert page.locator('.mobile-cta a[data-cta="purchase"]').count()==1
+    assert {page.locator(f'[data-cta-id="hero-purchase-{store}"]').get_attribute('href') for store in ('kyobo','yes24','aladin')} == {
+        'https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP',
+        'https://www.yes24.com/product/goods/196902420',
+        'https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=402869781',
+    }
+    page.evaluate("document.addEventListener('click',e=>{if(e.target.closest('a[data-cta=\"purchase\"]'))e.preventDefault()})")
+    mobile_purchase.click()
+    page.wait_for_timeout(80)
+    ga=page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="click_book_purchase")')
+    meta=page.evaluate('window.__meta.filter(e=>e[0]==="trackCustom"&&e[1]==="click_book_purchase")')
+    assert len(ga)==len(meta)==1 and ga[0][1:3]==meta[0][1:3]
+    assert ga[0][2]['cta_id']=='mobile-sticky-kyobo' and ga[0][2]['link_domain']=='product.kyobobook.co.kr'
+    assert meta[0][3]['eventID']==ga[0][2]['event_id']
+    assert not page.evaluate('window.__ga.some(e=>e[0]==="event"&&e[1]==="lead_form_success")')
+    assert not sent and not errors,errors
+    context.close()
+    print('PASS mobile Kyobo purchase: one click, one GA4/Meta intent pair, no lead or real purchase',flush=True)
+
     context,page,sent,mode,errors,outside=setup('/resources/rgctor-worksheet',width=1440)
     page.locator('[data-resource-id="rgctor-worksheet"]').click()
     page.wait_for_timeout(100)

@@ -91,9 +91,10 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     assert not any(e[0]=='event' and e[1]=='maturity_select' for e in page.evaluate('window.__ga'))
     page.locator('.maturity-btn[aria-selected="true"]').click()
     assert not any(e[0]=='event' and e[1]=='maturity_select' for e in page.evaluate('window.__ga'))
-    # Prevent the mail application's default action only after the production listener.
-    page.evaluate("document.addEventListener('click',e=>{if(e.target.closest('a[href^=\"mailto:\"]'))e.preventDefault()})")
-    page.locator('[data-cta="purchase"][data-position="hero"]').click()
+    # Prevent external store and mail navigation only after the production listeners.
+    page.evaluate("document.addEventListener('click',e=>{if(e.target.closest('a[href^=\"mailto:\"],a[data-cta=\"purchase\"]'))e.preventDefault()})")
+    for purchase_id in ('hero-kyobo', 'hero-purchase-kyobo', 'hero-purchase-yes24', 'hero-purchase-aladin'):
+        page.locator(f'[data-cta-id="{purchase_id}"]').click()
     page.locator('[data-consulting-path][data-position="hero"]').click()
     page.locator('[data-cta="inquiry"][data-position="consulting-scope"]').click()
     page.locator('[data-cta="preview"][data-position="quickstart-team"]').click()
@@ -132,8 +133,12 @@ window.fbq=(...args)=>{{if({str(meta_error).lower()})throw new Error('mock Meta 
     page.wait_for_timeout(100)
     ga = check_pairs(records)
     names = [event[1] for event in ga]
-    for name in ('click_book_purchase','click_consulting_path','preview_open','start_situation_diagnosis','open_rgctor_example','open_day1_preview'):
+    for name in ('click_consulting_path','preview_open','start_situation_diagnosis','open_rgctor_example','open_day1_preview'):
         assert names.count(name) == 1, (name,names)
+    purchases = [event[2] for event in ga if event[1] == 'click_book_purchase']
+    assert [event['cta_id'] for event in purchases] == ['hero-kyobo', 'hero-purchase-kyobo', 'hero-purchase-yes24', 'hero-purchase-aladin'], purchases
+    assert [event['link_domain'] for event in purchases] == ['product.kyobobook.co.kr', 'product.kyobobook.co.kr', 'www.yes24.com', 'www.aladin.co.kr'], purchases
+    assert not any(event[1] == 'lead_form_success' for event in ga), ga
     assert names.count('select_solo_team_loop') == 3
     assert names.count('inquiry_start') == 2
     assert 'faq_expand' in names and 'maturity_select' in names and 'section_view' in names and 'scroll_depth' in names
