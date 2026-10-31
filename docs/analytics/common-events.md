@@ -44,7 +44,7 @@ GA4 설정의 `page_location`은 정규 페이지 URL, `page_referrer`는 참조
 
 ### 구매·문의 의도
 
-- `click_book_purchase`: 외부 구매 페이지 이동 클릭. `position`, `link_domain`, 선택 `cta_id`. 실제 구매 완료가 아님.
+- `click_book_purchase`: 교보문고·YES24·알라딘 등 외부 서점 구매 페이지 이동 클릭. `position`, `link_domain`, 선택 `cta_id`로 위치와 서점을 구분합니다. 실제 구매 완료가 아닙니다.
 - `click_consulting_path`: 교육·강연·컨설팅 범위 안내 이동. `position`, 선택 `cta_id`. 문의 작성·접수가 아님.
 - `inquiry_start`: 메일 작성 링크 클릭. `position`. 이메일 주소·제목·본문은 맞춤 payload에 넣지 않으며 발송·접수·리드 완료를 의미하지 않음.
 
@@ -58,7 +58,7 @@ GA4 설정의 `page_location`은 정규 페이지 URL, `page_referrer`는 참조
 
 ## 기존 이름과 집계의 변경
 
-구매 클릭은 `book_store_click`와 `click_book_purchase`를 함께 보내던 방식에서 `click_book_purchase` 하나로 통합합니다. 구매 버튼을 클릭할 때 보내던 Meta `ViewContent`는 제거합니다. 이 사이트에서 외부 서점의 실제 결제를 확인할 수 없으므로 `Purchase`·`purchase`·`InitiateCheckout`을 만들어 보내지 않습니다. Meta는 실제 구매 완료와 페이지 방문 등을 구분하는 표준 이벤트를 정의합니다.[3]
+구매 클릭은 `book_store_click`와 `click_book_purchase`를 함께 보내던 방식에서 `click_book_purchase` 하나로 통합합니다. 교보문고·YES24·알라딘의 각 클릭은 한 번의 같은 이름 이벤트로 보내며 `link_domain`과 `cta_id`로 구분합니다. 구매 버튼을 클릭할 때 보내던 Meta `ViewContent`는 제거합니다. 이 사이트에서 외부 서점의 실제 결제를 확인할 수 없으므로 `Purchase`·`purchase`·`InitiateCheckout`을 만들어 보내지 않습니다. Meta는 실제 구매 완료와 페이지 방문 등을 구분하는 표준 이벤트를 정의합니다.[3]
 
 팀 안내 클릭을 `preview_open`으로도 기록하던 방식은 `click_consulting_path`로 분리합니다. 기존 `click_consulting_path`의 이메일 단계는 `inquiry_start` 하나로 분리하고 `Lead`·`generate_lead` 표준 이벤트는 중복 생성하지 않습니다. v2.1부터 사이트 폼의 실제 저장 확인만 `lead_form_success`로 분리합니다. 진단 Hero CTA는 `start_situation_diagnosis` 하나로 수집하고 별도 `preview_open`을 중복 전송하지 않습니다.
 
