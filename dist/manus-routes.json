@@ -101,6 +101,10 @@
       "title": "AI 에이전트 프롬프트 작성: ‘정리해줘’를 업무 지시서로 바꾸기"
     },
     {
+      "path": "/blog/everyday-ai-practice-04-test",
+      "title": "프롬프트 테스트: 정상·누락·모순을 확인하고 v2로 고치기"
+    },
+    {
       "path": "/privacy",
       "title": "문의 개인정보 수집·이용 안내"
     },
