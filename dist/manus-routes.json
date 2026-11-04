@@ -105,6 +105,10 @@
       "title": "프롬프트 테스트: 정상·누락·모순을 확인하고 v2로 고치기"
     },
     {
+      "path": "/blog/everyday-ai-practice-05-operation",
+      "title": "검수한 프롬프트 v2, 계속 쓸까? 개인 업무 운영 카드 만들기"
+    },
+    {
       "path": "/privacy",
       "title": "문의 개인정보 수집·이용 안내"
     },
