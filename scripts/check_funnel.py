@@ -156,7 +156,7 @@ with sync_playwright() as pw:
     print('PASS real downloadable resource action is not counted as a lead',flush=True)
 
     # New editorial content must retain its context through actual CTA navigation.
-    for slug, width in ((slug, width) for slug in ('marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide', 'command-marketing-book-practical-guide', 'agentic-ai-harness-loop-graph-jev-marketer-guide') for width in (390, 1440)):
+    for slug, width in ((slug, width) for slug in ('marketer-ai-decision-making', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide', 'command-marketing-book-practical-guide', 'agentic-ai-harness-loop-graph-jev-marketer-guide') for width in (390, 1440)):
         context,page,sent,mode,errors,outside=setup('/blog/'+slug,width=width)
         assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
         assert page.locator('.article-cta-inline h3').inner_text() != page.locator('.article-cta-end h3').inner_text()
@@ -168,7 +168,8 @@ with sync_playwright() as pw:
             page.locator('#article-end').scroll_into_view_if_needed()
             page.wait_for_timeout(200)
             assert page.locator('.article-mobile-cta').is_hidden()
-        assert page.locator('[data-cta-id="end-resource"]').get_attribute('href') == '/resources/rgctor-worksheet'
+        expected_resource = '/resources/content-search-checklist' if slug == 'marketer-ai-decision-making' else '/resources/rgctor-worksheet'
+        assert page.locator('[data-cta-id="end-resource"]').get_attribute('href') == expected_resource
         article_events = page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="view_blog_article")')
         assert len(article_events)==1 and article_events[0][2]['article_slug']==slug
         page.locator('[data-cta-id="end-team"]').click()

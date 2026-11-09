@@ -214,6 +214,7 @@ WORK_BY_SLUG = {
     'rgctor-content-workflow': 'review',
     'ai-search-measurement': 'performance',
     'marketer-ai-agent-workflow-design': 'review',
+    'marketer-ai-decision-making': 'review',
     'why-marketers-need-ai-agents': 'review',
     'jev-engineering-guide': 'review',
     'command-marketing-book-practical-guide': 'review',
