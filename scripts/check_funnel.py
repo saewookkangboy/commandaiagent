@@ -187,6 +187,28 @@ with sync_playwright() as pw:
         assert not sent and not errors
         context.close()
     print('PASS new article mobile/desktop CTA navigation, prefill and private-data-free source context; no real leads',flush=True)
+
+    for width in (390, 1440):
+        context,page,sent,mode,errors,outside=setup('/blog/ai-competitor-analysis-practice',width=width)
+        assert page.locator('.article-head h1').inner_text()=='AI 경쟁사 분석 실습: 공개 자료로 메시지와 오퍼 비교하기'
+        end=page.locator('.article-cta-end')
+        book=end.locator('a[data-cta-id="end-book"]')
+        assert book.inner_text()=='책을 통해서 확인해보세요'
+        assert book.get_attribute('href')=='https://product.kyobobook.co.kr/detail/S000221439823?LINK=PLP'
+        assert end.locator('[data-cta-id="end-contents"]').get_attribute('href')=='/#contents'
+        page.evaluate("document.addEventListener('click',e=>{if(e.target.closest('a[data-cta=\"purchase\"]'))e.preventDefault()})")
+        book.click();page.wait_for_timeout(100)
+        ga=page.evaluate('window.__ga.filter(e=>e[0]==="event"&&e[1]==="click_book_purchase")')
+        meta=page.evaluate('window.__meta.filter(e=>e[0]==="trackCustom"&&e[1]==="click_book_purchase")')
+        assert len(ga)==len(meta)==1 and ga[0][1:3]==meta[0][1:3]
+        assert ga[0][2]['article_slug']=='ai-competitor-analysis-practice' and ga[0][2]['content_id']=='ai-competitor-analysis-practice'
+        assert meta[0][3]['eventID']==ga[0][2]['event_id']
+        assert not page.evaluate('window.__ga.some(e=>e[0]==="event"&&(e[1]==="lead_form_success"||e[1]==="purchase"))')
+        assert not sent and not errors,errors
+        assert not [url for url in outside if urlsplit(url).hostname not in ('www.googletagmanager.com','googletagmanager.com','connect.facebook.net')]
+        context.close()
+    print('PASS AI competitor analysis article book CTA and intent event at390/1440px; no external purchase or lead',flush=True)
+
     for width in (360, 390, 768, 1440):
         slug = 'book-ai-agent-roles-reading-guide'
         context,page,sent,mode,errors,outside=setup('/blog/'+slug,width=width)

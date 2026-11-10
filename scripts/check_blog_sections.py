@@ -102,7 +102,8 @@ with sync_playwright() as pw:
             if route == '/blog':
                 page.goto(ORIGIN + '/blog#practical-guides')
                 assert page.locator('#practical-guides').count() == 1
-                assert page.locator('#book-series .blog-card').count() == 5
+                expected_book_series = len(next(section for section in SECTIONS if section['id'] == 'book-series')['posts'])
+                assert page.locator('#book-series .blog-card').count() == expected_book_series
         assert not outside, outside
         context.close()
         print(f'PASS {width}px: all topics,44px controls,keyboard anchors,header clearance,no topic overflow or external requests', flush=True)
