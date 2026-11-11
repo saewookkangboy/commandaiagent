@@ -61,8 +61,8 @@
 
 - [도서 읽기·실무 활용 목록](https://book.allrounder.im/blog#book-series): 책 소개 1→2→3으로 거버넌스·업무 지시·운영 루프를 읽고, 역할별 독서 가이드와 실무 활용 글로 내 업무의 시작점을 고르세요.
 - [AI 에이전트 마케팅 책: 업무 위임과 거버넌스](https://book.allrounder.im/blog/book-command-marketer-01): AI 에이전트 마케팅 책 『AI Agent를 지휘하는 마케터』의 Prologue와 Part 1·2에서 업무 위임, 데이터 보호, 사람의 승인·책임 원칙을 요약합니다.
-- [R-G-C-T-O-R 업무 지시서: 설계와 검수 기준](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서의 구성과 콘텐츠·SEO·랜딩페이지 QA 원칙을 책 Part 3·5에 근거해 요약합니다. 가상 사례는 도서 원문이 아닌 편집 응용으로 구분합니다.
-- [AI 마케팅 21일 훈련: 광고·CRM 운영 루프 만들기](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련의 주차별 진행과 광고·CRM·분석 운영 루프를 책의 Part 6·7에 근거해 정리합니다. 실험 로그, 사람의 승인 기준, 월간 점검표까지 살펴봅니다.
+- [R-G-C-T-O-R 업무 지시서: SEO·GEO 콘텐츠 검수](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 목표·근거·산출물·사람 승인 기준을 정리합니다. AI 답변 인용을 보장하지 않으면서, AIEO·GEO 질문을 반복 가능한 업무 흐름으로 연결합니다.
+- [AI 마케팅 21일 훈련: GEO 콘텐츠 관리·성과 측정](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련의 운영 루프에 GEO 콘텐츠 대행 후 인계·관리와 성과 관찰을 연결합니다. Search Console 노출·클릭, 인용 표본, 전환은 각각 다른 지표로 봅니다.
 - [AI Agent 역할별 특징: 마케팅 업무 17가지와 책 읽기 가이드](https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide): AI Agent 역할별 특징은 리서치, 콘텐츠 제작, 광고·CRM·성과분석에서 맡는 일과 검수 지점에 따라 다릅니다. 책의 17개 업무 역할과 준비할 자료·산출물을 비교하고, 내 업무에 맞는 장과 읽기 경로를 확인하세요.
 - [AI 경쟁사 분석 방법: 공개 자료 비교 실습](https://book.allrounder.im/blog/ai-competitor-analysis-practice): AI 경쟁사 분석은 숨은 성과를 추정하는 일이 아닙니다. 공개 자료의 메시지·오퍼·근거·구매 흐름을 같은 기준으로 정리하고, 관찰 사실과 가설·미확인 정보를 구분해 마케터가 다음 질문을 결정하는 실습을 제공합니다.
 - [AI Agent를 지휘하는 마케터 실무 활용법](https://book.allrounder.im/blog/command-marketing-book-practical-guide): AI 마케팅 책 실무 활용은 한 업무의 입력 자료, R-G-C-T-O-R 지시서, 아웃라인 승인과 초안 검수, 인계·회고를 연결하는 일입니다. 도서의 핵심 원칙과 가상 B2B 캠페인 예시로 따라 적용할 방법을 안내합니다.
