@@ -981,7 +981,7 @@
     "slug": "book-command-marketer-02",
     "title": "책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서",
     "short_title": "R-G-C-T-O-R 업무 지시서",
-    "description": "R-G-C-T-O-R 업무 지시서의 여섯 요소를 『AI Agent를 지휘하는 마케터』 Part 3·5에 근거해 소개합니다. 프롬프트를 업무 흐름으로 확장하고 콘텐츠·SEO·랜딩페이지의 검수와 사람 승인 기준을 세우는 편집 응용 예시를 확인하세요.",
+    "description": "『AI Agent를 지휘하는 마케터』 Part 3·5의 R-G-C-T-O-R 업무 지시서를 SEO·GEO 콘텐츠에 적용합니다. AI 답변 인용을 보장하지 않는 범위에서 근거 확인, 사람 검수·승인 기준과 편집 응용을 살펴봅니다.",
     "category": "책 소개 · 업무 지시서와 콘텐츠",
     "kind": "book-series",
     "series_order": 2,
@@ -991,28 +991,28 @@
       "command-marketing-book-practical-guide",
       "marketer-ai-agent-workflow-design"
     ],
-    "modified": "2026-10-19",
+    "modified": "2026-11-11",
     "image": "/assets/blog/book-command-marketer-02.webp",
     "image_jpg": "/assets/blog/book-command-marketer-02.jpg",
     "image_alt": "책 소개 2: 프롬프트보다 업무 지시서, R-G-C-T-O-R를 작성하는 카툰",
-    "seo_title": "R-G-C-T-O-R 업무 지시서: 설계와 검수 기준",
+    "seo_title": "R-G-C-T-O-R 업무 지시서: SEO·GEO 콘텐츠 검수",
     "primary_keyword": "R-G-C-T-O-R 업무 지시서",
     "secondary_keywords": [
       "AI 마케팅 업무 지시서",
       "R-G-C-T-O-R 프롬프트 설계",
-      "AI Agent Workflow 설계",
-      "SEO 콘텐츠 Agent 검수",
-      "랜딩페이지 QA 체크리스트",
-      "프롬프트와 업무 지시서 차이"
+      "SEO와 GEO 차이",
+      "AIEO와 SEO 차이",
+      "AI 답변 인용 콘텐츠 구조",
+      "GEO 콘텐츠 검수 서비스"
     ],
-    "search_intent": "정보 탐색형: 『AI Agent를 지휘하는 마케터』 핵심 내용을 바탕으로 R-G-C-T-O-R 업무 지시서의 구성과 프롬프트의 Workflow 전환, 콘텐츠·SEO·랜딩페이지의 검수 및 사람 승인 기준을 이해하고 실무 적용 방법을 찾으려는 검색.",
-    "search_summary": "R-G-C-T-O-R 업무 지시서의 구성과 콘텐츠·SEO·랜딩페이지 QA 원칙을 책 Part 3·5에 근거해 요약합니다. 가상 사례는 도서 원문이 아닌 편집 응용으로 구분합니다."
+    "search_intent": "정보 탐색형: 마케터가 SEO·GEO·AIEO 용어의 관계와 AI 답변에 참고될 콘텐츠의 구성 원칙을 이해하고, R-G-C-T-O-R 업무 지시서로 출처·범위·사람의 검수·승인을 설계하려는 검색 의도. AI 인용이나 검색 노출을 보장하는 방법을 찾는 글은 아닙니다.",
+    "search_summary": "R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 목표·근거·산출물·사람 승인 기준을 정리합니다. AI 답변 인용을 보장하지 않으면서, AIEO·GEO 질문을 반복 가능한 업무 흐름으로 연결합니다."
   },
   {
     "slug": "book-command-marketer-03",
     "title": "책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프",
     "short_title": "21일 훈련과 운영 루프",
-    "description": "AI 마케팅 21일 훈련을 다룬 『AI Agent를 지휘하는 마케터』 Part 6·7의 핵심을 요약합니다. 광고·CRM·분석의 운영 루프, 주차별 실습, 실험 기록과 사람의 승인 기준을 확인해 업무에 적용할 출발점을 찾을 수 있습니다.",
+    "description": "AI 마케팅 21일 훈련에 GEO 콘텐츠의 발행 후 관리와 성과 관찰을 연결합니다. 『AI Agent를 지휘하는 마케터』 Part 6·7의 운영 루프를 따라 대행 후 인계, 노출·클릭·인용·전환의 구분과 사람의 승인 기준을 설명합니다.",
     "category": "책 소개 · 21일 훈련과 운영",
     "kind": "book-series",
     "series_order": 3,
@@ -1022,21 +1022,21 @@
       "book-command-marketer-01",
       "ai-search-measurement"
     ],
-    "modified": "2026-10-17",
+    "modified": "2026-11-11",
     "image": "/assets/blog/book-command-marketer-03.webp",
     "image_jpg": "/assets/blog/book-command-marketer-03.jpg",
     "image_alt": "책 소개 3: 21일 작은 업무부터, 실행과 검수를 연습하는 마케터 카툰",
-    "seo_title": "AI 마케팅 21일 훈련: 광고·CRM 운영 루프 만들기",
+    "seo_title": "AI 마케팅 21일 훈련: GEO 콘텐츠 관리·성과 측정",
     "primary_keyword": "AI 마케팅 21일 훈련",
     "secondary_keywords": [
       "AI 마케팅 운영 루프",
-      "광고 CRM 분석 연결",
-      "AI 마케팅 실험 로그",
-      "마케팅 Agent 승인 기준",
-      "21일 커맨드 마케팅 훈련",
-      "AI 마케팅 월간 점검표"
+      "GEO 대행 후 관리",
+      "GEO 성과 측정",
+      "AI 검색 성과 측정",
+      "AI 마케팅 효과 측정",
+      "AI Agent 운영 승인 기준"
     ],
-    "search_intent": "『AI Agent를 지휘하는 마케터』의 Part 6·7을 바탕으로 광고·CRM·분석 업무의 운영 루프와 책에서 제시한 21일 훈련의 단계, 실험 기록 및 사람의 승인 기준을 이해하고 실무 적용의 출발점을 찾으려는 정보 탐색 의도.",
-    "search_summary": "AI 마케팅 21일 훈련의 주차별 진행과 광고·CRM·분석 운영 루프를 책의 Part 6·7에 근거해 정리합니다. 실험 로그, 사람의 승인 기준, 월간 점검표까지 살펴봅니다."
+    "search_intent": "정보 탐색형: AI 마케팅 21일 훈련을 바탕으로 GEO 콘텐츠 발행 뒤의 인계·관리·성과 관찰을 설계하고, GEO 대행 후 무엇을 이어받을지, AI 검색 노출·클릭·인용·전환을 어떻게 구분할지, 사람의 승인과 운영 기준을 어떻게 둘지 찾는 검색 의도. 특정 효과나 서비스 성과를 약속하지 않습니다.",
+    "search_summary": "AI 마케팅 21일 훈련의 운영 루프에 GEO 콘텐츠 대행 후 인계·관리와 성과 관찰을 연결합니다. Search Console 노출·클릭, 인용 표본, 전환은 각각 다른 지표로 봅니다."
   }
 ]
