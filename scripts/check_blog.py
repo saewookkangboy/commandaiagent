@@ -16,7 +16,7 @@ posts = json.loads((ROOT / 'content/blog/posts.json').read_text())
 assert len(posts) >= 14
 assert 'book-ai-agent-roles-reading-guide' in {post['slug'] for post in posts}
 assert len({post['slug'] for post in posts}) == len(posts)
-assert len([p for p in posts if p['kind'] == 'book-series']) == 3
+assert len([p for p in posts if p['kind'] == 'book-series']) == 5
 assert len({post['description'] for post in posts}) == len(posts)
 assert len({post['image'] for post in posts}) == len(posts)
 assert len({post['seo_title'] for post in posts}) == len(posts)
@@ -349,7 +349,7 @@ for post in posts:
     if post['kind'] == 'book-series':
         assert article['isBasedOn']['name'] == 'AI Agent를 지휘하는 마케터'
         assert len(soup.select('.series-nav [aria-current="page"]')) == 1
-        assert len(soup.select('.series-nav ol a')) == 3
+        assert len(soup.select('.series-nav ol a')) == 5
         assert '편집 응용' in source and '함께 읽을 내용과 적용 범위' in source
         assert BOOK_TITLE in source and '박충효' in source and 'AI 초안' in source
         assert 'AI 초안 활용' in soup.select_one('.article-disclosure-short').get_text()
@@ -465,7 +465,7 @@ for href in re.findall(r'\[[^\]]+\]\(([^\s)]+)\)', llms):
         if url.fragment:
             assert BeautifulSoup(target.read_text(), 'html.parser').find(id=unquote(url.fragment)), href
 assert '도서 발췌나 저자의 직접 발언이 아닙니다' in llms
-assert '책 소개 시리즈 3편은 『AI Agent를 지휘하는 마케터』의 주제와 구성을 소개하는 편집 글입니다' in llms
+assert '책 소개 시리즈 5편은 『AI Agent를 지휘하는 마케터』의 주제와 구성을 소개하는 편집 글입니다' in llms
 assert all(marker not in llms.lower() for marker in SOURCE_PROVENANCE_MARKERS), 'provided-file provenance is in llms.txt'
 assert '박충효·TROE 표기의 사용자 제공 HTML 원고' in llms
 assert 'Jev 입문을 제외한' in llms and '**결정 모델과 Jev Engineering.**' in intro

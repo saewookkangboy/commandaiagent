@@ -3,12 +3,14 @@
     "id": "book-series",
     "title": "도서 읽기·실무 활용",
     "eyebrow": "01 / Book · Reading · Practice",
-    "description": "책 소개 1→2→3으로 거버넌스·업무 지시·운영 루프를 읽고, 역할별 독서 가이드와 실무 활용 글로 내 업무의 시작점을 고르세요.",
+    "description": "책 소개 1→2→3→4→5에서 거버넌스·업무 지시·운영 루프·고객 인사이트·GEO 콘텐츠 검수와 발행을 읽고, 역할별 독서 가이드와 실무 활용 글로 시작점을 고르세요.",
     "sort": "reading",
     "slugs": [
       "book-command-marketer-01",
       "book-command-marketer-02",
       "book-command-marketer-03",
+      "book-command-marketer-04",
+      "book-command-marketer-05",
       "book-ai-agent-roles-reading-guide",
       "ai-competitor-analysis-practice",
       "command-marketing-book-practical-guide"
