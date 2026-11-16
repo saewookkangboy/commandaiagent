@@ -402,12 +402,12 @@ for part, section in zip(parts, sections):
     assert [item['position'] for item in part['mainEntity']['itemListElement']] == list(range(1, len(section['posts']) + 1))
     assert [item['url'] for item in part['mainEntity']['itemListElement']] == [ORIGIN + '/blog/' + post['slug'] for post in section['posts']]
     assert [item['name'] for item in part['mainEntity']['itemListElement']] == [post['title'] for post in section['posts']]
-assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == len(posts) + 7
+extra_paths = ['/consulting','/resources','/resources/rgctor-worksheet','/resources/content-search-checklist','/resources/geo-content-review-checklist']
+assert len(json.loads((DIST / 'manus-routes.json').read_text())['routes']) == len(posts) + len(extra_paths) + 3
 urls = [node.text for node in ET.parse(DIST / 'sitemap.xml').iter('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-assert len(urls) == len(posts) + 6 and len(set(urls)) == len(urls)
+assert len(urls) == len(posts) + len(extra_paths) + 2 and len(set(urls)) == len(urls)
 assert [url.rsplit('/', 1)[-1] for url in urls if urlsplit(url).path.startswith('/blog/')] == ordered_slugs
 assert all(urlsplit(url).scheme == 'https' and urlsplit(url).netloc == urlsplit(ORIGIN).netloc and not urlsplit(url).fragment and not urlsplit(url).query for url in urls)
-extra_paths = ['/consulting','/resources','/resources/rgctor-worksheet','/resources/content-search-checklist']
 assert set(urls) == {ORIGIN + '/', ORIGIN + '/blog'} | {ORIGIN + '/blog/' + p['slug'] for p in posts} | {ORIGIN + path for path in extra_paths}
 assert ORIGIN + '/privacy' not in urls
 assert htmls[DIST / 'privacy/index.html'].select_one('meta[name=robots]')['content'].startswith('noindex')
@@ -418,7 +418,7 @@ expected_modified = {ORIGIN + '/': site['home_modified'], ORIGIN + '/blog': max(
 assert collection['dateModified'] == expected_modified[ORIGIN + '/blog']
 expected_images = {ORIGIN + '/': ORIGIN + '/assets/book-flat.jpg'}
 funnel = json.loads((ROOT / 'content/funnel.json').read_text())
-expected_modified.update({ORIGIN + path: funnel['modified'] for path in extra_paths})
+expected_modified.update({ORIGIN + path: funnel.get('path_modified', {}).get(path, funnel['modified']) for path in extra_paths})
 for post in posts:
     url = ORIGIN + '/blog/' + post['slug']
     expected_modified[url] = post.get('modified', post['date'])

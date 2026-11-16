@@ -5,5 +5,9 @@
   "modified": "2026-10-17",
   "operator": "TROE",
   "contact_email": "chunghyo@troe.kr",
-  "retention": "문의 처리 완료 후 지체 없이 파기하며, 접수일부터 최대 3개월을 넘기지 않습니다. 법령상 보관 의무가 있는 경우 해당 기간을 따릅니다."
+  "retention": "문의 처리 완료 후 지체 없이 파기하며, 접수일부터 최대 3개월을 넘기지 않습니다. 법령상 보관 의무가 있는 경우 해당 기간을 따릅니다.",
+  "path_modified": {
+    "/resources": "2026-11-17",
+    "/resources/geo-content-review-checklist": "2026-11-17"
+  }
 }

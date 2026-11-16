@@ -814,42 +814,42 @@
   {
     "slug": "seo-geo-aieo-guide",
     "title": "SEO·GEO·AIEO, AI 검색 시대 콘텐츠 전략은 무엇이 달라져야 할까?",
-    "description": "SEO·GEO·AIEO 차이를 정의와 적용 범위로 비교하고, Google의 AI 검색 안내에 비춰 SEO 기본기와 생성형 검색 대응을 정리합니다. 발행 전 체크리스트와 도서 프레임의 편집 응용 예를 확인하세요.",
+    "description": "SEO·GEO·AIEO 차이와 서비스 장단점, AI 검색 성과 확인 도구를 비교합니다. AI 마케팅 효과는 노출·클릭·인용·전환을 나눠 해석하세요.",
     "category": "SEO · GEO · AIEO",
     "date": "2026-10-14",
     "related": [
       "geo-content-structure",
       "technical-seo-ai-search"
     ],
-    "modified": "2026-10-17",
+    "modified": "2026-11-17",
     "image": "/assets/blog/seo-geo-aieo-guide.webp",
     "image_jpg": "/assets/blog/seo-geo-aieo-guide.jpg",
     "image_alt": "SEO·GEO·AIEO, 검색에서 답변까지를 탐색하는 마케터와 AI 로봇 카툰",
     "kind": "guide",
-    "seo_title": "SEO·GEO·AIEO 차이와 AI 검색 콘텐츠 전략",
+    "seo_title": "SEO와 GEO 차이: 일반 SEO와 AI 검색 서비스 비교",
     "primary_keyword": "SEO·GEO·AIEO 차이",
     "secondary_keywords": [
       "SEO와 GEO 차이",
-      "AIEO 뜻",
-      "GEO 전략",
-      "AI 검색 최적화",
-      "생성형 검색 콘텐츠 전략",
-      "AI 검색 SEO 기본기"
+      "AIEO와 SEO 차이",
+      "AI SEO 대행 서비스 차이",
+      "GEO 검색 순위 확인",
+      "AI 검색 성과 측정 도구",
+      "AI 마케팅 효과 측정"
     ],
-    "search_intent": "정보 탐색형: SEO·GEO·AIEO의 의미와 범위 차이를 이해하고, AI 검색을 고려한 콘텐츠 전략과 실무 적용 항목을 비교하려는 의도입니다.",
-    "search_summary": "SEO·GEO·AIEO 차이를 검색엔진의 이해, 생성형 답변의 출처, 팀 콘텐츠 운영 관점에서 비교합니다. Google 안내와 발행 전 체크리스트, 도서 프레임을 편집에 응용한 예를 함께 소개합니다."
+    "search_intent": "정보 탐색형: 일반 SEO와 GEO·AI 검색 대응을 표방하는 서비스의 실제 작업 범위와 장단점을 비교하고, GEO 검색 노출·AI 답변 인용·AI 마케팅 성과를 어느 도구에서 어떤 한계와 함께 확인할지 알고 싶은 마케터의 의도입니다.",
+    "search_summary": "SEO·GEO·AIEO 차이를 일반 SEO와 AI 검색 서비스의 실제 작업 범위, 장단점, 확인할 지표로 비교합니다. Search Console·웹 분석·AI 답변 표본의 측정 범위도 설명합니다."
   },
   {
     "slug": "geo-content-structure",
     "title": "AI 답변에 인용되기 쉬운 콘텐츠 구조: GEO 실무 가이드",
-    "description": "GEO 콘텐츠 작성법을 찾는 마케터와 팀 리더를 위해 질문에 먼저 답하는 본문, 범위·기준일·원출처 표기, 구조화 데이터와 FAQ의 한계를 정리했습니다. 한국어 예시와 게시 전 점검표로 실무 적용 방법을 확인하세요.",
+    "description": "GEO 콘텐츠 작성법을 찾는 마케터와 팀 리더를 위해 직접 답변, 범위·기준일·원출처 표기와 AI 인용의 한계를 정리합니다. 게시 전 체크리스트와 별도 GEO 검수표로 발행·인계 항목을 확인하세요.",
     "category": "GEO · 콘텐츠 설계",
     "date": "2026-10-14",
     "related": [
       "seo-geo-aieo-guide",
       "rgctor-content-workflow"
     ],
-    "modified": "2026-10-17",
+    "modified": "2026-11-17",
     "image": "/assets/blog/geo-content-structure.webp",
     "image_jpg": "/assets/blog/geo-content-structure.jpg",
     "image_alt": "인용되는 콘텐츠: 답변·근거·맥락을 책과 문서로 확인하는 AI 로봇 카툰",
@@ -864,7 +864,7 @@
       "AI 검색 콘텐츠 구조화"
     ],
     "search_intent": "정보 탐색형: 마케터와 팀 리더가 생성형 검색·답변 서비스에 활용될 수 있는 콘텐츠를 어떻게 구성할지 알고, 근거·범위·기준일 표기와 게시 전 점검 방법을 확인하려는 의도.",
-    "search_summary": "GEO 콘텐츠 작성법의 핵심은 질문에 먼저 답하고 범위·기준일·원출처를 명확히 잇는 것입니다. 한국어 예시와 게시 전 체크리스트, 구조화 데이터 및 연구 결과의 한계를 함께 살펴봅니다."
+    "search_summary": "GEO 콘텐츠 작성법은 질문에 먼저 답하고 범위·기준일·원출처를 명확히 잇는 데서 시작합니다. 게시 전 점검, GEO 발행·인계 검수표, AI 답변 인용과 검색 성과 측정의 한계를 함께 살펴봅니다."
   },
   {
     "slug": "technical-seo-ai-search",
@@ -925,29 +925,30 @@
   {
     "slug": "ai-search-measurement",
     "title": "SEO·GEO·AIEO 성과 측정: 클릭·인용·전환을 분리하는 방법",
-    "description": "GEO 성과 측정에서 검색 노출, 사이트 클릭·세션, AI 답변 인용, CRM 전환을 구분합니다. Search Console의 한계와 고정 질문 표본, 2주 단일변수 실험을 활용해 마케팅 성과를 해석하는 기준을 확인하세요.",
+    "description": "GEO 성과 측정에서 Search Console 노출, 사이트 클릭·세션, AI 답변 인용, CRM 전환을 구분합니다. AI 검색 성과 도구의 범위와 작은 표본·0클릭 관찰을 해석하는 기준을 확인하세요.",
     "category": "SEO · GEO · 성과 측정",
     "date": "2026-10-14",
     "related": [
       "technical-seo-ai-search",
       "rgctor-content-workflow"
     ],
-    "modified": "2026-10-17",
+    "modified": "2026-11-17",
     "image": "/assets/blog/ai-search-measurement.webp",
     "image_jpg": "/assets/blog/ai-search-measurement.jpg",
     "image_alt": "클릭·인용·전환을 따로 보고 함께 판단하는 마케터의 손글씨 카툰",
     "kind": "guide",
-    "seo_title": "GEO 성과 측정: 클릭·인용·전환을 구분하는 방법",
+    "seo_title": "GEO 성과 측정: AI 검색 노출·클릭·인용·전환 구분",
     "primary_keyword": "GEO 성과 측정",
     "secondary_keywords": [
-      "AI 검색 성과 측정",
+      "AI 검색 성과 측정 도구",
+      "GEO 검색 순위 확인",
       "AI 인용 측정",
       "검색 노출 클릭 전환 구분",
-      "생성형 AI 검색 노출",
-      "AI 답변 인용 표본"
+      "AI 답변 인용 표본",
+      "AI 마케팅 효과 측정"
     ],
-    "search_intent": "정보 탐색형: GEO를 포함한 AI 검색 성과를 어떻게 측정할지 알고 싶어 하며, 검색 노출·클릭과 세션·AI 답변 인용·비즈니스 전환을 구분하는 실무 기준과 관찰 방법을 찾는 독자 대상.",
-    "search_summary": "GEO 성과 측정은 검색 노출, 사이트 방문, AI 답변 인용, 전환을 서로 다른 지표로 살피는 일입니다. 고정 질문 표본과 단일변수 실험으로 변화와 한계를 기록하는 방법을 소개합니다."
+    "search_intent": "정보 탐색형: GEO·AI 검색 성과를 어떤 도구에서 확인할지 찾는 독자를 위해 Google Search Console의 AI 기능 노출, 사이트 방문·전환, AI 답변 언급·링크 인용 표본을 구분하고, 낮은 노출·0클릭과 작은 표본을 과장 없이 해석하는 방법을 설명합니다.",
+    "search_summary": "GEO 성과 측정은 검색 노출·클릭, AI 답변 인용 표본, 사이트 방문·전환을 각각 살피는 일입니다. Search Console과 웹 분석의 역할, 작은 표본에서 판단을 보류하는 기준을 설명합니다."
   },
   {
     "slug": "book-command-marketer-01",
@@ -983,7 +984,7 @@
     "slug": "book-command-marketer-02",
     "title": "책 소개 2 | R-G-C-T-O-R로 설계하는 AI 마케팅 업무 지시서",
     "short_title": "R-G-C-T-O-R 업무 지시서",
-    "description": "『AI Agent를 지휘하는 마케터』 Part 3·5의 R-G-C-T-O-R 업무 지시서를 SEO·GEO 콘텐츠에 적용합니다. AI 답변 인용을 보장하지 않는 범위에서 근거 확인, 사람 검수·승인 기준과 편집 응용을 살펴봅니다.",
+    "description": "『AI Agent를 지휘하는 마케터』의 R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 범위·근거·검수 기준을 정합니다. 서비스 이름보다 실제 산출물과 승인 책임을 확인하세요.",
     "category": "책 소개 · 업무 지시서와 콘텐츠",
     "kind": "book-series",
     "series_order": 2,
@@ -993,7 +994,7 @@
       "command-marketing-book-practical-guide",
       "marketer-ai-agent-workflow-design"
     ],
-    "modified": "2026-11-11",
+    "modified": "2026-11-17",
     "image": "/assets/blog/book-command-marketer-02.webp",
     "image_jpg": "/assets/blog/book-command-marketer-02.jpg",
     "image_alt": "책 소개 2: 프롬프트보다 업무 지시서, R-G-C-T-O-R를 작성하는 카툰",
@@ -1007,14 +1008,14 @@
       "AI 답변 인용 콘텐츠 구조",
       "GEO 콘텐츠 검수 서비스"
     ],
-    "search_intent": "정보 탐색형: 마케터가 SEO·GEO·AIEO 용어의 관계와 AI 답변에 참고될 콘텐츠의 구성 원칙을 이해하고, R-G-C-T-O-R 업무 지시서로 출처·범위·사람의 검수·승인을 설계하려는 검색 의도. AI 인용이나 검색 노출을 보장하는 방법을 찾는 글은 아닙니다.",
-    "search_summary": "R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 목표·근거·산출물·사람 승인 기준을 정리합니다. AI 답변 인용을 보장하지 않으면서, AIEO·GEO 질문을 반복 가능한 업무 흐름으로 연결합니다."
+    "search_intent": "정보 탐색형: 마케터가 SEO·GEO·AIEO의 관계를 이해하고 R-G-C-T-O-R 업무 지시서로 콘텐츠의 질문·근거·사람의 검수·승인을 설계하려는 의도입니다. GEO 서비스의 작업 범위와 성과 약속을 구별하려는 질문도 다루며, AI 인용을 보장하는 방법을 제시하지 않습니다.",
+    "search_summary": "R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 질문·근거·산출물·승인 기준을 정리합니다. 일반 SEO와 AI 검색 대응의 범위, 발행 후 인계·측정, GEO 검수 서비스 제안서에서 확인할 항목을 연결합니다."
   },
   {
     "slug": "book-command-marketer-03",
     "title": "책 소개 3 | 21일 훈련으로 만드는 AI 마케팅 운영 루프",
     "short_title": "21일 훈련과 운영 루프",
-    "description": "AI 마케팅 21일 훈련에 GEO 콘텐츠의 발행 후 관리와 성과 관찰을 연결합니다. 『AI Agent를 지휘하는 마케터』 Part 6·7의 운영 루프를 따라 대행 후 인계, 노출·클릭·인용·전환의 구분과 사람의 승인 기준을 설명합니다.",
+    "description": "AI 마케팅 21일 훈련의 운영 루프에 GEO 대행 후 인계와 성과 측정을 연결합니다. Search Console 노출·클릭, AI 답변 인용과 전환을 구분하고 작은 표본은 판단을 보류하는 기준을 살펴봅니다.",
     "category": "책 소개 · 21일 훈련과 운영",
     "kind": "book-series",
     "series_order": 3,
@@ -1024,7 +1025,7 @@
       "book-command-marketer-01",
       "ai-search-measurement"
     ],
-    "modified": "2026-11-11",
+    "modified": "2026-11-17",
     "image": "/assets/blog/book-command-marketer-03.webp",
     "image_jpg": "/assets/blog/book-command-marketer-03.jpg",
     "image_alt": "책 소개 3: 21일 작은 업무부터, 실행과 검수를 연습하는 마케터 카툰",
@@ -1038,8 +1039,8 @@
       "AI 마케팅 효과 측정",
       "AI Agent 운영 승인 기준"
     ],
-    "search_intent": "정보 탐색형: AI 마케팅 21일 훈련을 바탕으로 GEO 콘텐츠 발행 뒤의 인계·관리·성과 관찰을 설계하고, GEO 대행 후 무엇을 이어받을지, AI 검색 노출·클릭·인용·전환을 어떻게 구분할지, 사람의 승인과 운영 기준을 어떻게 둘지 찾는 검색 의도. 특정 효과나 서비스 성과를 약속하지 않습니다.",
-    "search_summary": "AI 마케팅 21일 훈련의 운영 루프에 GEO 콘텐츠 대행 후 인계·관리와 성과 관찰을 연결합니다. Search Console 노출·클릭, 인용 표본, 전환은 각각 다른 지표로 봅니다."
+    "search_intent": "정보 탐색형: AI 마케팅 21일 훈련을 바탕으로 GEO 콘텐츠 발행 뒤 무엇을 인수인계·관리할지, Search Console에서 AI 검색 노출을 어떻게 해석할지, 클릭·인용·전환과 작은 표본을 어떻게 구분할지 찾는 의도입니다. 특정 서비스 효과나 순위를 약속하지 않습니다.",
+    "search_summary": "AI 마케팅 21일 훈련의 운영 루프에 GEO 대행 후 인계·콘텐츠 검수와 성과 관찰을 연결합니다. Search Console 노출·클릭, AI 답변 인용 표본, 사이트 전환은 서로 다른 지표이며 자료가 적으면 판단을 보류합니다."
   },
   {
     "slug": "book-command-marketer-04",
@@ -1050,7 +1051,7 @@
     "kind": "book-series",
     "series_order": 4,
     "date": "2026-11-12",
-    "modified": "2026-11-12",
+    "modified": "2026-11-17",
     "related": [
       "book-ai-agent-roles-reading-guide",
       "ai-competitor-analysis-practice",
@@ -1082,7 +1083,7 @@
     "kind": "book-series",
     "series_order": 5,
     "date": "2026-11-12",
-    "modified": "2026-11-12",
+    "modified": "2026-11-17",
     "related": [
       "book-ai-agent-roles-reading-guide",
       "book-command-marketer-02",

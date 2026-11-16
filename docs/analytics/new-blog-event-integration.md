@@ -54,7 +54,7 @@ https://book.allrounder.im/consulting?from=why-marketers-need-ai-agents&work=rev
 
 ### 워크시트 접근
 
-`resource_access`는 R-G-C-T-O-R 워크시트 링크 클릭 시 발생합니다. 글에서의 미리보기 값은 `resource_id=rgctor-worksheet`, `access_type=preview`이고 위치는 `article-inline` 또는 `article-end`입니다. CTA 식별자는 각각 `inline-resource`, `end-resource`이지만 **현재 `resource_access` payload에는 `cta_id`가 없습니다.** 위치 비교는 `position`으로 합니다.
+`resource_access`는 `content/analytics-events.json`에 허용된 공개 편집 자료의 미리보기·다운로드 링크 클릭 시 발생합니다. 글에서의 미리보기는 해당 자료의 `resource_id`와 `access_type=preview`, 위치 `article-inline` 또는 `article-end`를 사용합니다. CTA 식별자는 화면에 있을 수 있지만 **현재 `resource_access` payload에는 `cta_id`가 없습니다.** 위치 비교는 `position`으로 합니다.
 
 자료 페이지의 실제 다운로드 링크 클릭은 `access_type=download`로 구분합니다. 이는 파일 수신 완료나 리드 생성이 아닙니다. 글의 워크시트 링크에는 `from`이 없으므로, 자료 페이지의 다운로드 이벤트까지 신규 글 유입 슬러그가 자동 보존되지 않습니다. 글 페이지의 `resource_access`로 진입 의도를 보고 자료 페이지에서의 다운로드는 별도로 해석하세요.
 

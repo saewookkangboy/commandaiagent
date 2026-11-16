@@ -61,8 +61,8 @@
 
 - [도서 읽기·실무 활용 목록](https://book.allrounder.im/blog#book-series): 책 소개 1→2→3→4→5에서 거버넌스·업무 지시·운영 루프·고객 인사이트·GEO 콘텐츠 검수와 발행을 읽고, 역할별 독서 가이드와 실무 활용 글로 시작점을 고르세요.
 - [AI 에이전트 마케팅 책: 업무 위임과 거버넌스](https://book.allrounder.im/blog/book-command-marketer-01): AI 에이전트 마케팅 책 『AI Agent를 지휘하는 마케터』의 Prologue와 Part 1·2에서 업무 위임, 데이터 보호, 사람의 승인·책임 원칙을 요약합니다.
-- [R-G-C-T-O-R 업무 지시서: SEO·GEO 콘텐츠 검수](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 목표·근거·산출물·사람 승인 기준을 정리합니다. AI 답변 인용을 보장하지 않으면서, AIEO·GEO 질문을 반복 가능한 업무 흐름으로 연결합니다.
-- [AI 마케팅 21일 훈련: GEO 콘텐츠 관리·성과 측정](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련의 운영 루프에 GEO 콘텐츠 대행 후 인계·관리와 성과 관찰을 연결합니다. Search Console 노출·클릭, 인용 표본, 전환은 각각 다른 지표로 봅니다.
+- [R-G-C-T-O-R 업무 지시서: SEO·GEO 콘텐츠 검수](https://book.allrounder.im/blog/book-command-marketer-02): R-G-C-T-O-R 업무 지시서로 SEO·GEO 콘텐츠의 질문·근거·산출물·승인 기준을 정리합니다. 일반 SEO와 AI 검색 대응의 범위, 발행 후 인계·측정, GEO 검수 서비스 제안서에서 확인할 항목을 연결합니다.
+- [AI 마케팅 21일 훈련: GEO 콘텐츠 관리·성과 측정](https://book.allrounder.im/blog/book-command-marketer-03): AI 마케팅 21일 훈련의 운영 루프에 GEO 대행 후 인계·콘텐츠 검수와 성과 관찰을 연결합니다. Search Console 노출·클릭, AI 답변 인용 표본, 사이트 전환은 서로 다른 지표이며 자료가 적으면 판단을 보류합니다.
 - [고객 인사이트 AI Agent 활용법: VOC에서 캠페인 전략까지](https://book.allrounder.im/blog/book-command-marketer-04): 고객 인사이트 AI Agent는 승인된 VOC를 근거와 가설로 나누고 캠페인 전략 브리프 초안으로 연결하는 리서치 보조자입니다. 합성 예시와 사람의 검수, 자료 보호 기준을 살펴봅니다.
 - [GEO 콘텐츠 검수 서비스 선택법: AI 초안의 사람 승인 기준](https://book.allrounder.im/blog/book-command-marketer-05): GEO 콘텐츠 검수 서비스는 도구·대행·사내 편집 흐름별로 제공 범위가 다를 수 있습니다. 마케터가 원출처 확인, 사람 검수·수정 이력, 발행 승인, CMS 권한과 인수인계 자료를 확인하는 기준을 정리하며 검색 노출이나 AI 인용을 보장하지 않습니다.
 - [AI Agent 역할별 특징: 마케팅 업무 17가지와 책 읽기 가이드](https://book.allrounder.im/blog/book-ai-agent-roles-reading-guide): AI Agent 역할별 특징은 리서치, 콘텐츠 제작, 광고·CRM·성과분석에서 맡는 일과 검수 지점에 따라 다릅니다. 책의 17개 업무 역할과 준비할 자료·산출물을 비교하고, 내 업무에 맞는 장과 읽기 경로를 확인하세요.
@@ -94,12 +94,12 @@
 
 ## SEO·GEO·AIEO 검색 최적화 5편
 
-- [SEO·GEO·AIEO 검색 최적화 목록](https://book.allrounder.im/blog#search-optimization): 개념과 전략 → 답변형 콘텐츠 → 기술 SEO → 콘텐츠 Agent 운영 → 성과 측정의 흐름으로 읽으세요. 검색 유입·AI 인용·전환을 구분합니다.
-- [SEO·GEO·AIEO 차이와 AI 검색 콘텐츠 전략](https://book.allrounder.im/blog/seo-geo-aieo-guide): SEO·GEO·AIEO 차이를 검색엔진의 이해, 생성형 답변의 출처, 팀 콘텐츠 운영 관점에서 비교합니다. Google 안내와 발행 전 체크리스트, 도서 프레임을 편집에 응용한 예를 함께 소개합니다.
-- [GEO 콘텐츠 작성법: AI 답변 인용을 고려한 본문 구조](https://book.allrounder.im/blog/geo-content-structure): GEO 콘텐츠 작성법의 핵심은 질문에 먼저 답하고 범위·기준일·원출처를 명확히 잇는 것입니다. 한국어 예시와 게시 전 체크리스트, 구조화 데이터 및 연구 결과의 한계를 함께 살펴봅니다.
+- [SEO·GEO·AIEO 검색 최적화 목록](https://book.allrounder.im/blog#search-optimization): 일반 SEO와 AI 검색 대응의 범위 비교 → 답변형 콘텐츠 → 기술 점검 → 발행·인계 검수 → 성과 측정의 흐름으로 읽으세요. 검색 유입·AI 인용·전환을 구분합니다.
+- [SEO와 GEO 차이: 일반 SEO와 AI 검색 서비스 비교](https://book.allrounder.im/blog/seo-geo-aieo-guide): SEO·GEO·AIEO 차이를 일반 SEO와 AI 검색 서비스의 실제 작업 범위, 장단점, 확인할 지표로 비교합니다. Search Console·웹 분석·AI 답변 표본의 측정 범위도 설명합니다.
+- [GEO 콘텐츠 작성법: AI 답변 인용을 고려한 본문 구조](https://book.allrounder.im/blog/geo-content-structure): GEO 콘텐츠 작성법은 질문에 먼저 답하고 범위·기준일·원출처를 명확히 잇는 데서 시작합니다. 게시 전 점검, GEO 발행·인계 검수표, AI 답변 인용과 검색 성과 측정의 한계를 함께 살펴봅니다.
 - [AI 검색 기술 SEO 체크리스트: 크롤링·구조화 데이터 점검](https://book.allrounder.im/blog/technical-seo-ai-search): AI 검색 기술 SEO 체크리스트에서 초기 HTML, URL 정규화, 구조화 데이터와 검색·학습 크롤러 설정을 확인하고 배포 전 팀별 점검 항목을 살펴봅니다.
 - [AI 콘텐츠 자동화 워크플로: 사람 검수와 승인 절차](https://book.allrounder.im/blog/rgctor-content-workflow): AI 콘텐츠 자동화 워크플로에 R-G-C-T-O-R을 적용해 초안 작성, 근거 확인, 개인정보 보호와 사람의 최종 승인 절차를 정리합니다.
-- [GEO 성과 측정: 클릭·인용·전환을 구분하는 방법](https://book.allrounder.im/blog/ai-search-measurement): GEO 성과 측정은 검색 노출, 사이트 방문, AI 답변 인용, 전환을 서로 다른 지표로 살피는 일입니다. 고정 질문 표본과 단일변수 실험으로 변화와 한계를 기록하는 방법을 소개합니다.
+- [GEO 성과 측정: AI 검색 노출·클릭·인용·전환 구분](https://book.allrounder.im/blog/ai-search-measurement): GEO 성과 측정은 검색 노출·클릭, AI 답변 인용 표본, 사이트 방문·전환을 각각 살피는 일입니다. Search Console과 웹 분석의 역할, 작은 표본에서 판단을 보류하는 기준을 설명합니다.
 
 ## 일반 독자를 위한 AI Agent 실습 5편
 
@@ -114,11 +114,12 @@
 
 - [R-G-C-T-O-R 업무 지시서 워크시트](https://book.allrounder.im/resources/rgctor-worksheet): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.
 - [콘텐츠·검색 점검표](https://book.allrounder.im/resources/content-search-checklist): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.
+- [GEO 콘텐츠 발행 전 검수표](https://book.allrounder.im/resources/geo-content-review-checklist): 질문·출처·승인·인계·측정 범위를 확인하는 공개 편집 응용 자료입니다.
 - [팀 적용 문의](https://book.allrounder.im/consulting): 콘텐츠 검수·운영 체계의 적용 범위를 문의하는 경로입니다.
 
 ## 검색 보조 문서
 
-- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 35개와 대표 이미지
+- [XML 사이트맵](https://book.allrounder.im/sitemap.xml): 현재 색인 대상 정규 URL 36개와 대표 이미지
 - [크롤러 접근 정책](https://book.allrounder.im/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분
 
-문서 검토 기준일: 2026-11-12. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.
+문서 검토 기준일: 2026-11-17. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.

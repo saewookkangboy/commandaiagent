@@ -466,7 +466,7 @@ for section in TOPIC_SECTIONS:
     llms += f'\n## {section["title"]} {len(group)}편\n\n'
     llms += f'- [{section["title"]} 목록]({ORIGIN}/blog#{section["id"]}): {section["description"]}\n'
     llms += '\n'.join(f'- [{post["seo_title"]}]({ORIGIN}/blog/{post["slug"]}): {post["search_summary"]}' for post in group) + '\n'
-llms += f'\n## 공개 편집 자료와 팀 적용 문의\n\n- [R-G-C-T-O-R 업무 지시서 워크시트]({ORIGIN}/resources/rgctor-worksheet): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.\n- [콘텐츠·검색 점검표]({ORIGIN}/resources/content-search-checklist): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.\n- [팀 적용 문의]({ORIGIN}/consulting): 콘텐츠 검수·운영 체계의 적용 범위를 문의하는 경로입니다.\n'
+llms += f'\n## 공개 편집 자료와 팀 적용 문의\n\n- [R-G-C-T-O-R 업무 지시서 워크시트]({ORIGIN}/resources/rgctor-worksheet): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.\n- [콘텐츠·검색 점검표]({ORIGIN}/resources/content-search-checklist): 공개 편집 응용 자료이며 도서 본문을 대신하지 않습니다.\n- [GEO 콘텐츠 발행 전 검수표]({ORIGIN}/resources/geo-content-review-checklist): 질문·출처·승인·인계·측정 범위를 확인하는 공개 편집 응용 자료입니다.\n- [팀 적용 문의]({ORIGIN}/consulting): 콘텐츠 검수·운영 체계의 적용 범위를 문의하는 경로입니다.\n'
 llms += f'\n## 검색 보조 문서\n\n- [XML 사이트맵]({ORIGIN}/sitemap.xml): 현재 색인 대상 정규 URL {len(indexable_routes)}개와 대표 이미지\n- [크롤러 접근 정책]({ORIGIN}/robots.txt): 검색·사용자 요청 크롤러와 모델 학습 크롤러의 정책 구분\n'
 llms += f'\n문서 검토 기준일: {REVIEWED}. 각 페이지의 최종 콘텐츠 수정일은 사이트맵과 글의 게시·검토 표시를 참고하세요. llms.txt는 보조 문서이며 검색 노출이나 AI 인용을 보장하지 않습니다.\n'
 for path in (ROOT / 'llms.txt', DIST / 'llms.txt'):
