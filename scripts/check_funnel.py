@@ -145,15 +145,16 @@ with sync_playwright() as pw:
     context.close()
     print('PASS mobile Kyobo purchase: one click, one GA4/Meta intent pair, no lead or real purchase',flush=True)
 
-    context,page,sent,mode,errors,outside=setup('/resources/rgctor-worksheet',width=1440)
-    page.locator('[data-resource-id="rgctor-worksheet"]').click()
-    page.wait_for_timeout(100)
-    ga=page.evaluate('window.__ga.filter(e=>e[0]==="event")')
-    assert any(e[1]=='resource_access' and e[2]['access_type']=='download' for e in ga)
-    assert not any(e[1]=='lead_form_success' for e in ga)
-    assert not sent and not errors
-    context.close()
-    print('PASS real downloadable resource action is not counted as a lead',flush=True)
+    for resource_id in ('rgctor-worksheet','content-search-checklist','geo-content-review-checklist'):
+        context,page,sent,mode,errors,outside=setup('/resources/' + resource_id,width=1440)
+        page.locator('[data-resource-id="' + resource_id + '"]').click()
+        page.wait_for_timeout(100)
+        ga=page.evaluate('window.__ga.filter(e=>e[0]==="event")')
+        assert any(e[1]=='resource_access' and e[2]['resource_id']==resource_id and e[2]['access_type']=='download' for e in ga)
+        assert not any(e[1]=='lead_form_success' for e in ga)
+        assert not sent and not errors
+        context.close()
+    print('PASS all downloadable public resources remain resource access, not leads',flush=True)
 
     # New editorial content must retain its context through actual CTA navigation.
     for slug, width in ((slug, width) for slug in ('marketer-ai-decision-making', 'marketer-ai-agent-workflow-design', 'why-marketers-need-ai-agents', 'jev-engineering-guide', 'command-marketing-book-practical-guide', 'agentic-ai-harness-loop-graph-jev-marketer-guide') for width in (390, 1440)):

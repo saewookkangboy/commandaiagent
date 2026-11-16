@@ -83,7 +83,8 @@
     "resource_id": {
       "enum": [
         "rgctor-worksheet",
-        "content-search-checklist"
+        "content-search-checklist",
+        "geo-content-review-checklist"
       ]
     },
     "access_type": {

@@ -229,7 +229,7 @@ GA4 `G-QK0BMHHNR5`와 기존 Meta Pixel ID는 유지합니다. `book.allrounder.
 
 - 블로그 글의 짧은 메타·요약·접이식 주제/목차·소형 카툰·맥락 CTA·읽기 진행 후 모바일 CTA
 - `/consulting`: 필수3개·선택2개, 저장 확인 후 완료, 실패 시 입력 유지 및 이메일 대체
-- `/resources`: 공개 편집 워크시트2종, HTML 미리보기와 Markdown 다운로드; 이메일 등록 없음
+- `/resources`: 공개 편집 워크시트·검색/GEO 검수 자료, HTML 미리보기와 Markdown 다운로드; 이메일 등록 없음
 - `/privacy`: 문의 개인정보 안내(noindex); sitemap에는 색인 대상 정규 URL만 포함
 - 비공개 Google Sheets 저장: `api/lead.js` + `apps-script/Code.gs`; 서명 비밀은 Git/정적 파일에 포함하지 않음
 - 공통 이벤트v2.1·24개: [정의서](docs/analytics/common-events.md), [시트 운영](docs/analytics/sheets-lead-operations.md)
